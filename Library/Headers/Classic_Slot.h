@@ -14,9 +14,7 @@
 #define CODE_CLASSIC_SLOT_H
 
 #include "Machine.h"
-#include <string>
-#include <vector>
-#include <iostream>
+
 
 /*******************************************************************************************************************************
  * Classic Slot Machine ADT class and variables description                                                                    *

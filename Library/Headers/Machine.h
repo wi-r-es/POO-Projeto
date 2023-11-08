@@ -13,7 +13,10 @@
 #define CODE_MACHINE_H
 
 #include <iostream>
+
 #include <string>
+#include <vector>
+
 #include "Headers/User.h"
 // Enumerations for machine type and state
 // using class for scope restriction and unsigned char for memory optimization
