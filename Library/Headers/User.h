@@ -13,7 +13,7 @@
 #ifndef CODE_USER_H
 #define CODE_USER_H
 #include <string>
-#include <cstring>
+
 
 /******************************************************************************
  * Machine ADT class and variables description                                *
@@ -26,7 +26,7 @@
  ******************************************************************************/
 class User {
 private:
-    char d_id[10]; // confirmar se pode usar char ou se temos de usar strings, this makes life easier tho
+    char *d_id[10]; // confirmar se pode usar char (com pointers) ou se temos de usar strings, this makes life easier tho
     std::string d_name;
     std::string d_city;
     int d_age;

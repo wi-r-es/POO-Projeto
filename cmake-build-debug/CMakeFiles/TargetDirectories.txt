@@ -1,0 +1,3 @@
+/home/wires/Documents/WORKPLACE/UNI/POO/Projeto/src/cmake-build-debug/CMakeFiles/code.dir
+/home/wires/Documents/WORKPLACE/UNI/POO/Projeto/src/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/wires/Documents/WORKPLACE/UNI/POO/Projeto/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
