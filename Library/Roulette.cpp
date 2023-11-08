@@ -4,7 +4,7 @@
 
 #include "Headers/Roulette.h"
 
-Roulette::Roulette(int posX, int posY) {
+Roulette::Roulette(int posX, int posY) : Machine(MACHINE_TYPE::ROULETTE, posX, posY) {
 
 }
 

@@ -4,8 +4,8 @@
 
 #include "Headers/Craps.h"
 
-Craps::Craps(int posX, int posY) {
-
+Craps::Craps(int posX, int posY) : Machine(MACHINE_TYPE::CRAPS, posX, posY){
+    point=0;
 }
 
 Craps::~Craps() {

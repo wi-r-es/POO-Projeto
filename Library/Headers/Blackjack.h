@@ -12,7 +12,7 @@
 
 #ifndef CODE_BLACKJACK_H
 #define CODE_BLACKJACK_H
-#include "Headers/Machine.h"
+#include "Machine.h"
 /*******************************************************************************************************************************
  * Blackjack Machine ADT class and variables description                                                                       *
  * Inherits UID, TYPE, state, failureProbability, temperate, posX,posY, winProbability, failures and usage from Machine Class  *
@@ -20,7 +20,7 @@
  *                                                                                                                             *
  // GUI IDK THIS GAME SO YOU GO SINCE YOU DO
  *******************************************************************************************************************************/
-class Blackjack {
+class Blackjack : public Machine {
 private:
 
 public:

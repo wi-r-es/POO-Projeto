@@ -11,7 +11,7 @@
  ******************************************************************************************/
 #ifndef CODE_CRAPS_H
 #define CODE_CRAPS_H
-#include "Headers/Machine.h"
+#include "Machine.h"
 /*******************************************************************************************************************************
  * Craps Machine ADT class and vars description                                                                                *
  * Inherits UID, TYPE, state, failureProbability, temperate, posX,posY, winProbability, failures and usage from Machine Class  *
@@ -19,7 +19,7 @@
  *                                                                                                                             *
  *
  *******************************************************************************************************************************/
-class Craps {
+class Craps : public Machine{
 private:
     int point; // The point is the target number in a game of craps.
     // TBD

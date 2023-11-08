@@ -14,7 +14,8 @@
 #define CODE_USER_H
 #include <string>
 #include <cstring>
-#include "Machine.h"
+
+class Machine;
 
 /******************************************************************************
  * Machine ADT class and variables description                                *
@@ -82,7 +83,7 @@ public:
      * @brief Function to simulate the user using a machine
      * USe it to register the playing fact perhaps ?
      */
-    void playGame(Machine* Mac);
+    void playGame(Machine *Mac);
 
 };
 

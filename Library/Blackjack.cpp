@@ -4,7 +4,7 @@
 
 #include "Headers/Blackjack.h"
 
-Blackjack::Blackjack(int posX, int posY) {
+Blackjack::Blackjack(int posX, int posY) : Machine(MACHINE_TYPE::BLACKJACK, posX, posY) {
 
 }
 

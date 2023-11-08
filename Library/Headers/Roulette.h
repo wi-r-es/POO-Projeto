@@ -10,7 +10,7 @@
  ******************************************************************************************/
 #ifndef CODE_ROULETTE_H
 #define CODE_ROULETTE_H
-#include "Headers/Machine.h"
+#include "Machine.h"
 /*******************************************************************************************************************************
  * Roulette Machine ADT class and variables description                                                                        *
  * Inherits UID, TYPE, state, failureProbability, temperate, posX,posY, winProbability, failures and usage from Machine Class  *
@@ -18,7 +18,7 @@
  *                                                                                                                             *
  *
  *******************************************************************************************************************************/
-class Roulette {
+class Roulette : public Machine {
 private:
     // TBD
     //will try to have this done by tomorrow

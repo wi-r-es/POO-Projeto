@@ -11,10 +11,14 @@
 #ifndef CODE_CASINO_H
 #define CODE_CASINO_H
 
-#include "Headers/Machine.h"
-#include "Headers/Classic_Slot.h"
+#include "Machine.h"
+#include "Classic_Slot.h"
+#include "Craps.h"
+#include "Blackjack.h"
+#include "Roulette.h"
 
-#include "Headers/User.h"
+#include "User.h"
+
 #include <list>  // user vector instead of LIST ?
 #include <string>
 #include <map>
