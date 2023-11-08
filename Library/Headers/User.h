@@ -53,27 +53,27 @@ public:
     virtual ~User();
 
 
-    const char *getDId() const;
+    const char *getId() const;
 
-    const std::string &getDName() const;
+    const std::string &getName() const;
 
-    void setDName(const std::string &dName);
+    void setName(const std::string &dName);
 
-    const std::string &getDCity() const;
+    const std::string &getCity() const;
 
-    void setDCity(const std::string &dCity);
+    void setCity(const std::string &dCity);
 
-    int getDAge() const;
+    int getAge() const;
 
-    void setDAge(int dAge);
+    void setAge(int dAge);
 
-    int getDTimeSpent() const;
+    int getTimeSpent() const;
 
-    void setDTimeSpent(int dTimeSpent);
+    void setTimeSpent(int dTimeSpent);
 
-    int getDPrizesWon() const;
+    int getPrizesWon() const;
 
-    void setDPrizesWon(int dPrizesWon);
+    void setPrizesWon(int dPrizesWon);
 
     int getPlaying() const;
 

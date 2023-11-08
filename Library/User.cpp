@@ -18,47 +18,47 @@ User::~User(){
 
 }
 
-const char *User::getDId() const {
+const char *User::getId() const {
     return d_id;
 }
 
-const std::string &User::getDName() const {
+const std::string &User::getName() const {
     return d_name;
 }
 
-void User::setDName(const std::string &dName) {
+void User::setName(const std::string &dName) {
     d_name = dName;
 }
 
-const std::string &User::getDCity() const {
+const std::string &User::getCity() const {
     return d_city;
 }
 
-void User::setDCity(const std::string &dCity) {
+void User::setCity(const std::string &dCity) {
     d_city = dCity;
 }
 
-int User::getDAge() const {
+int User::getAge() const {
     return d_age;
 }
 
-void User::setDAge(int dAge) {
+void User::setAge(int dAge) {
     d_age = dAge;
 }
 
-int User::getDTimeSpent() const {
+int User::getTimeSpent() const {
     return d_time_spent;
 }
 
-void User::setDTimeSpent(int dTimeSpent) {
+void User::setTimeSpent(int dTimeSpent) {
     d_time_spent = dTimeSpent;
 }
 
-int User::getDPrizesWon() const {
+int User::getPrizesWon() const {
     return d_prizes_won;
 }
 
-void User::setDPrizesWon(int dPrizesWon) {
+void User::setPrizesWon(int dPrizesWon) {
     d_prizes_won = dPrizesWon;
 }
 
