@@ -7,7 +7,7 @@
 Machine::Machine(MACHINE_TYPE type, int posX, int posY) : TYPE(type), posX(posX), posY(posY) {
     static short int serialNumber = 1; // Static variable to keep track of the last used number
     UID = serialNumber++; // probably will be changed, not a problem for now ig?
-    state = OFF;
+    state = MACHINE_STATE::OFF;
     failureProbability = 0.3; // <=> 30%
     temperature = 25.0;
     winProbability = 0.1; // <=> 10%

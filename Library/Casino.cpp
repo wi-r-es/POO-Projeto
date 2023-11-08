@@ -6,7 +6,7 @@
 
 #include "Headers/Casino.h"
 
-Casino::Casino(std::string name): name(std::move(name)){
+Casino::Casino(std::string name): NAME(std::move(name)){
 
 }
 
@@ -34,7 +34,7 @@ void Casino::Listing(float X, std::ostream &f){
 void Casino::TurnOff(int id_mac){
 
 }
-MACHINE_STATE Casino::Get_State(int id_mac){
+MACHINE_STATE Casino::getState(int id_mac) {
 
 }
 int Casino::Total_Memory(){
