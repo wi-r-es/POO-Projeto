@@ -14,6 +14,7 @@
 #define CODE_USER_H
 #include <string>
 #include <cstring>
+#include "Machine.h"
 
 /******************************************************************************
  * Machine ADT class and variables description                                *
@@ -43,20 +44,46 @@ public:
      *******************************************************************************/
     User(char *id, std::string name, std::string city, int age);
 
+    User();
+
     /***********************************
      * @brief Destructor for User      *
      ***********************************/
     virtual ~User();
 
 
+    const char *getDId() const;
 
+    const std::string &getDName() const;
+
+    void setDName(const std::string &dName);
+
+    const std::string &getDCity() const;
+
+    void setDCity(const std::string &dCity);
+
+    int getDAge() const;
+
+    void setDAge(int dAge);
+
+    int getDTimeSpent() const;
+
+    void setDTimeSpent(int dTimeSpent);
+
+    int getDPrizesWon() const;
+
+    void setDPrizesWon(int dPrizesWon);
+
+    int getPlaying() const;
+
+    void setPlaying(int playing);
 
     /***************************************************************************
      * @brief Function to simulate the user using a machine
-     *  GOING TO BE CHANGED ONCE DECIDED HOW IT WILL COMMUNICATE WITH THE MACHINE OR THE OTHER WAY AROUND
+     * USe it to register the playing fact perhaps ?
      */
-    void playGame();
-    // ... other member functions
+    void playGame(Machine* Mac);
+
 };
 
 
