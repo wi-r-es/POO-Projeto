@@ -11,8 +11,9 @@
 #ifndef CODE_ROULETTE_H
 #define CODE_ROULETTE_H
 #include <iostream>
+#include <list>
+#include <random>
 using namespace std;
-
 #include "Machine.h"
 #include "User.h"
 
