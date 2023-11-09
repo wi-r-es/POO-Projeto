@@ -19,6 +19,7 @@ void Roulette::Play(User* user) {
 
     vector <int> redNumbers = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
 
+
     int aux = rand() % 17;
     int userMoney = user->getMoney();
     int betAmount = rand() % (userMoney + 1);
