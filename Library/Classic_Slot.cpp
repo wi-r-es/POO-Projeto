@@ -30,5 +30,33 @@ void ClassicSlot::resetNumSpins() {
 }
 
 void ClassicSlot::Play(User *user) {
+    vector<char> possibility = {'F', 'B', 'S', '7'}; // Fruit, Bar, Bell, 7
 
+    int rol1 = rand() % 4;
+    int rol2 = rand() % 4;
+    int rol3 = rand() % 4;
+
+    int userMoney = user->getMoney();
+    int betAmount = rand() % (userMoney + 1);
+    user->setMoney(userMoney - betAmount);
+
+    int profit = 0;
+
+
+    cout << possibility[rol1] << " | " << possibility[rol2] << " | " << possibility[rol3] << endl;
+
+    if (rol1 == rol2 && rol2 == rol3) {
+        profit = 100;
+    } else if (rol1 == rol2 || rol2 == rol3 || rol1 == rol3) {
+        profit = 50;
+    }
+
+    user->setMoney(userMoney + profit);
+
+    if (profit > 0) {
+        cout << "You won " << profit << "!" << endl;
+    } else {
+        cout << "You lost " << betAmount << "!" << endl;
+    }
 }
+

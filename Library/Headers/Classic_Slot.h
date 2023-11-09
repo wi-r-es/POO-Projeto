@@ -14,6 +14,11 @@
 #define CODE_CLASSIC_SLOT_H
 
 #include "Machine.h"
+#include "User.h"
+#include <vector>
+#include <random>
+#include <iostream>
+using namespace std;
 
 
 /*******************************************************************************************************************************
