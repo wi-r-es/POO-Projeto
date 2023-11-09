@@ -28,7 +28,12 @@ int main() {
 
     //Test Data
 
+    //initialize rand
+    srand(time(NULL));
+
     User *utilizador = new User("123456789", "Joao", "Porto", 20);
+
+    utilizador->setMoney(5000);
 
     std::cout << utilizador->getId() << std::endl;
 
