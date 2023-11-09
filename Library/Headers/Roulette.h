@@ -13,7 +13,10 @@
 #include <iostream>
 #include <list>
 #include <random>
+#include <map>
+#include <utility>
 using namespace std;
+
 #include "Machine.h"
 #include "User.h"
 
@@ -27,20 +30,37 @@ using namespace std;
  *******************************************************************************************************************************/
 class Roulette : public Machine {
 private:
-    // TBD
+    map<int, string> BOARD;
+
     //will try to have this done by tomorrow
 public:
+
     /***********************************************************************
      * @brief Constructor for Roulette Machine                             *
      * @param posX  -> X Position of the machine in the casino (X, Y).     *
      * @param posY  -> Y Position of the machine in the casino (X, Y).     *
      ***********************************************************************/
     Roulette(int posX, int posY);
+    Roulette();
 
     /*********************************************
      * @brief Destructor for Roulette Machine    *
      *********************************************/
     virtual ~Roulette();
+
+    pair<int, string> oddGenerate();
+    /**
+     * @brief Function to print the roulette for testing purpouses
+     */
+    void printMap() const;
+
+
+
+
+
+
+
+
 
     /**********************************************************************************
      * @brief Function that simulates the operation of the Roulette Machine .         *
@@ -49,6 +69,7 @@ public:
      **********************************************************************************/
     void Play(User* user) override ;
 };
+
 
 
 #endif //CODE_ROULETTE_H

@@ -8,9 +8,12 @@
 
 User::User(char *id, std::string name, std::string city, int age) : d_name(std::move(name)), d_city(std::move(city)), d_age(age){
     std::strcpy(d_id, id);
+    d_money=0;
     d_time_spent=0;
     d_prizes_won=0;
     playing=0;
+    bets=0;
+    profit=0;
 
 }
 
@@ -18,6 +21,7 @@ User::~User(){
 
 }
 
+// Setters and Getters
 const char *User::getId() const {
     return d_id;
 }
@@ -70,17 +74,19 @@ void User::setPlaying(int playing) {
     User::playing = playing;
 }
 
+float User::getMoney() const {
+    return d_money;
+}
+
+void User::setMoney(float money) {
+    d_money = money;
+}
+
 
 void User::playGame(Machine* Mac){
 
 }
 
-float User::getMoney() {
-    return this->d_money;
-}
 
-void User::setMoney(float money) {
-    this->d_money = money;
-}
 
 

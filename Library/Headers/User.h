@@ -28,13 +28,15 @@ class Machine;
  ******************************************************************************/
 class User {
 private:
-    float d_money{};
     char d_id[10]{}; // confirmar se pode usar char ou se temos de usar strings, this makes life easier tho
     std::string d_name;
     std::string d_city;
     int d_age;
+    float d_money;
     int d_time_spent;
     int d_prizes_won;
+    int bets;
+    int profit;
     int playing:1; //bitfield to tell if the user is playing or not
 public:
     //getters and setters
@@ -82,9 +84,10 @@ public:
 
     void setPlaying(int playing);
 
-    float getMoney();
+    float getMoney() const;
 
     void setMoney(float money);
+
 
 
     /***************************************************************************
