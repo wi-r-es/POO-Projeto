@@ -1,5 +1,7 @@
 #include <iostream>
-
+#include "Library/Headers/User.h"
+#include "Library/Headers/Roulette.h"
+#include "Library/Headers/Classic_Slot.h"
 
 
 // Example for documenting the functions from previous project
@@ -24,6 +26,30 @@
  *
  *********************************************************************************************************************************************************************/
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+
+    //Test Data
+
+    //initialize rand
+    srand(time(NULL));
+
+    User *utilizador = new User("123456789", "Joao", "Porto", 20);
+
+    utilizador->setMoney(5000);
+
+   /*
+    Roulette *roleta = new Roulette(1, 2);
+    roleta->Play(utilizador);
+    */
+
+    ClassicSlot *slot = new ClassicSlot(1, 2);
+    slot->Play(utilizador);
+
+
+
+
+
+
+
+    //std::cout << "Hello, World!" << std::endl;
     return 0;
 }

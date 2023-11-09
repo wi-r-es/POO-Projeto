@@ -28,7 +28,8 @@ class Machine;
  ******************************************************************************/
 class User {
 private:
-    char d_id[10]; // confirmar se pode usar char ou se temos de usar strings, this makes life easier tho
+    float d_money{};
+    char d_id[10]{}; // confirmar se pode usar char ou se temos de usar strings, this makes life easier tho
     std::string d_name;
     std::string d_city;
     int d_age;
@@ -36,6 +37,9 @@ private:
     int d_prizes_won;
     int playing:1; //bitfield to tell if the user is playing or not
 public:
+    //getters and setters
+
+
     /*******************************************************************************
      * @brief Constructor for User                                                 *
      * @param id     -> an string representing the ID of the user                  *
@@ -46,7 +50,6 @@ public:
     User(char *id, std::string name, std::string city, int age);
 
     User();
-
     /***********************************
      * @brief Destructor for User      *
      ***********************************/
@@ -78,6 +81,11 @@ public:
     int getPlaying() const;
 
     void setPlaying(int playing);
+
+    float getMoney();
+
+    void setMoney(float money);
+
 
     /***************************************************************************
      * @brief Function to simulate the user using a machine

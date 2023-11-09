@@ -74,3 +74,13 @@ void User::setPlaying(int playing) {
 void User::playGame(Machine* Mac){
 
 }
+
+float User::getMoney() {
+    return this->d_money;
+}
+
+void User::setMoney(float money) {
+    this->d_money = money;
+}
+
+
