@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include "Library/Headers/User.h"
+#include "Library/Headers/Roulette.h"
 
 
 // Example for documenting the functions from previous project
@@ -24,6 +25,19 @@
  *
  *********************************************************************************************************************************************************************/
 int main() {
+
+    //Test Data
+
+    User *utilizador = new User("123456789", "Joao", "Porto", 20);
+
+    std::cout << utilizador->getId() << std::endl;
+
+    Roulette *roleta = new Roulette(1, 2);
+    roleta->Play(utilizador);
+
+
+
+
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }
