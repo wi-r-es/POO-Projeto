@@ -21,4 +21,5 @@ add_executable(code main.cpp
         Library/XML.cpp
         Library/Headers/XML.h
         Library/UsefulFunctions.cpp
-        Library/Headers/UsefulFunctions.h)
+        Library/Headers/UsefulFunctions.h
+        Library/Headers/kbhitmodule.h)

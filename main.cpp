@@ -2,7 +2,7 @@
 
 #include "Library/Headers/Casino.h"
 #include "Library/Headers/UsefulFunctions.h"
-
+#include "Library/Headers/kbhitmodule.h"
 
 // Example for documenting the functions from previous project
 /*********************************************************************************************************************************************************************
@@ -56,11 +56,15 @@ int main() {
     }
 
     usr->setMoney(1000000);
+
+    /**
+     * KEYBOARD TEST RUN *
+     */
     while(1) {
         roulettePtr->Play(usr);
         if (kbhit())
         {
-          cout << "HELLO KEYBOARD" << endl;
+          cout << "HELLO KEYBOARD" << endl; sleep(30);
         }
     }
 
