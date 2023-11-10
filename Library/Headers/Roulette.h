@@ -25,7 +25,8 @@ using namespace std;
  * Inherits UID, TYPE, state, failureProbability, temperate, posX,posY, winProbability, failures and usage from Machine Class  *
  * @see Machine Class                                                                                                          *
  *                                                                                                                             *
- *
+ * BOARD                    -> Map of the board of the roulette                                                                *
+ * colorbet                 -> Map of the options to bet                                                                       *
  *******************************************************************************************************************************/
 class Roulette : public Machine {
 private:
@@ -65,10 +66,10 @@ public:
 
 
 
-    /**
-     * @brief Generate the winning slot of the Roulette
-     * @return
-     */
+    /*****************************************************
+     * @brief Generate the winning slot of the Roulette  *
+     * @return                                           *
+     *****************************************************/
     pair<int, string> oddGenerate();
 
     string simulate_singlebet();
@@ -79,11 +80,18 @@ public:
      *        Generates the outcome of the round and the success or unsuccess of the bet. *
      *        Then it adds or not the amount of money to the user.                        *
      *                                                                                    *
+     * @see User::getMoney()                                                              *
+     * @see User::getAttempts()                                                           *
+     * @see User::addDebt()                                                               *
+     * @see User::resetAttempts()                                                         *
+     * @see User::incAttempts()                                                           *
+     * @see User::setMoney()                                                              *
+     * @see User::getBetAmount()                                                          *
+     * @see Machine::setBetAmount()                                                       *
+     * @see Machine::randomNumberGeneratorInterval()                                      *
      * @see oddGenerate()                                                                 *
-     * @see simulate_singlebet()
-     * @see
+     * @see simulate_singlebet()                                                          *
      * @param Debug : boolean that represents if the has to debug or not.                 *
-     *
      **************************************************************************************/
     void Play(User* user) override ;
 };

@@ -22,7 +22,8 @@
 class Craps : public Machine{
 private:
     int point; // The point is the target number in a game of craps.
-    // TBD
+    unsigned int Dice1 : 4; // 4 bits for value (0 to 15)
+    unsigned int Dice2 : 4; // 4 bits for value (0 to 15)
 
 public:
     /***********************************************************************
