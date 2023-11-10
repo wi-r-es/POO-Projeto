@@ -13,9 +13,11 @@
 #define CODE_MACHINE_H
 
 #include <iostream>
-
+#include <map>
 #include <string>
 #include <vector>
+#include <random>
+
 
 #include "User.h"
 // Enumerations for machine type and state
@@ -57,6 +59,7 @@ private:
     int posX, posY;
     float winProbability;
     int failures;
+    float betAmount;
     int usage;
 
 public:
@@ -69,7 +72,9 @@ public:
      * @param posX  -> X Position of the machine in the casino (X, Y).     *
      * @param posY  -> Y Position of the machine in the casino (X, Y).     *
      ***********************************************************************/
-    Machine(MACHINE_TYPE type, int posX, int posY);  // id =  idtype seguido de um numero [WIP]
+    Machine(MACHINE_TYPE type, int posX, int posY);
+
+    // id =  idtype seguido de um numero [WIP]
     /***********************************
      * @brief Destructor for Machine   *
      ***********************************/
@@ -152,6 +157,11 @@ public:
      * @param newTemp                                      *
      ******************************************************/
     void setTemperature(float newTemp);
+
+    virtual void setBetAmount(float bet);
+    float getBetAmount() const;
+
+    int randomNumberGeneratorInterval(int x, int y);
 
     /**********************************************************************************
      * @brief Function that simulates the operation of the Machine .                  *

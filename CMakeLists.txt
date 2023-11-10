@@ -20,6 +20,5 @@ add_executable(code main.cpp
         Library/Headers/Craps.h
         Library/XML.cpp
         Library/Headers/XML.h
-        Library/UsefulFunctions.cpp
-        Library/Headers/UsefulFunctions.h
-        Library/Headers/kbhitmodule.h)
+        Library/Headers/kbhitmodule.h
+)

@@ -13,6 +13,7 @@ Machine::Machine(MACHINE_TYPE type, int posX, int posY) : TYPE(type), posX(posX)
     winProbability = 0.1; // <=> 10%
     failures = 0;
     usage=0;
+    betAmount=0;
 }
 
 Machine::~Machine(){
@@ -74,6 +75,26 @@ void Machine::setTemperature(float newTemp) {
         temperature = newTemp;
     }
 }
+void Machine::setBetAmount(float bet) {
+    Machine::betAmount = bet;
+    std::cout << "Money withdrawn from user to bet: " << bet << std::endl;
+}
+float Machine::getBetAmount() const {
+    return betAmount;
+}
+
+int Machine::randomNumberGeneratorInterval(int x, int y) {
+    std::random_device rd; // Obtain a random number from hardware
+    std::mt19937 eng(rd()); // Seed the generator
+    std::uniform_int_distribution<> distr(x, y); // Define the range
+
+    int randomValue = distr(eng); // Generate a random number within the range
+    return randomValue;
+}
+
+
 void Machine::Play(User* user){
     std::cout << __FUNCTION__  << std::endl;
 }
+
+

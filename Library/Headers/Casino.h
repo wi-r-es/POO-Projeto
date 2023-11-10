@@ -16,7 +16,7 @@
 #include "Craps.h"
 #include "Blackjack.h"
 #include "Roulette.h"
-#include "UsefulFunctions.h"
+
 
 #include "User.h"
 

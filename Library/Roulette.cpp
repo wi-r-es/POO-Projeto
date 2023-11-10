@@ -15,6 +15,10 @@ Roulette::Roulette(int posX, int posY) : Machine(MACHINE_TYPE::ROULETTE, posX, p
         BOARD[number] = "red";
     }
     BOARD[0]="green";
+
+    colorbet[0] = "black";
+    colorbet[1] = "red";
+    colorbet[2] = "green";
 }
 
 Roulette::Roulette() : Machine(MACHINE_TYPE::ROULETTE, 0, 0) {
@@ -27,6 +31,9 @@ Roulette::Roulette() : Machine(MACHINE_TYPE::ROULETTE, 0, 0) {
         BOARD[number] = "red";
     }
     BOARD[0]="green";
+    colorbet[0] = "black";
+    colorbet[1] = "red";
+    colorbet[2] = "green";
 }
 
 Roulette:: ~Roulette(){
@@ -52,42 +59,79 @@ pair<int, string> Roulette::oddGenerate() {
     return {winningNumber, color};
 }
 
+string Roulette::simulate_singlebet(){
+    int betColorIndex = rand() % 3; // 0 for black, 1 for red, 2 for green
+    return colorbet[betColorIndex];
+}
 // Adicionar seguintes funcionalidades:
 /*
  * EVEN OR ODD = X2
  * NUMBER = X3
  * GREEN|0 = X20
+ *
+ *
  */
 void Roulette::Play(User* user) {
+
     int userMoney = user->getMoney();
-    // restrain the bet amount somehow
-    float betAmount = rand() % (userMoney + 1);
+    if (userMoney == 0 ) {
+        cerr << " user has no more money to bet..." << endl;
 
-    // Simulate betting on a color
-    int betNumber = rand() % 37;
-    int betColorIndex = rand() % 3; // 0 for red, 1 for black, 2 for green
-    string betColors[3] = {"Red", "Black", "Green"};
-    string betColor = betColors[betColorIndex];
+        return;
+    }
+    if ( userMoney <= 5 )
+        setBetAmount(1);
 
+     else setBetAmount(static_cast<float>(  randomNumberGeneratorInterval(5, static_cast<int>(userMoney))) );
+    //else setBetAmount(static_cast<float>(  rand() % (userMoney + 1) ) ) ;
+
+    //withdraw money for the bet
+    user->setMoney(user->getMoney() - getBetAmount());
+    // Simulate betting
+    short int betNumber = 404;
+    string betColor = {};
+    bool multibet = false;
+    if (getBetAmount() == 1) {
+        betColor = simulate_singlebet();
+    } else {
+        betColor = simulate_singlebet();
+        betNumber = rand() % 37;
+        multibet = true;
+    }
     // Spin the wheel to get the winning number and color
     auto [winNumber, winColor] = oddGenerate();
-
-    cout << "You bet $" << betAmount << " on " << betNumber << betColor << endl;
-    cout << "The winning pair is: " << winNumber
-              << winColor << "." << endl;
+    if (multibet) {
+        cout << "You bet $" << getBetAmount() << " on " << betNumber << betColor << endl;
+        cout << "The winning pair is: " << winNumber
+             << winColor << "." << endl;
+    } else {
+        cout << "You bet $" << getBetAmount() << " on " << betColor << endl;
+        cout << "The winning pair is: " << winNumber
+             << winColor << "." << endl;
+    }
     float profit;
     // Determine if the user won or lost and calculate profits
-    if (betColor == winColor || betNumber == winNumber) {
-        if (winColor == "Green") {
-           profit = betAmount * 14; // Green typically pays 14:1
-        } else {
-            profit = betAmount * 2; // Red or Black typically pays 1:1
-        }
-        std::cout << "You won $" << profit << "!" << std::endl;
-        user->setMoney(static_cast<float>(userMoney) + static_cast<float> (profit));
-    } else {
-        std::cout << "You lost $" << betAmount << "!" << std::endl;
-        user->setMoney(static_cast<float>(userMoney) - static_cast<float>(betAmount));
-    }
-}
+    float amount = getBetAmount();
+    if ((multibet && betColor == winColor) || (!multibet && betColor == winColor)) {
+        profit = (winColor == "Green") ? amount / 2 * 14 : amount * 2;
 
+        // Check for betNumber
+        if (multibet && betNumber == winNumber) {
+            profit = amount / 2 * 3;
+        }
+
+        /** Additional conditions for odd/even bet can be added here **/
+
+        if (profit) {
+            cout << "You won $" << profit << "!" << endl;
+            user->setMoney(profit);
+        } else {
+            cout << "You lost $" << amount << "!" << endl;
+        }
+    } else {
+        cout << "You lost $" << amount << "!" << endl;
+    }
+    cout << "USER MONEY TO BET: -->" << user->getMoney();
+
+
+}

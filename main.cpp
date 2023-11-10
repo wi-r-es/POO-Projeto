@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "Library/Headers/Casino.h"
-#include "Library/Headers/UsefulFunctions.h"
 #include "Library/Headers/kbhitmodule.h"
 
 // Example for documenting the functions from previous project
@@ -28,9 +27,10 @@
 int main() {
 
     //Test Data
-    /*
     //initialize rand
-    srand(time(2000));
+    srand(time(nullptr));
+    /*
+
 
     User *utilizador = new User("123456789", "Joao", "Porto", 20);
 
@@ -56,15 +56,17 @@ int main() {
     }
 
     usr->setMoney(1000000);
-
+    std::cout << __FUNCTION__  << std::endl;
+    std::cout << "USER MONEY TO BET: -->" << usr->getMoney() << std::endl;
     /**
      * KEYBOARD TEST RUN *
      */
+
     while(1) {
         roulettePtr->Play(usr);
         if (kbhit())
         {
-          cout << "HELLO KEYBOARD" << endl; sleep(30);
+          std::cout << "HELLO KEYBOARD" << std::endl; sleep(30);
         }
     }
 

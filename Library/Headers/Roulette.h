@@ -10,10 +10,9 @@
  ******************************************************************************************/
 #ifndef CODE_ROULETTE_H
 #define CODE_ROULETTE_H
-#include <iostream>
+
 #include <list>
-#include <random>
-#include <map>
+
 #include <utility>
 using namespace std;
 
@@ -31,6 +30,9 @@ using namespace std;
 class Roulette : public Machine {
 private:
     map<int, string> BOARD;
+
+    map<int, string> colorbet;
+
 
     //will try to have this done by tomorrow
 public:
@@ -64,18 +66,22 @@ public:
 
 
     /**
-     * @
+     * @brief Generate the winning slot of the Roulette
      * @return
      */
     pair<int, string> oddGenerate();
+
+    string simulate_singlebet();
     /**************************************************************************************
      * @brief Function that simulates the operation of the Roulette Machine .             *
      *                                                                                    *
      *        Picks a bet amount for the user, randomly choose a bet amount.              *
-     *        Generates the outcome of the round and the success or unsuccess of the bet.  *
+     *        Generates the outcome of the round and the success or unsuccess of the bet. *
      *        Then it adds or not the amount of money to the user.                        *
      *                                                                                    *
      * @see oddGenerate()                                                                 *
+     * @see simulate_singlebet()
+     * @see
      * @param Debug : boolean that represents if the has to debug or not.                 *
      *
      **************************************************************************************/
