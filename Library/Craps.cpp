@@ -6,6 +6,8 @@
 
 Craps::Craps(int posX, int posY) : Machine(MACHINE_TYPE::CRAPS, posX, posY){
     point=0;
+    Dice1=0;
+    Dice2=0;
 }
 
 Craps::~Craps() {
