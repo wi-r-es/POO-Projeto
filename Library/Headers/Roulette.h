@@ -41,6 +41,9 @@ public:
      * @param posY  -> Y Position of the machine in the casino (X, Y).     *
      ***********************************************************************/
     Roulette(int posX, int posY);
+    /*************************************************
+     * @brief Empty Constructor for Roulette Machine *
+     *************************************************/
     Roulette();
 
     /*********************************************
@@ -48,10 +51,10 @@ public:
      *********************************************/
     virtual ~Roulette();
 
-    pair<int, string> oddGenerate();
-    /**
-     * @brief Function to print the roulette for testing purpouses
-     */
+
+    /***************************************************************
+     * @brief Function to print the roulette for testing purposes *
+     ***************************************************************/
     void printMap() const;
 
 
@@ -60,13 +63,22 @@ public:
 
 
 
-
-
-    /**********************************************************************************
-     * @brief Function that simulates the operation of the Roulette Machine .         *
-     *                                                                                *
-     * @param Debug : boolean that represents if the has to debug or not.             *
-     **********************************************************************************/
+    /**
+     * @
+     * @return
+     */
+    pair<int, string> oddGenerate();
+    /**************************************************************************************
+     * @brief Function that simulates the operation of the Roulette Machine .             *
+     *                                                                                    *
+     *        Picks a bet amount for the user, randomly choose a bet amount.              *
+     *        Generates the outcome of the round and the success or unsuccess of the bet.  *
+     *        Then it adds or not the amount of money to the user.                        *
+     *                                                                                    *
+     * @see oddGenerate()                                                                 *
+     * @param Debug : boolean that represents if the has to debug or not.                 *
+     *
+     **************************************************************************************/
     void Play(User* user) override ;
 };
 

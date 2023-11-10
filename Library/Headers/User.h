@@ -28,7 +28,7 @@ class Machine;
  ******************************************************************************/
 class User {
 private:
-    char d_id[10]{}; // confirmar se pode usar char ou se temos de usar strings, this makes life easier tho
+    char d_id[10]{};
     std::string d_name;
     std::string d_city;
     int d_age;

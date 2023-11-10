@@ -1,7 +1,7 @@
 #include <iostream>
-#include "Library/Headers/User.h"
-#include "Library/Headers/Roulette.h"
-#include "Library/Headers/Classic_Slot.h"
+
+#include "Library/Headers/Casino.h"
+#include "Library/Headers/UsefulFunctions.h"
 
 
 // Example for documenting the functions from previous project
@@ -54,9 +54,15 @@ int main() {
     } else {
         std::cerr << "Incorrect cast from Machine* to Roulette*" << std::endl;
     }
-    usr->setMoney(1000000);
-    roulettePtr->Play(usr);
 
+    usr->setMoney(1000000);
+    while(1) {
+        roulettePtr->Play(usr);
+        if (kbhit())
+        {
+          cout << "HELLO KEYBOARD" << endl;
+        }
+    }
 
 
 

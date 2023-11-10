@@ -60,6 +60,7 @@ pair<int, string> Roulette::oddGenerate() {
  */
 void Roulette::Play(User* user) {
     int userMoney = user->getMoney();
+    // restrain the bet amount somehow
     float betAmount = rand() % (userMoney + 1);
 
     // Simulate betting on a color
