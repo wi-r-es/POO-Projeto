@@ -2,7 +2,7 @@
 // Created on 06/11/23.
 //
 
-#include <utility>
+
 #include "Headers/User.h"
 
 
@@ -11,7 +11,7 @@ User::User(char *id, std::string name, std::string city, int age) : d_name(std::
     d_money=0;
     d_time_spent=0;
     d_prizes_won=0;
-    playing=0;
+    playing = 0;
     bets=0;
     profit=0;
 
@@ -71,7 +71,7 @@ int User::getPlaying() const {
 }
 
 void User::setPlaying(int playing) {
-    User::playing = playing;
+    playing = 1;
 }
 
 float User::getMoney() const {
@@ -83,9 +83,34 @@ void User::setMoney(float money) {
 }
 
 
+void User::addDebt(float amountOfDebt) {
+    if( debt >= 1000 ){
+        printf("TOO MANY DEBT. HOUSE GOT FORECLOSED . THIS CASINO WILL NO LONGER LEND MONEY TO THIS USER...\n\n ");
+        return;}
+    debt += amountOfDebt;
+    this->setMoney(amountOfDebt);
+}
+float User::getDebt() const {
+    return debt;
+}
+
+void User::incAttempts() {
+    count_plays_no_money++;
+}
+int User::getAttempts()const {
+    return count_plays_no_money;
+}
+
 void User::playGame(Machine* Mac){
 
 }
+
+void User::resetAttempts() {
+    count_plays_no_money=0;
+}
+
+
+
 
 
 

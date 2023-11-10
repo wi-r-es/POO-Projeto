@@ -14,6 +14,8 @@
 #define CODE_USER_H
 #include <string>
 #include <cstring>
+#include <utility>
+#include <cstdio>
 
 class Machine;
 
@@ -37,7 +39,9 @@ private:
     int d_prizes_won;
     int bets;
     int profit;
-    int playing:1; //bitfield to tell if the user is playing or not
+    float debt;
+    int count_plays_no_money;
+    unsigned int playing : 1; //bitfield to tell if the user is playing or not
 public:
     //getters and setters
 
@@ -88,6 +92,12 @@ public:
 
     void setMoney(float money);
 
+    void incAttempts();
+    void resetAttempts();
+    int getAttempts() const;
+
+    void addDebt(float amountOfDebt);
+    float getDebt() const;
 
 
 

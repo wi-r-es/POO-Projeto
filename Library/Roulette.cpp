@@ -76,7 +76,11 @@ void Roulette::Play(User* user) {
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
         cerr << " user has no more money to bet..." << endl;
-
+        if (user->getAttempts() > 5){
+            user->addDebt(100);
+            user->resetAttempts();
+        }
+        user->incAttempts();
         return;
     }
     if ( userMoney <= 5 )

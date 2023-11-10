@@ -68,7 +68,12 @@ int main() {
         {
           std::cout << "HELLO KEYBOARD" << std::endl; sleep(30);
         }
+
+
+        cout << "DEBT OWNED -> " << usr->getDebt() << endl;
     }
+
+
 
 
 
