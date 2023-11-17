@@ -30,7 +30,7 @@ class Machine;
  ******************************************************************************/
 class User {
 private:
-    char d_id[10]{};
+    char d_id[10];
     std::string d_name;
     std::string d_city;
     int d_age;
