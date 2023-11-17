@@ -19,10 +19,11 @@
  * @see Machine Class                                                                                                          *
  *                                                                                                                             *
  // GUI IDK THIS GAME SO YOU GO SINCE YOU DO
+ // OK!
  *******************************************************************************************************************************/
 class Blackjack : public Machine {
 private:
-
+    std::map<char,int> Values_Cards;
 public:
     /***********************************************************************
      * @brief Constructor for Blackjack Machine                            *
@@ -31,10 +32,22 @@ public:
      ***********************************************************************/
     Blackjack(int posX, int posY);
 
+    /*************************************************
+     * @brief Empty Constructor for Roulette Machine *
+     *************************************************/
+    Blackjack();
+
     /*********************************************
      * @brief Destructor for Blackjack Machine   *
      *********************************************/
     virtual ~Blackjack();
+
+    /***************************************************************
+     * @brief Function to print the Blackjack for testing purposes *
+     ***************************************************************/
+
+    void printMap() const;
+
 
     /**********************************************************************************
      * @brief Function that simulates the operation of the Blackjack Machine .        *
@@ -42,6 +55,7 @@ public:
      * @param Debug : boolean that represents if the has to debug or not.             *
      **********************************************************************************/
     void Play(User* user) override;
+
 };
 
 
