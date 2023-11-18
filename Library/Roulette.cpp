@@ -45,7 +45,7 @@ void Roulette::printMap() const {
 }
 
 pair<int, string> Roulette::oddGenerate() {
-    int winningNumber = rand() % 37; /** 37 possible slots (0 to 36) **/
+    int winningNumber = randomNumberGeneratorInterval(0,36); /** possible slots (0 to 36) **/
     string color;
 
     for (const auto& pair : BOARD) {
@@ -58,7 +58,7 @@ pair<int, string> Roulette::oddGenerate() {
 }
 
 string Roulette::simulate_singlebet(){
-    int betColorIndex = rand() % 2; // 0 for black, 1 for red
+    int betColorIndex = randomNumberGeneratorInterval(0,1); // 0 for black, 1 for red
     return colorbet[betColorIndex];
 }
 // Adicionar seguintes funcionalidades:
