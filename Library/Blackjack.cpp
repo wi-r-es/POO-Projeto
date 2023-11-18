@@ -29,30 +29,30 @@ Blackjack::~Blackjack() {
 }
 
 void Blackjack::printMap() const {
-    for (const auto& pair : Values_Cards) {
+    for (const auto& pair : Values_Cards)
         std::cout << "Card: " << pair.first << " Value: " << pair.second << std::endl;
-    }
 }
 
-std::map<char, int> Blackjack::player_first_hand(){
+void Blackjack::player_first_hand(){
     std::map<char,int>::iterator itr;
     int randCardIndex;
-    for(int i = 0; i < 2; i ++){
+    std::cout<<"Size = "<<Values_Cards.size()<<std::endl;
+    for(int i = 0; i < 2; ++i){
         itr = Values_Cards.begin();
-        randCardIndex = rand() % Values_Cards.size() - 1;
+        randCardIndex = randomNumberGeneratorInterval(0, Values_Cards.size() - 1);
         std::advance(itr, randCardIndex);
         Players_Hand.insert({itr->first, itr->second});
     }
     show_player_hand();
 }
-
 void Blackjack::show_player_hand() {
-   std::map<char,int>::iterator itr = Players_Hand.begin();
-   std::cout<<"PLAYER'S HAND:"<<std::endl;
-   for(; itr != Players_Hand.end(); itr ++)
-       std::cout<<itr->first<<" ";
-   std::cout<<"\n";
+    std::map<char,int>::iterator itr = Players_Hand.begin();
+    std::cout<<"PLAYER'S HAND:"<<std::endl;
+    for(; itr != Players_Hand.end(); ++itr)
+        std::cout<<itr->first<<" ";
+    std::cout<<"\n";
 }
+
 
 void Blackjack::Play(User* user) {
 

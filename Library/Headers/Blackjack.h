@@ -53,7 +53,7 @@ public:
     /***************************************************************
      * @brief Function to hand the player their first hand         *
      ***************************************************************/
-    std::map<char, int> player_first_hand();
+    void player_first_hand();
 
     /***************************************************************
      * @brief Function that shows the cards the player has         *
