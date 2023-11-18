@@ -34,6 +34,26 @@ void Blackjack::printMap() const {
     }
 }
 
+std::map<char, int> Blackjack::player_first_hand(){
+    std::map<char,int>::iterator itr;
+    int randCardIndex;
+    for(int i = 0; i < 2; i ++){
+        itr = Values_Cards.begin();
+        randCardIndex = rand() % Values_Cards.size() - 1;
+        std::advance(itr, randCardIndex);
+        Players_Hand.insert({itr->first, itr->second});
+    }
+    show_player_hand();
+}
+
+void Blackjack::show_player_hand() {
+   std::map<char,int>::iterator itr = Players_Hand.begin();
+   std::cout<<"PLAYER'S HAND:"<<std::endl;
+   for(; itr != Players_Hand.end(); itr ++)
+       std::cout<<itr->first<<" ";
+   std::cout<<"\n";
+}
+
 void Blackjack::Play(User* user) {
 
 }
