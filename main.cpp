@@ -29,14 +29,14 @@ int main() {
     //Test Data
     //initialize rand
     srand(time(nullptr));
-    /*
+
 
 
     User *utilizador = new User("123456789", "Joao", "Porto", 20);
 
     utilizador->setMoney(5000);
 
-   /*
+
     Roulette *roleta = new Roulette(1, 2);
     roleta->Play(utilizador);
 
@@ -44,16 +44,15 @@ int main() {
     ClassicSlot *slot = new ClassicSlot(1, 2);
     slot->Play(utilizador);
 
-     */
     User *usr = new User("123456789", "Joao", "Porto", 20);
     Machine *testMachine = new Roulette();
     // Use dynamic_cast to call printMap on a Machine pointer that points to a Roulette object
-    /*auto* roulettePtr = dynamic_cast<Roulette*>(testMachine);
+    auto* roulettePtr = dynamic_cast<Roulette*>(testMachine);
     if (roulettePtr) {
         roulettePtr->printMap();
     } else {
         std::cerr << "Incorrect cast from Machine* to Roulette*" << std::endl;
-    }*/
+    }
 
     usr->setMoney(1000000);
     std::cout << __FUNCTION__  << std::endl;
@@ -70,8 +69,8 @@ int main() {
     } else {
         std::cerr << "Incorrect cast from Machine* to BlackJack*" << std::endl;
     }
-
-    /*while(1) {
+/*
+    while(1) {
         roulettePtr->Play(usr);
         if (kbhit())
         {
@@ -80,8 +79,8 @@ int main() {
 
 
         cout << "DEBT OWNED -> " << usr->getDebt() << endl;
-    }*/
-
+    }
+*/
     //std::cout << "Hello, World!" << std::endl;
     return 0;
 }
