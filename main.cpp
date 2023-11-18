@@ -57,6 +57,7 @@ int main() {
     usr->setMoney(1000000);
     std::cout << __FUNCTION__  << std::endl;
     std::cout << "USER MONEY TO BET: -->" << usr->getMoney() << std::endl;
+
     /**
      * KEYBOARD TEST RUN *
      */
@@ -65,7 +66,8 @@ int main() {
 
     auto* blackjackPtr = dynamic_cast<Blackjack*>(testBlack);
     if (blackjackPtr) {
-        blackjackPtr->player_first_hand();
+        blackjackPtr->start_game();
+        blackjackPtr->show_player_hand();
     } else {
         std::cerr << "Incorrect cast from Machine* to BlackJack*" << std::endl;
     }

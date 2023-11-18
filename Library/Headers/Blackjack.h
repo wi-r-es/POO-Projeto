@@ -51,9 +51,14 @@ public:
     void printMap() const;
 
     /***************************************************************
-     * @brief Function to hand the player their first hand         *
+     * @brief Function to hand out cards to a chosen map           *
      ***************************************************************/
-    void player_first_hand();
+    void give_cards(std::map<char, int> cards_map);
+
+    /*****************************************************************************************
+     * @brief Function that hands out cards to the dealer and player to start the game       *
+     *****************************************************************************************/
+    void start_game();
 
     /***************************************************************
      * @brief Function that shows the cards the player has         *
