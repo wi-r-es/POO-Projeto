@@ -50,7 +50,6 @@ void Blackjack::start_game(){
 }
 
 void Blackjack::show_player_hand() {
-    std::map<char,int>::iterator itr = Players_Hand.begin();
     std::cout<<"PLAYER'S HAND:"<<std::endl;
     for(const auto& card : Players_Hand)
         std::cout<< card.first << " ";
