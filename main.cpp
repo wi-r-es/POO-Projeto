@@ -67,7 +67,6 @@ int main() {
     auto* blackjackPtr = dynamic_cast<Blackjack*>(testBlack);
     if (blackjackPtr) {
         blackjackPtr->start_game();
-        blackjackPtr->show_player_hand();
     } else {
         std::cerr << "Incorrect cast from Machine* to BlackJack*" << std::endl;
     }

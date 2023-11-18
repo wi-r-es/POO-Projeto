@@ -64,6 +64,11 @@ public:
      ***************************************************************/
     void show_player_hand();
 
+    /***************************************************************
+     * @brief Function that shows the cards the player has         *
+     ***************************************************************/
+    void show_dealer_hand();
+
     /**********************************************************************************
      * @brief Function that simulates the operation of the Blackjack Machine .        *
      *                                                                                *

@@ -47,12 +47,22 @@ void Blackjack::start_game(){
         give_cards(Players_Hand);
         give_cards(Dealers_Hand);
     }
+    show_player_hand();
+    std::cout<<"DEALER'S FIRST HAND"<<std::endl;
+    std::cout<<Dealers_Hand.begin()->first<<"| ??"<<std::endl;
 }
 
 void Blackjack::show_player_hand() {
     std::cout<<"PLAYER'S HAND:"<<std::endl;
     for(const auto& card : Players_Hand)
         std::cout<< card.first << " ";
+    std::cout<<"\n";
+}
+
+void Blackjack::show_dealer_hand() {
+    std::cout<<"DEALER'S HAND:"<<std::endl;
+    for(const auto& card : Dealers_Hand)
+        std::cout<< card.first << "| ";
     std::cout<<"\n";
 }
 
