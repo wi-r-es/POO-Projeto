@@ -21,4 +21,6 @@ add_executable(code main.cpp
         Library/XML.cpp
         Library/Headers/XML.h
         Library/Headers/kbhitmodule.h
+        Library/Headers/IO.h
+        Library/IO.cpp
 )
