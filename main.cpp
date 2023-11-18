@@ -32,7 +32,7 @@ int main() {
 
 
 
-    User *utilizador = new User("123456789", "Joao", "Porto", 20);
+    /*User *utilizador = new User("123456789", "Joao", "Porto", 20);
 
     utilizador->setMoney(5000);
 
@@ -57,7 +57,7 @@ int main() {
     usr->setMoney(1000000);
     std::cout << __FUNCTION__  << std::endl;
     std::cout << "USER MONEY TO BET: -->" << usr->getMoney() << std::endl;
-
+    */
     /**
      * KEYBOARD TEST RUN *
      */
