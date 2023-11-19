@@ -68,11 +68,18 @@ void Blackjack::show_dealer_hand() {
 
 /** Function to get the sum total of card values **/
 
-int get_total(std::map<char, int>card_map){
+int const get_total(std::map<char, int>card_map){
     int total = 0;
     for(const auto& card : card_map)
         total += card.second;
     return total;
+}
+
+void Blackjack::show_game(){
+    show_player_hand();
+    std::cout<<"Total = "<<get_total(Players_Hand)<<std::endl;
+    show_dealer_hand();
+    std::cout<<"Total = "<<get_total(Dealers_Hand)<<std::endl;
 }
 
 
