@@ -33,10 +33,14 @@ public:
      ***********************************************************************/
     Craps(int posX, int posY);
 
+    Craps();
+
     /******************************************
      * @brief Destructor for Craps Machine    *
      ******************************************/
     virtual ~Craps();
+
+    void RollDices();
 
     /**********************************************************************************
      * @brief Function that simulates the operation of the Craps Machine .            *
