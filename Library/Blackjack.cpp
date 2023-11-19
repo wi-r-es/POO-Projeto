@@ -33,7 +33,7 @@ void Blackjack::printMap() const {
         std::cout << "Card: " << pair.first << " Value: " << pair.second << std::endl;
 }
 
-void Blackjack::give_cards(std::map<char, int>& cards_map){
+void Blackjack::give_card(std::map<char, int>& cards_map){
     std::map<char,int>::iterator itr = Values_Cards.begin();
     int randCardIndex = randomNumberGeneratorInterval(0, Values_Cards.size() - 1);
     std::advance(itr, randCardIndex);
@@ -44,8 +44,8 @@ void Blackjack::give_cards(std::map<char, int>& cards_map){
 
 void Blackjack::start_game(){
     for(int i = 0; i < 2; i ++){
-        give_cards(Players_Hand);
-        give_cards(Dealers_Hand);
+        give_card(Players_Hand);
+        give_card(Dealers_Hand);
     }
     show_player_hand();
     std::cout<<"DEALER'S FIRST HAND"<<std::endl;
@@ -55,7 +55,7 @@ void Blackjack::start_game(){
 void Blackjack::show_player_hand() {
     std::cout<<"PLAYER'S HAND:"<<std::endl;
     for(const auto& card : Players_Hand)
-        std::cout<< card.first << " ";
+        std::cout << card.first << " ";
     std::cout<<"\n";
 }
 
@@ -64,6 +64,15 @@ void Blackjack::show_dealer_hand() {
     for(const auto& card : Dealers_Hand)
         std::cout<< card.first << "| ";
     std::cout<<"\n";
+}
+
+/** Function to get the sum total of card values **/
+
+int get_total(std::map<char, int>card_map){
+    int total = 0;
+    for(const auto& card : card_map)
+        total += card.second;
+    return total;
 }
 
 

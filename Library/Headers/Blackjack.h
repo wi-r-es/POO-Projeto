@@ -52,7 +52,7 @@ public:
     /***************************************************************
      * @brief Function to hand out cards to a chosen map           *
      ***************************************************************/
-    void give_cards(std::map<char, int>& cards_map);
+    void give_card(std::map<char, int>& cards_map);
 
     /*****************************************************************************************
      * @brief Function that hands out cards to the dealer and player to start the game       *
