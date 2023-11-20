@@ -49,13 +49,13 @@ void Blackjack::start_game(){
     }
     show_player_hand();
     std::cout<<"DEALER'S FIRST HAND"<<std::endl;
-    std::cout<<Dealers_Hand.begin()->first<<"| ??"<<std::endl;
+    std::cout<<Dealers_Hand.begin()->first<<"| ?? \n\n"<<std::endl;
 }
 
 void Blackjack::show_player_hand() {
     std::cout<<"PLAYER'S HAND:"<<std::endl;
     for(const auto& card : Players_Hand)
-        std::cout << card.first << " ";
+        std::cout << card.first << "| ";
     std::cout<<"\n";
 }
 
@@ -69,11 +69,26 @@ void Blackjack::show_dealer_hand() {
 /** Function to get the sum total of card values **/
 int const get_total(std::map<char, int>card_map){
     int total = 0;
-    for(const auto& card : card_map)
+    bool has_ace = false;
+    for(const auto& card : card_map) {
         total += card.second;
+        if(card.first == 'A')
+            has_ace = true;
+    }
+
+    if(total + 10 <= 21 && has_ace)
+       total += 10;
+
     return total;
 }
 
+
+// A 2 3
+// 1+2+3 = 6 < 21       6 + 11 < 21
+// 11+2+3 = 16
+// A 4 7
+// 1+4+7 = 12
+// 11+4+7 = 23
 void Blackjack::show_game(){
     show_player_hand();
     std::cout<<"Total = "<<get_total(Players_Hand)<<std::endl;
@@ -93,21 +108,26 @@ void Blackjack::simulate_game(){
     start_game();
 
     while(game){
-        player_total = get_total(Players_Hand);
-        dealer_total = get_total(Dealers_Hand);
-        if((player_total >= 21 || dealer_total >= 21) || !player_decision){
+        if((get_total(Players_Hand) >= 21 || get_total(Dealers_Hand) >= 21)){
             game = false;
+        }else {
+            /** Simulates the decision hit or stay in a random manner
+             * 1 -> hit
+             * 0 -> stay
+             * **/
+            player_decision = hit_or_stay();
+
+            if (!player_decision) {
+                std::cout << "STAY" << std::endl;
+                game = false;
+            } else {
+                give_card(Players_Hand);
+                std::cout << "HIT" << std::endl;
+            }
+            show_game();
         }
-        /** Simulates the decision hit or stay in a random manner
-         * 1 -> hit
-         * 0 -> stay
-         * **/
-        player_decision = hit_or_stay();
-       if(player_decision)
-           give_card(Players_Hand);
-       show_game();
     }
-    std::cout<<"STOPPED"<<std::endl;
+    std::cout<<"\n\nSTOPPED\n\n"<<std::endl;
     show_game();
 }
 
