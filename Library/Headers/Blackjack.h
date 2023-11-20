@@ -74,6 +74,18 @@ public:
      ***************************************************************/
     void show_game();
 
+
+    /***************************************************************
+     * @brief Function that simulates the decision of the player   *
+     * to get more cards or stay with the cards he has now         *
+     ***************************************************************/
+    int  hit_or_stay();
+
+    /***************************************************************
+     * @brief Function that simulates one game                     *
+     ***************************************************************/
+    void simulate_game();
+
     /**********************************************************************************
      * @brief Function that simulates the operation of the Blackjack Machine .        *
      *                                                                                *

@@ -67,7 +67,6 @@ void Blackjack::show_dealer_hand() {
 }
 
 /** Function to get the sum total of card values **/
-
 int const get_total(std::map<char, int>card_map){
     int total = 0;
     for(const auto& card : card_map)
@@ -82,7 +81,46 @@ void Blackjack::show_game(){
     std::cout<<"Total = "<<get_total(Dealers_Hand)<<std::endl;
 }
 
+int Blackjack::hit_or_stay(){
+    int decision = randomNumberGeneratorInterval(0, 1);
+    return decision;
+}
+
+void Blackjack::simulate_game(){
+    int player_total = 0, dealer_total = 0, player_decision;
+    bool game = true;
+    /** Give the cards to the player and dealer**/
+    start_game();
+
+    while(game){
+        player_total = get_total(Players_Hand);
+        dealer_total = get_total(Dealers_Hand);
+        if((player_total >= 21 || dealer_total >= 21) || !player_decision){
+            game = false;
+        }
+        /** Simulates the decision hit or stay in a random manner
+         * 1 -> hit
+         * 0 -> stay
+         * **/
+        player_decision = hit_or_stay();
+       if(player_decision)
+           give_card(Players_Hand);
+       show_game();
+    }
+    std::cout<<"STOPPED"<<std::endl;
+    show_game();
+}
+
 
 void Blackjack::Play(User* user) {
-
+    int userMoney = user->getMoney();
+    if (userMoney == 0 ) {
+        std::cerr << " user has no more money to bet..." << std::endl;
+        if (user->getAttempts() > 5) {
+            user->addDebt(100);
+            user->resetAttempts();
+        }
+        user->incAttempts();
+        return;
+    }
 }

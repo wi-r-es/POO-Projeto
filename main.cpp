@@ -32,10 +32,9 @@ int main() {
 
 
 
-    User *utilizador = new User("123456789", "Joao", "Porto", 20);
+   /* User *utilizador = new User("123456789", "Joao", "Porto", 20);
 
     utilizador->setMoney(5000);
-/*
 
     Roulette *roleta = new Roulette(1, 2);
     roleta->Play(utilizador);
@@ -60,20 +59,19 @@ int main() {
     */
     /**
      * KEYBOARD TEST RUN *
-
+    */
 
     Machine *testBlack = new Blackjack();
 
     auto* blackjackPtr = dynamic_cast<Blackjack*>(testBlack);
     if (blackjackPtr) {
-        blackjackPtr->start_game();
-        blackjackPtr->show_game();
+        blackjackPtr->simulate_game();
     } else {
         std::cerr << "Incorrect cast from Machine* to BlackJack*" << std::endl;
     }
-    */
 
-    Machine *CrapsMachine = new Craps();
+
+    /*Machine *CrapsMachine = new Craps();
 
     auto *crapsPtr = dynamic_cast<Craps*>(CrapsMachine);
     if(crapsPtr) {
@@ -92,7 +90,7 @@ int main() {
 
         cout << "DEBT OWNED -> " << utilizador->getDebt() << endl;
     }
-
+    */
     //std::cout << "Hello, World!" << std::endl;
     return 0;
 }
