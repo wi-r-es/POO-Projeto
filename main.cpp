@@ -32,18 +32,20 @@ int main() {
 
 
 
-   /* User *utilizador = new User("123456789", "Joao", "Porto", 20);
+    User *utilizador = new User("123456789", "Joao", "Porto", 20);
 
     utilizador->setMoney(5000);
 
-    Roulette *roleta = new Roulette(1, 2);
-    roleta->Play(utilizador);
 
 
     ClassicSlot *slot = new ClassicSlot(1, 2);
     slot->Play(utilizador);
-
+    /*
     User *usr = new User("123456789", "Joao", "Porto", 20);
+
+    Roulette *roleta = new Roulette(1, 2);
+    roleta->Play(utilizador);
+
     Machine *testMachine = new Roulette();
     // Use dynamic_cast to call printMap on a Machine pointer that points to a Roulette object
     auto* roulettePtr = dynamic_cast<Roulette*>(testMachine);
@@ -53,15 +55,13 @@ int main() {
         std::cerr << "Incorrect cast from Machine* to Roulette*" << std::endl;
     }
 
-    usr->setMoney(1000000);
     std::cout << __FUNCTION__  << std::endl;
-    std::cout << "USER MONEY TO BET: -->" << usr->getMoney() << std::endl;
-    */
+    std::cout << "USER MONEY TO BET: -->" << utilizador->getMoney() << std::endl;
     /**
      * KEYBOARD TEST RUN *
     */
 
-    Machine *testBlack = new Blackjack();
+ /*   Machine *testBlack = new Blackjack();
 
     auto* blackjackPtr = dynamic_cast<Blackjack*>(testBlack);
     if (blackjackPtr) {
@@ -71,7 +71,7 @@ int main() {
     }
 
 
-    /*Machine *CrapsMachine = new Craps();
+    Machine *CrapsMachine = new Craps();
 
     auto *crapsPtr = dynamic_cast<Craps*>(CrapsMachine);
     if(crapsPtr) {
@@ -80,8 +80,12 @@ int main() {
         cerr << "Incorrect cast from Machine* to Craps*" << endl;
     }
 
+*/
+    Machine *SlotMachine = new ClassicSlot();
+
+    auto *slotPtr = dynamic_cast<ClassicSlot*>(SlotMachine);
     while(1) {
-        crapsPtr->Play(utilizador);
+        slotPtr->Play(utilizador);
         if (kbhit())
         {
           std::cout << "HELLO KEYBOARD" << std::endl; sleep(30);
@@ -90,7 +94,7 @@ int main() {
 
         cout << "DEBT OWNED -> " << utilizador->getDebt() << endl;
     }
-    */
+
     //std::cout << "Hello, World!" << std::endl;
     return 0;
 }

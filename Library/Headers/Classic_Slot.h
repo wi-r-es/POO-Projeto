@@ -31,7 +31,6 @@ using namespace std;
  *******************************************************************************************************************************/
 class ClassicSlot : public Machine {
 private:
-    std::vector<std::string> symbols;
     int numSpins;
 
 public:
@@ -41,6 +40,11 @@ public:
      * @param posY  -> Y Position of the machine in the casino (X, Y).     *
      ***********************************************************************/
     ClassicSlot(int posX, int posY);
+
+ /****************************************************
+     * @brief Empty Constructor for Roulette Machine *
+ ****************************************************/
+    ClassicSlot();
 
     /************************************************
      * @brief Destructor for Classic Slot Machine   *
