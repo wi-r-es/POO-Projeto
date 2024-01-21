@@ -23,6 +23,9 @@
 #include <list>  // user vector instead of LIST ?
 #include <string>
 #include <map>
+#include <fstream>
+#include <sstream>
+#include<string>
 
 
 /****************************************************************************************************************************
@@ -42,6 +45,8 @@
 class Casino {
 private:
     std::string NAME;
+    int MAX_Players;
+    int JackpotRadius;
     std::map<MACHINE_TYPE, std::list<Machine *>> m_machines; // A map with machine TYPE as key and machine list as value
     std::list<Machine *> l_classicSlots_Machines;
     std::list<Machine *> l_Blackjack_Machines;
@@ -161,6 +166,13 @@ public:
      **************************************************************************************/
     void Up_Neighbour_Probability(Machine *M_win, float R, std::list<Machine *> &list_machine_neighbour);
 
+
+
+     /****************************************************************************************************************
+     * @brief Read the TXT file of the people randomly generate the n amount of people and put it in the people list *
+     * @param n                                                                                                      *
+     *****************************************************************************************************************/
+    void ReadPeopleFile(int n);
     /**********************************************************************************
      * @brief Main loop that simulates the operation of the Casino .                  *
      *                                                                                *

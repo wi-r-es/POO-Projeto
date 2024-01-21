@@ -23,4 +23,5 @@ add_executable(code main.cpp
         Library/Headers/kbhitmodule.h
         Library/Headers/IO.h
         Library/IO.cpp
+        Library/pugixml/pugixml.cpp
 )

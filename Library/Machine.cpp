@@ -35,6 +35,10 @@ MACHINE_STATE Machine::getState() {
     return state;
 }
 
+MACHINE_TYPE Machine::getType() {
+    return TYPE;
+}
+
 void Machine::setState(MACHINE_STATE newState) {
     state = newState;
 }

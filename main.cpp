@@ -26,11 +26,19 @@
  *********************************************************************************************************************************************************************/
 int main() {
 
+
+
     //Test Data
     //initialize rand
     srand(time(nullptr));
 
+    Casino *casino = new Casino("Casino_name");
 
+    casino->Load("CasinoInfo.xml");
+    int a;
+    cin >> a;
+
+    casino->ReadPeopleFile(20);
 
     User *utilizador = new User("123456789", "Joao", "Porto", 20);
 
