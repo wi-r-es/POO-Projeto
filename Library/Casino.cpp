@@ -7,9 +7,7 @@
 
 #include "Headers/Casino.h"
 
-Casino::Casino(std::string name): NAME(std::move(name)){
-
-}
+Casino::Casino(std::string name): NAME{name}{}
 
 Casino::~Casino(){
 
@@ -81,9 +79,15 @@ bool Casino::Add(User *usr){
 
 
 }
-bool Casino::Add(Machine *m){
+constexpr bool Casino::Add(Machine *m){
 
+    if ( m== nullptr ) return false;
     MACHINE_TYPE type = m->getType();
+    pair<int, int> machine_pos;
+    machine_pos = m->getPosition();
+
+
+
 
     m_machines[type].push_back(m);
 
@@ -96,13 +100,9 @@ bool Casino::Add(Machine *m){
     }else if(type == MACHINE_TYPE::CRAPS) {
         l_Craps_Machines.push_back(m);
     }
-
-
-
-
-
-
+    return true;
 }
+
 void Casino::Listing(std::ostream &f){
 
 }

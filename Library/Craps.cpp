@@ -21,8 +21,8 @@ Craps::~Craps() {
 }
 
 void Craps::RollDices() {
-    Dice1 =rand() % 6 + 1;
-    Dice2=rand() % 6 + 1;
+    Dice1 = rand() % 6 + 1;
+    Dice2 = rand() % 6 + 1;
 }
 
 void Craps::Play(User* user) {

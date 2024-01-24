@@ -18,8 +18,6 @@ add_executable(code main.cpp
         Library/Headers/Roulette.h
         Library/Craps.cpp
         Library/Headers/Craps.h
-        Library/XML.cpp
-        Library/Headers/XML.h
         Library/Headers/kbhitmodule.h
         Library/Headers/IO.h
         Library/IO.cpp

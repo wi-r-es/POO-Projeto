@@ -86,7 +86,7 @@ public:
      * @param m                          *
      * @return                           *
      *************************************/
-    bool Add(Machine *m);
+    constexpr bool Add(Machine *m);
 
     /************************************************
      * @brief List the current state of the casino  *

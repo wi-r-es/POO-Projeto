@@ -34,7 +34,7 @@ int main() {
 
     Casino *casino = new Casino("Casino_name");
 
-    casino->Load("CasinoInfo.xml");
+    casino->Load("../Files/I/CasinoInfo.xml");
     int a;
     cin >> a;
 
