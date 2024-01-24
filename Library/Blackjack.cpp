@@ -141,7 +141,7 @@ void Blackjack::Play(User* user) {
             user->resetAttempts();
         }
         user->incAttempts();
-
+        return;
     }
     simulate_game();
     setTemperature(this->getTemperature() + 0.3);

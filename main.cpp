@@ -46,7 +46,7 @@ int main() {
 
 
 
-    ClassicSlot *slot = new ClassicSlot(1, 2);
+    Machine *slot = new ClassicSlot(1, 2);
     slot->Play(utilizador);
     /*
     User *usr = new User("123456789", "Joao", "Porto", 20);
@@ -102,6 +102,8 @@ int main() {
 
         cout << "DEBT OWNED -> " << utilizador->getDebt() << endl;
     }
+
+    std::atexit([] {std::cout << "***std::atexit callback executing***\n";});
 
     //std::cout << "Hello, World!" << std::endl;
     return 0;
