@@ -9,7 +9,7 @@ Machine::Machine(MACHINE_TYPE type, int posX, int posY) : TYPE(type), posX(posX)
     UID = serialNumber++; // probably will be changed, not a problem for now ig?
     state = MACHINE_STATE::OFF;
     failureProbability = 0.3; // <=> 30%
-    temperature = 25.0;
+    temperature = 18.0;
     winProbability = 0.1; // <=> 10%
     failures = 0;
     usage=0;

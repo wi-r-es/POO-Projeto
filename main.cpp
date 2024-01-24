@@ -34,7 +34,7 @@ int main() {
 
     Casino *casino = new Casino("Casino_name");
 
-    casino->Load("../Files/I/CasinoInfo.xml");
+    if( casino->Load("../Files/I/CasinoInfo.xml") ) cout << "Loaded successful" ;
     int a;
     cin >> a;
 

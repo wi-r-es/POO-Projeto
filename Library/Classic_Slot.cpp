@@ -35,6 +35,7 @@ void ClassicSlot::resetNumSpins() {
 }
 
 void ClassicSlot::Play(User *user) {
+    cout << __FUNCTION__ ;
 
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
@@ -64,7 +65,7 @@ void ClassicSlot::Play(User *user) {
         user->setMoney(userMoney + getBetAmount()*4);
     }
 
-
+    setTemperature(this->getTemperature() + 0.3);
 
 }
 

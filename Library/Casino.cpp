@@ -53,6 +53,8 @@ bool Casino::Load(const std::string &file) {
         std::cout << "Location X: " << x << std::endl;
         std::cout << "Location Y: " << y << std::endl;
 
+
+
         Machine* m = nullptr;
         if (gameType == " Blackjack ") {
             m = new Blackjack(x, y);
@@ -65,7 +67,7 @@ bool Casino::Load(const std::string &file) {
         }
 
         if (m) {
-            Add(m);  // Assuming Add is a function that adds a Machine* to a collection
+            Add(m);
         }
         std::cout << std::endl;
     }
@@ -74,34 +76,64 @@ bool Casino::Load(const std::string &file) {
 }
 
 
+[[maybe_unused]] bool Casino::Add(User *usr){
+    if(usr== nullptr) cerr << "Null  pointer passed";
+    l_users.push_back(usr);
+}
+bool Casino::Add(Machine *m){
 
-bool Casino::Add(User *usr){
+    if ( m== nullptr ) return false;
+    /** Get machine position **/
+    pair<int, int> machine_pos;
+    machine_pos = m->getPosition();
+    /** Check if machine position is already taken **/
+    bool result = checkMachinePositionAvailability(machine_pos);
+    if (result){
+        databaseAddMachine(m);
+        return true;
+    } else { cout << "Machine position already taken" ;}
+
 
 
 }
-constexpr bool Casino::Add(Machine *m){
 
-    if ( m== nullptr ) return false;
-    MACHINE_TYPE type = m->getType();
-    pair<int, int> machine_pos;
-    machine_pos = m->getPosition();
-
-
-
-
-    m_machines[type].push_back(m);
-
-    if(type == MACHINE_TYPE::BLACKJACK) {
-        l_Blackjack_Machines.push_back(m);
-    }else if(type == MACHINE_TYPE::ROULETTE) {
-        l_Roulette_Machines.push_back(m);
-    }else if(type == MACHINE_TYPE::CLASSIC_SLOT) {
-        l_classicSlots_Machines.push_back(m);
-    }else if(type == MACHINE_TYPE::CRAPS) {
-        l_Craps_Machines.push_back(m);
+bool Casino::checkMachinePositionAvailability(pair<int,int> position ){
+    for(const auto &element : m_positions ){
+        const std::pair<int,int> &el_position = element.first; /** gets the key **/
+        if (position == el_position) { return false;}
     }
     return true;
 }
+
+void Casino::databaseAddMachine(Machine *m){
+    MACHINE_TYPE type = m->getType();
+    m_machines[type].push_back(m);
+    switch (type) {
+        case MACHINE_TYPE::BLACKJACK:
+            l_Blackjack_Machines.push_back(m);
+            break;
+        case MACHINE_TYPE::ROULETTE:
+            l_Roulette_Machines.push_back(m);
+            break;
+        case MACHINE_TYPE::CLASSIC_SLOT:
+            l_classicSlots_Machines.push_back(m);
+            break;
+        case MACHINE_TYPE::CRAPS:
+            l_Craps_Machines.push_back(m);
+            break;
+        default:
+            cout << "Machine/Type not created yet...." ;
+    }
+    pair<int,int> pos;
+    pos = m->getPosition();
+    uint32_t id = m->getUID();
+   // m_positions[pos] = id;
+    auto it = m_positions.begin();
+    m_positions.insert(it, std::make_pair(pos,id));
+    m_machine_id[id] = m;
+
+}
+
 
 void Casino::Listing(std::ostream &f){
 
@@ -111,12 +143,20 @@ void Casino::Listing(float X, std::ostream &f){
 
 }
 
-void Casino::TurnOff(int id_mac){
-
+void Casino::TurnOff(const int id_mac){
+    auto it = m_machine_id.find('id_mac');
+    if (it != m_machine_id.end())
+        it->second->setState(MACHINE_STATE::OFF);
+    else cout << "Machine ID not found!";
 }
-MACHINE_STATE Casino::getState(int id_mac) {
 
+// m_machine_id.erase (it);
 
+MACHINE_STATE Casino::getState(const int id_mac) {
+    auto it = m_machine_id.find('id_mac');
+    if (it != m_machine_id.end())
+       return it->second->getState();
+    else cout << "Machine ID not found!";
 }
 int Casino::Total_Memory(){
 
@@ -174,12 +214,15 @@ void Casino::ReadPeopleFile(int n) {
                 cout << "User with ID " << user->getId() << " already exists. Try again." << endl;
                 delete user;  // Free the memory allocated for the user
             } else {
-                l_users.push_back(user);
+                Add(user);
                 usersAdded++;
             }
         }
 
         myfile.close();
+        cout << " Success loading users" ;
+    } else{
+        cout << " Error opening users File";
     }
 }
 

@@ -84,13 +84,13 @@ public:
      * @brief Getter for the UID of the Machine    *
      * @return The UID of the machine.             *
      ***********************************************/
-    int getUID() const;
+    [[nodiscard]] int getUID() const;
 
     /*********************************************************************
      * @brief Getter for the number of the times the Machine was used    *
      * @return The Number of usages.                                     *
      *********************************************************************/
-    int getUsage() const;
+    [[nodiscard]] int getUsage() const;
 
     /************************************************************
      * @brief Increments the number of times a machine was used *
@@ -133,7 +133,7 @@ public:
      * @brief Getter for Machine win probability    *
      * @return Float representing Win probability.  *
      ************************************************/
-    float getWinProbability() const;
+    [[nodiscard]] float getWinProbability() const;
 
     /**********************************************************
      * @brief Setter for Machine win probability              *
@@ -145,7 +145,7 @@ public:
      * @brief Getter for Machine Number of failures        *
      * @return Integer representing number of failures.    *
      *******************************************************/
-    int getFailures() const;
+    [[nodiscard]] int getFailures() const;
 
     /***************************************************************************
      * @brief Function to increment the number of times a machine has failed.  *
@@ -156,7 +156,7 @@ public:
      * @brief Getter for Machine Temperature  *
      * @return Machine Temperature            *
      ******************************************/
-    float getTemperature() const;
+    [[nodiscard]] float getTemperature() const;
 
     /*******************************************************
      * @brief Setter for the Machine current temperature   *
@@ -165,7 +165,7 @@ public:
     void setTemperature(float newTemp);
 
     virtual void setBetAmount(float bet);
-    float getBetAmount() const;
+    [[nodiscard]] float getBetAmount() const;
 
     int randomNumberGeneratorInterval(int x, int y);
 
