@@ -32,7 +32,7 @@ enum class MACHINE_TYPE : unsigned char {CLASSIC_SLOT =1 ,          // 1
                                         CRAPS,                      // 6
                                         BACCARAT,                   // 7
                                         POKER};                     // 8
-
+std::string machineTypeToString(MACHINE_TYPE type);
 
 
 enum class MACHINE_STATE : unsigned char {OFF, ON, BROKEN, NONEXISTENT}; // maybe add another value, TBD
@@ -179,7 +179,7 @@ public:
     virtual void Play(User* user);
     std::string toString();
     std::string toStringOut();
-    std::string machineTypeToString(MACHINE_TYPE type);
+
 
     int getID(){ return UID;}
 };

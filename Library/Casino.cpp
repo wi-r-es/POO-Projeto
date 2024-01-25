@@ -189,22 +189,25 @@ void Casino::ReadPeopleFile() {
             }
         }
         myfile.close();
-        cout << " Success loading " << count << "users.\n" ;
+        auto message = " Success Loading " + to_string(count) + " users ";
+        beautify(message, '*');
     } else{
-        cout << " Error opening users File";
+        cerr << " Error opening users File";
     }
 }
 
 // Estado atual do casino
 void Casino::Listing(std::ostream &f){
-    beautify("Machines in casino without any ordering");
+    beautify(" Machines in casino without any ordering ");
+    Wait(10);
     //cout << "******************************************" << endl;
     //cout << "* Machines in casino without any ordering *" << endl;
     //cout << "Machines in casino without any ordering:" << endl;
 
     for(auto & it : m_machine_id) {
         string s = it.second->toStringOut();
-            f << s << endl;
+        f << s << endl;
+        Wait(5);
     }
 }
 

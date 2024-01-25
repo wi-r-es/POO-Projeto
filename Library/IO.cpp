@@ -3,6 +3,7 @@
 //
 
 #include "Headers/IO.h"
+#include "Headers/utils.h"
 
 ifstream open(const char* path, ios_base::openmode mode){
     ifstream file{ path, mode };
@@ -31,22 +32,23 @@ void logging(const std::string& filename, const std::string& funcname, const std
     }
 }
 
-void beautify(const std::string& str) {
+void beautify(const std::string& str, const char ch) {
     int length = str.length();
     int padding = (50 - length) / 2;
-
     std::ostringstream oss;
+    auto border = new std::string(50, ch );
+    auto paddingStr = new std::string(padding, ch);
 
-    oss << "##################################################\n";
-    oss << std::string(padding, '#');
+    oss << *border <<"\n";
+    oss << *paddingStr;
     oss << str;
     // Complete the line with padding if it is an odd length
     if ((padding * 2 + length) < 50) {
-        oss << std::string(padding + 1, '#');
+        oss << std::string(padding + 1, ch);
     } else {
-        oss << std::string(padding, '#');
+        oss << *paddingStr;
     }
-    oss << "\n##################################################\n";
-
+    oss << "\n" << *border << "\n\n";
     std::cout << oss.str();
+    //delete border; delete paddingStr;
 }

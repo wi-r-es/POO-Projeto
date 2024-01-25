@@ -33,7 +33,7 @@ void clear(){system("clear");}
 int main() {
 
     Casino *casino = new Casino("Casino_name");
-    if( casino->Load("../Files/I/CasinoInfo.xml") ) cout << "Loaded successful" ;
+    if( casino->Load("../Files/I/CasinoInfo.xml") ) beautify(" Loaded successful ") ;
     casino->ReadPeopleFile();
     casino->Listing();
 
@@ -42,7 +42,9 @@ int main() {
 
     Clock *ptrClock = casino->getClock();
     ptrClock->StartClock(500, "10:00:00");
+    //Wait(60);
     casino->Run();
+
 /*
     Machine *SlotMachine = new ClassicSlot();
 
