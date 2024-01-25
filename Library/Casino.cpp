@@ -362,6 +362,8 @@ void Casino::Run() {
     mac->Play(usr);
     logging(logfile, __FUNCTION__, mac->toString());
 
+    cout << "Current time " << clock->getTime() << endl;
+
 }
 int randomNumberGeneratorInterval(int x, int y) {
     std::random_device rd;

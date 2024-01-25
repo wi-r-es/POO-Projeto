@@ -115,7 +115,7 @@ std::string Machine::toString() {
 
 std::string Machine::toStringOut() {
     std::string s = "\t[ID]->" + std::to_string(UID);  s.append("\n");
-    s.append("\t\t[TYPE]->" + std::to_string(static_cast<int>(TYPE))); s.append("\n");
+    s.append("\t\t[TYPE]->" + machineTypeToString(TYPE)); s.append("\n");
     s.append("\t\t[TEMPERATURE]->" + std::to_string(temperature)); s.append("\n");
     s.append("\t\t[X,Y]->" + std::to_string(posX) + "," + std::to_string(posY)); s.append("\n");
     s.append("\t\t[winProbability]->" + std::to_string(winProbability)); s.append("\n");
@@ -125,5 +125,18 @@ std::string Machine::toStringOut() {
     return s;
 }
 
+std::string machineTypeToString(MACHINE_TYPE type) {
+    switch (type) {
+        case MACHINE_TYPE::CLASSIC_SLOT: return "CLASSIC_SLOT";
+        case MACHINE_TYPE::THEMATIC_SLOT: return "THEMATIC_SLOT";
+        case MACHINE_TYPE::FEATURE_SLOT: return "FEATURE_SLOT";
+        case MACHINE_TYPE::BLACKJACK: return "BLACKJACK";
+        case MACHINE_TYPE::ROULETTE: return "ROULETTE";
+        case MACHINE_TYPE::CRAPS: return "CRAPS";
+        case MACHINE_TYPE::BACCARAT: return "BACCARAT";
+        case MACHINE_TYPE::POKER: return "POKER";
+        default: return "UNKNOWN_TYPE";
+    }
+}
 
 
