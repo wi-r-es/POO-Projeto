@@ -214,8 +214,6 @@ void Casino::Listing(std::ostream &f){
         f << s << endl;
         //Wait(5);
     }
-
-
 }
 
 void Casino::Listing(float X, std::ostream &f){
@@ -368,13 +366,28 @@ void Casino::Run() {
     auto usr = getRandomUser();
     auto type = getRandomType();
     auto mac = getRandomMachineByType(type);
+    try{
+        if(mac->getTemperature())
+        {
+            throw runtime_error{"Machine Temperature of the charts, meltdown imminent..."};
+        }
 
-    mac->Play(usr);
+            mac->Play(usr);
+    } catch (runtime_error &ex) {
+        cerr<<"An error as occured while trying to use machine\n\t"
+            << '[' << mac->getUID() << ']' << " ... -> " << ex.what();
+        logging(logfile, "[[EXCEPTION CAUGHT]--[WHILE_TRYING_TO_USE_MACHINE]]", ex.what());
+        auto [x,y] = mac->getPosition();
+        string s = "[[ {" + to_string(mac->getUID()) +  "},{" +
+                machineTypeToString(mac->getType()) + "} at { [" + to_string(x) + "," + to_string(y) + "] }" +
+                " with {" + to_string(mac->getTemperature()) + "º Temperature} " + "]]";
+        logging(logfile, "[[SHUTTING DOWN MACHINE]]", s);
+    }
+
     logging(logfile, __FUNCTION__, mac->toString());
-    Wait(1000);
+    //Wait(1000);
     auto current_time =  clock->getTime();
     printTime(current_time);
-
 }
 
 User* Casino::getRandomUser(){

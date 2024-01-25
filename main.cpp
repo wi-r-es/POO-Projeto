@@ -9,6 +9,8 @@ void clear(){system("cls");}
 #else
 void clear(){system("clear");}
 #endif
+
+void SimulateCasino( Casino *casino);
 // Example for documenting the functions from previous project
 /*********************************************************************************************************************************************************************
  * @brief Loads Clients, employees, products and boxes from files. Generates hashing for clients based on the input.                                                 *
@@ -42,7 +44,7 @@ int main() {
 
     Clock *ptrClock = casino->getClock();
     ptrClock->StartClock(500, "10:00:00");
-    Wait(1000);
+    //Wait(1000);
     casino->Run();
 
 /*
@@ -69,4 +71,12 @@ int main() {
 
 
     //return 0;
+}
+
+
+void SimulateCasino( Casino *casino){
+    time_t time_passed = casino->getClock()->getTime();
+
+
+    casino->Run();
 }
