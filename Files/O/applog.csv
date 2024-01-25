@@ -121,3 +121,19 @@ Jan 24 2024,23:35:59,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding mach
 Jan 24 2024,23:35:59,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
 Jan 24 2024,23:35:59,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
 Jan 24 2024,23:35:59,[EXECUTING_FUNCTION]: Run,[SHORT-BRIEF]: [ID]->4; [TYPE]->1;[TEMPERATURE]->18.299999;[X,Y]->1,4;[winProbability]->0.100000;[Failures]->0;[betAmount]->4732.000000;[usage]->0
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Load,[SHORT-BRIEF]: Error adding machine to casino.
+Jan 25 2024,12:34:29,[EXECUTING_FUNCTION]: Run,[SHORT-BRIEF]: [ID]->9; [TYPE]->5;[TEMPERATURE]->18.299999;[X,Y]->3,1;[winProbability]->0.100000;[Failures]->0;[betAmount]->4375.000000;[usage]->0

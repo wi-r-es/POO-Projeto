@@ -17,6 +17,7 @@
 #include "Blackjack.h"
 #include "Roulette.h"
 #include "IO.h"
+#include "Clock.h"
 
 #include "User.h"
 
@@ -67,7 +68,7 @@ private:
     std::list<User*> l_users;
     std::vector<Machine *> v_Broken_Machines;
     // More data members related to opening and closing time, etc.
-    // Add clock !!!
+    Clock clock;
 
 public:
     /*****************************************************************

@@ -18,18 +18,20 @@ string logfile { "../Files/O/applog.csv" } ;
 
 #endif
 
-Casino::Casino(std::string name): NAME{std::move(name)}, MAX_Players{},JackpotRadius{}{}
+Casino::Casino(std::string name): NAME{std::move(name)}, MAX_Players{},JackpotRadius{}{
+    clock = new Clock();
+}
 Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)}, MAX_Players{max},JackpotRadius{jradius}{}
 
 Casino::~Casino(){
 
-    for(map<MACHINE_TYPE, std::list<Machine *>>::iterator it = m_machines.begin(); it != m_machines.end(); ++it) {
+    for(auto it = m_machines.begin(); it != m_machines.end(); ++it) {
         for (auto &machine : it->second) {
             delete machine;
         }
     }
 
-    for(list<User *>::iterator it = l_users.begin(); it != l_users.end(); ++it) {
+    for(auto it = l_users.begin(); it != l_users.end(); ++it) {
         delete *it;
     }
 
