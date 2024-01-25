@@ -21,7 +21,7 @@ class Clock {
 private:
     time_t START{};
     int SPEED{};
-    time_t Hora_Inicio{};
+    time_t START_TIME{};
 public:
 
 

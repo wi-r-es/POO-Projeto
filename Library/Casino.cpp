@@ -21,7 +21,9 @@ string logfile { "../Files/O/applog.csv" } ;
 Casino::Casino(std::string name): NAME{std::move(name)}, MAX_Players{},JackpotRadius{}{
     clock = new Clock();
 }
-Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)}, MAX_Players{max},JackpotRadius{jradius}{}
+Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)}, MAX_Players{max},JackpotRadius{jradius}{
+    clock = new Clock();
+}
 
 Casino::~Casino(){
 
@@ -193,12 +195,13 @@ void Casino::ReadPeopleFile() {
     }
 }
 
-// EStado atual do casino
+// Estado atual do casino
 void Casino::Listing(std::ostream &f){
     beautify("Machines in casino without any ordering");
     //cout << "******************************************" << endl;
     //cout << "* Machines in casino without any ordering *" << endl;
     //cout << "Machines in casino without any ordering:" << endl;
+
     for(auto & it : m_machine_id) {
         string s = it.second->toStringOut();
             f << s << endl;
@@ -237,6 +240,11 @@ MACHINE_STATE Casino::getState(const int id_mac) {
         return MACHINE_STATE::NONEXISTENT;
     }
 }
+
+Clock *Casino::getClock() const {
+    return clock;
+}
+
 size_t Casino::Total_Memory() const{
     size_t totalSize = sizeof(*this); /** Size of the Casino object itself **/
     /** Calculate the size of all unique machines in m_machine_id map **/
@@ -419,3 +427,5 @@ MACHINE_TYPE Casino::getRandomType(){
     int randomIndex = randomNumberGeneratorInterval(0, sizeof(typesInUse) / sizeof(typesInUse[0]) - 1);
     return typesInUse[randomIndex];
 }
+
+

@@ -68,7 +68,7 @@ private:
     std::list<User*> l_users;
     std::vector<Machine *> v_Broken_Machines;
     // More data members related to opening and closing time, etc.
-    Clock clock;
+    Clock *clock;
 
 public:
     /*****************************************************************
@@ -143,6 +143,9 @@ public:
      * @return Machine current state.                                    *
      *********************************************************************/
     MACHINE_STATE getState(int id_mac);
+
+    [[nodiscard]] Clock* getClock() const;
+
 
     /*********************************************************
      * @brief Calculates the total memory occupied by ADTs   *

@@ -39,6 +39,9 @@ int main() {
 
     User *utilizador = new User("123456789", "Joao", "Porto", 20);
     utilizador->setMoney(5000);
+
+    Clock *ptrClock = casino->getClock();
+    ptrClock->StartClock(500, "10:00:00");
     casino->Run();
 /*
     Machine *SlotMachine = new ClassicSlot();
