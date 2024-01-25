@@ -142,7 +142,7 @@ public:
      * @brief Calculates the total memory occupied by ADTs   *
      * @return Integer representing total memory usage.      *
      *********************************************************/
-    int Total_Memory();
+    size_t Total_Memory();
 
     /***************************************************
      * @brief Lists all Machines of a given type.      *

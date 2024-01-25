@@ -210,7 +210,7 @@ MACHINE_STATE Casino::getState(const int id_mac) {
         return MACHINE_STATE::NONEXISTENT;
     }
 }
-int Casino::Total_Memory(){
+size_t Casino::Total_Memory(){
 
 }
 std::list<Machine *> *Casino::List_Types(const std::string& Type, std::ostream &f ){
