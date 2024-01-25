@@ -33,6 +33,19 @@ Casino::~Casino(){
     for(auto it = l_users.begin(); it != l_users.end(); ++it) {
         delete *it;
     }
+    for(auto it = v_Broken_Machines.begin(); it != v_Broken_Machines.end(); ++it) {
+        delete *it;
+    }
+    m_machine_id.clear();
+    m_positions.clear();
+    m_machines.clear(); //maybe, still TBD
+    v_classicSlots_Machines.clear();
+    v_Blackjack_Machines.clear();
+    v_Roulette_Machines.clear();
+    v_Craps_Machines.clear();
+    l_users.clear();
+    v_Broken_Machines.clear();
+    delete clock;
 }
 
 bool Casino::Load(const std::string &file) {
