@@ -1,6 +1,8 @@
 //
 // Created on 06/11/23.
 //
+#include <utility>
+
 #include "Headers/Casino.h"
 #include "pugixml/pugixml.hpp"
 
@@ -13,7 +15,8 @@ string logfile { "../Files/O/applog.csv" } ;
 
 #endif
 
-Casino::Casino(std::string name): NAME{name}{}
+Casino::Casino(std::string name): NAME{std::move(name)}, MAX_Players{},JackpotRadius{}{}
+Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)}, MAX_Players{max},JackpotRadius{jradius}{}
 
 Casino::~Casino(){
 
@@ -27,30 +30,21 @@ bool Casino::Load(const std::string &file) {
         std::cout << "Error loading file: " << file << std::endl;
         return false;
     }
-
-    pugi::xml_node data = doc.child("DATA");
-
+    auto data = doc.child("DATA");
     // Process SETTINGS
-    pugi::xml_node settings = data.child("SETTINGS");
-    std::string name = settings.child_value("NAME");
-    std::string maxPlayersStr = settings.child_value("MAX_PLAYERS");
-    std::string jackpotRadiusStr = settings.child_value("JackpotRadius");
+    auto settings = data.child("SETTINGS");
+    NAME = settings.child_value("NAME");
+    MAX_Players = std::stoi(settings.child_value("MAX_PLAYERS"));
+    JackpotRadius = std::stoi(settings.child_value("JackpotRadius"));
 
-    std::cout << "Casino Name: " << name << std::endl;
-    std::cout << "Max Players: " << maxPlayersStr << std::endl;
-    std::cout << "Jackpot Radius: " << jackpotRadiusStr << std::endl;
 
-    // Convert strings to integers
-    int maxPlayers = std::stoi(maxPlayersStr);
-    int jackpotRadius = std::stoi(jackpotRadiusStr);
-    // Set them to your class members
-    // NAME = name;
-    // MAX_Players = maxPlayers;
-    // JackpotRadius = jackpotRadius;
+    std::cout << "Casino Name: " << NAME << std::endl;
+    std::cout << "Max Players: " << MAX_Players << std::endl;
+    std::cout << "Jackpot Radius: " << JackpotRadius << std::endl;
 
     // Process MACHINELIST
     pugi::xml_node machineList = data.child("MACHINELIST");
-    for (pugi::xml_node machine = machineList.child("MACHINE"); machine; machine = machine.next_sibling("MACHINE")) {
+    for (auto machine = machineList.child("MACHINE"); machine; machine = machine.next_sibling("MACHINE")) {
         std::string gameType = machine.child_value("GAME");
         int x = std::stoi(machine.child_value("X"));
         int y = std::stoi(machine.child_value("Y"));
@@ -73,7 +67,7 @@ bool Casino::Load(const std::string &file) {
             m = new Craps(x, y);
         }
 
-        if (m) {
+        if (m && Add(m)) {
             bool result = Add(m);
             if(!result){ logging(logfile, __FUNCTION__, "Error adding machine to casino.");}
             else logging(logfile, __FUNCTION__, "Success adding machine to casino.");
