@@ -5,9 +5,10 @@
 #include "pugixml/pugixml.hpp"
 
 #ifdef _WIN32
-string logfile { "..\\..\\Files\\O\\applog.csv" };
+string clients_file { "..\\Files\\I\\pessoas.txt" };
+string logfile { "..\\Files\\O\\applog.csv" };
 #else
-//ifstream clients_file { "../../Files/I/pessoas.txt" } ;
+string clients_file { "../Files/I/pessoas.txt" } ;
 string logfile { "../Files/O/applog.csv" } ;
 
 #endif
@@ -84,9 +85,14 @@ bool Casino::Load(const std::string &file) {
 }
 
 
-[[maybe_unused]] bool Casino::Add(User *usr){
-    if(usr== nullptr) cerr << "Null  pointer passed";
-    l_users.push_back(usr);
+bool Casino::Add(User *usr){
+    try {
+        l_users.push_back(usr);
+        return true;
+    } catch (runtime_error& ex){
+        cerr<<"An error as occured... -> " << ex.what();
+        return false;
+    }
 }
 bool Casino::Add(Machine *m){
 
@@ -99,15 +105,15 @@ bool Casino::Add(Machine *m){
     if (result){
         databaseAddMachine(m);
         return true;
-    } else { cerr << "Machine position already taken\n" ; return false;}
-
-
-
+    } else {
+        cerr << "Machine position already taken\n" ;
+        cout << endl << endl<<endl<<endl;
+        return false;}
 }
 
 bool Casino::checkMachinePositionAvailability(pair<int,int> position ){
     for(const auto &element : m_positions ){
-        const std::pair<int,int> &el_position = element.first; /** gets the key **/
+        const auto &el_position = element.first; /** gets the key **/
         if (position == el_position) { return false;}
     }
     return true;
@@ -115,7 +121,20 @@ bool Casino::checkMachinePositionAvailability(pair<int,int> position ){
 
 void Casino::databaseAddMachine(Machine *m){
     MACHINE_TYPE type = m->getType();
+    auto pos = m->getPosition();
+    uint32_t id = m->getUID();
+
+    // Check if a machine with the same ID already exists
+    if (m_machine_id.find(id) != m_machine_id.end()) {
+        cerr << "Machine with ID " << id << " already exists." << endl;
+        return;
+    }
+
+    /** Add the machine to the appropriate list and maps **/
     m_machines[type].push_back(m);
+    m_positions[pos] = id;
+    m_machine_id[id] = m;
+
     switch (type) {
         case MACHINE_TYPE::BLACKJACK:
             l_Blackjack_Machines.push_back(m);
@@ -130,16 +149,52 @@ void Casino::databaseAddMachine(Machine *m){
             l_Craps_Machines.push_back(m);
             break;
         default:
-            cout << "Machine/Type not created yet....\n" ;
+            cout << "Machine/Type not created yet....\n";
     }
-    pair<int,int> pos;
-    pos = m->getPosition();
-    uint32_t id = m->getUID();
-   // m_positions[pos] = id;
-    auto it = m_positions.begin();
-    m_positions.insert(it, std::make_pair(pos,id));
-    m_machine_id[id] = m;
+}
 
+
+void Casino::ReadPeopleFile() {
+    string line;
+    ifstream myfile{clients_file, ios::in};
+
+    if (myfile.is_open()) {
+        int count{};
+        while (getline(myfile, line) ) {
+            stringstream aux(line);
+
+            string id, name, city, age;
+            getline(aux, id, '\t');
+            getline(aux, name, '\t');
+            getline(aux, city, '\t');
+            getline(aux, age, '\t');
+
+            User* user = new User(id.data(), name, city, stoi(age));
+
+            // Check if the user with this ID already exists in the list
+            bool userExists = false;
+            for (const auto& existingUser : l_users) {
+                if (existingUser->getId() == user->getId()) {
+                    userExists = true;
+                    break;
+                }
+            }
+
+            if (userExists) {
+                cout << "User with ID " << user->getId() << " already exists. Try again." << endl;
+                delete user;  // Free the memory allocated for the user
+            } else {
+                if(Add(user)) {
+                    //cout << "User added to casino.\n";
+                    count++;
+                }
+            }
+        }
+        myfile.close();
+        cout << " Success loading " << count << "users.\n" ;
+    } else{
+        cout << " Error opening users File";
+    }
 }
 
 
@@ -198,48 +253,7 @@ void Casino::Up_Neighbour_Probability(Machine *M_win, float R, std::list<Machine
 
 }
 
-void Casino::ReadPeopleFile(int n) {
-    string line;
-    ifstream myfile("../Files/I/pessoas.txt");
 
-    if (myfile.is_open()) {
-        int usersAdded = 0;
-
-        while (getline(myfile, line) && usersAdded < n) {
-            stringstream aux(line);
-
-            string id, name, city, age;
-            getline(aux, id, '\t');
-            getline(aux, name, '\t');
-            getline(aux, city, '\t');
-            getline(aux, age, '\t');
-
-            User* user = new User(id.data(), name, city, stoi(age));
-
-            // Check if the user with this ID already exists in the list
-            bool userExists = false;
-            for (const auto& existingUser : l_users) {
-                if (existingUser->getId() == user->getId()) {
-                    userExists = true;
-                    break;
-                }
-            }
-
-            if (userExists) {
-                cout << "User with ID " << user->getId() << " already exists. Try again." << endl;
-                delete user;  // Free the memory allocated for the user
-            } else {
-                Add(user);
-                usersAdded++;
-            }
-        }
-
-        myfile.close();
-        cout << " Success loading users" ;
-    } else{
-        cout << " Error opening users File";
-    }
-}
 
 
 

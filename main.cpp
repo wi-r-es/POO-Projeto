@@ -43,7 +43,7 @@ int main() {
     if( casino->Load("../Files/I/CasinoInfo.xml") ) cout << "Loaded successful" ;
 
 
-    //casino->ReadPeopleFile(20);
+    casino->ReadPeopleFile();
 
     User *utilizador = new User("123456789", "Joao", "Porto", 20);
 
@@ -94,7 +94,7 @@ int main() {
     }
 
 */
-
+/*
     Machine *SlotMachine = new ClassicSlot();
 
     auto *slotPtr = dynamic_cast<ClassicSlot*>(SlotMachine);
@@ -111,7 +111,7 @@ int main() {
         cout << "DEBT OWNED -> " << utilizador->getDebt() << endl;
     }
 
-
+*/
     std::atexit([] {std::cout << "***std::atexit callback executing***\n";});
 
 
