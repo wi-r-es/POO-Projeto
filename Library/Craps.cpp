@@ -55,5 +55,6 @@ void Craps::Play(User* user) {
         std::cout << "Roll again!" << std::endl;
     }
     setTemperature(this->getTemperature() + 0.3);
+    increaseTemperature();
 
 }

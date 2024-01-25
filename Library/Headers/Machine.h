@@ -166,6 +166,7 @@ public:
      * @param newTemp                                      *
      ******************************************************/
     void setTemperature(float newTemp);
+    void increaseTemperature();
 
     virtual void setBetAmount(float bet);
     [[nodiscard]] float getBetAmount() const;

@@ -73,6 +73,9 @@ void Machine::incrementFailures() {
 float Machine::getTemperature() const {
     return temperature;
 }
+void Machine::increaseTemperature() {
+    temperature+=0.5f;
+}
 
 void Machine::setTemperature(float newTemp) {
     if (newTemp >= 0.0f) {

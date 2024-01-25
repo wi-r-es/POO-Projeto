@@ -65,7 +65,7 @@ void ClassicSlot::Play(User *user) {
         user->setMoney(userMoney + getBetAmount()*4);
     }
 
-    setTemperature(this->getTemperature() + 0.3);
+    increaseTemperature();
 
 }
 
