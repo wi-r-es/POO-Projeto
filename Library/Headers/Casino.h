@@ -25,6 +25,7 @@
 #include <type_traits>
 #include <vector>
 #include <map>
+#include <algorithm>
 #include <utility>
 #include <fstream>
 #include <sstream>
@@ -64,6 +65,7 @@ private:
     std::vector<Machine *> v_Roulette_Machines;
     std::vector<Machine *> v_Craps_Machines;
     std::list<User*> l_users;
+    std::vector<Machine *> v_Broken_Machines;
     // More data members related to opening and closing time, etc.
     // Add clock !!!
 
@@ -184,6 +186,8 @@ public:
      * @param xml_file                                                             *
      *******************************************************************************/
     void Report(const std::string &xml_file);
+
+    float DistanceBetweenPoints(int first, int second, int first1, int second1);
 
     /**************************************************************************************
      * @brief Raises the winning probability of the Machines near                         *

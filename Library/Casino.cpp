@@ -4,6 +4,9 @@
 #include <utility>
 
 #include "Headers/Casino.h"
+
+
+
 #include "pugixml/pugixml.hpp"
 
 #ifdef _WIN32
@@ -19,6 +22,16 @@ Casino::Casino(std::string name): NAME{std::move(name)}, MAX_Players{},JackpotRa
 Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)}, MAX_Players{max},JackpotRadius{jradius}{}
 
 Casino::~Casino(){
+
+    for(map<MACHINE_TYPE, std::list<Machine *>>::iterator it = m_machines.begin(); it != m_machines.end(); ++it) {
+        for (auto &machine : it->second) {
+            delete machine;
+        }
+    }
+
+    for(list<User *>::iterator it = l_users.begin(); it != l_users.end(); ++it) {
+        delete *it;
+    }
 
 }
 
@@ -181,9 +194,25 @@ void Casino::ReadPeopleFile() {
 
 void Casino::Listing(std::ostream &f){
 
+    for(map<MACHINE_TYPE, std::list<Machine *>>::iterator it = m_machines.begin(); it != m_machines.end(); ++it) {
+        for (auto &machine : it->second) {
+            f << "Maquina: " << machine->getUID() << " Probabilidade: " << machine->getWinProbability() << endl;
+        }
+    }
+
+
+
 }
 
 void Casino::Listing(float X, std::ostream &f){
+
+    for(map<MACHINE_TYPE, std::list<Machine *>>::iterator it = m_machines.begin(); it != m_machines.end(); ++it) {
+        for (auto &machine : it->second) {
+            if (machine->getWinProbability() > X) {
+                f << "Maquina: " << machine->getUID() << " Probabilidade: " << machine->getWinProbability() << endl;
+            }
+        }
+    }
 
 }
 
@@ -238,21 +267,81 @@ std::list<Machine *> *Casino::List_Types(const std::string& Type, std::ostream &
 
 }
 std::list<std::string> *Casino::Ranking_of_the_weaks(){
+    vector<Machine*> v_broken = v_Broken_Machines;
+
+    sort(v_broken.begin(), v_broken.end(), [](Machine* m1, Machine* m2) {
+        return m1->getFailures() > m2->getFailures();
+    });
+
+
+    list<string> *l_ranking;
+    for (auto it = v_broken.begin(); it != v_broken.end(); it++) {
+        l_ranking->push_back("MACHINE ID: " + to_string((*it)->getUID()) + " FAILURES: " + to_string((*it)->getFailures()) + "\n");
+    }
+
+    return l_ranking;
+
 
 }
 std::list<Machine *> *Casino::Ranking_of_the_most_used(){
 
+    map<MACHINE_TYPE, std::list<Machine *>> m_machine = m_machines;
+
+    for(auto &pair : m_machine){
+        pair.second.sort([](Machine* m1, Machine* m2) {
+            return m1->getUsage() > m2->getUsage();
+        });
+    }
+
+    list<string> *l_ranking;
+    for (auto it = m_machine.begin(); it != m_machine.end(); ++it) {
+        if (!it->second.empty()) { // Check if the list is not empty
+            Machine* machine = it->second.front(); // Get the first Machine* in the list
+            l_ranking->push_back("MACHINE ID: " + std::to_string(machine->getID()) + " USAGE: " + std::to_string(machine->getUsage()) + "\n");
+        }
+    }
+
+
 }
 std::list<User *> *Casino::Most_Frequent_Users(){
+    list<User*> *l_frequent_users;
+    l_frequent_users->sort([] (User* u1, User* u2) {
+        return u1->getTimeSpent() > u2->getTimeSpent();
+    });
+
+    return  l_frequent_users;
 
 }
 std::list<User *> *Casino::Most_Wins_Users(){
+
+    list<User*> *l_wins_users;
+    l_wins_users->sort([] (User* u1, User* u2) {
+        return u1->getPrizesWon() > u2->getPrizesWon();
+    });
+
+    return l_wins_users;
 
 }
 void Casino::Report(const std::string& xml_file){
 
 }
+
+float Casino::DistanceBetweenPoints(int first, int second, int first1, int second1) {
+    return sqrt(pow(first1 - first, 2) + pow(second1 - second, 2));
+}
+
 void Casino::Up_Neighbour_Probability(Machine *M_win, float R, std::list<Machine *> &list_machine_neighbour){
+
+    for(Machine* m : list_machine_neighbour){
+        if(m != M_win){
+            float distance = DistanceBetweenPoints(M_win->getPosition().first, M_win->getPosition().second, m->getPosition().first, m->getPosition().second);
+            if(distance <= R){
+                m->setWinProbability(m->getWinProbability() + 0.1);
+            }
+        }
+    }
+
+
 
 }
 
