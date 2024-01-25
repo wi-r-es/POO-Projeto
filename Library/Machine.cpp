@@ -101,4 +101,17 @@ void Machine::Play(User* user){
     std::cout << __FUNCTION__  << std::endl;
 }
 
+std::string Machine::toString() {
+    std::string s = "[ID]->" + std::to_string(UID);  s.append(";");
+    s.append(" [TYPE]->" + std::to_string(static_cast<int>(TYPE))); s.append(";");
+    s.append("[TEMPERATURE]->" + std::to_string(temperature)); s.append(";");
+    s.append("[X,Y]->" + std::to_string(posX) + "," + std::to_string(posY)); s.append(";");
+    s.append("[winProbability]->" + std::to_string(winProbability)); s.append(";");
+    s.append("[Failures]->" + std::to_string(failures)); s.append(";");
+    s.append("[betAmount]->" + std::to_string(betAmount)); s.append(";");
+    s.append("[usage]->" + std::to_string(usage));
+    return s;
+}
+
+
 

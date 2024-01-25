@@ -32,68 +32,14 @@ void clear(){system("clear");}
  *********************************************************************************************************************************************************************/
 int main() {
 
-
-
-    //Test Data
-    //initialize rand
-    srand(time(nullptr));
-
     Casino *casino = new Casino("Casino_name");
-
     if( casino->Load("../Files/I/CasinoInfo.xml") ) cout << "Loaded successful" ;
-
-
     casino->ReadPeopleFile();
 
+
     User *utilizador = new User("123456789", "Joao", "Porto", 20);
-
     utilizador->setMoney(5000);
-
-
-
-    //Machine *slot = new ClassicSlot(1, 2);
-    //slot->Play(utilizador);
-    /*
-    User *usr = new User("123456789", "Joao", "Porto", 20);
-
-    Roulette *roleta = new Roulette(1, 2);
-    roleta->Play(utilizador);
-
-    Machine *testMachine = new Roulette();
-    // Use dynamic_cast to call printMap on a Machine pointer that points to a Roulette object
-    auto* roulettePtr = dynamic_cast<Roulette*>(testMachine);
-    if (roulettePtr) {
-        roulettePtr->printMap();
-    } else {
-        std::cerr << "Incorrect cast from Machine* to Roulette*" << std::endl;
-    }
-
-    std::cout << __FUNCTION__  << std::endl;
-    std::cout << "USER MONEY TO BET: -->" << utilizador->getMoney() << std::endl;
-    /**
-     * KEYBOARD TEST RUN *
-    */
-
- /*   Machine *testBlack = new Blackjack();
-
-    auto* blackjackPtr = dynamic_cast<Blackjack*>(testBlack);
-    if (blackjackPtr) {
-        blackjackPtr->simulate_game();
-    } else {
-        std::cerr << "Incorrect cast from Machine* to BlackJack*" << std::endl;
-    }
-
-
-    Machine *CrapsMachine = new Craps();
-
-    auto *crapsPtr = dynamic_cast<Craps*>(CrapsMachine);
-    if(crapsPtr) {
-        cout << "All good"<< endl;
-    }else {
-        cerr << "Incorrect cast from Machine* to Craps*" << endl;
-    }
-
-*/
+    casino->Run();
 /*
     Machine *SlotMachine = new ClassicSlot();
 
@@ -112,6 +58,8 @@ int main() {
     }
 
 */
+    const size_t mem = casino->Total_Memory();
+    cout << "\nMemoria total ocupado pelo casino: " << mem << "bytes" << endl;
     std::atexit([] {std::cout << "***std::atexit callback executing***\n";});
 
 

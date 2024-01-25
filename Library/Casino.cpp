@@ -71,6 +71,7 @@ bool Casino::Load(const std::string &file) {
 
 bool Casino::Add(User *usr){
     try {
+        usr->setMoney(5000);
         l_users.push_back(usr);
         return true;
     } catch (runtime_error& ex){
@@ -107,13 +108,11 @@ void Casino::databaseAddMachine(Machine *m){
     MACHINE_TYPE type = m->getType();
     auto pos = m->getPosition();
     uint32_t id = m->getUID();
-
-    // Check if a machine with the same ID already exists
+    /** Check if a machine with the same ID already exists **/
     if (m_machine_id.find(id) != m_machine_id.end()) {
         cerr << "Machine with ID " << id << " already exists." << endl;
         return;
     }
-
     /** Add the machine to the appropriate list and maps **/
     m_machines[type].push_back(m);
     m_positions[pos] = id;
@@ -121,16 +120,16 @@ void Casino::databaseAddMachine(Machine *m){
 
     switch (type) {
         case MACHINE_TYPE::BLACKJACK:
-            l_Blackjack_Machines.push_back(m);
+            v_Blackjack_Machines.push_back(m);
             break;
         case MACHINE_TYPE::ROULETTE:
-            l_Roulette_Machines.push_back(m);
+            v_Roulette_Machines.push_back(m);
             break;
         case MACHINE_TYPE::CLASSIC_SLOT:
-            l_classicSlots_Machines.push_back(m);
+            v_classicSlots_Machines.push_back(m);
             break;
         case MACHINE_TYPE::CRAPS:
-            l_Craps_Machines.push_back(m);
+            v_Craps_Machines.push_back(m);
             break;
         default:
             cout << "Machine/Type not created yet....\n";
@@ -227,10 +226,10 @@ size_t Casino::Total_Memory() const{
     }
 
     /** Add the size of specific machine lists **/
-    totalSize += l_classicSlots_Machines.size();         /** Size of l_classicSlots_Machines list **/
-    totalSize += l_Blackjack_Machines.size();            /** Size of l_Blackjack_Machines list **/
-    totalSize += l_Roulette_Machines.size();             /** Size of l_Roulette_Machines list **/
-    totalSize += l_Craps_Machines.size();                /** Size of l_Craps_Machines list **/
+    totalSize += v_classicSlots_Machines.size();         /** Size of l_classicSlots_Machines list **/
+    totalSize += v_Blackjack_Machines.size();            /** Size of l_Blackjack_Machines list **/
+    totalSize += v_Roulette_Machines.size();             /** Size of l_Roulette_Machines list **/
+    totalSize += v_Craps_Machines.size();                /** Size of l_Craps_Machines list **/
     /** Add the size of the user list **/
     totalSize += l_users.size() * sizeof(User*);         /** Size of l_users list **/
     return totalSize;
@@ -261,8 +260,76 @@ void Casino::Up_Neighbour_Probability(Machine *M_win, float R, std::list<Machine
 
 
 
-void Casino::Run(bool Debug) {
+void Casino::Run() {
+    auto usr = getRandomUser();
+    auto type = getRandomType();
+    auto mac = getRandomMachineByType(type);
 
+    mac->Play(usr);
+    logging(logfile, __FUNCTION__, mac->toString());
+
+}
+int randomNumberGeneratorInterval(int x, int y) {
+    std::random_device rd;
+    std::mt19937 eng(rd());
+    std::uniform_int_distribution<> distr(x, y);
+    return distr(eng);
+}
+User* Casino::getRandomUser(){
+    if (l_users.empty()) {
+        return nullptr; /** check if list is empty **/
+    }
+    /** Get the size of the list **/
+    size_t size = l_users.size();
+    /** Generate a random position **/
+    int randomPos = randomNumberGeneratorInterval(0, static_cast<int>(size) - 1);
+    /** Advance the iterator to the random position **/
+    auto it = l_users.begin();
+    std::advance(it, randomPos);
+    return *it; /** Return the random user **/
 }
 
 
+Machine* getRandomMachineFromVector(MACHINE_TYPE type, const std::vector<Machine *>& vec) {
+    auto machineCount = vec.size();
+    int randomIndex = randomNumberGeneratorInterval(0, static_cast<int>(machineCount) - 1);
+    auto t = vec.at(randomIndex);
+    return t;
+}
+
+Machine* Casino::getRandomMachineByType(MACHINE_TYPE type){
+    /** Check if there are machines of the given type **/
+    auto it = m_machines.find(type);
+    if (it == m_machines.end() || it->second.empty()) {
+        return nullptr; // No machines of this type
+    }
+    Machine* machine= nullptr;
+    switch (type) {
+        case MACHINE_TYPE::BLACKJACK:
+            machine = getRandomMachineFromVector(type, v_Blackjack_Machines);
+            break;
+        case MACHINE_TYPE::ROULETTE:
+            machine = getRandomMachineFromVector(type,v_Roulette_Machines);
+            break;
+        case MACHINE_TYPE::CLASSIC_SLOT:
+            machine = getRandomMachineFromVector(type,v_classicSlots_Machines);
+            break;
+        case MACHINE_TYPE::CRAPS:
+            machine = getRandomMachineFromVector(type,v_Craps_Machines);
+            break;
+        default:
+            cerr << "Type not used, some error has occured....";
+    }
+    return machine;
+}
+MACHINE_TYPE Casino::getRandomType(){
+    /** Only randomizes the machines types at use **/
+    static const MACHINE_TYPE typesInUse[] = {
+            MACHINE_TYPE::CLASSIC_SLOT,
+            MACHINE_TYPE::BLACKJACK,
+            MACHINE_TYPE::ROULETTE,
+            MACHINE_TYPE::CRAPS
+    };
+    int randomIndex = randomNumberGeneratorInterval(0, sizeof(typesInUse) / sizeof(typesInUse[0]) - 1);
+    return typesInUse[randomIndex];
+}
