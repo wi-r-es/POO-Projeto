@@ -210,8 +210,30 @@ MACHINE_STATE Casino::getState(const int id_mac) {
         return MACHINE_STATE::NONEXISTENT;
     }
 }
-size_t Casino::Total_Memory(){
+size_t Casino::Total_Memory() const{
+    size_t totalSize = sizeof(*this); /** Size of the Casino object itself **/
+    /** Calculate the size of all unique machines in m_machine_id map **/
+    for (const auto& pair : m_machine_id) {
+        totalSize += sizeof(pair.first) + sizeof(Machine*); /** Size of the map entry (ID and pointer) **/
+        totalSize += sizeof(*(pair.second)); /** Size of the Machine object pointed to by the pointer **/
+    }
+    /** Add the size of collections storing pointers to machines **/
+    totalSize += m_positions.size() * sizeof(std::pair<const std::pair<int, int>, uint16_t>); /** Size of m_positions map **/
+    totalSize += m_machines.size() * sizeof(std::pair<const MACHINE_TYPE, std::list<Machine *>>); /** Size of m_machines map **/
 
+    // if map is indeed never used or initialized this shall be deleted
+    for (const auto& pair : m_machines) {
+        totalSize += pair.second.size() * sizeof(Machine*); /** Size of the list of pointers in each map entry **/
+    }
+
+    /** Add the size of specific machine lists **/
+    totalSize += l_classicSlots_Machines.size();         /** Size of l_classicSlots_Machines list **/
+    totalSize += l_Blackjack_Machines.size();            /** Size of l_Blackjack_Machines list **/
+    totalSize += l_Roulette_Machines.size();             /** Size of l_Roulette_Machines list **/
+    totalSize += l_Craps_Machines.size();                /** Size of l_Craps_Machines list **/
+    /** Add the size of the user list **/
+    totalSize += l_users.size() * sizeof(User*);         /** Size of l_users list **/
+    return totalSize;
 }
 std::list<Machine *> *Casino::List_Types(const std::string& Type, std::ostream &f ){
 
