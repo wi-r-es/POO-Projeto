@@ -24,9 +24,7 @@ Casino::~Casino(){
 
 bool Casino::Load(const std::string &file) {
     pugi::xml_document doc;
-
-    pugi::xml_parse_result result = doc.load_file(file.c_str());
-    if (!result) {
+    if (!doc.load_file(file.c_str())) {
         std::cout << "Error loading file: " << file << std::endl;
         return false;
     }
@@ -36,7 +34,6 @@ bool Casino::Load(const std::string &file) {
     NAME = settings.child_value("NAME");
     MAX_Players = std::stoi(settings.child_value("MAX_PLAYERS"));
     JackpotRadius = std::stoi(settings.child_value("JackpotRadius"));
-
 
     std::cout << "Casino Name: " << NAME << std::endl;
     std::cout << "Max Players: " << MAX_Players << std::endl;
