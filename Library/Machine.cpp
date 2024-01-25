@@ -113,5 +113,17 @@ std::string Machine::toString() {
     return s;
 }
 
+std::string Machine::toStringOut() {
+    std::string s = "\t[ID]->" + std::to_string(UID);  s.append("\n");
+    s.append("\t\t[TYPE]->" + std::to_string(static_cast<int>(TYPE))); s.append("\n");
+    s.append("\t\t[TEMPERATURE]->" + std::to_string(temperature)); s.append("\n");
+    s.append("\t\t[X,Y]->" + std::to_string(posX) + "," + std::to_string(posY)); s.append("\n");
+    s.append("\t\t[winProbability]->" + std::to_string(winProbability)); s.append("\n");
+    s.append("\t\t[Failures]->" + std::to_string(failures)); s.append("\n");
+    s.append("\t\t[betAmount]->" + std::to_string(betAmount)); s.append("\n");
+    s.append("\t\t[usage]->" + std::to_string(usage)); s.append("\n");
+    return s;
+}
+
 
 

@@ -8,6 +8,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <cstdlib>
 
@@ -23,8 +24,9 @@ ifstream clients_file  { "..\\..\\Files\\I\\pessoas.txt" };
 ifstream open(const char* path, ios_base::openmode mode = ios_base::in);
 
 
-
 void logging(const std::string& filename, const std::string& funcname, const std::string& info);
 
+
+void beautify(const std::string& str);
 
 #endif //CODE_IO_H

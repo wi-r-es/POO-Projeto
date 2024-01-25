@@ -177,6 +177,7 @@ public:
      **********************************************************************************/
     virtual void Play(User* user);
     std::string toString();
+    std::string toStringOut();
 
     int getID(){ return UID;}
 };

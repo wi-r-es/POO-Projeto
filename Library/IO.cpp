@@ -30,3 +30,23 @@ void logging(const std::string& filename, const std::string& funcname, const std
         system("pwd");
     }
 }
+
+void beautify(const std::string& str) {
+    int length = str.length();
+    int padding = (50 - length) / 2;
+
+    std::ostringstream oss;
+
+    oss << "##################################################\n";
+    oss << std::string(padding, '#');
+    oss << str;
+    // Complete the line with padding if it is an odd length
+    if ((padding * 2 + length) < 50) {
+        oss << std::string(padding + 1, '#');
+    } else {
+        oss << std::string(padding, '#');
+    }
+    oss << "\n##################################################\n";
+
+    std::cout << oss.str();
+}

@@ -35,7 +35,7 @@ int main() {
     Casino *casino = new Casino("Casino_name");
     if( casino->Load("../Files/I/CasinoInfo.xml") ) cout << "Loaded successful" ;
     casino->ReadPeopleFile();
-
+    casino->Listing();
 
     User *utilizador = new User("123456789", "Joao", "Porto", 20);
     utilizador->setMoney(5000);

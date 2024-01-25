@@ -126,7 +126,7 @@ void Casino::databaseAddMachine(Machine *m){
         cerr << "Machine with ID " << id << " already exists." << endl;
         return;
     }
-    /** Add the machine to the appropriate list and maps **/
+    /** Add the machine to the appropriate vector and maps **/
     m_machines[type].push_back(m);
     m_positions[pos] = id;
     m_machine_id[id] = m;
@@ -191,33 +191,30 @@ void Casino::ReadPeopleFile() {
     }
 }
 
-
+// EStado atual do casino
 void Casino::Listing(std::ostream &f){
-
-    for(map<MACHINE_TYPE, std::list<Machine *>>::iterator it = m_machines.begin(); it != m_machines.end(); ++it) {
-        for (auto &machine : it->second) {
-            f << "Maquina: " << machine->getUID() << " Probabilidade: " << machine->getWinProbability() << endl;
-        }
+    beautify("Machines in casino without any ordering");
+    //cout << "******************************************" << endl;
+    //cout << "* Machines in casino without any ordering *" << endl;
+    //cout << "Machines in casino without any ordering:" << endl;
+    for(auto & it : m_machine_id) {
+        string s = it.second->toStringOut();
+            f << s << endl;
     }
-
-
-
 }
 
 void Casino::Listing(float X, std::ostream &f){
 
-    for(map<MACHINE_TYPE, std::list<Machine *>>::iterator it = m_machines.begin(); it != m_machines.end(); ++it) {
-        for (auto &machine : it->second) {
-            if (machine->getWinProbability() > X) {
-                f << "Maquina: " << machine->getUID() << " Probabilidade: " << machine->getWinProbability() << endl;
-            }
+    for(auto & it : m_machine_id) {
+        if (it.second->getWinProbability() > X) {
+            string s = it.second->toStringOut();
+            f << s << endl;
         }
     }
-
 }
 
 void Casino::TurnOff(const int id_mac){
-    auto it = m_machine_id.find('id_mac');
+    auto it = m_machine_id.find(id_mac);
     if (it != m_machine_id.end())
         it->second->setState(MACHINE_STATE::OFF);
     else cout << "Machine ID not found!";
@@ -227,7 +224,7 @@ void Casino::TurnOff(const int id_mac){
 
 MACHINE_STATE Casino::getState(const int id_mac) {
     try {
-        auto it = m_machine_id.find('id_mac');
+        auto it = m_machine_id.find(id_mac);
         if (it != m_machine_id.end())
             return it->second->getState();
         else throw runtime_error{"Machine not found"};
@@ -273,16 +270,14 @@ std::list<std::string> *Casino::Ranking_of_the_weaks(){
         return m1->getFailures() > m2->getFailures();
     });
 
-
     list<string> *l_ranking;
     for (auto it = v_broken.begin(); it != v_broken.end(); it++) {
         l_ranking->push_back("MACHINE ID: " + to_string((*it)->getUID()) + " FAILURES: " + to_string((*it)->getFailures()) + "\n");
     }
-
     return l_ranking;
-
-
 }
+
+
 std::list<Machine *> *Casino::Ranking_of_the_most_used(){
 
     map<MACHINE_TYPE, std::list<Machine *>> m_machine = m_machines;
@@ -300,9 +295,9 @@ std::list<Machine *> *Casino::Ranking_of_the_most_used(){
             l_ranking->push_back("MACHINE ID: " + std::to_string(machine->getID()) + " USAGE: " + std::to_string(machine->getUsage()) + "\n");
         }
     }
-
-
 }
+
+
 std::list<User *> *Casino::Most_Frequent_Users(){
     list<User*> *l_frequent_users;
     l_frequent_users->sort([] (User* u1, User* u2) {
@@ -310,8 +305,9 @@ std::list<User *> *Casino::Most_Frequent_Users(){
     });
 
     return  l_frequent_users;
-
 }
+
+
 std::list<User *> *Casino::Most_Wins_Users(){
 
     list<User*> *l_wins_users;
@@ -322,6 +318,8 @@ std::list<User *> *Casino::Most_Wins_Users(){
     return l_wins_users;
 
 }
+
+
 void Casino::Report(const std::string& xml_file){
 
 }
@@ -340,9 +338,6 @@ void Casino::Up_Neighbour_Probability(Machine *M_win, float R, std::list<Machine
             }
         }
     }
-
-
-
 }
 
 
