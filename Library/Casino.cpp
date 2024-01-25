@@ -29,29 +29,24 @@ bool Casino::Load(const std::string &file) {
         return false;
     }
     auto data = doc.child("DATA");
-    // Process SETTINGS
+
     auto settings = data.child("SETTINGS");
     NAME = settings.child_value("NAME");
     MAX_Players = std::stoi(settings.child_value("MAX_PLAYERS"));
     JackpotRadius = std::stoi(settings.child_value("JackpotRadius"));
-
     std::cout << "Casino Name: " << NAME << std::endl;
     std::cout << "Max Players: " << MAX_Players << std::endl;
     std::cout << "Jackpot Radius: " << JackpotRadius << std::endl;
 
-    // Process MACHINELIST
-    pugi::xml_node machineList = data.child("MACHINELIST");
+    auto machineList = data.child("MACHINELIST");
     for (auto machine = machineList.child("MACHINE"); machine; machine = machine.next_sibling("MACHINE")) {
         std::string gameType = machine.child_value("GAME");
         int x = std::stoi(machine.child_value("X"));
         int y = std::stoi(machine.child_value("Y"));
 
-
         std::cout << "Machine Game:" << gameType << std::endl;
         std::cout << "Location X: " << x << std::endl;
         std::cout << "Location Y: " << y << std::endl;
-
-
 
         Machine* m = nullptr;
         if (gameType == " Blackjack ") {
@@ -64,14 +59,12 @@ bool Casino::Load(const std::string &file) {
             m = new Craps(x, y);
         }
 
-        if (m && Add(m)) {
-            bool result = Add(m);
-            if(!result){ logging(logfile, __FUNCTION__, "Error adding machine to casino.");}
-            else logging(logfile, __FUNCTION__, "Success adding machine to casino.");
+        if (m && !Add(m)) {
+            logging(logfile, __FUNCTION__, "Error adding machine to casino.");
+            delete m; //clean up
         }
         std::cout << std::endl;
     }
-
     return true;
 }
 
@@ -161,7 +154,6 @@ void Casino::ReadPeopleFile() {
             getline(aux, age, '\t');
 
             User* user = new User(id.data(), name, city, stoi(age));
-
             // Check if the user with this ID already exists in the list
             bool userExists = false;
             for (const auto& existingUser : l_users) {
@@ -170,10 +162,9 @@ void Casino::ReadPeopleFile() {
                     break;
                 }
             }
-
             if (userExists) {
                 cout << "User with ID " << user->getId() << " already exists. Try again." << endl;
-                delete user;  // Free the memory allocated for the user
+                delete user;
             } else {
                 if(Add(user)) {
                     //cout << "User added to casino.\n";
