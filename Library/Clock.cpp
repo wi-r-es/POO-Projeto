@@ -7,6 +7,10 @@ Clock::Clock() : START(time(0)), SPEED(0), START_TIME{} {}
 Clock::Clock(time_t start, int velocidade, time_t horaInicio) : START(start), SPEED(velocidade),
                                                                 START_TIME(horaInicio) {}
 
+Clock::~Clock() {
+
+}
+
 void Clock::StartClock(int speed, const std::string& start_time) {
     START = time(nullptr);
     SPEED = speed;
@@ -38,4 +42,19 @@ std::string Clock::toStringOut() const{
     s.append("\t\t[VELOCITY]->" + std::to_string(SPEED)); s.append("\n");
     s.append("\t\t[Start_Hour SW]->" + std::to_string(START_TIME)); s.append("\n");
     return s;
+}
+
+int Clock::getMinutesSinceStart() const {
+    time_t currentTime = time(nullptr);
+    time_t elapsedSeconds = difftime(currentTime, START);
+    return static_cast<int>(elapsedSeconds / 60);
+}
+
+int timeDifferenceInMinutes(time_t time1, time_t time2) {
+    time_t elapsedSeconds = difftime(time2, time1);
+    return static_cast<int>(elapsedSeconds / 60);
+}
+
+int timeToTotalMinutes(const time_t& timeValue) {
+    return static_cast<int>(timeValue / 60);
 }

@@ -386,8 +386,8 @@ void Casino::Run() {
 
     logging(logfile, __FUNCTION__, mac->toString());
     //Wait(1000);
-    auto current_time =  clock->getTime();
-    printTime(current_time);
+    //auto current_time =  clock->getTime();
+    //printTime(current_time);
 }
 
 User* Casino::getRandomUser(){
