@@ -14,3 +14,4 @@ int randomNumberGeneratorInterval(int x, int y) {
 void Wait(int seconds) {
     std::this_thread::sleep_for(std::chrono::seconds(seconds));
 }
+

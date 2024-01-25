@@ -28,6 +28,7 @@ void logging(const std::string& filename, const std::string& funcname, const std
 
 
 void beautify(const std::string& str, char ch = '#');
+void printTime(const time_t& _time);
 
 
 #endif //CODE_IO_H

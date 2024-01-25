@@ -50,5 +50,10 @@ void beautify(const std::string& str, const char ch) {
     }
     oss << "\n" << *border << "\n\n";
     std::cout << oss.str();
-    //delete border; delete paddingStr;
+    //to prevent leaks
+    delete border; delete paddingStr;
+}
+
+void printTime(const time_t& _time) {
+    std::cout << "\n\t\t\t\t TIME = " << asctime(localtime(&_time));
 }

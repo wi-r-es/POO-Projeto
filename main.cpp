@@ -42,7 +42,7 @@ int main() {
 
     Clock *ptrClock = casino->getClock();
     ptrClock->StartClock(500, "10:00:00");
-    //Wait(60);
+    Wait(1000);
     casino->Run();
 
 /*

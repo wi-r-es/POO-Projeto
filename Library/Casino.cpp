@@ -27,16 +27,12 @@ Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)}, MA
 
 Casino::~Casino(){
 
-    for(auto it = m_machines.begin(); it != m_machines.end(); ++it) {
-        for (auto &machine : it->second) {
-            delete machine;
-        }
+    for(auto it = m_machine_id.begin(); it != m_machine_id.end(); ++it) {
+        delete it->second;
     }
-
     for(auto it = l_users.begin(); it != l_users.end(); ++it) {
         delete *it;
     }
-
 }
 
 bool Casino::Load(const std::string &file) {
@@ -199,16 +195,14 @@ void Casino::ReadPeopleFile() {
 // Estado atual do casino
 void Casino::Listing(std::ostream &f){
     beautify(" Machines in casino without any ordering ");
-    Wait(10);
-    //cout << "******************************************" << endl;
-    //cout << "* Machines in casino without any ordering *" << endl;
-    //cout << "Machines in casino without any ordering:" << endl;
-
+    //Wait(10);
     for(auto & it : m_machine_id) {
         string s = it.second->toStringOut();
         f << s << endl;
-        Wait(5);
+        //Wait(5);
     }
+
+
 }
 
 void Casino::Listing(float X, std::ostream &f){
@@ -364,8 +358,9 @@ void Casino::Run() {
 
     mac->Play(usr);
     logging(logfile, __FUNCTION__, mac->toString());
-
-    cout << "Current time " << clock->getTime() << endl;
+    Wait(1000);
+    auto current_time =  clock->getTime();
+    printTime(current_time);
 
 }
 

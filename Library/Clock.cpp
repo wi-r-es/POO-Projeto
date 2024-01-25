@@ -18,7 +18,7 @@ void Clock::StartClock(int speed, const std::string& start_time) {
 
     char buffer[80];
     strftime(buffer, 80, "%c", localtime(&START_TIME));
-    std::cout << "Hora de Arranque = [" << buffer << "]" << std::endl;
+    std::cout << "------------\n" << "\t[Hora de Arranque] = [" << buffer << "]" << "\n\n";
 }
 
 time_t Clock::getTime() const {
