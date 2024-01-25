@@ -24,4 +24,6 @@ add_executable(code main.cpp
         Library/pugixml/pugixml.cpp
         Library/Headers/Clock.h
         Library/Clock.cpp
+        Library/utils.cpp
+        Library/Headers/utils.h
 )

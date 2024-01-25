@@ -11,6 +11,9 @@
 #ifndef CODE_CASINO_H
 #define CODE_CASINO_H
 
+/******************
+ * Headers Files  *
+ ******************/
 #include "Machine.h"
 #include "Classic_Slot.h"
 #include "Craps.h"
@@ -18,9 +21,12 @@
 #include "Roulette.h"
 #include "IO.h"
 #include "Clock.h"
-
+#include "utils.h"
 #include "User.h"
 
+/**********************
+ * Libraries Includes *
+ **********************/
 #include <list>  // user vector instead of LIST ?
 #include <string>
 #include <type_traits>

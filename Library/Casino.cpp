@@ -1,7 +1,7 @@
 //
 // Created on 06/11/23.
 //
-#include <utility>
+
 
 #include "Headers/Casino.h"
 
@@ -365,12 +365,7 @@ void Casino::Run() {
     cout << "Current time " << clock->getTime() << endl;
 
 }
-int randomNumberGeneratorInterval(int x, int y) {
-    std::random_device rd;
-    std::mt19937 eng(rd());
-    std::uniform_int_distribution<> distr(x, y);
-    return distr(eng);
-}
+
 User* Casino::getRandomUser(){
     if (l_users.empty()) {
         return nullptr; /** check if list is empty **/
