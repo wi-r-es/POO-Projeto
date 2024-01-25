@@ -1,11 +1,16 @@
 //
 // Created on 06/11/23.
 //
-
-#include <utility>
+#include "Headers/Casino.h"
 #include "pugixml/pugixml.hpp"
 
-#include "Headers/Casino.h"
+#ifdef _WIN32
+string logfile { "..\\..\\Files\\O\\applog.csv" };
+#else
+//ifstream clients_file { "../../Files/I/pessoas.txt" } ;
+string logfile { "../Files/O/applog.csv" } ;
+
+#endif
 
 Casino::Casino(std::string name): NAME{name}{}
 
@@ -49,6 +54,7 @@ bool Casino::Load(const std::string &file) {
         int x = std::stoi(machine.child_value("X"));
         int y = std::stoi(machine.child_value("Y"));
 
+
         std::cout << "Machine Game:" << gameType << std::endl;
         std::cout << "Location X: " << x << std::endl;
         std::cout << "Location Y: " << y << std::endl;
@@ -67,7 +73,9 @@ bool Casino::Load(const std::string &file) {
         }
 
         if (m) {
-            Add(m);
+            bool result = Add(m);
+            if(!result){ logging(logfile, __FUNCTION__, "Error adding machine to casino.");}
+            else logging(logfile, __FUNCTION__, "Success adding machine to casino.");
         }
         std::cout << std::endl;
     }
@@ -91,7 +99,7 @@ bool Casino::Add(Machine *m){
     if (result){
         databaseAddMachine(m);
         return true;
-    } else { cout << "Machine position already taken" ;}
+    } else { cerr << "Machine position already taken\n" ; return false;}
 
 
 
@@ -122,7 +130,7 @@ void Casino::databaseAddMachine(Machine *m){
             l_Craps_Machines.push_back(m);
             break;
         default:
-            cout << "Machine/Type not created yet...." ;
+            cout << "Machine/Type not created yet....\n" ;
     }
     pair<int,int> pos;
     pos = m->getPosition();
@@ -153,10 +161,17 @@ void Casino::TurnOff(const int id_mac){
 // m_machine_id.erase (it);
 
 MACHINE_STATE Casino::getState(const int id_mac) {
-    auto it = m_machine_id.find('id_mac');
-    if (it != m_machine_id.end())
-       return it->second->getState();
-    else cout << "Machine ID not found!";
+    try {
+        auto it = m_machine_id.find('id_mac');
+        if (it != m_machine_id.end())
+            return it->second->getState();
+        else throw runtime_error{"Machine not found"};
+    }
+    catch(const runtime_error& ex){
+        //string log = ex.what()
+        logging(logfile, __FUNCTION__, ex.what());
+        return MACHINE_STATE::NONEXISTENT;
+    }
 }
 int Casino::Total_Memory(){
 

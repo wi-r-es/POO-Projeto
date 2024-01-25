@@ -16,7 +16,7 @@
 #include "Craps.h"
 #include "Blackjack.h"
 #include "Roulette.h"
-
+#include "IO.h"
 
 #include "User.h"
 
@@ -26,8 +26,12 @@
 #include <utility>
 #include <fstream>
 #include <sstream>
-#include<string>
+#include <string>
+#include <stdexcept>
 
+
+
+extern std::string logfile;
 
 /****************************************************************************************************************************
  * Casino ADT class and variables description                                                                               *

@@ -14,3 +14,19 @@ ifstream open(const char* path, ios_base::openmode mode){
     file.exceptions(ifstream::badbit);
     return file;
 }
+
+void logging(const std::string& filename, const std::string& funcname, const std::string& info) {
+    if (funcname.empty() || info.empty())
+        return;
+    try {
+        std::ofstream file{filename, std::ios::app};
+        if (!file.is_open())
+            throw std::runtime_error("Unable to open file: " + filename);
+        file << __DATE__ << "," << __TIME__ << ",[EXECUTING_FUNCTION]: " << funcname << ",[SHORT-BRIEF]: " << info
+             << std::endl;
+
+    } catch (const std::runtime_error &e) {
+        std::cerr << "An error occurred: " << e.what() << '\n';
+        system("pwd");
+    }
+}

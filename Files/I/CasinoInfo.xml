@@ -1,6 +1,6 @@
 <DATA>
     <SETTINGS>
-        <NAME> Casino Name </NAME>
+        <NAME> El chumanco Casino Vedas </NAME>
         <MAX_PLAYERS> 50 </MAX_PLAYERS>
         <JackpotRadius> 10 </JackpotRadius>
     </SETTINGS>
@@ -40,5 +40,254 @@
             <X> 2 </X>
             <Y> 3 </Y>
         </MACHINE>
+        <!-- Additional entries -->
+        <MACHINE>
+            <GAME> Classic Slots </GAME>
+            <X> 2 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Roulette </GAME>
+            <X> 3 </X>
+            <Y> 1 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Craps </GAME>
+            <X> 3 </X>
+            <Y> 2 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Blackjack </GAME>
+            <X> 3 </X>
+            <Y> 3 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Classic Slots </GAME>
+            <X> 3 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Roulette </GAME>
+            <X> 4 </X>
+            <Y> 1 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Craps </GAME>
+            <X> 4 </X>
+            <Y> 2 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Blackjack </GAME>
+            <X> 4 </X>
+            <Y> 3 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Classic Slots </GAME>
+            <X> 4 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Roulette </GAME>
+            <X> 5 </X>
+            <Y> 1 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Craps </GAME>
+            <X> 5 </X>
+            <Y> 2 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Blackjack </GAME>
+            <X> 5 </X>
+            <Y> 3 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Classic Slots </GAME>
+            <X> 5 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Roulette </GAME>
+            <X> 6 </X>
+            <Y> 1 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Craps </GAME>
+            <X> 6 </X>
+            <Y> 2 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Blackjack </GAME>
+            <X> 6 </X>
+            <Y> 3 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Classic Slots </GAME>
+            <X> 6 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Roulette </GAME>
+            <X> 7 </X>
+            <Y> 1 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Craps </GAME>
+            <X> 7 </X>
+            <Y> 2 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Blackjack </GAME>
+            <X> 7 </X>
+            <Y> 3 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Classic Slots </GAME>
+            <X> 7 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Roulette </GAME>
+            <X> 8 </X>
+            <Y> 1 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Craps </GAME>
+            <X> 8 </X>
+            <Y> 2 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Blackjack </GAME>
+            <X> 8 </X>
+            <Y> 3 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Classic Slots </GAME>
+            <X> 8 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+        <!-- New entries with some repeated positions -->
+        <MACHINE>
+            <GAME> Roulette </GAME>
+            <X> 5 </X>
+            <Y> 1 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Craps </GAME>
+            <X> 5 </X>
+            <Y> 2 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Blackjack </GAME>
+            <X> 5 </X>
+            <Y> 3 </Y>
+        </MACHINE>
+        <!-- Repeated position -->
+        <MACHINE>
+            <GAME> Classic Slots </GAME>
+            <X> 5 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Classic Slots </GAME>
+            <X> 5 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+        <!-- Repeated position with different game -->
+        <MACHINE>
+            <GAME> Roulette </GAME>
+            <X> 6 </X>
+            <Y> 1 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Roulette </GAME>
+            <X> 6 </X>
+            <Y> 1 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Craps </GAME>
+            <X> 6 </X>
+            <Y> 2 </Y>
+        </MACHINE>
+        <!-- Repeated position -->
+        <MACHINE>
+            <GAME> Blackjack </GAME>
+            <X> 6 </X>
+            <Y> 3 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Blackjack </GAME>
+            <X> 6 </X>
+            <Y> 3 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Classic Slots </GAME>
+            <X> 7 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+        <!-- Additional entries with unique positions -->
+        <MACHINE>
+            <GAME> Roulette </GAME>
+            <X> 8 </X>
+            <Y> 1 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Craps </GAME>
+            <X> 8 </X>
+            <Y> 2 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Blackjack </GAME>
+            <X> 8 </X>
+            <Y> 3 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Classic Slots </GAME>
+            <X> 8 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Thematic Slot </GAME>
+            <X> 9 </X>
+            <Y> 1 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Feature Slot </GAME>
+            <X> 9 </X>
+            <Y> 2 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Baccarat </GAME>
+            <X> 9 </X>
+            <Y> 3 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Poker </GAME>
+            <X> 9 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Thematic Slot </GAME>
+            <X> 10 </X>
+            <Y> 1 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Feature Slot </GAME>
+            <X> 10 </X>
+            <Y> 2 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Baccarat </GAME>
+            <X> 10 </X>
+            <Y> 3 </Y>
+        </MACHINE>
+        <MACHINE>
+            <GAME> Poker </GAME>
+            <X> 10 </X>
+            <Y> 4 </Y>
+        </MACHINE>
+
+
     </MACHINELIST>
 </DATA>
+<!-- repeated positions  X=5, Y=4; X=6, Y=1; X=6, Y=3 -->

@@ -19,6 +19,8 @@
 #include <random>
 
 
+
+
 #include "User.h"
 // Enumerations for machine type and state
 // using class for scope restriction and unsigned char for memory optimization
@@ -32,7 +34,7 @@ enum class MACHINE_TYPE : unsigned char {CLASSIC_SLOT =1 ,          // 1
                                         POKER};                     // 8
 
 
-enum class MACHINE_STATE : unsigned char {OFF, ON, BROKEN}; // maybe add another value, TBD
+enum class MACHINE_STATE : unsigned char {OFF, ON, BROKEN, NONEXISTENT}; // maybe add another value, TBD
 
 // to use simply use MACHINE_TYPE::BLACKJACK for example
 
