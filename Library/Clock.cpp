@@ -3,13 +3,13 @@
 //
 #include "Headers/Clock.h"
 
-Clock::Clock() : START(time(0)), VELOCIDADE(25), Hora_Inicio((time_t) "10:00:00") {}
-Clock::Clock(time_t start, int velocidade, time_t horaInicio) : START(start), VELOCIDADE(velocidade),
+Clock::Clock() : START(time(0)), SPEED(0), Hora_Inicio((time_t) "10:00:00") {}
+Clock::Clock(time_t start, int velocidade, time_t horaInicio) : START(start), VELOCITY(velocidade),
                                                                 Hora_Inicio(horaInicio) {}
 
-void Clock::StartClock(int Vel, const std::string& H_Inicio) {
+void Clock::StartClock(int speed, const std::string& H_Inicio) {
     START = time(nullptr);
-    VELOCIDADE = Vel;
+    SPEED = speed;
 
     struct tm tmp;
     localtime_r(&START, &tmp);
@@ -28,5 +28,14 @@ time_t Clock::getTime() const {
 }
 
 std::string Clock::toString() const{
-
+    std::string s = "\t[Time HW]->" + std::to_string(START);  s.append(";");
+    s.append("\t\t[VELOCITY]->" + std::to_string(SPEED)); s.append(";");
+    s.append("\t\t[Start_Hour SW]->" + std::to_string(Hora_Inicio)); s.append(";");
+    return s;
+}
+std::string Clock::toStringOut() const{
+    std::string s = "\t[Time HW]->" + std::to_string(START);  s.append("\n");
+    s.append("\t\t[VELOCITY]->" + std::to_string(SPEED)); s.append("\n");
+    s.append("\t\t[Start_Hour SW]->" + std::to_string(Hora_Inicio)); s.append("\n");
+    return s;
 }

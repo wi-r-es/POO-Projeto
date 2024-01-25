@@ -20,16 +20,17 @@
 class Clock {
 private:
     time_t START{};
-    int VELOCIDADE{};
+    int SPEED{};
     time_t Hora_Inicio{};
 public:
 
 
     Clock();
-    Clock(time_t start, int velocidade, time_t horaInicio);
+    Clock(time_t start, int speed, time_t horaInicio);
     ~Clock();
-    void StartClock(int Vel, const std::string& H_Inicio);
+    void StartClock(int speed, const std::string& H_Inicio);
     time_t getTime() const;
     std::string toString() const;
+    std::string toStringOut() const;
 };
 #endif //CODE_CLOCK_H
