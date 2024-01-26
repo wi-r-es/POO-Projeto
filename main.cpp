@@ -2,7 +2,7 @@
 
 #include "Library/Headers/Casino.h"
 #include "Library/Headers/kbhitmodule.h"
-
+#include "Library/Headers/utils.h"
 
 #if defined(_WIN32) || defined(_WIN64)
 void clear(){system("cls");}
@@ -62,7 +62,7 @@ int main() {
             menu(casino);
         }
         auto currentTime = chrono::steady_clock::now(); /** Record current time **/
-        auto elapsed = chrono::duration_cast<chrono::seconds>(currentTime - lastRoutineCheck); /** Computates time passed **/
+        auto elapsed = getElapsedTime(currentTime, lastRoutineCheck);
         if (elapsed.count() >= 5) {
             casino->printVectorsSize();
             //Wait(30);
@@ -72,7 +72,7 @@ int main() {
             casino->printVectorsSize();
             //Wait(30);
         }
-        if(randomNumberGeneratorInterval(0,20) == 3){
+        if(randomNumberGeneratorInterval(1,3) == 3){
             casino->changeMachineFailProbability();
         }
         casino->RandomOddImprovement();
@@ -86,7 +86,7 @@ int main() {
 
     /** Callback at program ending **/
     auto endTime = std::chrono::steady_clock::now();
-    static auto time_executing = (std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count())/60;
+    static auto time_executing = (getElapsedTime(startTime, endTime).count())/60;
     exit_message = "[Execution time]: " + to_string(time_executing);
     atexit([] { cout << "Execution time: " << time_executing << "minutes." ;});
     atexit(logAtExit);

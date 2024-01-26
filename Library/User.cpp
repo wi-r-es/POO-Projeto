@@ -9,12 +9,10 @@
 User::User(char *id, std::string name, std::string city, int age) : d_name(std::move(name)), d_city(std::move(city)), d_age(age){
     std::strcpy(d_id, id);
     d_money=0;
-    d_time_spent=0;
     d_prizes_won=0;
     playing = 0;
     bets=0;
     profit=0;
-
 }
 
 User::~User(){
@@ -50,11 +48,11 @@ void User::setAge(int dAge) {
     d_age = dAge;
 }
 
-int User::getTimeSpent() const {
-    return d_time_spent;
+long User::getTimeSpent() const {
+    return d_time_spent.count();
 }
 
-void User::setTimeSpent(int dTimeSpent) {
+void User::setTimeSpent(std::chrono::seconds dTimeSpent) {
     d_time_spent = dTimeSpent;
 }
 
@@ -62,8 +60,8 @@ int User::getPrizesWon() const {
     return d_prizes_won;
 }
 
-void User::setPrizesWon(int dPrizesWon) {
-    d_prizes_won = dPrizesWon;
+void User::setPrizesWon(float dPrizesWon) {
+    d_prizes_won += dPrizesWon;
 }
 
 int User::getPlaying() const {
@@ -101,9 +99,6 @@ int User::getAttempts()const {
     return count_plays_no_money;
 }
 
-void User::playGame(Machine* Mac){
-
-}
 
 void User::resetAttempts() {
     count_plays_no_money=0;
@@ -111,7 +106,22 @@ void User::resetAttempts() {
 
 std::string User::toString() {
 
-    return std::string();
+    std::string s;
+
+    s.append("[ID]->").append(d_id).append(";");
+    s.append(" [Name]->").append(d_name).append(";");
+    s.append(" [City]->").append(d_city).append(";");
+    s.append(" [Age]->").append(std::to_string(d_age)).append(";");
+    s.append(" [Time Spent]->").append(std::to_string(getTimeSpent())).append(";");
+    s.append(" [Prizes Won]->").append(std::to_string(d_prizes_won)).append(";");
+    s.append(" [Playing]->").append(playing ? "Yes" : "No").append(";");
+    s.append(" [Money]->").append(std::to_string(d_money)).append(";");
+    s.append(" [Bets]->").append(std::to_string(bets)).append(";");
+    s.append(" [Profit]->").append(std::to_string(profit)).append(";");
+    s.append(" [Debt]->").append(std::to_string(debt)).append(";");
+    s.append(" [Attempts No Money]->").append(std::to_string(count_plays_no_money));
+
+    return s;
 }
 
 

@@ -12,5 +12,5 @@
 
 int randomNumberGeneratorInterval(int x, int y);
 void Wait(int seconds);
-
+std::chrono::seconds getElapsedTime(std::chrono::steady_clock::time_point start, std::chrono::steady_clock::time_point end);
 #endif //CODE_UTILS_H

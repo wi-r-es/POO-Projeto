@@ -15,3 +15,9 @@ void Wait(int seconds) {
     std::this_thread::sleep_for(std::chrono::seconds(seconds));
 }
 
+/** Computates time passed **/
+std::chrono::seconds getElapsedTime(std::chrono::steady_clock::time_point start, std::chrono::steady_clock::time_point end){
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+    return duration;
+}
+

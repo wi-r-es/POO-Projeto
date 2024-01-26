@@ -20,7 +20,7 @@
 #include <chrono>
 
 
-
+#include "utils.h"
 #include "User.h"
 // Enumerations for machine type and state
 // using class for scope restriction and unsigned char for memory optimization
@@ -38,7 +38,6 @@ std::string machineTypeToString(MACHINE_TYPE type);
 enum class MACHINE_STATE : unsigned char {OFF, ON, BROKEN, MAINTENANCE, NONEXISTENT}; // maybe add another value, TBD
 std::string machineSTATEToString(MACHINE_STATE state);
 // to use simply use MACHINE_TYPE::BLACKJACK for example
-
 
 /**********************************************************************************************
  * Machine ADT class and vars description                                                     *

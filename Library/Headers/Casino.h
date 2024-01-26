@@ -170,7 +170,7 @@ public:
      * @param f                                        *
      * @return                                         *
      ***************************************************/
-    std::list<Machine *> *List_Types(const std::string& Type, std::ostream &f = std::cout);
+    std::list<Machine *> *List_Types(const MACHINE_TYPE Type, std::ostream &f = std::cout);
 
     /**************************************************************************************
      * @brief Lists Ranking of the Machines showing the ones who fail more at the top.    *

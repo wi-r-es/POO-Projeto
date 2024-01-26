@@ -26,6 +26,7 @@ void Craps::RollDices() {
 }
 
 bool Craps::Play(User* user) {
+    auto start_time = std::chrono::steady_clock::now();
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
         std::cerr << "\nuser has no more money to bet..." << std::endl;
@@ -34,12 +35,19 @@ bool Craps::Play(User* user) {
             user->resetAttempts();
         }
         user->incAttempts();
+        auto end_time = std::chrono::steady_clock::now();
+        auto elapsed = getElapsedTime(start_time, end_time);
+        user->setTimeSpent(elapsed);
         return false;
     }
     if(getWinProbability() > 0.7f){
         user->setMoney(user->getMoney() + 200);
+        user->setPrizesWon(200);
         incUsage();
         increaseTemperature();
+        auto end_time = std::chrono::steady_clock::now();
+        auto elapsed = getElapsedTime(start_time, end_time);
+        user->setTimeSpent(elapsed);
         return true;
     }
 
@@ -52,7 +60,12 @@ bool Craps::Play(User* user) {
     if (sumDices == 7 || sumDices == 11) {
 
         std::cout << "\nYou win!" << std::endl;
-        user->setMoney(userMoney + getBetAmount() * 2);
+        auto profit = getBetAmount()*2;
+        user->setMoney(userMoney + profit);
+        user->setPrizesWon(profit);
+        auto end_time = std::chrono::steady_clock::now();
+        auto elapsed = getElapsedTime(start_time, end_time);
+        user->setTimeSpent(elapsed);
         return true;
     }
     /* else if (sumDices == 2 || sumDices == 3 || sumDices == 12) {
@@ -63,6 +76,9 @@ bool Craps::Play(User* user) {
     }
      */
     else {
+        auto end_time = std::chrono::steady_clock::now();
+        auto elapsed = getElapsedTime(start_time, end_time);
+        user->setTimeSpent(elapsed);
         return false;
         //std::cout << "\nRoll again!" << std::endl;
     }

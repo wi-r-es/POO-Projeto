@@ -297,7 +297,7 @@ size_t Casino::Total_Memory() const{
 }
 
 
-std::list<Machine *> *Casino::List_Types(const std::string& Type, std::ostream &f ){
+std::list<Machine *> *Casino::List_Types(const MACHINE_TYPE Type, std::ostream &f ){
     try{
         switch (Type) {
             case MACHINE_TYPE::BLACKJACK:

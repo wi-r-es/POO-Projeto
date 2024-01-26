@@ -16,6 +16,7 @@
 #include <cstring>
 #include <utility>
 #include <cstdio>
+#include <chrono>
 
 class Machine;
 
@@ -35,7 +36,7 @@ private:
     std::string d_city;
     int d_age;
     float d_money;
-    int d_time_spent;
+    std::chrono::seconds d_time_spent;
     int d_prizes_won;
     int bets;
     int profit;
@@ -76,13 +77,13 @@ public:
 
     void setAge(int dAge);
 
-    int getTimeSpent() const;
+    long getTimeSpent() const;
 
-    void setTimeSpent(int dTimeSpent);
+    void setTimeSpent(std::chrono::seconds dTimeSpent);
 
     int getPrizesWon() const;
 
-    void setPrizesWon(int dPrizesWon);
+    void setPrizesWon(float dPrizesWon);
 
     int getPlaying() const;
 
@@ -101,14 +102,6 @@ public:
 
     std::string toString();
 
-
-
-
-    /***************************************************************************
-     * @brief Function to simulate the user using a machine
-     * USe it to register the playing fact perhaps ?
-     */
-    void playGame(Machine *Mac);
 
 };
 

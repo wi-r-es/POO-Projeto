@@ -70,6 +70,7 @@ string Roulette::simulate_singlebet(){
  */
 
 bool Roulette::Play(User* user) {
+    auto start_time = std::chrono::steady_clock::now();
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
         cerr << "\nuser has no more money to bet..." << endl;
@@ -78,12 +79,19 @@ bool Roulette::Play(User* user) {
             user->resetAttempts();
         }
         user->incAttempts();
+        auto end_time = std::chrono::steady_clock::now();
+        auto elapsed = getElapsedTime(start_time, end_time);
+        user->setTimeSpent(elapsed);
         return false;
     }
     if(getWinProbability() > 0.7f){
         user->setMoney(user->getMoney() + 200);
+        user->setPrizesWon(200);
         incUsage();
         increaseTemperature();
+        auto end_time = std::chrono::steady_clock::now();
+        auto elapsed = getElapsedTime(start_time, end_time);
+        user->setTimeSpent(elapsed);
         return true;
     }
     /** Set bet amount **/
@@ -126,10 +134,17 @@ bool Roulette::Play(User* user) {
     increaseTemperature();
     if (static_cast<bool>(profit)) {
         cout << "You won $" << profit << "!" << endl;
+        user->setPrizesWon(profit);
         user->setMoney(user->getMoney() + profit);
+        auto end_time = std::chrono::steady_clock::now();
+        auto elapsed = getElapsedTime(start_time, end_time);
+        user->setTimeSpent(elapsed);
         return true;
     }else {
         cout << "You lost $" << amount << "!" << endl;
+        auto end_time = std::chrono::steady_clock::now();
+        auto elapsed = getElapsedTime(start_time, end_time);
+        user->setTimeSpent(elapsed);
         return false;
     }
     //cout << "\nUSER MONEY TO BET: -->" << user->getMoney();

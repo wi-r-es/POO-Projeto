@@ -164,6 +164,7 @@ bool Blackjack::simulate_game(){
 
 
 bool Blackjack::Play(User* user) {
+    auto start_time = std::chrono::steady_clock::now();
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
         std::cerr << "\n user has no more money to bet..." << std::endl;
@@ -172,16 +173,26 @@ bool Blackjack::Play(User* user) {
             user->resetAttempts();
         }
         user->incAttempts();
+        auto end_time = std::chrono::steady_clock::now();
+        auto elapsed = getElapsedTime(start_time, end_time);
+        user->setTimeSpent(elapsed);
         return false;
     }
     if(getWinProbability() > 0.7f){
         user->setMoney(user->getMoney() + 200);
+        user->setPrizesWon(200);
         incUsage();
         increaseTemperature();
+        auto end_time = std::chrono::steady_clock::now();
+        auto elapsed = getElapsedTime(start_time, end_time);
+        user->setTimeSpent(elapsed);
         return true;
     }
     simulate_game();
     incUsage();
     increaseTemperature();
+    auto end_time = std::chrono::steady_clock::now();
+    auto elapsed = getElapsedTime(start_time, end_time);
+    user->setTimeSpent(elapsed);
     return true;
 }
