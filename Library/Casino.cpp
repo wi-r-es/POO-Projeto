@@ -52,6 +52,7 @@ Casino::~Casino(){
 }
 
 bool Casino::Load(const std::string &file) {
+    logging(logfile, __FUNCTION__ , "Loading casino from file");
     pugi::xml_document doc;
     if (!doc.load_file(file.c_str())) {
         std::cout << "Error loading file: " << file << std::endl;
@@ -89,7 +90,7 @@ bool Casino::Load(const std::string &file) {
         }
 
         if (m && !Add(m)) {
-            logging(logfile, __FUNCTION__, "Error adding machine to casino.");
+            logging(error_logfile, __FUNCTION__, "Error adding machine to casino. Position already taken.");
             delete m; //clean up
         }
         std::cout << std::endl;
@@ -202,8 +203,10 @@ void Casino::ReadPeopleFile() {
         }
         myfile.close();
         auto message = " Success Loading " + to_string(count) + " users ";
+        logging(logfile, __FUNCTION__ , message);
         beautify(message, '*');
     } else{
+        logging(error_logfile, __FUNCTION__ , "Error loading users file");
         cerr << " Error opening users File";
     }
 }
@@ -213,10 +216,16 @@ void Casino::Listing(std::ostream &f){
     beautify(" Machines in casino without any ordering ");
     //Wait(10);
     for(auto & it : m_machine_id) {
-        string s = it.second->toStringOut();
+        string s = it.second->toString();
         f << s << endl;
-        //Wait(5);
     }
+    f<<"[[Users]]"<<endl;
+    for(auto & it :l_users) {
+        auto s = it->toString();
+    }
+    auto s = VectorsSize();
+    f<<s <<endl;
+
 }
 
 void Casino::Listing(float X, std::ostream &f){
@@ -255,7 +264,7 @@ MACHINE_STATE Casino::getState(const int id_mac) {
     }
     catch(const runtime_error& ex){
         //string log = ex.what()
-        logging(logfile, __FUNCTION__, ex.what());
+        logging(error_logfile, __FUNCTION__, ex.what());
         return MACHINE_STATE::NONEXISTENT;
     }
 }
@@ -375,7 +384,7 @@ void Casino::Up_Neighbour_Probability(Machine *M_win, float R, std::list<Machine
 
 void Casino::Run() {
     auto usr = getRandomUser();
-    Machine* mac = nullptr;
+    Machine* mac{};
     int attempts = 0;
     auto num_macs = m_machine_id.size();
 
@@ -409,12 +418,12 @@ void Casino::Run() {
     } catch (runtime_error &ex) {
         cerr<<"An error as occurred while trying to use machine\n\t"
             << '[' << mac->getUID() << ']' << " ... -> " << ex.what();
-        logging(logfile, "[[EXCEPTION CAUGHT]--[WHILE_TRYING_TO_USE_MACHINE]]", ex.what());
+        logging(error_logfile, "[[EXCEPTION CAUGHT]--[WHILE_TRYING_TO_USE_MACHINE]]", ex.what());
         auto [x,y] = mac->getPosition();
         string s = "[[ {" + to_string(mac->getUID()) +  "},{" +
                 machineTypeToString(mac->getType()) + "} at { [" + to_string(x) + "," + to_string(y) + "] }" +
                 " with {" + to_string(mac->getTemperature()) + "º Temperature} " + "]]";
-        logging(logfile, "[[SHUTTING DOWN MACHINE]]", s);
+        logging(error_logfile, "[[SHUTTING DOWN MACHINE]]", s);
         BrokenMachine(mac->getUID());
     }
 
@@ -478,7 +487,7 @@ Machine* Casino::getRandomMachineByType(MACHINE_TYPE type){
         }
     }catch(runtime_error &ex){
         cerr << ex.what();
-        logging(logfile, __FUNCTION__ , ex.what());
+        logging(error_logfile, __FUNCTION__ , ex.what());
         return machine;
     }
     return machine;
@@ -510,7 +519,8 @@ void Casino::RandomOddImprovement(){
 void Casino::check_routine() {
     auto TimeGoneBy = [](std::chrono::steady_clock::time_point tp1,
                             std::chrono::steady_clock::time_point tp2){
-        return (chrono::duration_cast<chrono::seconds>(tp1 - tp2)).count();
+        auto temp = chrono::duration_cast<chrono::seconds>(tp2 - tp1);
+        return (temp.count());
     };
 
     auto it = v_Broken_Machines.begin();
@@ -521,8 +531,9 @@ void Casino::check_routine() {
         auto time = std::chrono::steady_clock::now();
 
         //Wait(5);
-        cout << mac->toStringOut();
+        //cout << mac->toStringOut();
         //Wait(15);
+        auto timeInMaintenance = TimeGoneBy(mac->getTimeInMaintenance(),time);
         if (state == MACHINE_STATE::BROKEN) {
             // Move machine to maintenance
             mac->setState(MACHINE_STATE::MAINTENANCE);
@@ -530,9 +541,13 @@ void Casino::check_routine() {
             mac->incrementFailures();
             removeFromTypeVector(mac, type);
             ++it;
-        } else if (state == MACHINE_STATE::MAINTENANCE /*&& ( TimeGoneBy(mac->getTimeInMaintenance(),time) >= 5 )*/ ) {
+        } else if (state == MACHINE_STATE::MAINTENANCE && ( timeInMaintenance >= 5 ) ) {
             /** Reactivate machine **/
             //Wait(5);
+            auto s = mac->toStringOut();
+            s.append(" -- was in maitenance for ") + to_string(timeInMaintenance);
+            logging(logfile, s, to_string(timeInMaintenance));
+
             mac->setState(MACHINE_STATE::ON);
             mac->reset();
             addToTypeVector(mac,type);
@@ -571,6 +586,7 @@ void Casino::removeFromTypeVector(Machine* machine, MACHINE_TYPE type) {
             machine_vector->erase(it);
         }
     } catch( runtime_error &ex){
+        logging(error_logfile, __FUNCTION__ , ex.what());
         cerr << ex.what();
     }
 }
@@ -608,4 +624,25 @@ void Casino::printVectorsSize(){
     cout << "Items in vectors: \n" << "\tBlackjack: " << s1
             << "\n\tCraps: " << s2 << "\n\tClassicSlots: " << s3
             << "\n\tRoulette: " << s4 << "\n\tBrokenMachines: " << b << endl;
+}
+string Casino::VectorsSize(){
+    auto s1 = v_Blackjack_Machines.size();
+    auto s2 = v_Craps_Machines.size();
+    auto s3 = v_classicSlots_Machines.size();
+    auto s4 = v_Roulette_Machines.size();
+    auto b = v_Broken_Machines.size();
+
+    string final =  "Items in vectors: \n" ;
+    final.append("\tBlackjack: ");
+    final.append(to_string(s1));
+    final.append("\n\tCraps: ");
+    final.append(to_string(s2));
+    final.append("\n\tClassicSlots: ");
+    final.append(to_string(s3));
+    final.append("\n\tRoulette: ");
+    final.append(to_string(s4));
+    final.append("\n\tBrokenMachines: ");
+    final.append(to_string(b));
+    //final.append();
+    return final;
 }

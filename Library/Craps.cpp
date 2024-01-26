@@ -25,7 +25,7 @@ void Craps::RollDices() {
     Dice2 = rand() % 6 + 1;
 }
 
-void Craps::Play(User* user) {
+bool Craps::Play(User* user) {
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
         std::cerr << "\nuser has no more money to bet..." << std::endl;
@@ -34,33 +34,38 @@ void Craps::Play(User* user) {
             user->resetAttempts();
         }
         user->incAttempts();
-        return;
+        return false;
     }
     if(getWinProbability() > 0.7f){
         user->setMoney(user->getMoney() + 200);
         incUsage();
         increaseTemperature();
-        return;
+        return true;
     }
 
     setBetAmount(userMoney <= 5 ? 1 : static_cast<float>(randomNumberGeneratorInterval(5, static_cast<int>(userMoney))));
 
     RollDices();
     int sumDices = Dice1 + Dice2;
-
+    incUsage();
+    increaseTemperature();
     if (sumDices == 7 || sumDices == 11) {
 
         std::cout << "\nYou win!" << std::endl;
         user->setMoney(userMoney + getBetAmount() * 2);
-    } else if (sumDices == 2 || sumDices == 3 || sumDices == 12) {
+        return true;
+    }
+    /* else if (sumDices == 2 || sumDices == 3 || sumDices == 12) {
 
         std::cout << "\nYou lost!" << std::endl;
         user->setMoney(userMoney - getBetAmount());
-    } else {
-
-        std::cout << "\nRoll again!" << std::endl;
+        return false;
     }
-    incUsage();
-    increaseTemperature();
+     */
+    else {
+        return false;
+        //std::cout << "\nRoll again!" << std::endl;
+    }
+
 
 }

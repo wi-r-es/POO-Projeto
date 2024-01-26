@@ -35,14 +35,18 @@ void menu(Casino* casino);
  *
  *********************************************************************************************************************************************************************/
 int main() {
+    logging(logfile, __FUNCTION__ , "Starting Program");
     auto startTime = chrono::steady_clock::now();
     Casino *casino = new Casino("Casino_name");
-    if( casino->Load("../Files/I/CasinoInfo.xml") ) beautify(" Loaded successful ") ;
+    if( casino->Load("../Files/I/CasinoInfo.xml") ) {
+        beautify(" Loaded successful ");
+        logging(logfile, __FUNCTION__ , "Casino Loaded Successfully");
+    }
     casino->ReadPeopleFile();
     casino->Listing();
 
     Clock *ptrClock = casino->getClock();
-    ptrClock->StartClock(500, "10:00:00");
+    ptrClock->StartClock(50, "10:00:00");
     u_int8_t flag = 0;
     auto lastRoutineCheck = chrono::steady_clock::now(); /** Record the start time **/
     while(1){
@@ -77,9 +81,6 @@ int main() {
         casino->printVectorsSize();
     }
 
-    //Wait(1000);
-    //casino->Run();
-
     const size_t mem = casino->Total_Memory();
     cout << "\nMemoria total ocupado pelo casino: " << mem << "bytes" << endl;
 
@@ -87,7 +88,7 @@ int main() {
     auto endTime = std::chrono::steady_clock::now();
     static auto time_executing = (std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count())/60;
     exit_message = "[Execution time]: " + to_string(time_executing);
-    atexit([] { cout << "Execution time: " << time_executing ;});
+    atexit([] { cout << "Execution time: " << time_executing << "minutes." ;});
     atexit(logAtExit);
     delete casino;
     const size_t memf = casino->Total_Memory();
@@ -115,6 +116,7 @@ void SimulateCasino( Casino *casino, u_int8_t &flag){
         }
     }catch(runtime_error &ex){
         cerr << "ERROR OCCURRED ->"<< ex.what();
+        logging(error_logfile, __FUNCTION__ , ex.what());
         exit(EXIT_FAILURE);
     }
 
@@ -166,7 +168,7 @@ void menu(Casino* casino) {
                 break;
             case 9:
                 logging(logfile, __FUNCTION__, "EXITING THE SIMULATION");
-                // Additional logic for option 9
+                // Additional logic for closing casino
                 delete casino;
                 exit(1);
             case 0:

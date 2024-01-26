@@ -44,6 +44,7 @@
 
 
 extern std::string logfile;
+extern std::string error_logfile;
 
 /****************************************************************************************************************************
  * Casino ADT class and variables description                                                                               *
@@ -230,6 +231,7 @@ public:
     void changeMachineFailProbability();
     void RandomOddImprovement();
     void printVectorsSize();
+    string VectorsSize();
 };
 
 #endif //CODE_CASINO_H

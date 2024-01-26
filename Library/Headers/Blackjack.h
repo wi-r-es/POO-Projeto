@@ -90,7 +90,7 @@ public:
      *                                                                                *
      * @param Debug : boolean that represents if the has to debug or not.             *
      **********************************************************************************/
-    void Play(User* user) override;
+    bool Play(User* user) override;
 
 };
 

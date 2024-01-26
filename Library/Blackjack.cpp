@@ -67,7 +67,7 @@ void Blackjack::show_dealer_hand() {
 }
 
 /** Function to get the sum total of card values **/
-int const get_total(std::vector<int>hand){
+int get_total(std::vector<int>hand) {
     int total = 0;
     bool has_ace = false;
     for(const auto& card : hand) {
@@ -148,21 +148,27 @@ bool Blackjack::simulate_game(){
     show_game();
 
     //Checks who has the bigger value in their hands
-    result = get_total(Players_Hand) > get_total(Dealers_Hand);
+    auto p_hand = get_total(Players_Hand);
+    auto d_hand = get_total(Dealers_Hand);
 
-    if(result) {
+    if(p_hand > d_hand) {
         std::cout << "WINNER = [Player]" << std::endl;
         return true;
-    } else if(get_total(Players_Hand) == get_total(Dealers_Hand)){
+    }
+    /*
+    else if(p_hand == d_hand){
         std::cout << "DRAW" << std::endl;
-    }else {
+        simulate_game();
+    }
+     */
+    else {
         std::cout << "WINNER = [Dealer]" << std::endl;
         return false;
     }
 }
 
 
-void Blackjack::Play(User* user) {
+bool Blackjack::Play(User* user) {
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
         std::cerr << "\n user has no more money to bet..." << std::endl;
@@ -171,15 +177,16 @@ void Blackjack::Play(User* user) {
             user->resetAttempts();
         }
         user->incAttempts();
-        return;
+        return false;
     }
     if(getWinProbability() > 0.7f){
         user->setMoney(user->getMoney() + 200);
         incUsage();
         increaseTemperature();
-        return;
+        return true;
     }
     simulate_game();
     incUsage();
     increaseTemperature();
+    return true;
 }

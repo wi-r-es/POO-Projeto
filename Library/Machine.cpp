@@ -103,7 +103,7 @@ int Machine::randomNumberGeneratorInterval(int x, int y) {
 }
 
 
-void Machine::Play(User* user){
+bool Machine::Play(User* user){
     std::cout << __FUNCTION__  << std::endl;
 }
 

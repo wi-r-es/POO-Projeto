@@ -178,7 +178,7 @@ public:
      * @brief Function that simulates the operation of the Machine .                  *
      *                                                                                *
      **********************************************************************************/
-    virtual void Play(User* user);
+    virtual bool Play(User* user);
     std::string toString();
     std::string toStringOut();
     void setMaintenanceTime(std::chrono::steady_clock::time_point time);

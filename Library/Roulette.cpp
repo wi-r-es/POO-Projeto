@@ -61,15 +61,15 @@ string Roulette::simulate_singlebet(){
     int betColorIndex = randomNumberGeneratorInterval(0,1); // 0 for black, 1 for red
     return colorbet[betColorIndex];
 }
+
 // Adicionar seguintes funcionalidades:
 /*
  * EVEN OR ODD = X2
  * NUMBER = X3
  * GREEN|0 = X20
- *
- *
  */
-void Roulette::Play(User* user) {
+
+bool Roulette::Play(User* user) {
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
         cerr << "\nuser has no more money to bet..." << endl;
@@ -78,43 +78,25 @@ void Roulette::Play(User* user) {
             user->resetAttempts();
         }
         user->incAttempts();
-        return;
+        return false;
     }
     if(getWinProbability() > 0.7f){
         user->setMoney(user->getMoney() + 200);
         incUsage();
         increaseTemperature();
-        return;
+        return true;
     }
-    /** OPTIMIZED VERSION OF THE CODE **/
     /** Set bet amount **/
     setBetAmount(userMoney <= 5 ? 1 : static_cast<float>(randomNumberGeneratorInterval(5, static_cast<int>(userMoney))));
-/*  NOT OPTIMIZED VERSION###
-    if ( userMoney <= 5 )
-        setBetAmount(1);
-    else setBetAmount(static_cast<float>(  randomNumberGeneratorInterval(5, static_cast<int>(userMoney))) );
-    //else setBetAmount(static_cast<float>(  rand() % (userMoney + 1) ) ) ;
-*/
+
     /** withdraw money for the bet **/
     user->setMoney(user->getMoney() - getBetAmount());
     /** Simulate betting **/
-    /** OPTIMIZED VERSION OF THE CODE **/
 
     bool multibet = (getBetAmount() != 1);
     string betColor = simulate_singlebet();
     int betNumber = (multibet) ? randomNumberGeneratorInterval(0,36) : 404;
 
-    /** NOT OPTIMIZED VERSION OF THE CODE **/
-/*
-    short int betNumber = 404;
-    string betColor = {};
-    bool multibet = false;
-    betColor = simulate_singlebet();
-    if (getBetAmount() != 1) {
-        betNumber = rand() % 37;
-        multibet = true;
-    }
-*/
     /**  Spin the wheel to get the winning number and color **/
     auto [winNumber, winColor] = oddGenerate();
     /** Print bets **/
@@ -140,13 +122,16 @@ void Roulette::Play(User* user) {
         if (betColor == winColor)
             profit += amount * 2; // cause  amount / 2 * 4 = *2
     }
+    incUsage();
+    increaseTemperature();
     if (static_cast<bool>(profit)) {
         cout << "You won $" << profit << "!" << endl;
         user->setMoney(user->getMoney() + profit);
+        return true;
     }else {
         cout << "You lost $" << amount << "!" << endl;
+        return false;
     }
-    cout << "\nUSER MONEY TO BET: -->" << user->getMoney();
-    incUsage();
-    increaseTemperature();
+    //cout << "\nUSER MONEY TO BET: -->" << user->getMoney();
+
 }

@@ -34,7 +34,7 @@ void ClassicSlot::resetNumSpins() {
     numSpins = 0;
 }
 
-void ClassicSlot::Play(User *user) {
+bool ClassicSlot::Play(User *user) {
     cout << __FUNCTION__ ;
 
     int userMoney = user->getMoney();
@@ -45,15 +45,14 @@ void ClassicSlot::Play(User *user) {
             user->resetAttempts();
         }
         user->incAttempts();
-        return;
-
+        return false;
     }
 
     if(getWinProbability() > 0.7f){
         user->setMoney(user->getMoney() + 200);
         incUsage();
         increaseTemperature();
-        return;
+        return true;
     }
 
     int rol1 = rand() % 4; //randomly a number that represents the 4 simbols
@@ -69,5 +68,6 @@ void ClassicSlot::Play(User *user) {
     }
     incUsage();
     increaseTemperature();
+    return true;
 }
 

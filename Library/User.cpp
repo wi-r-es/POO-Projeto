@@ -109,6 +109,11 @@ void User::resetAttempts() {
     count_plays_no_money=0;
 }
 
+std::string User::toString() {
+
+    return std::string();
+}
+
 
 
 

@@ -99,6 +99,8 @@ public:
     void addDebt(float amountOfDebt);
     float getDebt() const;
 
+    std::string toString();
+
 
 
 
