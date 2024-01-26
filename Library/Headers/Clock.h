@@ -32,12 +32,9 @@ public:
     time_t getTime() const;
     std::string toString() const;
     std::string toStringOut() const;
-    int getMinutesSinceStart() const;
 };
 
-int timeDifferenceInMinutes(time_t time1, time_t time2);
 
-int timeToTotalMinutes(const time_t& timeValue);
 
 
 #endif //CODE_CLOCK_H

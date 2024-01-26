@@ -26,16 +26,12 @@ Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)}, MA
 }
 
 Casino::~Casino(){
-
-    for(auto it = m_machine_id.begin(); it != m_machine_id.end(); ++it) {
-        delete it->second;
+    /** Delete all machines from the m_machine_id map **/
+    for(auto & it : m_machine_id) {
+        delete it.second;
     }
-    for(auto it = l_users.begin(); it != l_users.end(); ++it) {
-        delete *it;
-    }
-    for(auto it = v_Broken_Machines.begin(); it != v_Broken_Machines.end(); ++it) {
-        delete *it;
-    }
+    /** Clear other containers without deleting the elements
+     *         as they are already deleted from m_machine_id **/
     m_machine_id.clear();
     m_positions.clear();
     m_machines.clear(); //maybe, still TBD
@@ -43,8 +39,13 @@ Casino::~Casino(){
     v_Blackjack_Machines.clear();
     v_Roulette_Machines.clear();
     v_Craps_Machines.clear();
-    l_users.clear();
     v_Broken_Machines.clear();
+    /** Delete users and related container **/
+    for(auto & l_user : l_users) {
+        delete l_user;
+    }
+    l_users.clear();
+    /** Delete other class owned resources **/
     delete rolex;
 }
 
@@ -386,7 +387,7 @@ void Casino::Run() {
         ++attempts;
     } while(attempts <= num_macs);
 
-    if (mac->getState() == MACHINE_STATE::BROKEN || mac->getState() == MACHINE_STATE::OFF) {
+    if (mac->getState() == MACHINE_STATE::BROKEN || mac->getState() == MACHINE_STATE::OFF || mac == nullptr) {
         cout << "No working machines available.\n";
         return; /** Early exit if no working machine is found **/
     }
@@ -445,10 +446,12 @@ Machine* getRandomMachineFromVector(MACHINE_TYPE type, const std::vector<Machine
 
 Machine* Casino::getRandomMachineByType(MACHINE_TYPE type){
     /** Check if there are machines of the given type **/
+    /*
     auto it = m_machines.find(type);
     if (it == m_machines.end() || it->second.empty()) {
         return nullptr; // No machines of this type
     }
+     */
     Machine* machine= nullptr;
     try{
         switch (type) {
@@ -474,6 +477,7 @@ Machine* Casino::getRandomMachineByType(MACHINE_TYPE type){
     }catch(runtime_error &ex){
         cerr << ex.what();
         logging(logfile, __FUNCTION__ , ex.what());
+        return machine;
     }
     return machine;
 }
