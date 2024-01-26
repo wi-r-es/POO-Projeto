@@ -519,7 +519,7 @@ void Casino::check_routine() {
         } else if (state == MACHINE_STATE::OFF && (timeDifferenceInMinutes(mac->getTimeInMaintenance(), rolex->getTime()) >= 15 )) {
             /** Reactivate machine **/
             mac->setState(MACHINE_STATE::ON);
-            m_machines[type].push_back(mac);
+            addToTypeVector(mac,type);
             it = v_Broken_Machines.erase(it);  /** Remove fixed machine and update iterator **/
         } else {
             ++it;
