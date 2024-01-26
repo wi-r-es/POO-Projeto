@@ -24,8 +24,8 @@
 class Blackjack : public Machine {
 private:
     std::map<char,int> Values_Cards;
-    std::map<char,int> Dealers_Hand;
-    std::map<char,int> Players_Hand;
+    std::vector<int> Dealers_Hand;
+    std::vector<int> Players_Hand;
 public:
     /***********************************************************************
      * @brief Constructor for Blackjack Machine                            *
@@ -52,7 +52,7 @@ public:
     /***************************************************************
      * @brief Function to hand out cards to a chosen map           *
      ***************************************************************/
-    void give_card(std::map<char, int>& cards_map);
+    void give_card(std::vector<int>& cards_map);
 
     /*****************************************************************************************
      * @brief Function that hands out cards to the dealer and player to start the game       *
@@ -84,8 +84,7 @@ public:
     /***************************************************************
      * @brief Function that simulates one game                     *
      ***************************************************************/
-    void simulate_game();
-
+    bool simulate_game();
     /**********************************************************************************
      * @brief Function that simulates the operation of the Blackjack Machine .        *
      *                                                                                *

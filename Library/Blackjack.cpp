@@ -33,11 +33,11 @@ void Blackjack::printMap() const {
         std::cout << "Card: " << pair.first << " Value: " << pair.second << std::endl;
 }
 
-void Blackjack::give_card(std::map<char, int>& cards_map){
-    std::map<char,int>::iterator itr = Values_Cards.begin();
+void Blackjack::give_card(std::vector<int>& hand){
+    auto itr = Values_Cards.begin();
     int randCardIndex = randomNumberGeneratorInterval(0, Values_Cards.size() - 1);
     std::advance(itr, randCardIndex);
-    cards_map.insert({itr->first, itr->second});
+    hand.push_back(itr->second);
 
 }
 
@@ -49,30 +49,30 @@ void Blackjack::start_game(){
     }
     show_player_hand();
     std::cout<<"DEALER'S FIRST HAND"<<std::endl;
-    std::cout<<Dealers_Hand.begin()->first<<"| ?? \n\n"<<std::endl;
+    std::cout<<Dealers_Hand.at(0)<<"| ?? \n\n"<<std::endl;
 }
 
 void Blackjack::show_player_hand() {
     std::cout<<"PLAYER'S HAND:"<<std::endl;
     for(const auto& card : Players_Hand)
-        std::cout << card.first << "| ";
+        std::cout << card << "| ";
     std::cout<<"\n";
 }
 
 void Blackjack::show_dealer_hand() {
     std::cout<<"DEALER'S HAND:"<<std::endl;
     for(const auto& card : Dealers_Hand)
-        std::cout<< card.first << "| ";
+        std::cout<< card << "| ";
     std::cout<<"\n";
 }
 
 /** Function to get the sum total of card values **/
-int const get_total(std::map<char, int>card_map){
+int const get_total(std::vector<int>hand){
     int total = 0;
     bool has_ace = false;
-    for(const auto& card : card_map) {
-        total += card.second;
-        if(card.first == 'A')
+    for(const auto& card : hand) {
+        total += card;
+        if(card == 1)
             has_ace = true;
     }
 
@@ -94,6 +94,8 @@ void Blackjack::show_game(){
     std::cout<<"Total = "<<get_total(Players_Hand)<<std::endl;
     show_dealer_hand();
     std::cout<<"Total = "<<get_total(Dealers_Hand)<<std::endl;
+    std::cout<<"\n";
+
 }
 
 int Blackjack::hit_or_stay(){
@@ -101,14 +103,16 @@ int Blackjack::hit_or_stay(){
     return decision;
 }
 // chnge this to bool, so if true player won, if false player lost
-void Blackjack::simulate_game(){
+bool Blackjack::simulate_game(){
     int player_total = 0, dealer_total = 0, player_decision;
-    bool game = true;
+    bool game = true, result;
     /** Give the cards to the player and dealer**/
     start_game();
 
     while(game){
-        if((get_total(Players_Hand) >= 21 || get_total(Dealers_Hand) >= 21)){
+        if(get_total(Players_Hand) > 21){
+            std::cout << "PLAYER LOSES" << std::endl;
+            return false;
             game = false;
         }else {
             /** Simulates the decision hit or stay in a random manner
@@ -119,6 +123,19 @@ void Blackjack::simulate_game(){
 
             if (!player_decision) {
                 std::cout << "\n\tSTAY" << std::endl;
+                /** Dealer hits until the total on the table is at least 17 **/
+                while(true){
+                    if(get_total(Dealers_Hand) > 17){
+                        break;
+                    }
+                    std::cout << "\n-> Dealer is hitting..." << std::endl;
+                    give_card(Dealers_Hand);
+                    show_game();
+                }
+                if(get_total(Dealers_Hand) > 21){
+                    std::cout << "PLAYER WINS" << std::endl;
+                    return true;
+                }
                 game = false;
             } else {
                 give_card(Players_Hand);
@@ -127,8 +144,21 @@ void Blackjack::simulate_game(){
             show_game();
         }
     }
-    std::cout<<"\n\nSTOPPED\n\n"<<std::endl;
+    std::cout << "FINAL" << std::endl;
     show_game();
+
+    //Checks who has the bigger value in their hands
+    result = get_total(Players_Hand) > get_total(Dealers_Hand);
+
+    if(result) {
+        std::cout << "WINNER = [Player]" << std::endl;
+        return true;
+    } else if(get_total(Players_Hand) == get_total(Dealers_Hand)){
+        std::cout << "DRAW" << std::endl;
+    }else {
+        std::cout << "WINNER = [Dealer]" << std::endl;
+        return false;
+    }
 }
 
 
