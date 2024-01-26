@@ -110,6 +110,7 @@ void Machine::Play(User* user){
 std::string Machine::toString() {
     std::string s = "[ID]->" + std::to_string(UID);  s.append(";");
     s.append(" [TYPE]->" + std::to_string(static_cast<int>(TYPE))); s.append(";");
+    s.append("\t\t[STATE]->" + machineSTATEToString(state)); s.append(";");
     s.append("[TEMPERATURE]->" + std::to_string(temperature)); s.append(";");
     s.append("[X,Y]->" + std::to_string(posX) + "," + std::to_string(posY)); s.append(";");
     s.append("[winProbability]->" + std::to_string(winProbability)); s.append(";");
@@ -122,6 +123,7 @@ std::string Machine::toString() {
 std::string Machine::toStringOut() {
     std::string s = "\t[ID]->" + std::to_string(UID);  s.append("\n");
     s.append("\t\t[TYPE]->" + machineTypeToString(TYPE)); s.append("\n");
+    s.append("\t\t[STATE]->" + machineSTATEToString(state)); s.append("\n");
     s.append("\t\t[TEMPERATURE]->" + std::to_string(temperature)); s.append("\n");
     s.append("\t\t[X,Y]->" + std::to_string(posX) + "," + std::to_string(posY)); s.append("\n");
     s.append("\t\t[winProbability]->" + std::to_string(winProbability)); s.append("\n");
@@ -131,12 +133,18 @@ std::string Machine::toStringOut() {
     return s;
 }
 
-time_t Machine::getTimeInMaintenance() {
+std::chrono::steady_clock::time_point Machine::getTimeInMaintenance() {
     return coolingtime;
 }
 
-void Machine::setMaintenanceTime(time_t time) {
+void Machine::setMaintenanceTime(std::chrono::steady_clock::time_point time) {
     coolingtime = time;
+}
+
+void Machine::reset() {
+    failureProbability = 0.3;
+    temperature = 18.0;
+    winProbability = 0.1;
 }
 
 std::string machineTypeToString(MACHINE_TYPE type) {
@@ -149,6 +157,15 @@ std::string machineTypeToString(MACHINE_TYPE type) {
         case MACHINE_TYPE::CRAPS: return "CRAPS";
         case MACHINE_TYPE::BACCARAT: return "BACCARAT";
         case MACHINE_TYPE::POKER: return "POKER";
+        default: return "UNKNOWN_TYPE";
+    }
+}std::string machineSTATEToString(MACHINE_STATE state) {
+    switch (state) {
+        case MACHINE_STATE::MAINTENANCE : return "MAINTENANCE";
+        case MACHINE_STATE::OFF: return "OFF";
+        case MACHINE_STATE::ON: return "ON";
+        case MACHINE_STATE::NONEXISTENT : return "NONEXISTENT";
+        case MACHINE_STATE::BROKEN: return "BROKEN";
         default: return "UNKNOWN_TYPE";
     }
 }

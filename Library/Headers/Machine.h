@@ -17,7 +17,7 @@
 #include <string>
 #include <vector>
 #include <random>
-
+#include <chrono>
 
 
 
@@ -36,7 +36,7 @@ std::string machineTypeToString(MACHINE_TYPE type);
 
 
 enum class MACHINE_STATE : unsigned char {OFF, ON, BROKEN, MAINTENANCE, NONEXISTENT}; // maybe add another value, TBD
-
+std::string machineSTATEToString(MACHINE_STATE state);
 // to use simply use MACHINE_TYPE::BLACKJACK for example
 
 
@@ -64,7 +64,7 @@ private:
     int failures;
     float betAmount;
     int usage;
-    time_t coolingtime;
+    std::chrono::steady_clock::time_point coolingtime;
 
 public:
     /***********************************************************************
@@ -181,9 +181,9 @@ public:
     virtual void Play(User* user);
     std::string toString();
     std::string toStringOut();
-    void setMaintenanceTime(time_t time);
-    time_t getTimeInMaintenance();
-
+    void setMaintenanceTime(std::chrono::steady_clock::time_point time);
+    std::chrono::steady_clock::time_point getTimeInMaintenance();
+    void reset();
     [[nodiscard]] int getID() const{ return UID;}
 };
 

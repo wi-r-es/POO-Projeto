@@ -58,18 +58,23 @@ int main() {
             menu(casino);
         }
         auto currentTime = chrono::steady_clock::now(); /** Record current time **/
-        auto elapsed = chrono::duration_cast<chrono::minutes>(currentTime - lastRoutineCheck); /** Computates time passed **/
+        auto elapsed = chrono::duration_cast<chrono::seconds>(currentTime - lastRoutineCheck); /** Computates time passed **/
         if (elapsed.count() >= 5) {
+            casino->printVectorsSize();
+            //Wait(30);
+            this_thread::sleep_for(chrono::milliseconds(500));
             casino->check_routine();
             lastRoutineCheck = chrono::steady_clock::now(); /** Reset the timer **/
+            casino->printVectorsSize();
+            //Wait(30);
         }
-        if(randomNumberGeneratorInterval(0,1)){
+        if(randomNumberGeneratorInterval(0,20) == 3){
             casino->changeMachineFailProbability();
         }
         casino->RandomOddImprovement();
         this_thread::sleep_for(chrono::milliseconds(100)); /** To reduce CPU usage **/
 
-        //auto =
+        casino->printVectorsSize();
     }
 
     //Wait(1000);
@@ -80,7 +85,7 @@ int main() {
 
     /** Callback at program ending **/
     auto endTime = std::chrono::steady_clock::now();
-    static auto time_executing = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
+    static auto time_executing = (std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count())/60;
     exit_message = "[Execution time]: " + to_string(time_executing);
     atexit([] { cout << "Execution time: " << time_executing ;});
     atexit(logAtExit);

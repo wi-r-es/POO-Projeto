@@ -229,6 +229,7 @@ public:
     MACHINE_TYPE getRandomType();
     void changeMachineFailProbability();
     void RandomOddImprovement();
+    void printVectorsSize();
 };
 
 #endif //CODE_CASINO_H

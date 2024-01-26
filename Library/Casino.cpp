@@ -502,25 +502,36 @@ void Casino::RandomOddImprovement(){
 }
 
 void Casino::check_routine() {
+    auto TimeGoneBy = [](std::chrono::steady_clock::time_point tp1,
+                            std::chrono::steady_clock::time_point tp2){
+        return (chrono::duration_cast<chrono::seconds>(tp1 - tp2)).count();
+    };
 
     auto it = v_Broken_Machines.begin();
     while (it != v_Broken_Machines.end()) {
         Machine* mac = *it;
-        auto state = mac->getState();
+        MACHINE_STATE state = mac->getState();
         auto type = mac->getType();
+        auto time = std::chrono::steady_clock::now();
 
+        //Wait(5);
+        cout << mac->toStringOut();
+        //Wait(15);
         if (state == MACHINE_STATE::BROKEN) {
             // Move machine to maintenance
             mac->setState(MACHINE_STATE::MAINTENANCE);
-            time_t time = rolex->getTime();
             mac->setMaintenanceTime(time);
+            mac->incrementFailures();
             removeFromTypeVector(mac, type);
             ++it;
-        } else if (state == MACHINE_STATE::OFF && (timeDifferenceInMinutes(mac->getTimeInMaintenance(), rolex->getTime()) >= 5 )) {
+        } else if (state == MACHINE_STATE::MAINTENANCE /*&& ( TimeGoneBy(mac->getTimeInMaintenance(),time) >= 5 )*/ ) {
             /** Reactivate machine **/
+            //Wait(5);
             mac->setState(MACHINE_STATE::ON);
+            mac->reset();
             addToTypeVector(mac,type);
             it = v_Broken_Machines.erase(it);  /** Remove fixed machine and update iterator **/
+            cout << "Machine removed from broken vector";
         } else {
             ++it;
         }
@@ -547,9 +558,14 @@ void Casino::removeFromTypeVector(Machine* machine, MACHINE_TYPE type) {
             return;
     }
 
-    auto it = find(machine_vector->begin(), machine_vector->end(), machine);
-    if (it != machine_vector->end()) {
-        machine_vector->erase(it);
+    try{
+        if(machine_vector->empty()) throw runtime_error{"Vector is empty"};
+        auto it = find(machine_vector->begin(), machine_vector->end(), machine);
+        if (it != machine_vector->end()) {
+            machine_vector->erase(it);
+        }
+    } catch( runtime_error &ex){
+        cerr << ex.what();
     }
 }
 void Casino::addToTypeVector(Machine* machine, MACHINE_TYPE type) {
@@ -573,5 +589,17 @@ void Casino::addToTypeVector(Machine* machine, MACHINE_TYPE type) {
             return;
     }
     machine_vector->push_back(machine);
+    cout << "Machine re-added to vector";
+}
 
+void Casino::printVectorsSize(){
+    auto s1 = v_Blackjack_Machines.size();
+    auto s2 = v_Craps_Machines.size();
+    auto s3 = v_classicSlots_Machines.size();
+    auto s4 = v_Roulette_Machines.size();
+    auto b = v_Broken_Machines.size();
+
+    cout << "Items in vectors: \n" << "\tBlackjack: " << s1
+            << "\n\tCraps: " << s2 << "\n\tClassicSlots: " << s3
+            << "\n\tRoulette: " << s4 << "\n\tBrokenMachines: " << b << endl;
 }
