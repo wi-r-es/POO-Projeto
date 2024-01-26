@@ -234,8 +234,10 @@ void Casino::TurnOff(const int id_mac){
 }
 void Casino::BrokenMachine(const int id_mac){
     auto it = m_machine_id.find(id_mac);
-    if (it != m_machine_id.end())
+    if (it != m_machine_id.end()) {
         it->second->setState(MACHINE_STATE::BROKEN);
+        v_Broken_Machines.push_back(it->second);
+    }
     else cout << "Machine ID not found!";
 }
 
@@ -370,8 +372,25 @@ void Casino::Up_Neighbour_Probability(Machine *M_win, float R, std::list<Machine
 
 void Casino::Run() {
     auto usr = getRandomUser();
-    auto type = getRandomType();
-    auto mac = getRandomMachineByType(type);
+    Machine* mac = nullptr;
+    int attempts = 0;
+    auto num_macs = m_machine_id.size();
+
+    do {
+        auto type = getRandomType();
+        mac = getRandomMachineByType(type);
+
+        if (mac && mac->getState() != MACHINE_STATE::BROKEN) {
+            break; /** Found a working machine **/
+        }
+        ++attempts;
+    } while(attempts <= num_macs);
+
+    if (!mac || mac->getState() == MACHINE_STATE::BROKEN) {
+        cout << "No working machines available.\n";
+        return; /** Early exit if no working machine is found **/
+    }
+
     try{
         float temp = mac->getTemperature();
         if(temp > 90.0f)
@@ -427,21 +446,30 @@ Machine* Casino::getRandomMachineByType(MACHINE_TYPE type){
         return nullptr; // No machines of this type
     }
     Machine* machine= nullptr;
-    switch (type) {
-        case MACHINE_TYPE::BLACKJACK:
-            machine = getRandomMachineFromVector(type, v_Blackjack_Machines);
-            break;
-        case MACHINE_TYPE::ROULETTE:
-            machine = getRandomMachineFromVector(type,v_Roulette_Machines);
-            break;
-        case MACHINE_TYPE::CLASSIC_SLOT:
-            machine = getRandomMachineFromVector(type,v_classicSlots_Machines);
-            break;
-        case MACHINE_TYPE::CRAPS:
-            machine = getRandomMachineFromVector(type,v_Craps_Machines);
-            break;
-        default:
-            cerr << "Type not used, some error has occured....";
+    try{
+        switch (type) {
+            case MACHINE_TYPE::BLACKJACK:
+                if (v_Blackjack_Machines.empty()) { throw runtime_error{"Empty Blackjack List"}; }
+                machine = getRandomMachineFromVector(type, v_Blackjack_Machines);
+                break;
+            case MACHINE_TYPE::ROULETTE:
+                if (v_Roulette_Machines.empty()) { throw runtime_error{"Empty Roulette List"}; }
+                machine = getRandomMachineFromVector(type, v_Roulette_Machines);
+                break;
+            case MACHINE_TYPE::CLASSIC_SLOT:
+                if (v_classicSlots_Machines.empty()) { throw runtime_error{"Empty ClassicSlot List"}; }
+                machine = getRandomMachineFromVector(type, v_classicSlots_Machines);
+                break;
+            case MACHINE_TYPE::CRAPS:
+                if (v_Craps_Machines.empty()) { throw runtime_error{"Empty Craps List"}; }
+                machine = getRandomMachineFromVector(type, v_Craps_Machines);
+                break;
+            default:
+                cerr << "Type not used, some error has occured....";
+        }
+    }catch(runtime_error &ex){
+        cerr << ex.what();
+        logging(logfile, __FUNCTION__ , ex.what());
     }
     return machine;
 }
@@ -457,4 +485,6 @@ MACHINE_TYPE Casino::getRandomType(){
     return typesInUse[randomIndex];
 }
 
+void Casino::check_routine() {
 
+}

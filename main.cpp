@@ -49,6 +49,7 @@ int main() {
 
         SimulateCasino(casino, flag);
         if(flag==1){
+            //CloseCasino...
             break;
         }
         if (kbhit())
@@ -87,13 +88,19 @@ void logAtExit() {
 
 void SimulateCasino( Casino *casino, u_int8_t &flag){
 
-    casino->Run();
+    try{
+        if(casino == nullptr) throw runtime_error{"Casino is null."};
+        casino->Run();
 
-    time_t timeToClose = casino->getClock()->getTime();
+        time_t timeToClose = casino->getClock()->getTime();
 
-    if (localtime(&timeToClose)->tm_hour == 04){
-        //Function to start closing casino
-        flag = 1;
+        if (localtime(&timeToClose)->tm_hour == 04) {
+            //Function to start closing casino
+            flag = 1;
+        }
+    }catch(runtime_error &ex){
+        cerr << "ERROR OCCURRED ->"<< ex.what();
+        exit(EXIT_FAILURE);
     }
 }
 
