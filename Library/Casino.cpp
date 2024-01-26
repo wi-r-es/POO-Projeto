@@ -13,8 +13,8 @@
 string clients_file { "..\\Files\\I\\pessoas.txt" };
 string logfile { "..\\Files\\O\\applog.csv" };
 #else
-string clients_file { "../Files/I/pessoas.txt" } ;
-string logfile { "../Files/O/applog.csv" } ;
+ string clients_file { "../Files/I/pessoas.txt" } ;
+ string logfile { "../Files/O/applog.csv" } ;
 
 #endif
 
@@ -232,6 +232,12 @@ void Casino::TurnOff(const int id_mac){
         it->second->setState(MACHINE_STATE::OFF);
     else cout << "Machine ID not found!";
 }
+void Casino::BrokenMachine(const int id_mac){
+    auto it = m_machine_id.find(id_mac);
+    if (it != m_machine_id.end())
+        it->second->setState(MACHINE_STATE::BROKEN);
+    else cout << "Machine ID not found!";
+}
 
 // m_machine_id.erase (it);
 
@@ -367,14 +373,15 @@ void Casino::Run() {
     auto type = getRandomType();
     auto mac = getRandomMachineByType(type);
     try{
-        if(mac->getTemperature())
+        float temp = mac->getTemperature();
+        if(temp > 90.0f)
         {
-            throw runtime_error{"Machine Temperature of the charts, meltdown imminent..."};
+            cout << "TEMP: " << temp << endl;
+            throw runtime_error{"Machine Temperature of the charts, meltdown imminent...\n"};
         }
-
-            mac->Play(usr);
+        mac->Play(usr);
     } catch (runtime_error &ex) {
-        cerr<<"An error as occured while trying to use machine\n\t"
+        cerr<<"An error as occurred while trying to use machine\n\t"
             << '[' << mac->getUID() << ']' << " ... -> " << ex.what();
         logging(logfile, "[[EXCEPTION CAUGHT]--[WHILE_TRYING_TO_USE_MACHINE]]", ex.what());
         auto [x,y] = mac->getPosition();
@@ -382,6 +389,7 @@ void Casino::Run() {
                 machineTypeToString(mac->getType()) + "} at { [" + to_string(x) + "," + to_string(y) + "] }" +
                 " with {" + to_string(mac->getTemperature()) + "º Temperature} " + "]]";
         logging(logfile, "[[SHUTTING DOWN MACHINE]]", s);
+        BrokenMachine(mac->getUID());
     }
 
     logging(logfile, __FUNCTION__, mac->toString());

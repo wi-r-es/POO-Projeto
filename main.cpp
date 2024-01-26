@@ -9,7 +9,8 @@ void clear(){system("cls");}
 #else
 void clear(){system("clear");}
 #endif
-
+void logAtExit();
+static string exit_message;
 void SimulateCasino( Casino *casino, u_int8_t &flag);
 void menu(Casino* casino);
 // Example for documenting the functions from previous project
@@ -34,18 +35,16 @@ void menu(Casino* casino);
  *
  *********************************************************************************************************************************************************************/
 int main() {
-
+    time_t time1 = clock();
     Casino *casino = new Casino("Casino_name");
     if( casino->Load("../Files/I/CasinoInfo.xml") ) beautify(" Loaded successful ") ;
     casino->ReadPeopleFile();
     casino->Listing();
 
-    User *utilizador = new User("123456789", "Joao", "Porto", 20);
-    utilizador->setMoney(5000);
-
     Clock *ptrClock = casino->getClock();
     ptrClock->StartClock(500, "10:00:00");
     u_int8_t flag = 0;
+    auto lastTime = chrono::steady_clock::now(); /** Record the start time **/
     while(1){
 
         SimulateCasino(casino, flag);
@@ -56,9 +55,15 @@ int main() {
         {
             //clear();
             menu(casino);
-            //  char option = getchar();
-            // ENTER TO THE MENU FUCNTION...
         }
+        auto currentTime = chrono::steady_clock::now(); /** Record current time **/
+        auto elapsed = chrono::duration_cast<chrono::minutes>(currentTime - lastTime); /** Computates time passed **/
+        if (elapsed.count() >= 5) {
+            casino->check_routine();
+            lastTime = chrono::steady_clock::now(); /** Reset the timer **/
+        }
+
+        this_thread::sleep_for(chrono::milliseconds(100)); /** To reduce CPU usage **/
 
     }
 
@@ -67,21 +72,25 @@ int main() {
 
     const size_t mem = casino->Total_Memory();
     cout << "\nMemoria total ocupado pelo casino: " << mem << "bytes" << endl;
-    std::atexit([] {std::cout << "***std::atexit callback executing***\n";});
 
+    /** Callback at program ending **/
+    static auto time_executing = ((float)time1)/CLOCKS_PER_SEC;
+    exit_message = "[Execution time]: " + to_string(time_executing);
+    atexit([] { cout << "Execution time: " << time_executing ;});
+    atexit(logAtExit);
 
-    //return 0;
+    return 0;
+}
+void logAtExit() {
+    logging(logfile, __FUNCTION__, exit_message);
 }
 
-
 void SimulateCasino( Casino *casino, u_int8_t &flag){
-    time_t time_passed = casino->getClock()->getTime();
-
 
     casino->Run();
 
-
     time_t timeToClose = casino->getClock()->getTime();
+
     if (localtime(&timeToClose)->tm_hour == 04){
         //Function to start closing casino
         flag = 1;
@@ -92,30 +101,30 @@ void SimulateCasino( Casino *casino, u_int8_t &flag){
 void menu(Casino* casino) {
     int choice;
     logging(logfile, __FUNCTION__, "ACCESSED");
-    std::this_thread::sleep_for(std::chrono::seconds(10));
+    this_thread::sleep_for(std::chrono::seconds(10));
     do {
         beautify("<MENU>");
-        std::cout << "###   $<1> Show Casino Information.\n"
-                  << "###   $<2> [TBD]\n"
-                  << "###   $<3> [TBD]\n"
-                  << "###   $<4> Check what time it is to the simulated software.\n"
-                  << "###   $<5> [TBD].\n"
-                  << "###   $<9> Shutdown current simulation.\n"
-                  << "###   $<0> Exit the menu and return the flow control to the simulation.\n"
-                  << "\n\n\t <Enter your choice>: ";
+        cout << "###   $<1> Show Casino Information.\n"
+             << "###   $<2> [TBD]\n"
+             << "###   $<3> [TBD]\n"
+             << "###   $<4> Check what time it is to the simulated software.\n"
+             << "###   $<5> [TBD].\n"
+             << "###   $<9> Shutdown current simulation.\n"
+             << "###   $<0> Exit the menu and return the flow control to the simulation.\n"
+             << "\n\n\t [<Enter your choice>]: ";
 
-        std::cin >> choice;
+        cin >> choice;
 
-        // Clearing input buffer
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        /** Clearing input buffer **/
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        std::cout << "CHOICE -> " << choice << std::endl;
+        cout << "CHOICE -> " << choice << endl;
         time_t currentTime{};
         if(choice == 4)  currentTime = casino->getClock()->getTime();
         switch (choice) {
             case 1:
-                std::cout << "You selected Option 1 - Show Casino information\n";
+                cout << "You selected Option 1 - Show Casino information\n";
                 logging(logfile, __FUNCTION__, "SHOWING Casino");
                 // Additional logic for option 1
                 break;
@@ -126,7 +135,7 @@ void menu(Casino* casino) {
                 // Logic for option 3
                 break;
             case 4:
-                std::cout << "You selected Option 4\n";
+                cout << "You selected Option 4\n";
                 printTime(currentTime);
                 break;
             case 5:
@@ -139,15 +148,16 @@ void menu(Casino* casino) {
                 exit(1);
             case 0:
                 logging(logfile, __FUNCTION__, "EXITING THE MENU->RETURNING FLOW CONTROL TO SIMULATION");
-                std::cout << "Exiting the menu and returning the flow control to run...\n";
-                std::this_thread::sleep_for(std::chrono::seconds(2));
+                cout << "Exiting the menu and returning the flow control to run...\n";
+                this_thread::sleep_for(chrono::seconds(2));
                 break;
             default:
                 logging(logfile, __FUNCTION__, "INVALID CHOICE GIVEN");
-                std::cout << "Invalid choice. Please try again.\n";
+                cout << "Invalid choice. Please try again.\n";
                 break;
         }
 
-        std::cout << "\n";
+        cout << "\n";
     } while (choice != 0);
 }
+

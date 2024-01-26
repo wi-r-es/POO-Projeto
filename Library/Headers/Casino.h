@@ -145,6 +145,8 @@ public:
      ************************************************/
     void TurnOff(int id_mac);
 
+    void BrokenMachine(int id_mac);
+
     /*********************************************************************
      * @brief Getter for the Machine current state, based on given ID    *
      * @param id_mac                                                     *
