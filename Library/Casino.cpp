@@ -20,6 +20,34 @@ string error_logfile { "..\\Files\\O\\applog.csv" };
 
 #endif
 
+
+namespace MachineUtils{
+    /** specific content for C++ 17, for C++ 20 concepts can be used **/
+    /**  Helper template to check for toString method **/
+    template<typename T, typename = std::void_t<>>
+    struct has_toString_method : std::false_type {
+    };
+
+    template<typename T>
+    struct has_toString_method<T, std::void_t<decltype(std::declval<T>().toString())>> : std::true_type {
+    };
+
+    template<typename Container>
+    void printElements(const Container &container) {
+        /** Check if the container's value_type is Machine **/
+        static_assert(std::is_same_v<typename Container::value_type, Machine>,
+                      "Container does not contain Machine objects");
+
+        /** Check if Machine has a toString method **/
+        static_assert(has_toString_method<Machine>::value, "Machine does not have a toString method");
+
+        for (const auto &element: container) {
+            std::cout << element.toString() << std::endl;
+        }
+    }
+
+}
+
 Casino::Casino(std::string name): NAME{std::move(name)}, MAX_Players{},JackpotRadius{}{
     rolex = new Clock();
 }
@@ -241,6 +269,7 @@ void Casino::TurnOff(const int id_mac){
         it->second->setState(MACHINE_STATE::OFF);
     else cout << "Machine ID not found!";
 }
+
 void Casino::BrokenMachine(const int id_mac){
     auto it = m_machine_id.find(id_mac);
     if (it != m_machine_id.end()) {
