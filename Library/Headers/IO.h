@@ -12,6 +12,8 @@
 #include <stdexcept>
 #include <cstdlib>
 
+
+#include "Machine.h"
 using namespace std;
 
 #ifdef _WIN32
@@ -29,6 +31,7 @@ void logging(const std::string& filename, const std::string& funcname, const std
 
 void beautify(const std::string& str, char ch = '#');
 void printTime(const time_t& _time);
+void List_Specific_Containers(const std::vector<Machine *>& container, std::list<Machine *> &l,std::ostream &f = std::cout);
 
 
 #endif //CODE_IO_H

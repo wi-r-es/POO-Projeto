@@ -57,3 +57,11 @@ void beautify(const std::string& str, const char ch) {
 void printTime(const time_t& _time) {
     std::cout << "\n\t\t\t\t TIME = " << asctime(localtime(&_time));
 }
+
+void List_Specific_Containers(const std::vector<Machine *>& container, std::list<Machine *> &l,std::ostream &f){
+    for (const auto &machine : container) {
+        f << machine->toString() << '\n';
+        l.push_back(machine);
+
+    }
+}
