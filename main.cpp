@@ -62,7 +62,7 @@ int main() {
         if (elapsed.count() >= 5) {
             casino->printVectorsSize();
             //Wait(30);
-            this_thread::sleep_for(chrono::milliseconds(500));
+            this_thread::sleep_for(chrono::milliseconds(100));
             casino->check_routine();
             lastRoutineCheck = chrono::steady_clock::now(); /** Reset the timer **/
             casino->printVectorsSize();
@@ -90,6 +90,8 @@ int main() {
     atexit([] { cout << "Execution time: " << time_executing ;});
     atexit(logAtExit);
     delete casino;
+    const size_t memf = casino->Total_Memory();
+    cout << "\nMemoria total ocupado pelo casino: " << memf << "bytes" << endl;
     return 0;
 }
 void logAtExit() {
