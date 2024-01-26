@@ -107,7 +107,7 @@ bool Machine::Play(User* user){
     std::cout << __FUNCTION__  << std::endl;
 }
 
-std::string Machine::toString() {
+std::string Machine::toString() const{
     std::string s = "[ID]->" + std::to_string(UID);  s.append(";");
     s.append(" [TYPE]->" + std::to_string(static_cast<int>(TYPE))); s.append(";");
     s.append("\t\t[STATE]->" + machineSTATEToString(state)); s.append(";");
@@ -120,7 +120,7 @@ std::string Machine::toString() {
     return s;
 }
 
-std::string Machine::toStringOut() {
+std::string Machine::toStringOut() const{
     std::string s = "\t[ID]->" + std::to_string(UID);  s.append("\n");
     s.append("\t\t[TYPE]->" + machineTypeToString(TYPE)); s.append("\n");
     s.append("\t\t[STATE]->" + machineSTATEToString(state)); s.append("\n");

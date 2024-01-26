@@ -178,8 +178,8 @@ public:
      *                                                                                *
      **********************************************************************************/
     virtual bool Play(User* user);
-    std::string toString();
-    std::string toStringOut();
+    std::string toString() const;
+    std::string toStringOut() const;
     void setMaintenanceTime(std::chrono::steady_clock::time_point time);
     std::chrono::steady_clock::time_point getTimeInMaintenance();
     void reset();

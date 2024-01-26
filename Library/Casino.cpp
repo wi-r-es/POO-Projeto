@@ -298,41 +298,41 @@ size_t Casino::Total_Memory() const{
 
 
 std::list<Machine *> *Casino::List_Types(const MACHINE_TYPE Type, std::ostream &f ){
+    std::vector<Machine *> *vecvec= nullptr;
+    auto list_by_type = new std::list<Machine *>;
     try{
+
         switch (Type) {
             case MACHINE_TYPE::BLACKJACK:
                 if (v_Blackjack_Machines.empty()) { throw runtime_error{"Empty Blackjack List"}; }
-                for (const auto &machine : v_Blackjack_Machines) {
-                    f << machine->toString() << '\n';
-                }
+                vecvec = &v_Blackjack_Machines;
                 break;
             case MACHINE_TYPE::ROULETTE:
                 if (v_Roulette_Machines.empty()) { throw runtime_error{"Empty Roulette List"}; }
-                for (const auto &machine : v_Roulette_Machines) {
-                    f << machine->toString() << '\n';
-                }
+                vecvec = &v_Roulette_Machines;
                 break;
             case MACHINE_TYPE::CLASSIC_SLOT:
                 if (v_classicSlots_Machines.empty()) { throw runtime_error{"Empty ClassicSlot List"}; }
-                for (const auto &machine : v_classicSlots_Machines) {
-                    f << machine->toString() << '\n';
-                }
+                vecvec = &v_classicSlots_Machines;
                 break;
             case MACHINE_TYPE::CRAPS:
                 if (v_Craps_Machines.empty()) { throw runtime_error{"Empty Craps List"}; }
-                for (const auto &machine : v_Craps_Machines) {
-                    f << machine->toString() << '\n';
-                }
+                vecvec = &v_Craps_Machines;
                 break;
             default:
                 cerr << "Type not used, some error has occurred....";
+
                 throw runtime_error{"Type not used, some error has occurred...."};
         }
+        List_Specific_Containers(*vecvec, *list_by_type);
     }catch(runtime_error &ex){
-        cerr << ex.what();
+        f << ex.what();
+        delete list_by_type; /** Clean up to avoid memory leak **/
         logging(error_logfile, __FUNCTION__ , ex.what());
         return nullptr;
     }
+
+    return list_by_type;
 }
 std::list<std::string> *Casino::Ranking_of_the_weaks(){
     vector<Machine*> v_broken = v_Broken_Machines;
