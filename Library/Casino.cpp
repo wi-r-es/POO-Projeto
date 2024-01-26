@@ -12,9 +12,11 @@
 #ifdef _WIN32
 string clients_file { "..\\Files\\I\\pessoas.txt" };
 string logfile { "..\\Files\\O\\applog.csv" };
+string error_logfile { "..\\Files\\O\\applog.csv" };
 #else
  string clients_file { "../Files/I/pessoas.txt" } ;
  string logfile { "../Files/O/applog.csv" } ;
+ string error_logfile { "../Files/O/error_log.csv" } ;
 
 #endif
 

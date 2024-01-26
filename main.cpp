@@ -99,8 +99,9 @@ void logAtExit() {
 }
 
 void SimulateCasino( Casino *casino, u_int8_t &flag){
-
+    static int iterations =0;
     try{
+        ++iterations;
         if(casino == nullptr) throw runtime_error{"Casino is null."};
         casino->Run();
 
@@ -109,11 +110,14 @@ void SimulateCasino( Casino *casino, u_int8_t &flag){
         if (localtime(&timeToClose)->tm_hour == 04) {
             //Function to start closing casino
             flag = 1;
+            cout << "Number of iterations: " << iterations << endl;
+            logging(logfile, "Total number of iterations through simulation", to_string(iterations));
         }
     }catch(runtime_error &ex){
         cerr << "ERROR OCCURRED ->"<< ex.what();
         exit(EXIT_FAILURE);
     }
+
 }
 
 
