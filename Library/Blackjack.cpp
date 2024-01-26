@@ -155,12 +155,7 @@ bool Blackjack::simulate_game(){
         std::cout << "WINNER = [Player]" << std::endl;
         return true;
     }
-    /*
-    else if(p_hand == d_hand){
-        std::cout << "DRAW" << std::endl;
-        simulate_game();
-    }
-     */
+
     else {
         std::cout << "WINNER = [Dealer]" << std::endl;
         return false;

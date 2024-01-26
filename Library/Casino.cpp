@@ -211,20 +211,18 @@ void Casino::ReadPeopleFile() {
     }
 }
 
-// Estado atual do casino
+// Casino current state! DONE
 void Casino::Listing(std::ostream &f){
-    beautify(" Machines in casino without any ordering ");
-    //Wait(10);
-    for(auto & it : m_machine_id) {
-        string s = it.second->toString();
-        f << s << endl;
+    beautify("Machines in casino without any ordering");
+    for (const auto &it : m_machine_id) {
+        f << it.second->toString() << '\n';
     }
-    f<<"[[Users]]"<<endl;
-    for(auto & it :l_users) {
-        auto s = it->toString();
+    f << "[[Users]]\n";
+    for (const auto &user : l_users) {
+        f << user->toString() << '\n';
     }
-    auto s = VectorsSize();
-    f<<s <<endl;
+    f << "[[Containers size]]\n";
+    f << VectorsSize() << '\n';
 
 }
 
@@ -232,8 +230,7 @@ void Casino::Listing(float X, std::ostream &f){
 
     for(auto & it : m_machine_id) {
         if (it.second->getWinProbability() > X) {
-            string s = it.second->toStringOut();
-            f << s << endl;
+           f<< it.second->toStringOut()<<'\n';
         }
     }
 }
@@ -298,8 +295,36 @@ size_t Casino::Total_Memory() const{
     totalSize += l_users.size() * sizeof(User*);         /** Size of l_users list **/
     return totalSize;
 }
-std::list<Machine *> *Casino::List_Types(const std::string& Type, std::ostream &f ){
 
+
+std::list<Machine *> *Casino::List_Types(const std::string& Type, std::ostream &f ){
+    try{
+        switch (Type) {
+            case MACHINE_TYPE::BLACKJACK:
+                if (v_Blackjack_Machines.empty()) { throw runtime_error{"Empty Blackjack List"}; }
+                machine = getRandomMachineFromVector(type, v_Blackjack_Machines);
+                break;
+            case MACHINE_TYPE::ROULETTE:
+                if (v_Roulette_Machines.empty()) { throw runtime_error{"Empty Roulette List"}; }
+                machine = getRandomMachineFromVector(type, v_Roulette_Machines);
+                break;
+            case MACHINE_TYPE::CLASSIC_SLOT:
+                if (v_classicSlots_Machines.empty()) { throw runtime_error{"Empty ClassicSlot List"}; }
+                machine = getRandomMachineFromVector(type, v_classicSlots_Machines);
+                break;
+            case MACHINE_TYPE::CRAPS:
+                if (v_Craps_Machines.empty()) { throw runtime_error{"Empty Craps List"}; }
+                machine = getRandomMachineFromVector(type, v_Craps_Machines);
+                break;
+            default:
+                cerr << "Type not used, some error has occurred....";
+                throw runtime_error{"Type not used, some error has occurred...."};
+        }
+    }catch(runtime_error &ex){
+        cerr << ex.what();
+        logging(error_logfile, __FUNCTION__ , ex.what());
+        return nullptr;
+    }
 }
 std::list<std::string> *Casino::Ranking_of_the_weaks(){
     vector<Machine*> v_broken = v_Broken_Machines;
