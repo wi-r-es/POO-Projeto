@@ -302,19 +302,27 @@ std::list<Machine *> *Casino::List_Types(const MACHINE_TYPE Type, std::ostream &
         switch (Type) {
             case MACHINE_TYPE::BLACKJACK:
                 if (v_Blackjack_Machines.empty()) { throw runtime_error{"Empty Blackjack List"}; }
-                machine = getRandomMachineFromVector(type, v_Blackjack_Machines);
+                for (const auto &machine : v_Blackjack_Machines) {
+                    f << machine->toString() << '\n';
+                }
                 break;
             case MACHINE_TYPE::ROULETTE:
                 if (v_Roulette_Machines.empty()) { throw runtime_error{"Empty Roulette List"}; }
-                machine = getRandomMachineFromVector(type, v_Roulette_Machines);
+                for (const auto &machine : v_Roulette_Machines) {
+                    f << machine->toString() << '\n';
+                }
                 break;
             case MACHINE_TYPE::CLASSIC_SLOT:
                 if (v_classicSlots_Machines.empty()) { throw runtime_error{"Empty ClassicSlot List"}; }
-                machine = getRandomMachineFromVector(type, v_classicSlots_Machines);
+                for (const auto &machine : v_classicSlots_Machines) {
+                    f << machine->toString() << '\n';
+                }
                 break;
             case MACHINE_TYPE::CRAPS:
                 if (v_Craps_Machines.empty()) { throw runtime_error{"Empty Craps List"}; }
-                machine = getRandomMachineFromVector(type, v_Craps_Machines);
+                for (const auto &machine : v_Craps_Machines) {
+                    f << machine->toString() << '\n';
+                }
                 break;
             default:
                 cerr << "Type not used, some error has occurred....";
