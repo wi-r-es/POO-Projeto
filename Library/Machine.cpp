@@ -7,7 +7,7 @@
 Machine::Machine(MACHINE_TYPE type, int posX, int posY) : TYPE(type), posX(posX), posY(posY) {
     static short int serialNumber = 1; // Static variable to keep track of the last used number
     UID = serialNumber++; // probably will be changed, not a problem for now ig?
-    state = MACHINE_STATE::OFF;
+    state = MACHINE_STATE::ON;
     failureProbability = 0.3; // <=> 30%
     temperature = 18.0;
     winProbability = 0.1; // <=> 10%
@@ -129,6 +129,14 @@ std::string Machine::toStringOut() {
     s.append("\t\t[betAmount]->" + std::to_string(betAmount)); s.append("\n");
     s.append("\t\t[usage]->" + std::to_string(usage)); s.append("\n");
     return s;
+}
+
+time_t Machine::getTimeInMaintenance() {
+    return coolingtime;
+}
+
+void Machine::setMaintenanceTime(time_t time) {
+    coolingtime = time;
 }
 
 std::string machineTypeToString(MACHINE_TYPE type) {

@@ -19,10 +19,10 @@ string logfile { "..\\Files\\O\\applog.csv" };
 #endif
 
 Casino::Casino(std::string name): NAME{std::move(name)}, MAX_Players{},JackpotRadius{}{
-    clock = new Clock();
+    rolex = new Clock();
 }
 Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)}, MAX_Players{max},JackpotRadius{jradius}{
-    clock = new Clock();
+    rolex = new Clock();
 }
 
 Casino::~Casino(){
@@ -45,7 +45,7 @@ Casino::~Casino(){
     v_Craps_Machines.clear();
     l_users.clear();
     v_Broken_Machines.clear();
-    delete clock;
+    delete rolex;
 }
 
 bool Casino::Load(const std::string &file) {
@@ -258,7 +258,7 @@ MACHINE_STATE Casino::getState(const int id_mac) {
 }
 
 Clock *Casino::getClock() const {
-    return clock;
+    return rolex;
 }
 
 size_t Casino::Total_Memory() const{
@@ -380,13 +380,13 @@ void Casino::Run() {
         auto type = getRandomType();
         mac = getRandomMachineByType(type);
         auto state = mac->getState();
-        if (mac && state != MACHINE_STATE::BROKEN && state != MACHINE_STATE::OFF) {
+        if (state != MACHINE_STATE::BROKEN) {
             break; /** Found a working machine **/
         }
         ++attempts;
     } while(attempts <= num_macs);
 
-    if (mac->getState() == MACHINE_STATE::BROKEN && mac->getState() == MACHINE_STATE::OFF) {
+    if (mac->getState() == MACHINE_STATE::BROKEN || mac->getState() == MACHINE_STATE::OFF) {
         cout << "No working machines available.\n";
         return; /** Early exit if no working machine is found **/
     }
@@ -396,10 +396,13 @@ void Casino::Run() {
         if(temp > 90.0f)
         {
             cout << "TEMP: " << temp << endl;
-            throw runtime_error{"Machine Temperature of the charts, meltdown imminent...\n"};
+            throw runtime_error{"Machine malfunction due to high temperature."};
         }
         mac->Play(usr);
-        if(mac->getFailureProbability() == 0.8f) mac->setState(MACHINE_STATE::BROKEN);
+        if(mac->getFailureProbability() == 0.8f) {
+            throw runtime_error{"Machine malfunction due to failure in the system hardware."};
+        }
+
     } catch (runtime_error &ex) {
         cerr<<"An error as occurred while trying to use machine\n\t"
             << '[' << mac->getUID() << ']' << " ... -> " << ex.what();
@@ -414,7 +417,7 @@ void Casino::Run() {
 
     logging(logfile, __FUNCTION__, mac->toString());
     //Wait(1000);
-    //auto current_time =  clock->getTime();
+    //auto current_time =  rolex->getTime();
     //printTime(current_time);
 }
 
@@ -466,7 +469,7 @@ Machine* Casino::getRandomMachineByType(MACHINE_TYPE type){
                 machine = getRandomMachineFromVector(type, v_Craps_Machines);
                 break;
             default:
-                cerr << "Type not used, some error has occured....";
+                cerr << "Type not used, some error has occurred....";
         }
     }catch(runtime_error &ex){
         cerr << ex.what();
@@ -499,5 +502,76 @@ void Casino::RandomOddImprovement(){
 }
 
 void Casino::check_routine() {
+
+    auto it = v_Broken_Machines.begin();
+    while (it != v_Broken_Machines.end()) {
+        Machine* mac = *it;
+        auto state = mac->getState();
+        auto type = mac->getType();
+
+        if (state == MACHINE_STATE::BROKEN) {
+            // Move machine to maintenance
+            mac->setState(MACHINE_STATE::MAINTENANCE);
+            time_t time = rolex->getTime();
+            mac->setMaintenanceTime(time);
+            removeFromTypeVector(mac, type);
+            ++it;
+        } else if (state == MACHINE_STATE::OFF && (timeDifferenceInMinutes(mac->getTimeInMaintenance(), rolex->getTime()) >= 15 )) {
+            /** Reactivate machine **/
+            mac->setState(MACHINE_STATE::ON);
+            m_machines[type].push_back(mac);
+            it = v_Broken_Machines.erase(it);  /** Remove fixed machine and update iterator **/
+        } else {
+            ++it;
+        }
+    }
+}
+void Casino::removeFromTypeVector(Machine* machine, MACHINE_TYPE type) {
+    vector<Machine*> *machine_vector;
+
+    switch (type) {
+        case MACHINE_TYPE::BLACKJACK:
+            machine_vector = &v_Blackjack_Machines;
+            break;
+        case MACHINE_TYPE::ROULETTE:
+            machine_vector = &v_Roulette_Machines;
+            break;
+        case MACHINE_TYPE::CLASSIC_SLOT:
+            machine_vector = &v_classicSlots_Machines;
+            break;
+        case MACHINE_TYPE::CRAPS:
+            machine_vector = &v_Craps_Machines;
+            break;
+        default:
+            std::cerr << "Unknown machine type encountered.";
+            return;
+    }
+
+    auto it = find(machine_vector->begin(), machine_vector->end(), machine);
+    if (it != machine_vector->end()) {
+        machine_vector->erase(it);
+    }
+}
+void Casino::addToTypeVector(Machine* machine, MACHINE_TYPE type) {
+    vector<Machine*> *machine_vector;
+
+    switch (type) {
+        case MACHINE_TYPE::BLACKJACK:
+            machine_vector = &v_Blackjack_Machines;
+            break;
+        case MACHINE_TYPE::ROULETTE:
+            machine_vector = &v_Roulette_Machines;
+            break;
+        case MACHINE_TYPE::CLASSIC_SLOT:
+            machine_vector = &v_classicSlots_Machines;
+            break;
+        case MACHINE_TYPE::CRAPS:
+            machine_vector = &v_Craps_Machines;
+            break;
+        default:
+            std::cerr << "Unknown machine type encountered.";
+            return;
+    }
+    machine_vector->push_back(machine);
 
 }

@@ -35,7 +35,7 @@ enum class MACHINE_TYPE : unsigned char {CLASSIC_SLOT =1 ,          // 1
 std::string machineTypeToString(MACHINE_TYPE type);
 
 
-enum class MACHINE_STATE : unsigned char {OFF, ON, BROKEN, NONEXISTENT}; // maybe add another value, TBD
+enum class MACHINE_STATE : unsigned char {OFF, ON, BROKEN, MAINTENANCE, NONEXISTENT}; // maybe add another value, TBD
 
 // to use simply use MACHINE_TYPE::BLACKJACK for example
 
@@ -181,9 +181,10 @@ public:
     virtual void Play(User* user);
     std::string toString();
     std::string toStringOut();
+    void setMaintenanceTime(time_t time);
+    time_t getTimeInMaintenance();
 
-
-    int getID(){ return UID;}
+    [[nodiscard]] int getID() const{ return UID;}
 };
 
 

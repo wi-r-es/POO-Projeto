@@ -76,7 +76,7 @@ private:
     std::list<User*> l_users;
     std::vector<Machine *> v_Broken_Machines;
     // More data members related to opening and closing time, etc.
-    Clock *clock;
+    Clock *rolex;
 
 public:
     /*****************************************************************
@@ -222,6 +222,8 @@ public:
      **********************************************************************************/
     void Run();
     void check_routine();
+    void removeFromTypeVector(Machine* machine, MACHINE_TYPE type);
+    void addToTypeVector(Machine* machine, MACHINE_TYPE type);
     User* getRandomUser();
     Machine* getRandomMachineByType(MACHINE_TYPE type);
     MACHINE_TYPE getRandomType();
