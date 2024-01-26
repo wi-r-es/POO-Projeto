@@ -484,6 +484,11 @@ MACHINE_TYPE Casino::getRandomType(){
     int randomIndex = randomNumberGeneratorInterval(0, sizeof(typesInUse) / sizeof(typesInUse[0]) - 1);
     return typesInUse[randomIndex];
 }
+void Casino::changeMachineFailProbability() {
+    auto type = getRandomType();
+    auto mac = getRandomMachineByType(type);
+    mac->setFailureProbability(0.8); // Set probability to 80%
+}
 
 void Casino::check_routine() {
 

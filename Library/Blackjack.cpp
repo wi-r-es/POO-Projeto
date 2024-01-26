@@ -144,5 +144,6 @@ void Blackjack::Play(User* user) {
         return;
     }
     simulate_game();
+    incUsage();
     increaseTemperature();
 }

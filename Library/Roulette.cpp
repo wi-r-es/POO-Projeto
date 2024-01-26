@@ -140,7 +140,7 @@ void Roulette::Play(User* user) {
     }else {
         cout << "You lost $" << amount << "!" << endl;
     }
-    setTemperature(this->getTemperature() + 0.3);
     cout << "USER MONEY TO BET: -->" << user->getMoney();
+    incUsage();
     increaseTemperature();
 }

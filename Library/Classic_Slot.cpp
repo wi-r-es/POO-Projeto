@@ -64,7 +64,7 @@ void ClassicSlot::Play(User *user) {
     } else if (rol1 == rol2 && rol2 == rol3) {
         user->setMoney(userMoney + getBetAmount()*4);
     }
-
+    incUsage();
     increaseTemperature();
 
 }

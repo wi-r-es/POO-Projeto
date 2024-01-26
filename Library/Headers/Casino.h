@@ -225,7 +225,7 @@ public:
     User* getRandomUser();
     Machine* getRandomMachineByType(MACHINE_TYPE type);
     MACHINE_TYPE getRandomType();
-
+    void changeMachineFailProbability();
 };
 
 #endif //CODE_CASINO_H

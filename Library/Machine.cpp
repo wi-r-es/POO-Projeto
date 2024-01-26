@@ -47,9 +47,8 @@ std::pair<int, int> Machine::getPosition() {
     return std::make_pair(posX, posY);
 }
 
-void Machine::setPosition(int newX, int newY) {
-    posX = newX;
-    posY = newY;
+void Machine::setFailureProbability(float prob) {
+    failureProbability = prob;
 }
 
 float Machine::getWinProbability() const {

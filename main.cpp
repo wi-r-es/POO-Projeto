@@ -63,6 +63,9 @@ int main() {
             casino->check_routine();
             lastTime = chrono::steady_clock::now(); /** Reset the timer **/
         }
+        if(randomNumberGeneratorInterval(0,1)){
+            casino->changeMachineFailProbability();
+        }
 
         this_thread::sleep_for(chrono::milliseconds(100)); /** To reduce CPU usage **/
 

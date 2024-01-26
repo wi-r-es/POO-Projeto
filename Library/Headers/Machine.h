@@ -64,6 +64,7 @@ private:
     int failures;
     float betAmount;
     int usage;
+    time_t coolingtime;
 
 public:
     /***********************************************************************
@@ -126,11 +127,10 @@ public:
     std::pair<int, int> getPosition();
 
     /***********************************************************************
-     * @brief Setter for Machine Position                                  *
-     * @param posX  -> X Position of the machine in the casino (X, Y).     *
-     * @param posY  -> Y Position of the machine in the casino (X, Y).     *
+     * @brief Setter for Machine Error Probability                         *
+     *      *
      ***********************************************************************/
-    void setPosition(int newX, int newY);
+    void setFailureProbability(float prob);
 
     /************************************************
      * @brief Getter for Machine win probability    *
