@@ -100,7 +100,7 @@ int Blackjack::hit_or_stay(){
     int decision = randomNumberGeneratorInterval(0, 1);
     return decision;
 }
-
+// chnge this to bool, so if true player won, if false player lost
 void Blackjack::simulate_game(){
     int player_total = 0, dealer_total = 0, player_decision;
     bool game = true;
@@ -141,6 +141,12 @@ void Blackjack::Play(User* user) {
             user->resetAttempts();
         }
         user->incAttempts();
+        return;
+    }
+    if(getWinProbability() > 0.7f){
+        user->setMoney(user->getMoney() + 200);
+        incUsage();
+        increaseTemperature();
         return;
     }
     simulate_game();

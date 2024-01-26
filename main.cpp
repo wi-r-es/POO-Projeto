@@ -66,7 +66,7 @@ int main() {
         if(randomNumberGeneratorInterval(0,1)){
             casino->changeMachineFailProbability();
         }
-
+        casino->RandomOddImprovement();
         this_thread::sleep_for(chrono::milliseconds(100)); /** To reduce CPU usage **/
 
     }

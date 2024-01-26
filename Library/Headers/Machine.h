@@ -131,6 +131,7 @@ public:
      *      *
      ***********************************************************************/
     void setFailureProbability(float prob);
+    [[nodiscard]] float getFailureProbability() const;
 
     /************************************************
      * @brief Getter for Machine win probability    *

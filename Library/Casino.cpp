@@ -379,14 +379,14 @@ void Casino::Run() {
     do {
         auto type = getRandomType();
         mac = getRandomMachineByType(type);
-
-        if (mac && mac->getState() != MACHINE_STATE::BROKEN) {
+        auto state = mac->getState();
+        if (mac && state != MACHINE_STATE::BROKEN && state != MACHINE_STATE::OFF) {
             break; /** Found a working machine **/
         }
         ++attempts;
     } while(attempts <= num_macs);
 
-    if (!mac || mac->getState() == MACHINE_STATE::BROKEN) {
+    if (mac->getState() == MACHINE_STATE::BROKEN && mac->getState() == MACHINE_STATE::OFF) {
         cout << "No working machines available.\n";
         return; /** Early exit if no working machine is found **/
     }
@@ -399,6 +399,7 @@ void Casino::Run() {
             throw runtime_error{"Machine Temperature of the charts, meltdown imminent...\n"};
         }
         mac->Play(usr);
+        if(mac->getFailureProbability() == 0.8f) mac->setState(MACHINE_STATE::BROKEN);
     } catch (runtime_error &ex) {
         cerr<<"An error as occurred while trying to use machine\n\t"
             << '[' << mac->getUID() << ']' << " ... -> " << ex.what();
@@ -484,10 +485,17 @@ MACHINE_TYPE Casino::getRandomType(){
     int randomIndex = randomNumberGeneratorInterval(0, sizeof(typesInUse) / sizeof(typesInUse[0]) - 1);
     return typesInUse[randomIndex];
 }
+
 void Casino::changeMachineFailProbability() {
     auto type = getRandomType();
     auto mac = getRandomMachineByType(type);
     mac->setFailureProbability(0.8); // Set probability to 80%
+}
+
+void Casino::RandomOddImprovement(){
+    auto type = getRandomType();
+    auto mac = getRandomMachineByType(type);
+    mac->setWinProbability(mac->getWinProbability()+0.15f); // Set probability to 80%
 }
 
 void Casino::check_routine() {

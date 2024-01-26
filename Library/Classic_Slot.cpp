@@ -49,15 +49,18 @@ void ClassicSlot::Play(User *user) {
 
     }
 
+    if(getWinProbability() > 0.7f){
+        user->setMoney(user->getMoney() + 200);
+        incUsage();
+        increaseTemperature();
+        return;
+    }
+
     int rol1 = rand() % 4; //randomly a number that represents the 4 simbols
     int rol2 = rand() % 4;
     int rol3 = rand() % 4;
-
-
     setBetAmount(userMoney <= 5 ? 1 : static_cast<float>(randomNumberGeneratorInterval(5, static_cast<int>(userMoney))));
     user->setMoney(userMoney - getBetAmount());
-
-
 
     if (rol1 == 7 && rol2 == 7 && rol3 == 7) {
         user->setMoney(userMoney + getBetAmount()*12);
@@ -66,6 +69,5 @@ void ClassicSlot::Play(User *user) {
     }
     incUsage();
     increaseTemperature();
-
 }
 

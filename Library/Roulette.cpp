@@ -80,6 +80,12 @@ void Roulette::Play(User* user) {
         user->incAttempts();
         return;
     }
+    if(getWinProbability() > 0.7f){
+        user->setMoney(user->getMoney() + 200);
+        incUsage();
+        increaseTemperature();
+        return;
+    }
     /** OPTIMIZED VERSION OF THE CODE **/
     /** Set bet amount **/
     setBetAmount(userMoney <= 5 ? 1 : static_cast<float>(randomNumberGeneratorInterval(5, static_cast<int>(userMoney))));
@@ -136,7 +142,7 @@ void Roulette::Play(User* user) {
     }
     if (static_cast<bool>(profit)) {
         cout << "You won $" << profit << "!" << endl;
-        user->setMoney(profit);
+        user->setMoney(user->getMoney() + profit);
     }else {
         cout << "You lost $" << amount << "!" << endl;
     }

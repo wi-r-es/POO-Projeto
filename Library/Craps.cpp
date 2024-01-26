@@ -35,8 +35,14 @@ void Craps::Play(User* user) {
         }
         user->incAttempts();
         return;
-
     }
+    if(getWinProbability() > 0.7f){
+        user->setMoney(user->getMoney() + 200);
+        incUsage();
+        increaseTemperature();
+        return;
+    }
+
     setBetAmount(userMoney <= 5 ? 1 : static_cast<float>(randomNumberGeneratorInterval(5, static_cast<int>(userMoney))));
 
     RollDices();

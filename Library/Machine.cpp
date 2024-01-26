@@ -51,6 +51,10 @@ void Machine::setFailureProbability(float prob) {
     failureProbability = prob;
 }
 
+float Machine::getFailureProbability() const{
+    return failureProbability;
+}
+
 float Machine::getWinProbability() const {
     return winProbability;
 }
