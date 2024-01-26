@@ -28,7 +28,7 @@ void Craps::RollDices() {
 void Craps::Play(User* user) {
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
-        std::cerr << " user has no more money to bet..." << std::endl;
+        std::cerr << "\nuser has no more money to bet..." << std::endl;
         if (user->getAttempts() > 5){
             user->addDebt(100);
             user->resetAttempts();
@@ -50,15 +50,15 @@ void Craps::Play(User* user) {
 
     if (sumDices == 7 || sumDices == 11) {
 
-        std::cout << "You win!" << std::endl;
+        std::cout << "\nYou win!" << std::endl;
         user->setMoney(userMoney + getBetAmount() * 2);
     } else if (sumDices == 2 || sumDices == 3 || sumDices == 12) {
 
-        std::cout << "You lost!" << std::endl;
+        std::cout << "\nYou lost!" << std::endl;
         user->setMoney(userMoney - getBetAmount());
     } else {
 
-        std::cout << "Roll again!" << std::endl;
+        std::cout << "\nRoll again!" << std::endl;
     }
     incUsage();
     increaseTemperature();

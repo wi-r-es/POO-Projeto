@@ -118,11 +118,11 @@ void Blackjack::simulate_game(){
             player_decision = hit_or_stay();
 
             if (!player_decision) {
-                std::cout << "STAY" << std::endl;
+                std::cout << "\n\tSTAY" << std::endl;
                 game = false;
             } else {
                 give_card(Players_Hand);
-                std::cout << "HIT" << std::endl;
+                std::cout << "\n\tHIT" << std::endl;
             }
             show_game();
         }
@@ -135,7 +135,7 @@ void Blackjack::simulate_game(){
 void Blackjack::Play(User* user) {
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
-        std::cerr << " user has no more money to bet..." << std::endl;
+        std::cerr << "\n user has no more money to bet..." << std::endl;
         if (user->getAttempts() > 5) {
             user->addDebt(100);
             user->resetAttempts();

@@ -39,7 +39,7 @@ void ClassicSlot::Play(User *user) {
 
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
-        std::cerr << " user has no more money to bet..." << std::endl;
+        std::cerr << "\nuser has no more money to bet..." << std::endl;
         if (user->getAttempts() > 5){
             user->addDebt(100);
             user->resetAttempts();

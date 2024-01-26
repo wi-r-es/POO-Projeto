@@ -35,7 +35,7 @@ void menu(Casino* casino);
  *
  *********************************************************************************************************************************************************************/
 int main() {
-    time_t time1 = clock();
+    auto startTime = chrono::steady_clock::now();
     Casino *casino = new Casino("Casino_name");
     if( casino->Load("../Files/I/CasinoInfo.xml") ) beautify(" Loaded successful ") ;
     casino->ReadPeopleFile();
@@ -44,7 +44,7 @@ int main() {
     Clock *ptrClock = casino->getClock();
     ptrClock->StartClock(500, "10:00:00");
     u_int8_t flag = 0;
-    auto lastTime = chrono::steady_clock::now(); /** Record the start time **/
+    auto lastRoutineCheck = chrono::steady_clock::now(); /** Record the start time **/
     while(1){
 
         SimulateCasino(casino, flag);
@@ -58,10 +58,10 @@ int main() {
             menu(casino);
         }
         auto currentTime = chrono::steady_clock::now(); /** Record current time **/
-        auto elapsed = chrono::duration_cast<chrono::minutes>(currentTime - lastTime); /** Computates time passed **/
+        auto elapsed = chrono::duration_cast<chrono::minutes>(currentTime - lastRoutineCheck); /** Computates time passed **/
         if (elapsed.count() >= 5) {
             casino->check_routine();
-            lastTime = chrono::steady_clock::now(); /** Reset the timer **/
+            lastRoutineCheck = chrono::steady_clock::now(); /** Reset the timer **/
         }
         if(randomNumberGeneratorInterval(0,1)){
             casino->changeMachineFailProbability();
@@ -69,6 +69,7 @@ int main() {
         casino->RandomOddImprovement();
         this_thread::sleep_for(chrono::milliseconds(100)); /** To reduce CPU usage **/
 
+        //auto =
     }
 
     //Wait(1000);
@@ -78,11 +79,12 @@ int main() {
     cout << "\nMemoria total ocupado pelo casino: " << mem << "bytes" << endl;
 
     /** Callback at program ending **/
-    static auto time_executing = ((float)time1)/CLOCKS_PER_SEC;
+    auto endTime = std::chrono::steady_clock::now();
+    static auto time_executing = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
     exit_message = "[Execution time]: " + to_string(time_executing);
     atexit([] { cout << "Execution time: " << time_executing ;});
     atexit(logAtExit);
-
+    delete casino;
     return 0;
 }
 void logAtExit() {

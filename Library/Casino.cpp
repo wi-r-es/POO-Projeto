@@ -516,7 +516,7 @@ void Casino::check_routine() {
             mac->setMaintenanceTime(time);
             removeFromTypeVector(mac, type);
             ++it;
-        } else if (state == MACHINE_STATE::OFF && (timeDifferenceInMinutes(mac->getTimeInMaintenance(), rolex->getTime()) >= 15 )) {
+        } else if (state == MACHINE_STATE::OFF && (timeDifferenceInMinutes(mac->getTimeInMaintenance(), rolex->getTime()) >= 5 )) {
             /** Reactivate machine **/
             mac->setState(MACHINE_STATE::ON);
             addToTypeVector(mac,type);

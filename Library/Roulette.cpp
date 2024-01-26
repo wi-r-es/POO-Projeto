@@ -37,7 +37,7 @@ Roulette::Roulette() : Machine(MACHINE_TYPE::ROULETTE, 0, 0) {
 Roulette:: ~Roulette(){
 
 }
-
+// was used for debug purposes
 void Roulette::printMap() const {
     for (const auto& pair : BOARD) {
         cout << "Number: " << pair.first << " Color: " << pair.second << endl;
@@ -72,7 +72,7 @@ string Roulette::simulate_singlebet(){
 void Roulette::Play(User* user) {
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
-        cerr << " user has no more money to bet..." << endl;
+        cerr << "\nuser has no more money to bet..." << endl;
         if (user->getAttempts() > 5){
             user->addDebt(100);
             user->resetAttempts();
@@ -146,7 +146,7 @@ void Roulette::Play(User* user) {
     }else {
         cout << "You lost $" << amount << "!" << endl;
     }
-    cout << "USER MONEY TO BET: -->" << user->getMoney();
+    cout << "\nUSER MONEY TO BET: -->" << user->getMoney();
     incUsage();
     increaseTemperature();
 }
