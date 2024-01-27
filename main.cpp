@@ -6,13 +6,18 @@
 
 #if defined(_WIN32) || defined(_WIN64)
 void clear(){system("cls");}
+string casinoFile { "Files\\O\\casinoState.txt" } ;
 #else
 void clear(){system("clear");}
 #endif
 void logAtExit();
 static string exit_message;
+string casinoFile { "Files/O/casinoState.txt" } ;
+
 void SimulateCasino( Casino *casino, u_int8_t &flag);
 void menu(Casino* casino);
+void submenu(Casino* casino);
+void listingToFile(Casino* casino);
 // Example for documenting the functions from previous project
 /*********************************************************************************************************************************************************************
  * @brief Loads Clients, employees, products and boxes from files. Generates hashing for clients based on the input.                                                 *
@@ -124,16 +129,20 @@ void SimulateCasino( Casino *casino, u_int8_t &flag){
 
 
 void menu(Casino* casino) {
+    if(!casino) exit(-1);
     int choice;
     logging(logfile, __FUNCTION__, "ACCESSED");
     this_thread::sleep_for(std::chrono::seconds(10));
     do {
         beautify("<MENU>");
         cout << "###   $<1> Show Casino Information.\n"
-             << "###   $<2> [TBD]\n"
-             << "###   $<3> [TBD]\n"
-             << "###   $<4> Check what time it is to the simulated software.\n"
-             << "###   $<5> [TBD].\n"
+             << "###   $<2> Save casino information to file.\n"
+             << "###   $<3> Check what time it is to the simulated software.\n"
+             << "###   $<4> List Ranking of the WEAK (machines).\n"
+             << "###   $<5> List Ranking of the MOST used (machines).\n"
+             << "###   $<6> List Ranking of most frequent users.\n"
+             << "###   $<7> List Ranking of most chicken dinner users (winners).\n"
+             << "###   $<8> [Interact with machines].\n"
              << "###   $<9> Shutdown current simulation.\n"
              << "###   $<0> Exit the menu and return the flow control to the simulation.\n"
              << "\n\n\t [<Enter your choice>]: ";
@@ -146,27 +155,44 @@ void menu(Casino* casino) {
 
         cout << "CHOICE -> " << choice << endl;
         time_t currentTime{};
-        if(choice == 4)  currentTime = casino->getClock()->getTime();
+        if(choice == 3)  currentTime = casino->getClock()->getTime();
         switch (choice) {
             case 1:
                 cout << "You selected Option 1 - Show Casino information\n";
+                casino->Listing();
                 logging(logfile, __FUNCTION__, "SHOWING Casino");
-                // Additional logic for option 1
                 break;
             case 2:
-                // Logic for option 2
+                cout << "You selected Option 2 - Save Casino information to file\n";
+                listingToFile(casino);
+                logging(logfile, __FUNCTION__, "SHOWING Casino");
                 break;
             case 3:
-                // Logic for option 3
-                break;
-            case 4:
-                cout << "You selected Option 4\n";
+                cout << "You selected Option 3 - Check what time it is to the simulated software.\n";
                 printTime(currentTime);
                 break;
+            case 4:
+                cout << "You selected Option 4 - List Ranking of the WEAK (machines).\n";
+
+                break;
             case 5:
-                // Logic for option 5
+                cout << "You selected Option 5 - List Ranking of the MOST used (machines).\n";
+
+                break;
+            case 6:
+                cout << "You selected Option 6 - List Ranking of most frequent users.\n";
+
+                break;
+            case 7:
+                cout << "You selected Option 7 - List Ranking of most chicken dinner users (winners).\n";
+
+                break;
+            case 8:
+                cout << "You selected Option 8 - [Interact with machines].\n";
+                submenu(casino);
                 break;
             case 9:
+                cout << "You selected Option 9 - Shutting down simulation...\n";
                 logging(logfile, __FUNCTION__, "EXITING THE SIMULATION");
                 // Additional logic for closing casino
                 delete casino;
@@ -181,8 +207,65 @@ void menu(Casino* casino) {
                 cout << "Invalid choice. Please try again.\n";
                 break;
         }
+        cout << "\n";
+    } while (choice != 0);
+}
+void submenu(Casino* casino) {
+    if (!casino) exit(-1);
+    int choice;
+    logging(logfile, __FUNCTION__, "ACCESSED");
+    this_thread::sleep_for(std::chrono::seconds(10));
+    do {
+        beautify("<MENU>");
+        cout << "###   $<1> List Machines UIDs.\n"
+             << "###   $<2> Turn Off Machine by UID.\n"
+             << "###   $<3> Turn Off Machine by UID.\n"
+             << "###   $<0> Exit the submenu.\n"
+             << "\n\n\t [<Enter your choice>]: ";
 
+        cin >> choice;
+
+        /** Clearing input buffer **/
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        cout << "CHOICE -> " << choice << endl;
+        switch (choice) {
+            case 1:
+                cout << "You selected Option 1 - List Machines UIDs.\n";
+
+                logging(logfile, __FUNCTION__, "List Machines UIDs");
+                break;
+            case 2:
+                cout << "You selected Option 2 - Turn Off Machine by UID.\n";
+
+                logging(logfile, __FUNCTION__, "List Machines UIDs");
+                break;
+            case 3:
+                cout << "You selected Option 3 - Turn Off Machine by UID.\n";
+
+                logging(logfile, __FUNCTION__, "List Machines UIDs");
+                break;
+            case 0:
+                logging(logfile, __FUNCTION__, "EXITING THE SUBMENU->RETURNING TO MENU");
+                cout << "Exiting the submenu and returning to teh submenu...\n";
+                this_thread::sleep_for(chrono::seconds(2));
+            default:
+                logging(logfile, __FUNCTION__, "INVALID CHOICE GIVEN");
+                cout << "Invalid choice. Please try again.\n";
+                break;
+        }
         cout << "\n";
     } while (choice != 0);
 }
 
+void listingToFile(Casino* casino){
+    try {
+        std::ofstream file{casinoFile, std::ios::app};
+        if (!file.is_open())
+            throw std::runtime_error("Unable to open file: " + casinoFile);
+        casino->Listing(file);
+    } catch (const std::runtime_error &e) {
+        std::cerr << "An error occurred: " << e.what() << '\n';
+    }
+}

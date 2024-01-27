@@ -4,7 +4,7 @@
 
 #include "Headers/IO.h"
 #include "Headers/utils.h"
-
+/*
 ifstream open(const char* path, ios_base::openmode mode){
     ifstream file{ path, mode };
     if(!file.is_open()) {
@@ -15,6 +15,7 @@ ifstream open(const char* path, ios_base::openmode mode){
     file.exceptions(ifstream::badbit);
     return file;
 }
+ */
 
 void logging(const std::string& filename, const std::string& funcname, const std::string& info) {
     if (funcname.empty() || info.empty())
