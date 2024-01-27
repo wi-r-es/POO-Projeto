@@ -21,9 +21,10 @@ string error_logfile { "..\\Files\\O\\applog.csv" };
 #endif
 
 
-namespace MachineUtils{
+namespace usefulFT{
     /** specific content for C++ 17, for C++ 20 concepts can be used **/
     /**  Helper template to check for toString method **/
+    /** SORTING TEMPLATE FOR MACHINES **/
     template<typename T, typename = std::void_t<>>
     struct has_toString_method : std::false_type {
     };
@@ -49,15 +50,25 @@ namespace MachineUtils{
 
     template <typename Container, typename Compare>
     void stableSortContainer(Container& container, Compare comp) {
-        std::stable_sort(container.begin(), container.end(), comp);
+        std::stable_sort(container.begin(), container.end(),
+                         [&](const auto& a, const auto& b) { return comp(*a, *b); });
     }
 
     template <typename T, typename Compare>
-    void stableSortContainer(std::list<T>& container, Compare comp) {
-        container.sort(comp);
+    void stableSortContainer(std::list<T*>& container, Compare comp) {
+        container.sort([&](const auto& a, const auto& b) { return comp(*a, *b); });
     }
 
-
+    /** SORTING TEMPLATE FOR USERS **/
+    template <typename Container, typename Compare>
+    void stableSortUsers(Container& container, Compare comp) {
+        std::stable_sort(container.begin(), container.end(),
+                         [&](const auto& a, const auto& b) { return comp(*a, *b); });
+    }
+    template <typename T, typename Compare>
+    void stableSortUsers(std::list<T*>& container, Compare comp) {
+        container.sort([&](const auto& a, const auto& b) { return comp(*a, *b); });
+    }
 }
 
 Casino::Casino(std::string name): NAME{std::move(name)}, MAX_Players{},JackpotRadius{}{
@@ -385,58 +396,86 @@ std::list<Machine *> *Casino::List_Types(const MACHINE_TYPE Type, std::ostream &
     return list_by_type;
 }
 std::list<std::string> *Casino::Ranking_of_the_weaks(){
-    vector<Machine*> v_broken = v_Broken_Machines;
+    auto tempL = l_machines;
+    auto l_ranking = new std::list<std::string> ;
 
-    sort(v_broken.begin(), v_broken.end(), [](Machine* m1, Machine* m2) {
-        return m1->getFailures() > m2->getFailures();
-    });
-
-    list<string> *l_ranking;
-    for (auto it = v_broken.begin(); it != v_broken.end(); it++) {
-        l_ranking->push_back("MACHINE ID: " + to_string((*it)->getUID()) + " FAILURES: " + to_string((*it)->getFailures()) + "\n");
+    try{
+        usefulFT::stableSortContainer(tempL, [](const Machine& a, const Machine& b) {
+            return a.getFailures() < b.getFailures();
+        });
+        for(auto &m : tempL){
+            l_ranking->push_back(m->toStringOut());
+        }
+    }catch(runtime_error &ex) {
+        cout << ex.what();
+        logging(error_logfile, __FUNCTION__, ex.what());
+        return nullptr;
     }
     return l_ranking;
 }
 
 
 std::list<Machine *> *Casino::Ranking_of_the_most_used(){
-
-   std::list<Machine *> l_machine = l_machines;
-
-    for(auto &pair : m_machine){
-        pair.second.sort([](Machine* m1, Machine* m2) {
-            return m1->getUsage() > m2->getUsage();
+    auto tempL = l_machines;
+    auto l_ranking = new std::list<Machine *>;
+    try{
+        usefulFT::stableSortContainer(tempL, [](const Machine& a, const Machine& b) {
+            return a.getUsage() < b.getUsage();
         });
-    }
-
-    list<string> *l_ranking;
-    for (auto it = m_machine.begin(); it != m_machine.end(); ++it) {
-        if (!it->second.empty()) { // Check if the list is not empty
-            Machine* machine = it->second.front(); // Get the first Machine* in the list
-            l_ranking->push_back("MACHINE ID: " + std::to_string(machine->getID()) + " USAGE: " + std::to_string(machine->getUsage()) + "\n");
+        for(auto &m : tempL){
+            l_ranking->push_back(m);
         }
+
+    }catch(runtime_error &ex) {
+        cout << ex.what();
+        delete l_ranking; /** Clean up to avoid memory leak **/
+        logging(error_logfile, __FUNCTION__, ex.what());
+        return nullptr;
     }
+    return l_ranking;
 }
 
 
 std::list<User *> *Casino::Most_Frequent_Users(){
-    list<User*> *l_frequent_users;
-    l_frequent_users->sort([] (User* u1, User* u2) {
-        return u1->getTimeSpent() > u2->getTimeSpent();
-    });
+    auto tempL = l_users;
+    auto l_ranking = new std::list<User *>;
+    try{
+        usefulFT::stableSortUsers(tempL, [](User &a, const User& b) {
+            return a.getTimeSpent() < b.getTimeSpent();
+        });
+        for(auto &usr : tempL){
+            l_ranking->push_back(usr);
+        }
 
-    return  l_frequent_users;
+    }catch(runtime_error &ex) {
+        cout << ex.what();
+        delete l_ranking; /** Clean up to avoid memory leak **/
+        logging(error_logfile, __FUNCTION__, ex.what());
+        return nullptr;
+    }
+    return l_ranking;
 }
 
 
 std::list<User *> *Casino::Most_Wins_Users(){
 
-    list<User*> *l_wins_users;
-    l_wins_users->sort([] (User* u1, User* u2) {
-        return u1->getPrizesWon() > u2->getPrizesWon();
-    });
+    auto tempL = l_users;
+    auto l_ranking = new std::list<User *>;
+    try{
+        usefulFT::stableSortUsers(tempL, [](User &a, const User& b) {
+            return a.getPrizesWon() < b.getPrizesWon();
+        });
+        for(auto &usr : tempL){
+            l_ranking->push_back(usr);
+        }
 
-    return l_wins_users;
+    }catch(runtime_error &ex) {
+        cout << ex.what();
+        delete l_ranking; /** Clean up to avoid memory leak **/
+        logging(error_logfile, __FUNCTION__, ex.what());
+        return nullptr;
+    }
+    return l_ranking;
 
 }
 

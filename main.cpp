@@ -19,6 +19,10 @@ void menu(Casino* casino);
 void submenu(Casino* casino);
 void subsubmenu(Casino* casino);
 void listingToFile(Casino* casino);
+void ROTW(Casino* casino);
+void ROTMU(Casino* casino);
+void MFU(Casino* casino);
+void MWU(Casino* casino);
 // Example for documenting the functions from previous project
 /*********************************************************************************************************************************************************************
  * @brief Loads Clients, employees, products and boxes from files. Generates hashing for clients based on the input.                                                 *
@@ -129,6 +133,7 @@ void SimulateCasino( Casino *casino, u_int8_t &flag){
 }
 
 
+
 void menu(Casino* casino) {
     if(!casino) exit(-1);
     int choice;
@@ -174,19 +179,19 @@ void menu(Casino* casino) {
                 break;
             case 4:
                 cout << "You selected Option 4 - List Ranking of the WEAK (machines).\n";
-
+                ROTW(casino);
                 break;
             case 5:
                 cout << "You selected Option 5 - List Ranking of the MOST used (machines).\n";
-
+                ROTMU(casino);
                 break;
             case 6:
                 cout << "You selected Option 6 - List Ranking of most frequent users.\n";
-
+                MFU(casino);
                 break;
             case 7:
                 cout << "You selected Option 7 - List Ranking of most chicken dinner users (winners).\n";
-
+                MWU(casino);
                 break;
             case 8:
                 cout << "You selected Option 8 - [More Options].\n";
@@ -211,6 +216,61 @@ void menu(Casino* casino) {
         cout << "\n";
     } while (choice != 0);
 }
+
+
+void ROTW(Casino* casino){
+    beautify(" Ranking of the ~W E A K~");
+    auto sl = casino->Ranking_of_the_weaks();
+    if(sl->empty()){
+        cerr << "An error as occured...\n" << endl;
+    }
+    else{
+        for(auto &entry : *sl){
+            cout << entry << endl;
+        }
+    }
+    delete sl;
+}
+void ROTMU(Casino* casino){
+    beautify(" Ranking of the ~Most USED~");
+    auto ml = casino->Ranking_of_the_most_used();
+    if(ml->empty()){
+        cerr << "An error as occured...\n" << endl;
+    }
+    else{
+        for(auto &entry : *ml){
+            cout << entry->toStringOut() << endl;
+        }
+    }
+    delete ml;
+}
+void MFU(Casino* casino){
+    beautify(" Ranking of the ~Most Frequent Users~");
+    auto mfu = casino->Most_Frequent_Users();
+    if(mfu->empty()){
+        cerr << "An error as occured...\n" << endl;
+    }
+    else{
+        for(auto &entry : *mfu){
+            cout << entry->toString() << endl;
+        }
+    }
+    delete mfu;
+}
+void MWU(Casino* casino){
+    beautify(" Ranking of the ~Most Winners Users~");
+    auto mwu = casino->Most_Wins_Users();
+    if(mwu->empty()){
+        cerr << "An error as occured...\n" << endl;
+    }
+    else{
+        for(auto &entry : *mwu){
+            cout << entry->toString() << endl;
+        }
+    }
+    delete mwu;
+}
+
 void submenu(Casino* casino) {
     if (!casino) exit(-1);
     int choice;
