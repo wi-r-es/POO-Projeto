@@ -68,25 +68,26 @@ Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)}, MA
 }
 
 Casino::~Casino(){
-    /** Delete all machines from the m_machine_id map **/
-    for(auto & it : m_machine_id) {
-        delete it.second;
-    }
-    /** Clear other containers without deleting the elements
-     *         as they are already deleted from m_machine_id **/
-    m_machine_id.clear();
-    m_positions.clear();
-    m_machines.clear(); //maybe, still TBD
-    v_classicSlots_Machines.clear();
-    v_Blackjack_Machines.clear();
-    v_Roulette_Machines.clear();
-    v_Craps_Machines.clear();
-    v_Broken_Machines.clear();
     /** Delete users and related container **/
     for(auto & l_user : l_users) {
         delete l_user;
     }
     l_users.clear();
+    /** Delete all machines from the list and related container **/
+    for(auto & l_machine : l_machines) {
+        delete l_machine;
+    }
+    l_machines.clear();
+    /** Clear other containers without deleting the elements
+     *         as they are already deleted from m_machine_id **/
+    m_machine_id.clear();
+    m_positions.clear();
+    v_classicSlots_Machines.clear();
+    v_Blackjack_Machines.clear();
+    v_Roulette_Machines.clear();
+    v_Craps_Machines.clear();
+    v_Broken_Machines.clear();
+
     /** Delete other class owned resources **/
     delete rolex;
 }
@@ -184,7 +185,7 @@ void Casino::databaseAddMachine(Machine *m){
         return;
     }
     /** Add the machine to the appropriate vector and maps **/
-    m_machines[type].push_back(m);
+    l_machines.push_back(m);
     m_positions[pos] = id;
     m_machine_id[id] = m;
 
@@ -319,26 +320,29 @@ Clock *Casino::getClock() const {
 size_t Casino::Total_Memory() const{
     size_t totalSize = sizeof(*this); /** Size of the Casino object itself **/
     /** Calculate the size of all unique machines in m_machine_id map **/
-    for (const auto& pair : m_machine_id) {
-        totalSize += sizeof(pair.first) + sizeof(Machine*); /** Size of the map entry (ID and pointer) **/
-        totalSize += sizeof(*(pair.second)); /** Size of the Machine object pointed to by the pointer **/
+    totalSize += l_machines.size() * sizeof(Machine*);
+    for (const auto machine : l_machines) {
+        totalSize += sizeof(*machine); // Size of each machine object
     }
     /** Add the size of collections storing pointers to machines **/
     totalSize += m_positions.size() * sizeof(std::pair<const std::pair<int, int>, uint16_t>); /** Size of m_positions map **/
-    totalSize += m_machines.size() * sizeof(std::pair<const MACHINE_TYPE, std::list<Machine *>>); /** Size of m_machines map **/
+    totalSize += m_machine_id.size() * sizeof(std::pair<uint16_t , Machine*>); /** Size of m_machine_id map **/
 
-    // if map is indeed never used or initialized this shall be deleted
-    for (const auto& pair : m_machines) {
-        totalSize += pair.second.size() * sizeof(Machine*); /** Size of the list of pointers in each map entry **/
-    }
 
     /** Add the size of specific machine lists **/
     totalSize += v_classicSlots_Machines.size();         /** Size of l_classicSlots_Machines list **/
     totalSize += v_Blackjack_Machines.size();            /** Size of l_Blackjack_Machines list **/
     totalSize += v_Roulette_Machines.size();             /** Size of l_Roulette_Machines list **/
     totalSize += v_Craps_Machines.size();                /** Size of l_Craps_Machines list **/
+    totalSize += v_Broken_Machines.size() * sizeof(Machine*);
     /** Add the size of the user list **/
     totalSize += l_users.size() * sizeof(User*);         /** Size of l_users list **/
+    for (const auto user : l_users) {
+        totalSize += sizeof(*user); // Size of each User object
+    }
+    if (rolex != nullptr) {
+        totalSize += sizeof(*rolex);
+    }
     return totalSize;
 }
 
@@ -397,7 +401,7 @@ std::list<std::string> *Casino::Ranking_of_the_weaks(){
 
 std::list<Machine *> *Casino::Ranking_of_the_most_used(){
 
-    map<MACHINE_TYPE, std::list<Machine *>> m_machine = m_machines;
+   std::list<Machine *> l_machine = l_machines;
 
     for(auto &pair : m_machine){
         pair.second.sort([](Machine* m1, Machine* m2) {

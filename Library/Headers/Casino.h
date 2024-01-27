@@ -68,7 +68,7 @@ private:
     int MAX_Players{};
     int JackpotRadius{};
     std::map<std::pair<int, int>, uint16_t > m_positions; // A map with the machines position and the machine ID
-    std::map<MACHINE_TYPE, std::list<Machine *>> m_machines; // A map with machine TYPE as key and machine list as value
+    std::list<Machine *> l_machines; // A list with machine TYPE as key and machine list as value
     std::map<uint16_t , Machine*> m_machine_id; // mapping between ID of machine and machine
     std::vector<Machine *> v_classicSlots_Machines; //vectors instead of lists for easier randomized access
     std::vector<Machine *> v_Blackjack_Machines;

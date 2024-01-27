@@ -217,7 +217,7 @@ void submenu(Casino* casino) {
     logging(logfile, __FUNCTION__, "ACCESSED");
     this_thread::sleep_for(std::chrono::seconds(10));
     do {
-        beautify("<MENU>");
+        beautify("<SUBMENU>");
         cout << "###   $<1> List Machines UIDs.\n"
              << "###   $<2> Turn Off Machine by UID.\n"
              << "###   $<3> Get Machine State by UID.\n"
@@ -291,7 +291,7 @@ void subsubmenu(Casino* casino) {
     logging(logfile, __FUNCTION__, "ACCESSED");
     this_thread::sleep_for(std::chrono::seconds(10));
     do {
-        beautify("<MENU>");
+        beautify("<SUBSUBMENU>");
         cout << "###   $<-> Select Machine type.\n"
              << "###   $<1> CLASSIC_SLOT.\n"
              << "###   $<4> BLACKJACK.\n"
