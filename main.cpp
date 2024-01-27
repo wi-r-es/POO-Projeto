@@ -17,6 +17,7 @@ string casinoFile { "Files/O/casinoState.txt" } ;
 void SimulateCasino( Casino *casino, u_int8_t &flag);
 void menu(Casino* casino);
 void submenu(Casino* casino);
+void subsubmenu(Casino* casino);
 void listingToFile(Casino* casino);
 // Example for documenting the functions from previous project
 /*********************************************************************************************************************************************************************
@@ -142,7 +143,7 @@ void menu(Casino* casino) {
              << "###   $<5> List Ranking of the MOST used (machines).\n"
              << "###   $<6> List Ranking of most frequent users.\n"
              << "###   $<7> List Ranking of most chicken dinner users (winners).\n"
-             << "###   $<8> [Interact with machines].\n"
+             << "###   $<8> [More options].\n"
              << "###   $<9> Shutdown current simulation.\n"
              << "###   $<0> Exit the menu and return the flow control to the simulation.\n"
              << "\n\n\t [<Enter your choice>]: ";
@@ -188,7 +189,7 @@ void menu(Casino* casino) {
 
                 break;
             case 8:
-                cout << "You selected Option 8 - [Interact with machines].\n";
+                cout << "You selected Option 8 - [More Options].\n";
                 submenu(casino);
                 break;
             case 9:
@@ -219,8 +220,83 @@ void submenu(Casino* casino) {
         beautify("<MENU>");
         cout << "###   $<1> List Machines UIDs.\n"
              << "###   $<2> Turn Off Machine by UID.\n"
-             << "###   $<3> Turn Off Machine by UID.\n"
+             << "###   $<3> Get Machine State by UID.\n"
+             << "###   $<5> List Machine by type.\n"
              << "###   $<7> List Machines with winning percentage higher than 50%.\n"\
+             << "###   $<0> Exit the submenu.\n"
+             << "\n\n\t [<Enter your choice>]: ";
+
+        cin >> choice;
+
+        /** Clearing input buffer **/
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        cout << "CHOICE -> " << choice << endl;
+        int id;
+        switch (choice) {
+            case 1:
+                cout << "You selected Option 1 - List Machines UIDs.\n";
+                casino->ListMachinesUID();
+                logging(logfile, __FUNCTION__, "List Machines UIDs");
+                break;
+            case 2:
+                cout << "You selected Option 2 - Turn Off Machine by UID.\n";
+                cout << "Machine UID to turn off: ";
+                this_thread::sleep_for(std::chrono::seconds(5));
+                cin >> id;
+                /** Clearing input buffer **/
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "CHOICE -> " << choice << endl;
+                casino->TurnOff(id);
+                logging(logfile, __FUNCTION__, "Turn Off Machine by UID");
+                break;
+            case 3:
+                cout << "You selected Option 3 - Get Machine State by UID.\n";
+                cout << "Machine UID to turn off: ";
+                this_thread::sleep_for(std::chrono::seconds(5));
+                cin >> id;
+                /** Clearing input buffer **/
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "CHOICE -> " << choice << endl;
+                casino->getState(id);
+                logging(logfile, __FUNCTION__, "Get Machine State by UID");
+                break;
+            case 5:
+                cout << "You selected Option 5 - List Machine by type.\n";
+                subsubmenu(casino);
+                break;
+            case 7:
+                cout << "You selected Option 7 - List Machines with winning percentage higher than 50%.\n";
+                casino->Listing(0.5f);
+                logging(logfile, __FUNCTION__, "List Machines with winning percentage higher than 50%.");
+                break;
+            case 0:
+                logging(logfile, __FUNCTION__, "EXITING THE SUBMENU->RETURNING TO MENU");
+                cout << "Exiting the submenu and returning to teh submenu...\n";
+                this_thread::sleep_for(chrono::seconds(10));
+            default:
+                logging(logfile, __FUNCTION__, "INVALID CHOICE GIVEN");
+                cout << "Invalid choice. Please try again.\n";
+                break;
+        }
+        cout << "\n";
+    } while (choice != 0);
+}
+void subsubmenu(Casino* casino) {
+    if (!casino) exit(-1);
+    int choice;
+    logging(logfile, __FUNCTION__, "ACCESSED");
+    this_thread::sleep_for(std::chrono::seconds(10));
+    do {
+        beautify("<MENU>");
+        cout << "###   $<-> Select Machine type.\n"
+             << "###   $<1> CLASSIC_SLOT.\n"
+             << "###   $<4> BLACKJACK.\n"
+             << "###   $<5> ROULETTE.\n"
+             << "###   $<6> CRAPS.\n"\
              << "###   $<0> Exit the submenu.\n"
              << "\n\n\t [<Enter your choice>]: ";
 
@@ -233,38 +309,29 @@ void submenu(Casino* casino) {
         cout << "CHOICE -> " << choice << endl;
         switch (choice) {
             case 1:
-                cout << "You selected Option 1 - List Machines UIDs.\n";
-
-                logging(logfile, __FUNCTION__, "List Machines UIDs");
+                casino->List_Types(MACHINE_TYPE::CLASSIC_SLOT);
                 break;
-            case 2:
-                cout << "You selected Option 2 - Turn Off Machine by UID.\n";
-
-                logging(logfile, __FUNCTION__, "List Machines UIDs");
+            case 4:
+                casino->List_Types(MACHINE_TYPE::BLACKJACK);
                 break;
-            case 3:
-                cout << "You selected Option 3 - Turn Off Machine by UID.\n";
-
-                logging(logfile, __FUNCTION__, "List Machines UIDs");
+            case 5:
+                casino->List_Types(MACHINE_TYPE::ROULETTE);
                 break;
-            case 7:
-                cout << "You selected Option 7 - List Machines with winning percentage higher than 50%.\n";
-                casino->Listing(0.5f);
-                logging(logfile, __FUNCTION__, "List Machines UIDs");
+            case 6:
+                casino->List_Types(MACHINE_TYPE::CRAPS);
                 break;
             case 0:
-                logging(logfile, __FUNCTION__, "EXITING THE SUBMENU->RETURNING TO MENU");
+                logging(logfile, __FUNCTION__, "EXITING THE SUBSUBMENU->RETURNING TO SUBMENU");
                 cout << "Exiting the submenu and returning to teh submenu...\n";
-                this_thread::sleep_for(chrono::seconds(2));
+                this_thread::sleep_for(chrono::seconds(10));
             default:
                 logging(logfile, __FUNCTION__, "INVALID CHOICE GIVEN");
                 cout << "Invalid choice. Please try again.\n";
                 break;
         }
         cout << "\n";
-    } while (choice != 0);
-}
-
+    }while (choice != 0);
+    }
 void listingToFile(Casino* casino){
     try {
         std::ofstream file{casinoFile, std::ios::app};

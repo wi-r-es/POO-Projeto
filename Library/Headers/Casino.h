@@ -140,6 +140,8 @@ public:
      *************************************************************************/
     void Listing(float X, std::ostream &f = std::cout);
 
+    void ListMachinesUID(std::ostream &f = std::cout);
+
     /************************************************
      * @brief Turns off a Machine given its ID      *
      * @param id_mac -> UID of the Machine.         *

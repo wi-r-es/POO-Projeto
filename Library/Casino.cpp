@@ -46,6 +46,18 @@ namespace MachineUtils{
         }
     }
 
+
+    template <typename Container, typename Compare>
+    void stableSortContainer(Container& container, Compare comp) {
+        std::stable_sort(container.begin(), container.end(), comp);
+    }
+
+    template <typename T, typename Compare>
+    void stableSortContainer(std::list<T>& container, Compare comp) {
+        container.sort(comp);
+    }
+
+
 }
 
 Casino::Casino(std::string name): NAME{std::move(name)}, MAX_Players{},JackpotRadius{}{
@@ -241,7 +253,7 @@ void Casino::ReadPeopleFile() {
 
 // Casino current state! DONE
 void Casino::Listing(std::ostream &f){
-    beautify("Machines in casino without any ordering");
+    beautify(" Machines in casino without any ordering ");
     for (const auto &it : m_machine_id) {
         f << it.second->toString() << '\n';
     }
@@ -251,15 +263,21 @@ void Casino::Listing(std::ostream &f){
     }
     f << "[[Containers size]]\n";
     f << VectorsSize() << '\n';
-
 }
 
 void Casino::Listing(float X, std::ostream &f){
-
+    beautify(" Machines in casino with winning odd higher than X");
     for(auto & it : m_machine_id) {
         if (it.second->getWinProbability() > X) {
            f<< it.second->toStringOut()<<'\n';
         }
+    }
+}
+
+void Casino::ListMachinesUID(std::ostream &f){
+    beautify(" Machines in casino by UID ");
+    for(auto & it : m_machine_id) {
+        f<< to_string(it.first) <<'\n';
     }
 }
 
@@ -279,7 +297,6 @@ void Casino::BrokenMachine(const int id_mac){
     else cout << "Machine ID not found!";
 }
 
-// m_machine_id.erase (it);
 
 MACHINE_STATE Casino::getState(const int id_mac) {
     try {
