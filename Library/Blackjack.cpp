@@ -178,6 +178,7 @@ bool Blackjack::Play(User* user) {
         user->setTimeSpent(elapsed);
         return false;
     }
+    user->setBets(1);
     if(getWinProbability() > 0.7f){
         user->setMoney(user->getMoney() + 200);
         user->setPrizesWon(200);

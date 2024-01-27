@@ -35,7 +35,7 @@ void ClassicSlot::resetNumSpins() {
 }
 
 bool ClassicSlot::Play(User *user) {
-    cout << __FUNCTION__ ;
+    cout << __FUNCTION__ << endl;
     auto start_time = chrono::steady_clock::now();
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
@@ -67,7 +67,7 @@ bool ClassicSlot::Play(User *user) {
     int rol3 = rand() % 4;
     setBetAmount(userMoney <= 5 ? 1 : static_cast<float>(randomNumberGeneratorInterval(5, static_cast<int>(userMoney))));
     user->setMoney(userMoney - getBetAmount());
-
+    user->setBets(1);
     if (rol1 == 7 && rol2 == 7 && rol3 == 7) {
         auto profit = getBetAmount()*12;
         user->setMoney(userMoney + profit);
