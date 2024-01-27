@@ -141,8 +141,8 @@ void SimulateCasino( Casino *casino, u_int8_t &flag){
 void Shutdown(Casino *casino){
     try {
         casino->Report(reportfile);
-        //do smth more.. idk yet
-        Wait(10);
+        //do smth maybe...
+        Wait(5);
         delete casino;
     } catch (const std::runtime_error &e) {
         std::cerr << "An error occurred: " << e.what() << '\n';
