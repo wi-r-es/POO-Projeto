@@ -67,6 +67,7 @@ int main() {
         SimulateCasino(casino, flag);
         if(flag==1){
             //CloseCasino...
+            //Shutdown(casino);
             break;
         }
         if (kbhit())
@@ -105,7 +106,7 @@ int main() {
     exit_message = "[Execution time]: " + to_string(time_executing);
     atexit([] { cout << "Execution time: " << time_executing << "minutes." ;});
     atexit(logAtExit);
-    delete casino;
+    Shutdown(casino);
     const size_t memf = casino->Total_Memory();
     cout << "\nMemoria total ocupado pelo casino: " << memf << "bytes" << endl;
     return 0;
@@ -140,7 +141,8 @@ void SimulateCasino( Casino *casino, u_int8_t &flag){
 void Shutdown(Casino *casino){
     try {
         casino->Report(reportfile);
-
+        //do smth more.. idk yet
+        delete casino;
     } catch (const std::runtime_error &e) {
         std::cerr << "An error occurred: " << e.what() << '\n';
     }
@@ -213,7 +215,7 @@ void menu(Casino* casino) {
                 cout << "You selected Option 9 - Shutting down simulation...\n";
                 logging(logfile, __FUNCTION__, "EXITING THE SIMULATION");
                 // Additional logic for closing casino
-                delete casino;
+                Shutdown(casino);
                 exit(1);
             case 0:
                 logging(logfile, __FUNCTION__, "EXITING THE MENU->RETURNING FLOW CONTROL TO SIMULATION");

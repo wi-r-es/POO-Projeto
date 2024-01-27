@@ -521,8 +521,8 @@ void Casino::Report(const std::string& xml_file){
         for (const auto &user: l_users) {
             pugi::xml_node userNode = usersNode.append_child("USER");
             userNode.append_attribute("ID") = user->getId();
-            userNode.append_attribute("NAME") = user->getDName();
-            userNode.append_attribute("CITY") = user->getDCity();
+            userNode.append_attribute("NAME") = user->getName().c_str();
+            userNode.append_attribute("CITY") = user->getCity().c_str();
             userNode.append_attribute("AGE") = user->getAge();
             userNode.append_attribute("MONEY") = user->getMoney();
             userNode.append_attribute("PRIZES") = user->getPrizesWon();
