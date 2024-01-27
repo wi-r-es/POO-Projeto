@@ -481,7 +481,66 @@ std::list<User *> *Casino::Most_Wins_Users(){
 
 
 void Casino::Report(const std::string& xml_file){
+    try{
+        pugi::xml_document doc;
 
+        /** Create a root node for the casino **/
+        pugi::xml_node casinoNode = doc.append_child("CASINO");
+        casinoNode.append_attribute("NAME") = NAME.c_str();
+        casinoNode.append_attribute("MAX_PLAYERS") = MAX_Players;
+        casinoNode.append_attribute("JACKPOTRADIUS") = JackpotRadius;
+
+        try{
+            usefulFT::stableSortContainer(l_machines, [](const Machine& a, const Machine& b) {
+                return a.getUID() < b.getUID();
+            });
+
+        }catch(runtime_error &ex) {
+            cout << ex.what() << endl;
+            logging(error_logfile, __FUNCTION__, ex.what());
+        }
+        /** Add machines **/
+        pugi::xml_node machinesNode = casinoNode.append_child("MACHINES");
+
+        for (const auto &machine: l_machines) {
+            pugi::xml_node machineNode = machinesNode.append_child("MACHINE");
+            machineNode.append_attribute("ID") = machine->getUID();
+            machineNode.append_attribute("TYPE") = machine->getUID();
+            machineNode.append_attribute("STATE") = machine->getUID();
+            machineNode.append_attribute("FAILURE_PROBABILITY") = machine->getUID();
+            machineNode.append_attribute("TEMPERATURE") = machine->getUID();
+            machineNode.append_attribute("X") = machine->getUID();
+            machineNode.append_attribute("Y") = machine->getUID();
+            machineNode.append_attribute("WIN_PROBABILITY") = machine->getUID();
+            machineNode.append_attribute("FAILURES") = machine->getUID();
+            machineNode.append_attribute("USAGE") = machine->getUID();
+        }
+
+        /** Add users **/
+        pugi::xml_node usersNode = casinoNode.append_child("USERS");
+        for (const auto &user: l_users) {
+            pugi::xml_node userNode = usersNode.append_child("USER");
+            userNode.append_attribute("ID") = user->getId();
+            userNode.append_attribute("NAME") = user->getDName();
+            userNode.append_attribute("CITY") = user->getDCity();
+            userNode.append_attribute("AGE") = user->getAge();
+            userNode.append_attribute("MONEY") = user->getMoney();
+            userNode.append_attribute("PRIZES") = user->getPrizesWon();
+            userNode.append_attribute("BETS") = user->getBets();
+            userNode.append_attribute("PROFIT") = user->getPrizesWon();
+            userNode.append_attribute("DEBT") = user->getDebt();
+        }
+
+        /** Save the document **/
+        doc.save_file(xml_file.c_str());
+    } catch (const std::bad_alloc& ex) {
+        cout << ex.what() << endl;
+        logging(error_logfile, __FUNCTION__, ex.what());
+        abort();
+    } catch (const std::runtime_error& ex) {
+        cout << ex.what() << endl;
+        logging(error_logfile, __FUNCTION__, ex.what());
+    }
 }
 
 float Casino::DistanceBetweenPoints(int first, int second, int first1, int second1) {
@@ -547,8 +606,8 @@ void Casino::Run() {
         }
 
     } catch (runtime_error &ex) {
-        cerr<<"An error as occurred while trying to use machine\n\t"
-            << '[' << mac->getUID() << ']' << " ... -> " << ex.what();
+        cerr<<"\nAn error as occurred while trying to use machine\n\t"
+            << '[' << mac->getUID() << ']' << " ... -> " << ex.what() << endl;
         logging(error_logfile, "[[EXCEPTION CAUGHT]--[WHILE_TRYING_TO_USE_MACHINE]]", ex.what());
         auto [x,y] = mac->getPosition();
         string s = "[[ {" + to_string(mac->getUID()) +  "},{" +
@@ -669,7 +728,7 @@ void Casino::check_routine() {
             mac->incrementFailures();
             removeFromTypeVector(mac, type);
             ++it;
-        } else if (state == MACHINE_STATE::MAINTENANCE && ( timeInMaintenance >= 5 ) ) {
+        } else if (state == MACHINE_STATE::MAINTENANCE /*&& ( timeInMaintenance >= 5 )*/ ) {
             /** Reactivate machine **/
             //Wait(5);
             auto s = mac->toStringOut();

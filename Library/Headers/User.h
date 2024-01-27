@@ -32,17 +32,23 @@ class Machine;
 class User {
 private:
     char d_id[10];
-    std::string d_name;
-    std::string d_city;
+    std::string *d_name;
+    std::string *d_city;
     int d_age;
     float d_money;
     std::chrono::seconds d_time_spent;
+public:
+    int getBets() const;
+
+    void setBets(int bets);
+
+private:
     int d_prizes_won;
     int bets;
     int profit;
     float debt;
     int count_plays_no_money;
-    unsigned int playing : 1; //bitfield to tell if the user is playing or not
+    [[maybe_unused]]unsigned int playing : 1; //bitfield to tell if the user is playing or not
 public:
     //getters and setters
 
@@ -54,7 +60,7 @@ public:
      * @param city   -> a string representing the name of the city of the user.    *
      * @param age    -> an int representing the age of the user                    *
      *******************************************************************************/
-    User(char *id, std::string name, std::string city, int age);
+    User(char *id, std::string *name, std::string *city, int age);
 
     User();
     /***********************************
@@ -65,13 +71,13 @@ public:
 
     const char *getId() const;
 
-    const std::string &getName() const;
+    std::string *getDName() const;
 
-    void setName(const std::string &dName);
+    void setName(std::string *dName);
 
-    const std::string &getCity() const;
+    std::string *getDCity() const;
 
-    void setCity(const std::string &dCity);
+    void setCity(std::string *dCity);
 
     int getAge() const;
 

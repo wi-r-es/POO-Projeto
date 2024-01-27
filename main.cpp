@@ -59,6 +59,7 @@ int main() {
     ptrClock->StartClock(50, "10:00:00");
     u_int8_t flag = 0;
     auto lastRoutineCheck = chrono::steady_clock::now(); /** Record the start time **/
+    int iterations = 0;
     while(1){
 
         SimulateCasino(casino, flag);
@@ -73,7 +74,7 @@ int main() {
         }
         auto currentTime = chrono::steady_clock::now(); /** Record current time **/
         auto elapsed = getElapsedTime(currentTime, lastRoutineCheck);
-        if (elapsed.count() >= 5) {
+        if (elapsed.count() >= 5 || iterations == 10) {
             casino->printVectorsSize();
             //Wait(30);
             this_thread::sleep_for(chrono::milliseconds(100));
@@ -81,14 +82,16 @@ int main() {
             lastRoutineCheck = chrono::steady_clock::now(); /** Reset the timer **/
             casino->printVectorsSize();
             //Wait(30);
+            iterations=0;
         }
-        if(randomNumberGeneratorInterval(1,3) == 3){
+        if(randomNumberGeneratorInterval(0,3) == 3){
             casino->changeMachineFailProbability();
         }
         casino->RandomOddImprovement();
         this_thread::sleep_for(chrono::milliseconds(100)); /** To reduce CPU usage **/
 
         casino->printVectorsSize();
+        ++iterations;
     }
 
     const size_t mem = casino->Total_Memory();
