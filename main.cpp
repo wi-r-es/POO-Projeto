@@ -12,8 +12,8 @@ void clear(){system("clear");}
 #endif
 void logAtExit();
 static string exit_message;
-string casinoFile { "Files/O/casinoState.txt" } ;
-string reportfile { "Files/O/casino_report.xml" } ;
+extern string casinoFile;
+extern string reportfile;
 
 void SimulateCasino( Casino *casino, u_int8_t &flag);
 void Shutdown(Casino *casino);
@@ -142,6 +142,7 @@ void Shutdown(Casino *casino){
     try {
         casino->Report(reportfile);
         //do smth more.. idk yet
+        Wait(10);
         delete casino;
     } catch (const std::runtime_error &e) {
         std::cerr << "An error occurred: " << e.what() << '\n';
@@ -152,7 +153,7 @@ void menu(Casino* casino) {
     if(!casino) exit(-1);
     int choice;
     logging(logfile, __FUNCTION__, "ACCESSED");
-    this_thread::sleep_for(std::chrono::seconds(10));
+    this_thread::sleep_for(std::chrono::seconds(5));
     do {
         beautify("<MENU>");
         cout << "###   $<1> Show Casino Information.\n"
@@ -289,7 +290,7 @@ void submenu(Casino* casino) {
     if (!casino) exit(-1);
     int choice;
     logging(logfile, __FUNCTION__, "ACCESSED");
-    this_thread::sleep_for(std::chrono::seconds(10));
+    this_thread::sleep_for(std::chrono::seconds(5));
     do {
         beautify("<SUBMENU>");
         cout << "###   $<1> List Machines UIDs.\n"
@@ -328,12 +329,14 @@ void submenu(Casino* casino) {
                 break;
             case 3:
                 cout << "You selected Option 3 - Get Machine State by UID.\n";
-                cout << "Machine UID to turn off: ";
-                this_thread::sleep_for(std::chrono::seconds(5));
-                cin >> id;
-                /** Clearing input buffer **/
+                cout << "Machine UID to get state: ";
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                //this_thread::sleep_for(std::chrono::seconds(5));
+                cin >> id;
+                /** Clearing input buffer **/
+                //cin.clear();
+                //cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cout << "CHOICE -> " << choice << endl;
                 casino->getState(id);
                 logging(logfile, __FUNCTION__, "Get Machine State by UID");
@@ -363,7 +366,7 @@ void subsubmenu(Casino* casino) {
     if (!casino) exit(-1);
     int choice;
     logging(logfile, __FUNCTION__, "ACCESSED");
-    this_thread::sleep_for(std::chrono::seconds(10));
+    this_thread::sleep_for(std::chrono::seconds(5));
     do {
         beautify("<SUBSUBMENU>");
         cout << "###   $<-> Select Machine type.\n"

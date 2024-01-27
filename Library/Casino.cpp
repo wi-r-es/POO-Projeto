@@ -13,10 +13,14 @@
 string clients_file { "..\\Files\\I\\pessoas.txt" };
 string logfile { "..\\Files\\O\\applog.csv" };
 string error_logfile { "..\\Files\\O\\applog.csv" };
+string casinoFile { "..\\Files\O\casinoState.txt" } ;
+string reportfile { "..\\Files\O\casino_report.xml" } ;
 #else
- string clients_file { "../Files/I/pessoas.txt" } ;
- string logfile { "../Files/O/applog.csv" } ;
- string error_logfile { "../Files/O/error_log.csv" } ;
+string clients_file { "../Files/I/pessoas.txt" } ;
+string logfile { "../Files/O/applog.csv" } ;
+string error_logfile { "../Files/O/error_log.csv" } ;
+string casinoFile { "../Files/O/casinoState.txt" } ;
+string reportfile { "../Files/O/casino_report.xml" } ;
 
 #endif
 
@@ -505,15 +509,15 @@ void Casino::Report(const std::string& xml_file){
         for (const auto &machine: l_machines) {
             pugi::xml_node machineNode = machinesNode.append_child("MACHINE");
             machineNode.append_attribute("ID") = machine->getUID();
-            machineNode.append_attribute("TYPE") = machine->getUID();
-            machineNode.append_attribute("STATE") = machine->getUID();
-            machineNode.append_attribute("FAILURE_PROBABILITY") = machine->getUID();
-            machineNode.append_attribute("TEMPERATURE") = machine->getUID();
-            machineNode.append_attribute("X") = machine->getUID();
-            machineNode.append_attribute("Y") = machine->getUID();
-            machineNode.append_attribute("WIN_PROBABILITY") = machine->getUID();
-            machineNode.append_attribute("FAILURES") = machine->getUID();
-            machineNode.append_attribute("USAGE") = machine->getUID();
+            machineNode.append_attribute("TYPE") = machineTypeToString(machine->getType()).c_str();
+            machineNode.append_attribute("STATE") = machineSTATEToString(machine->getState()).c_str();
+            machineNode.append_attribute("FAILURE_PROBABILITY") = machine->getFailureProbability();
+            machineNode.append_attribute("TEMPERATURE") = machine->getTemperature();
+            machineNode.append_attribute("X") = machine->getPosition().first;
+            machineNode.append_attribute("Y") = machine->getPosition().second;
+            machineNode.append_attribute("WIN_PROBABILITY") = machine->getWinProbability();
+            machineNode.append_attribute("FAILURES") = machine->getFailures();
+            machineNode.append_attribute("USAGE") = machine->getUsage();
         }
 
         /** Add users **/
