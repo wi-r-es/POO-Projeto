@@ -13,8 +13,10 @@ void clear(){system("clear");}
 void logAtExit();
 static string exit_message;
 string casinoFile { "Files/O/casinoState.txt" } ;
+string reportfile { "Files/O/casino_report.xml" } ;
 
 void SimulateCasino( Casino *casino, u_int8_t &flag);
+void Shutdown(Casino *casino);
 void menu(Casino* casino);
 void submenu(Casino* casino);
 void subsubmenu(Casino* casino);
@@ -135,7 +137,14 @@ void SimulateCasino( Casino *casino, u_int8_t &flag){
 
 }
 
+void Shutdown(Casino *casino){
+    try {
+        casino->Report(reportfile);
 
+    } catch (const std::runtime_error &e) {
+        std::cerr << "An error occurred: " << e.what() << '\n';
+    }
+}
 
 void menu(Casino* casino) {
     if(!casino) exit(-1);

@@ -3,10 +3,12 @@
 //
 
 
+#include <utility>
+
 #include "Headers/User.h"
 
 
-User::User(char *id, std::string *name, std::string *city, int age) : d_name(name), d_city(city), d_age(age){
+User::User(char *id, std::string name, std::string city, int age) : d_name(std::move(name)), d_city(std::move(city)), d_age(age){
     std::strcpy(d_id, id);
     d_money=0;
     d_prizes_won=0;
@@ -16,8 +18,6 @@ User::User(char *id, std::string *name, std::string *city, int age) : d_name(nam
 }
 
 User::~User(){
-    delete d_name;
-    delete d_city;
 }
 
 // Setters and Getters
@@ -26,12 +26,12 @@ const char *User::getId() const {
 }
 
 
-void User::setName(std::string *dName) {
+void User::setName(const std::string &dName) {
     d_name = dName;
 }
 
 
-void User::setCity(std::string *dCity) {
+void User::setCity(const std::string &dCity) {
     d_city = dCity;
 }
 
@@ -104,8 +104,8 @@ std::string User::toString() {
     std::string s;
 
     s.append("[ID]->").append(d_id).append(";");
-    s.append(" [Name]->").append(*d_name).append(";");
-    s.append(" [City]->").append(*d_city).append(";");
+    //s.append(" [Name]->").append(*d_name).append(";");
+    //s.append(" [City]->").append(*d_city).append(";");
     s.append(" [Age]->").append(std::to_string(d_age)).append(";");
     s.append(" [Time Spent]->").append(std::to_string(getTimeSpent())).append(";");
     s.append(" [Prizes Won]->").append(std::to_string(d_prizes_won)).append(";");
@@ -119,11 +119,11 @@ std::string User::toString() {
     return s;
 }
 
-std::string *User::getDName() const {
+const std::string &User::getName() const {
     return d_name;
 }
 
-std::string *User::getDCity() const {
+const std::string &User::getCity() const {
     return d_city;
 }
 

@@ -31,18 +31,13 @@ class Machine;
  ******************************************************************************/
 class User {
 private:
+
     char d_id[10];
-    std::string *d_name;
-    std::string *d_city;
+    std::string d_name;
+    std::string d_city;
     int d_age;
     float d_money;
     std::chrono::seconds d_time_spent;
-public:
-    int getBets() const;
-
-    void setBets(int bets);
-
-private:
     int d_prizes_won;
     int bets;
     int profit;
@@ -50,8 +45,6 @@ private:
     int count_plays_no_money;
     [[maybe_unused]]unsigned int playing : 1; //bitfield to tell if the user is playing or not
 public:
-    //getters and setters
-
 
     /*******************************************************************************
      * @brief Constructor for User                                                 *
@@ -60,7 +53,7 @@ public:
      * @param city   -> a string representing the name of the city of the user.    *
      * @param age    -> an int representing the age of the user                    *
      *******************************************************************************/
-    User(char *id, std::string *name, std::string *city, int age);
+    User(char *id, std::string name, std::string city, int age);
 
     User();
     /***********************************
@@ -68,16 +61,19 @@ public:
      ***********************************/
     virtual ~User();
 
+    int getBets() const;
+
+    void setBets(int bets);
 
     const char *getId() const;
 
-    std::string *getDName() const;
+    const std::string &getName() const;
 
-    void setName(std::string *dName);
+    void setName(const std::string &dName);
 
-    std::string *getDCity() const;
+    const std::string &getCity() const;
 
-    void setCity(std::string *dCity);
+    void setCity(const std::string &dCity);
 
     int getAge() const;
 
