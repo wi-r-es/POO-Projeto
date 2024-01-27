@@ -115,7 +115,7 @@ bool Casino::Load(const std::string &file) {
     auto settings = data.child("SETTINGS");
     NAME = settings.child_value("NAME");
     MAX_Players = std::stoi(settings.child_value("MAX_PLAYERS"));
-    JackpotRadius = std::stoi(settings.child_value("JackpotRadius"));
+    JackpotRadius = std::stof(settings.child_value("JackpotRadius"));
     std::cout << "Casino Name: " << NAME << std::endl;
     std::cout << "Max Players: " << MAX_Players << std::endl;
     std::cout << "Jackpot Radius: " << JackpotRadius << std::endl;
@@ -489,10 +489,18 @@ float Casino::DistanceBetweenPoints(int first, int second, int first1, int secon
 }
 
 void Casino::Up_Neighbour_Probability(Machine *M_win, float R, std::list<Machine *> &list_machine_neighbour){
-
+    if (M_win == nullptr) {
+        std::cerr << "Winning machine pointer is null.\n";
+        return;
+    }
     for(Machine* m : list_machine_neighbour){
-        if(m != M_win){
-            float distance = DistanceBetweenPoints(M_win->getPosition().first, M_win->getPosition().second, m->getPosition().first, m->getPosition().second);
+        /** Ensure the machine pointer is valid and not the winning machine itself **/
+        if(m && m != M_win){
+            float distance = DistanceBetweenPoints(
+                    M_win->getPosition().first, M_win->getPosition().second,
+                    m->getPosition().first, m->getPosition().second
+            );
+            /** Increase win probability if within the radius R **/
             if(distance <= R){
                 m->setWinProbability(m->getWinProbability() + 0.1);
             }
@@ -532,7 +540,8 @@ void Casino::Run() {
             cout << "TEMP: " << temp << endl;
             throw runtime_error{"Machine malfunction due to high temperature."};
         }
-        mac->Play(usr);
+        auto result = mac->Play(usr);
+        if(result) Up_Neighbour_Probability(mac, this->getRadius(), l_machines );
         if(mac->getFailureProbability() == 0.8f) {
             throw runtime_error{"Machine malfunction due to failure in the system hardware."};
         }
@@ -550,9 +559,6 @@ void Casino::Run() {
     }
 
     logging(logfile, __FUNCTION__, mac->toString());
-    //Wait(1000);
-    //auto current_time =  rolex->getTime();
-    //printTime(current_time);
 }
 
 User* Casino::getRandomUser(){
@@ -767,4 +773,8 @@ string Casino::VectorsSize(){
     final.append(to_string(b));
     //final.append();
     return final;
+}
+
+int Casino::getRadius() const{
+    return JackpotRadius;
 }

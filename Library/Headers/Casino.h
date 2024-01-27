@@ -234,6 +234,7 @@ public:
     void RandomOddImprovement();
     void printVectorsSize();
     string VectorsSize();
+    [[nodiscard]] int getRadius() const;
 };
 
 #endif //CODE_CASINO_H
