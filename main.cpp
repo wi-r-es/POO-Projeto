@@ -220,6 +220,7 @@ void submenu(Casino* casino) {
         cout << "###   $<1> List Machines UIDs.\n"
              << "###   $<2> Turn Off Machine by UID.\n"
              << "###   $<3> Turn Off Machine by UID.\n"
+             << "###   $<7> List Machines with winning percentage higher than 50%.\n"\
              << "###   $<0> Exit the submenu.\n"
              << "\n\n\t [<Enter your choice>]: ";
 
@@ -244,6 +245,11 @@ void submenu(Casino* casino) {
             case 3:
                 cout << "You selected Option 3 - Turn Off Machine by UID.\n";
 
+                logging(logfile, __FUNCTION__, "List Machines UIDs");
+                break;
+            case 7:
+                cout << "You selected Option 7 - List Machines with winning percentage higher than 50%.\n";
+                casino->Listing(0.5f);
                 logging(logfile, __FUNCTION__, "List Machines UIDs");
                 break;
             case 0:
