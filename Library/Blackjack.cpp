@@ -25,7 +25,9 @@ Blackjack::Blackjack() : Machine(MACHINE_TYPE::BLACKJACK, 0, 0) {
 }
 
 Blackjack::~Blackjack() {
-
+    Values_Cards.clear();
+    Dealers_Hand.clear();
+    Players_Hand.clear();
 }
 
 void Blackjack::printMap() const {
@@ -102,7 +104,7 @@ int Blackjack::hit_or_stay(){
     int decision = randomNumberGeneratorInterval(0, 1);
     return decision;
 }
-// chnge this to bool, so if true player won, if false player lost
+
 bool Blackjack::simulate_game(){
     int player_total = 0, dealer_total = 0, player_decision;
     bool game = true, result;

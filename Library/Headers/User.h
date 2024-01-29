@@ -55,7 +55,7 @@ public:
 
     /*******************************************************************************
      * @brief Constructor for User                                                 *
-     * @param id     -> an string representing the ID of the user                  *
+     * @param id     -> a string representing the ID of the user                   *
      * @param name   -> a string representing the full name of the user.           *
      * @param city   -> a string representing the name of the city of the user.    *
      * @param age    -> an int representing the age of the user                    *
