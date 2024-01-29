@@ -18,17 +18,23 @@
 #include <cstdio>
 #include <chrono>
 
-class Machine;
 
-/******************************************************************************
- * Machine ADT class and variables description                                *
- * d_id                 -> Unique identifier (ID) for each user (client).     *
- * d_name               -> User's Full name.                                  *
- * d_city               -> User's city.                                       *
- * d_age                -> User's age.                                        *
- * d_time_spent         -> User's time spent inside the casino                *
- * d_prizes_won         -> User's total amount of prizes won.                 *
- ******************************************************************************/
+/*****************************************************************************************
+ * User ADT class and variables description                                              *
+ *                                                                                       *
+ * d_id                 -> Unique identifier (ID) for each user (client).                *
+ * d_name               -> User's Full name.                                             *
+ * d_city               -> User's city.                                                  *
+ * d_age                -> User's age.                                                   *
+ * d_money              -> User's money                                                  *
+ * d_time_spent         -> User's time spent inside the casino.                          *
+ * d_prizes_won         -> User's total amount of prizes won.                            *
+ * bets                 -> User's bet within a game round.                               *
+ * profit               -> User's profit inside the casino.                              *
+ * debt                 -> User's debt to the casino.                                    *
+ * count_plays_no_money -> Counter for number of times user tried to play without money. *
+ * playing              -> Flag to control whether user is playing. \NOT USED            *
+ *****************************************************************************************/
 class User {
 private:
 
@@ -52,15 +58,31 @@ public:
      * @param name   -> a string representing the full name of the user.           *
      * @param city   -> a string representing the name of the city of the user.    *
      * @param age    -> an int representing the age of the user                    *
+     * @exceptsafe none - Shall not throw exceptions
+     * @return Newly created User object
      *******************************************************************************/
     User(char *id, std::string name, std::string city, int age);
 
     User();
     /***********************************
      * @brief Destructor for User      *
+     * @exceptsafe none - Shall not throw exceptions
+     * @return NONE
      ***********************************/
     virtual ~User();
 
+    /*********************************************************************************************************************
+     * @brief Writes the current state of the casino to a file                                                           *
+     *                                                                                                                   *
+     * @see logging()                                                                                                    *
+     * @see beautify()                                                                                                   *
+     * @see Casino::Listing()                                                                                            *
+     * @throw std::ios_base::failure if an error occurs while opening the file                                           *
+     * @exceptsafe basic - captures errors related to the opening of the file, and some runtime error that might occur   *
+     * @param casino pointer to the casino object                                                                        *
+     * @param choice[in] user choice input                                                                               *
+     * @return None.                                                                                                     *
+ *********************************************************************************************************************/
     int getBets() const;
 
     void setBets(int bets);

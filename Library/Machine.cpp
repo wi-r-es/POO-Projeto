@@ -105,6 +105,7 @@ int Machine::randomNumberGeneratorInterval(int x, int y) {
 
 bool Machine::Play(User* user){
     std::cout << __FUNCTION__  << std::endl;
+    return true;
 }
 
 std::string Machine::toString() const{

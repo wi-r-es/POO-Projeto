@@ -13,8 +13,8 @@
 string clients_file { "..\\Files\\I\\pessoas.txt" };
 string logfile { "..\\Files\\O\\applog.csv" };
 string error_logfile { "..\\Files\\O\\applog.csv" };
-string casinoFile { "..\\Files\O\casinoState.txt" } ;
-string reportfile { "..\\Files\O\casino_report.xml" } ;
+string casinoFile { "..\\Files\\O\\casinoState.txt" } ;
+string reportfile { "..\\Files\\O\\casino_report.xml" } ;
 #else
 string clients_file { "../Files/I/pessoas.txt" } ;
 string logfile { "../Files/O/applog.csv" } ;
