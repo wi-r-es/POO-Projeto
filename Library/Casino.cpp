@@ -620,7 +620,6 @@ void Casino::Run() {
         logging(error_logfile, "[[SHUTTING DOWN MACHINE]]", s);
         BrokenMachine(mac->getUID());
     }
-
     logging(logfile, __FUNCTION__, mac->toString());
 }
 
@@ -648,12 +647,6 @@ Machine* getRandomMachineFromVector(MACHINE_TYPE type, const std::vector<Machine
 
 Machine* Casino::getRandomMachineByType(MACHINE_TYPE type){
     /** Check if there are machines of the given type **/
-    /*
-    auto it = m_machines.find(type);
-    if (it == m_machines.end() || it->second.empty()) {
-        return nullptr; // No machines of this type
-    }
-     */
     Machine* machine= nullptr;
     try{
         switch (type) {

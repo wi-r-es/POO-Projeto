@@ -16,9 +16,7 @@ Machine::Machine(MACHINE_TYPE type, int posX, int posY) : TYPE(type), posX(posX)
     betAmount=0;
 }
 
-Machine::~Machine(){
-
-}
+Machine::~Machine()= default;
 
 int Machine::getUID() const{
     return UID;
@@ -76,6 +74,7 @@ void Machine::incrementFailures() {
 float Machine::getTemperature() const {
     return temperature;
 }
+
 void Machine::increaseTemperature() {
     temperature+=0.5f;
 }
@@ -85,10 +84,12 @@ void Machine::setTemperature(float newTemp) {
         temperature = newTemp;
     }
 }
+
 void Machine::setBetAmount(float bet) {
     Machine::betAmount = bet;
     std::cout << "Money withdrawn from user to bet: " << bet << std::endl;
 }
+
 float Machine::getBetAmount() const {
     return betAmount;
 }
@@ -160,7 +161,9 @@ std::string machineTypeToString(MACHINE_TYPE type) {
         case MACHINE_TYPE::POKER: return "POKER";
         default: return "UNKNOWN_TYPE";
     }
-}std::string machineSTATEToString(MACHINE_STATE state) {
+}
+
+std::string machineSTATEToString(MACHINE_STATE state) {
     switch (state) {
         case MACHINE_STATE::MAINTENANCE : return "MAINTENANCE";
         case MACHINE_STATE::OFF: return "OFF";

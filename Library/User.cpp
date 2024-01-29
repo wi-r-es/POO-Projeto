@@ -13,8 +13,8 @@ User::User(char *id, std::string name, std::string city, int age) : d_name(std::
     d_money=0;
     d_prizes_won=0;
     playing = 0;
-    bets=0;
-    profit=0;
+    d_bets=0;
+    d_profit=0;
 }
 
 User::~User(){
@@ -47,15 +47,15 @@ long User::getTimeSpent() const {
     return d_time_spent.count();
 }
 
-void User::setTimeSpent(std::chrono::seconds dTimeSpent) {
-    d_time_spent = dTimeSpent;
+void User::incTimeSpent(std::chrono::seconds dTimeSpent) {
+    d_time_spent += dTimeSpent;
 }
 
-int User::getPrizesWon() const {
+float User::getPrizesWon() const {
     return d_prizes_won;
 }
 
-void User::setPrizesWon(float dPrizesWon) {
+void User::incPrizesWon(float dPrizesWon) {
     d_prizes_won += dPrizesWon;
 }
 
@@ -77,14 +77,14 @@ void User::setMoney(float money) {
 
 
 void User::addDebt(float amountOfDebt) {
-    if( debt >= 1000 ){
+    if( d_debt >= 1000 ){
         printf("TOO MANY DEBT. HOUSE GOT FORECLOSED . THIS CASINO WILL NO LONGER LEND MONEY TO THIS USER...\n\n ");
         return;}
-    debt += amountOfDebt;
+    d_debt += amountOfDebt;
     this->setMoney(amountOfDebt);
 }
 float User::getDebt() const {
-    return debt;
+    return d_debt;
 }
 
 void User::incAttempts() {
@@ -111,9 +111,9 @@ std::string User::toString() {
     s.append(" [Prizes Won]->").append(std::to_string(d_prizes_won)).append(";");
     s.append(" [Playing]->").append(playing ? "Yes" : "No").append(";");
     s.append(" [Money]->").append(std::to_string(d_money)).append(";");
-    s.append(" [Bets]->").append(std::to_string(bets)).append(";");
-    s.append(" [Profit]->").append(std::to_string(profit)).append(";");
-    s.append(" [Debt]->").append(std::to_string(debt)).append(";");
+    s.append(" [Bets]->").append(std::to_string(d_bets)).append(";");
+    s.append(" [Profit]->").append(std::to_string(d_profit)).append(";");
+    s.append(" [Debt]->").append(std::to_string(d_debt)).append(";");
     s.append(" [Attempts No Money]->").append(std::to_string(count_plays_no_money));
 
     return s;
@@ -128,11 +128,11 @@ const std::string &User::getCity() const {
 }
 
 int User::getBets() const {
-    return bets;
+    return d_bets;
 }
 
-void User::setBets(int bets) {
-    User::bets += bets;
+void User::incBets(int bets) {
+    d_bets += bets;
 }
 
 

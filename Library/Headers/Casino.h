@@ -217,12 +217,30 @@ public:
 
 
 
-    /**********************************************************************************
-     * @brief Main loop that simulates the operation of the Casino .                  *
-     *                                                                                *
+    /*******************************************************************************************************************************************************************
+     * @brief Function to execute the main casino simulation.
      *
-     * @see
-     **********************************************************************************/
+     * This function represents the core behavior of the casino simulation. It involves selecting a random user and attempting to find a working gaming machine for them.
+     * The function searches through the available machines, checking their states (like 'BROKEN' or 'OFF'), and picks the first working machine it finds.
+     * If a machine is found, the function simulates a play on the machine with the selected user. It also manages machine errors and exceptions by logging them
+     * and handling machine malfunctions, such as high temperature or system hardware failures.
+     *
+     * @note This function is crucial for simulating user interactions with machines in the casino.
+     *
+     * @see getRandomUser()
+     * @see getRandomMachineByType()
+     * @see Machine::Play()
+     * @see logging()
+     * @see Machine::getTemperature()
+     * @see BrokenMachine()
+     * @see Machine::getFailureProbability()
+     *
+     * @throw std::runtime_error If the machine is in a state that prevents normal operation (e.g., high temperature, hardware failure).
+     * @exceptsafe strong -> The function offers a strong exception safety guarantee. If an exception is thrown, no part of the casino state is modified.
+     *
+     * @param None.
+     * @return None. The function provides control flow via early exits if conditions are not met for normal operation.
+     *******************************************************************************************************************************************************************/
     void Run();
     void check_routine();
     void removeFromTypeVector(Machine* machine, MACHINE_TYPE type);

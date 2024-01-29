@@ -29,9 +29,9 @@
  * d_money              -> User's money                                                  *
  * d_time_spent         -> User's time spent inside the casino.                          *
  * d_prizes_won         -> User's total amount of prizes won.                            *
- * bets                 -> User's bet within a game round.                               *
- * profit               -> User's profit inside the casino.                              *
- * debt                 -> User's debt to the casino.                                    *
+ * d_bets                 -> User's bet within a game round.                               *
+ * d_profit               -> User's profit inside the casino.                              *
+ * d_debt                 -> User's debt to the casino.                                    *
  * count_plays_no_money -> Counter for number of times user tried to play without money. *
  * playing              -> Flag to control whether user is playing. \NOT USED            *
  *****************************************************************************************/
@@ -44,12 +44,13 @@ private:
     int d_age;
     float d_money;
     std::chrono::seconds d_time_spent;
-    int d_prizes_won;
-    int bets;
-    int profit;
-    float debt;
+    float d_prizes_won;
+    int d_bets;
+    int d_profit;
+    float d_debt;
     int count_plays_no_money;
     [[maybe_unused]]unsigned int playing : 1; //bitfield to tell if the user is playing or not
+
 public:
 
     /*******************************************************************************
@@ -58,72 +59,191 @@ public:
      * @param name   -> a string representing the full name of the user.           *
      * @param city   -> a string representing the name of the city of the user.    *
      * @param age    -> an int representing the age of the user                    *
-     * @exceptsafe none - Shall not throw exceptions
-     * @return Newly created User object
+     * @exceptsafe none - Shall not throw exceptions                               *
+     * @return Newly created User object                                           *
      *******************************************************************************/
     User(char *id, std::string name, std::string city, int age);
 
-    User();
-    /***********************************
-     * @brief Destructor for User      *
-     * @exceptsafe none - Shall not throw exceptions
-     * @return NONE
-     ***********************************/
+    /**************************************************
+     * @brief Destructor for User                     *
+     * @exceptsafe none - Shall not throw exceptions  *
+     * @return NONE                                   *
+     **************************************************/
     virtual ~User();
 
-    /*********************************************************************************************************************
-     * @brief Writes the current state of the casino to a file                                                           *
-     *                                                                                                                   *
-     * @see logging()                                                                                                    *
-     * @see beautify()                                                                                                   *
-     * @see Casino::Listing()                                                                                            *
-     * @throw std::ios_base::failure if an error occurs while opening the file                                           *
-     * @exceptsafe basic - captures errors related to the opening of the file, and some runtime error that might occur   *
-     * @param casino pointer to the casino object                                                                        *
-     * @param choice[in] user choice input                                                                               *
-     * @return None.                                                                                                     *
- *********************************************************************************************************************/
-    int getBets() const;
+    /***************************************************
+     * @brief Getter for user Bets                     *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return Number of bets.                         *
+     ***************************************************/
+    [[nodiscard]] int getBets() const;
 
-    void setBets(int bets);
+    /***************************************************
+     * @brief Increment user number of bets            *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @param bets -> integer to add to user bets      *
+     * @return None.                                   *
+     ***************************************************/
+    void incBets(int bets);
 
-    const char *getId() const;
+    /***************************************************
+     * @brief Getter for user ID                       *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return User's ID.                              *
+     ***************************************************/
+    [[nodiscard]] const char *getId() const;
 
-    const std::string &getName() const;
+    /****************************************************
+     * @brief Getter for user Name                      *
+     * @exceptsafe none - Shall not throw exceptions    *
+     * @return User's name.                             *
+     ****************************************************/
+    [[nodiscard]] const std::string &getName() const;
 
-    void setName(const std::string &dName);
+    /***************************************************
+     * @brief Setter for user Name                     *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @param dName -> name to set to                  *
+     * @return None.                                   *
+     ***************************************************/
+    [[maybe_unused]]void setName(const std::string &dName);
 
-    const std::string &getCity() const;
+    /***************************************************
+     * @brief Getter for user city                     *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return User's city.                            *
+     ***************************************************/
+    [[nodiscard]] const std::string &getCity() const;
 
-    void setCity(const std::string &dCity);
+    /***************************************************
+     * @brief Setter for user city                     *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @param dCity -> string of city to set to        *
+     * @return None.                                   *
+     ***************************************************/
+    [[maybe_unused]]void setCity(const std::string &dCity);
 
-    int getAge() const;
+    /***************************************************
+     * @brief Getter for user age                      *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return User's age.                             *
+     ***************************************************/
+    [[nodiscard]] int getAge() const;
 
-    void setAge(int dAge);
+    /***************************************************
+     * @brief Setter for user age                      *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @param dAge -> age to set to                    *
+     * @return None.                                   *
+     ***************************************************/
+    [[maybe_unused]]void setAge(int dAge);
 
-    long getTimeSpent() const;
+    /***************************************************
+     * @brief Getter for user time spent in casino     *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return User's time spent in casino.            *
+     ***************************************************/
+    [[nodiscard]] long getTimeSpent() const;
 
-    void setTimeSpent(std::chrono::seconds dTimeSpent);
+    /****************************************************************
+     * @brief Increment the user time spent in casino               *
+     *                                                              *
+     *        Adds time to the users time spent inside the casino   *
+     *                                                              *
+     * @exceptsafe none - Shall not throw exceptions                *
+     * @param dTimeSpent -> chrono::seconds of user's time spent    *
+     * @return None.                                                *
+     ****************************************************************/
+    void incTimeSpent(std::chrono::seconds dTimeSpent);
 
-    int getPrizesWon() const;
+    /****************************************************
+     * @brief Getter for user acquired prizes           *
+     * @exceptsafe none - Shall not throw exceptions    *
+     * @return User's acquired prizes.                  *
+     ****************************************************/
+    [[nodiscard]] float getPrizesWon() const;
 
-    void setPrizesWon(float dPrizesWon);
+    /****************************************************************
+     * @brief Increment the user acquired prizes                    *
+     *                                                              *
+     *        Adds more prizes (money) to the users prizes          *
+     *                                                              *
+     * @exceptsafe none - Shall not throw exceptions                *
+     * @param dPrizesWon -> money to add to user's bets               *
+     * @return None.                                                *
+     ****************************************************************/
+    void incPrizesWon(float dPrizesWon);
 
-    int getPlaying() const;
+    /***************************************************
+     * @brief Getter for user playing flag             *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return User's flag for playing status.         *
+     ***************************************************/
+    [[maybe_unused]] [[nodiscard]] int getPlaying() const; //not used
 
-    void setPlaying(int playing);
+    /***************************************************
+     * @brief Setter for user playing flag             *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return None.                                   *
+     ***************************************************/
+    [[maybe_unused]]void setPlaying(int playing); //not used
 
-    float getMoney() const;
+    /***************************************************
+     * @brief Getter for user money                    *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return User's money.                           *
+     ***************************************************/
+    [[nodiscard]] float getMoney() const;
 
+    /***************************************************
+     * @brief Setter for user money                    *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @param money -> user's money to set to          *
+     * @return None.                                   *
+     ***************************************************/
     void setMoney(float money);
 
+    /**********************************************************************
+     * @brief Increments user attempts for trying to play without money   *
+     * @exceptsafe none - Shall not throw exceptions                      *
+     * @return None.                                                      *
+     **********************************************************************/
     void incAttempts();
+
+    /**********************************************************************
+     * @brief Reset user attempts for trying to play without money        *
+     * @exceptsafe none - Shall not throw exceptions                      *
+     * @return None.                                                      *
+     **********************************************************************/
     void resetAttempts();
-    int getAttempts() const;
 
+    /******************************************************************
+     * @brief Getter for user attempts trying to play without money   *
+     * @exceptsafe none - Shall not throw exceptions                  *
+     * @return None.                                                  *
+     ******************************************************************/
+    [[nodiscard]] int getAttempts() const;
+
+    /************************************************************
+     * @brief Add bet to user                                   *
+     * @exceptsafe none - Shall not throw exceptions            *
+     * @param amountOfDebt -> Amount of bet to be added to user *
+     * @return None.                                            *
+     ************************************************************/
     void addDebt(float amountOfDebt);
-    float getDebt() const;
 
+    /***************************************************
+     * @brief Getter for user debt                     *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return User's bet.                             *
+     ***************************************************/
+    [[nodiscard]] float getDebt() const;
+
+    /***************************************************
+     * @brief Converts a user object into a string     *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return a String representation of the object   *
+     ***************************************************/
     std::string toString();
 
 

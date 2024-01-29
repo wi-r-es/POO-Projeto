@@ -47,18 +47,18 @@ bool ClassicSlot::Play(User *user) {
         user->incAttempts();
         auto end_time = chrono::steady_clock::now();
         auto elapsed = getElapsedTime(start_time, end_time);
-        user->setTimeSpent(elapsed);
+        user->incTimeSpent(elapsed);
         return false;
     }
 
     if(getWinProbability() > 0.7f){
         user->setMoney(user->getMoney() + 200);
-        user->setPrizesWon(200);
+        user->incPrizesWon(200);
         incUsage();
         increaseTemperature();
         auto end_time = chrono::steady_clock::now();
         auto elapsed = getElapsedTime(start_time, end_time);
-        user->setTimeSpent(elapsed);
+        user->incTimeSpent(elapsed);
         return true;
     }
 
@@ -67,29 +67,29 @@ bool ClassicSlot::Play(User *user) {
     int rol3 = rand() % 4;
     setBetAmount(userMoney <= 5 ? 1 : static_cast<float>(randomNumberGeneratorInterval(5, static_cast<int>(userMoney))));
     user->setMoney(userMoney - getBetAmount());
-    user->setBets(1);
+    user->incBets(1);
     if (rol1 == 7 && rol2 == 7 && rol3 == 7) {
         auto profit = getBetAmount()*12;
         user->setMoney(userMoney + profit);
-        user->setPrizesWon(profit);
+        user->incPrizesWon(profit);
         auto end_time = chrono::steady_clock::now();
         auto elapsed = chrono::duration_cast<chrono::seconds>(start_time - end_time);
-        user->setTimeSpent(elapsed);
+        user->incTimeSpent(elapsed);
         return true;
     } else if (rol1 == rol2 && rol2 == rol3) {
         auto profit = getBetAmount()*4;
         user->setMoney(userMoney + profit);
-        user->setPrizesWon(profit);
+        user->incPrizesWon(profit);
         auto end_time = chrono::steady_clock::now();
         auto elapsed = getElapsedTime(start_time, end_time);
-        user->setTimeSpent(elapsed);
+        user->incTimeSpent(elapsed);
         return true;
     }
     incUsage();
     increaseTemperature();
     auto end_time = chrono::steady_clock::now();
     auto elapsed = getElapsedTime(start_time, end_time);
-    user->setTimeSpent(elapsed);
+    user->incTimeSpent(elapsed);
     return false;
 }
 

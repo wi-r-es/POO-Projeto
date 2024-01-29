@@ -44,6 +44,7 @@ std::string machineSTATEToString(MACHINE_STATE state);
 
 /**********************************************************************************************
  * Machine ADT class and vars description                                                     *
+ *                                                                                            *
  * ID                       -> TYPE_TBD of the Unique identifier (ID) for each machine.       *
  * state                    -> Current state of the machine.                                  *
  * type                     -> Type of game the machine offers.                               *
@@ -71,6 +72,7 @@ private:
     std::chrono::steady_clock::time_point coolingtime;
 
 public:
+
     /***********************************************************************
      * @brief Constructor for Machine                                      *
      *                                                                     *
@@ -80,6 +82,7 @@ public:
      * @param type  -> Enum type indicating the type of the Machine.       *
      * @param posX  -> X Position of the machine in the casino (X, Y).     *
      * @param posY  -> Y Position of the machine in the casino (X, Y).     *
+     * @return Newly created Machine object                                *
      ***********************************************************************/
     Machine(MACHINE_TYPE type, int posX, int posY);
 
@@ -118,11 +121,11 @@ public:
      *****************************************************************************************/
     MACHINE_STATE getState();
 
-   /******************************************************************************************
-    * @brief Getter for the current type of the Machine                                      *
-    * @exceptsafe none - Shall not throw exceptions                                          *
-    * @return The current Machine type. One of the games                                     *
-    *****************************************************************************************/
+   /*********************************************************
+    * @brief Getter for the current type of the Machine     *
+    * @exceptsafe none - Shall not throw exceptions         *
+    * @return The current Machine type. One of the games    *
+    *********************************************************/
     MACHINE_TYPE getType();
 
     /****************************************************************************************
@@ -158,7 +161,7 @@ public:
     /***************************************************
      * @brief Getter for Machine win probability       *
      * @exceptsafe none - Shall not throw exceptions   *
-     * @return Float representing Win probability.     *
+     * @return Win probability of the machine.         *
      ***************************************************/
     [[nodiscard]] float getWinProbability() const;
 
@@ -173,7 +176,7 @@ public:
     /*******************************************************
      * @brief Getter for Machine Number of failures        *
      * @exceptsafe none - Shall not throw exceptions       *
-     * @return Integer representing number of failures.    *
+     * @return Number of failures.                         *
      *******************************************************/
     [[nodiscard]] int getFailures() const;
 
@@ -187,7 +190,7 @@ public:
     /***************************************************
      * @brief Getter for Machine Temperature           *
      * @exceptsafe none - Shall not throw exceptions   *
-     * @return Machine Temperature - Flaot             *
+     * @return Machine Temperature                     *
      ***************************************************/
     [[nodiscard]] float getTemperature() const;
 
@@ -221,13 +224,13 @@ public:
      ********************************************************************/
     [[nodiscard]] float getBetAmount() const;
 
-    /***********************************************************
-     * @brief Random number generator between a min and a max  *
-     * @exceptsafe none - Shall not throw exceptions           *
-     * @param x minimum number                                 *
-     * @param y maximum number                                 *
-     * @return Randomly generated integer between the interval *
-     ***********************************************************/
+    /*****************************************************************
+     * @brief Random number generator between a min and a max        *
+     * @exceptsafe none - Shall not throw exceptions                 *
+     * @param x minimum number                                       *
+     * @param y maximum number                                       *
+     * @return Randomly generated integer between the given interval *
+     *****************************************************************/
     int randomNumberGeneratorInterval(int x, int y);
 
     /************************************************************************
@@ -235,18 +238,18 @@ public:
      ************************************************************************/
     virtual bool Play(User* user);
 
-    /*****************************************************************
-     * @brief Function that converts a machine object into a string  *
-     * @exceptsafe none - Shall not throw exceptions                 *
-     * @return a String representation of the object                 *
-     *****************************************************************/
+    /***************************************************
+     * @brief Converts a machine object into a string  *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return a String representation of the object   *
+     ***************************************************/
     [[nodiscard]] std::string toString() const;
 
-    /*********************************************************************************
-     * @brief Function that converts a machine object into a string meant for output *
-     * @exceptsafe none - Shall not throw exceptions                                 *
-     * @return a String representation of the object                                 *
-     *********************************************************************************/
+    /*******************************************************************
+     * @brief Converts a machine object into a string meant for output *
+     * @exceptsafe none - Shall not throw exceptions                   *
+     * @return a String representation of the object                   *
+     *******************************************************************/
     [[nodiscard]] std::string toStringOut() const;
 
     /*****************************************************************************
