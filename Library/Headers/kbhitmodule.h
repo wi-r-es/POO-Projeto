@@ -40,7 +40,16 @@ int kbhit()
 #include <fcntl.h>
 #include <unistd.h>
 #include <termios.h>
-
+/*********************************************************************************************************************************************************************
+ * @brief Non-blocking check for keyboard input.                                                                                                                     *
+ *                                                                                                                                                                   *
+ * `kbhit()` is a custom implementation of the keyboard hit check. It is commonly used in console applications where non-blocking input is desired.                  *
+ * This function checks if any key has been pressed on the keyboard without waiting for input (non-blocking). It achieves this by manipulating terminal settings     *
+ * to read a character from the standard input without requiring the usual line buffering.                                                                           *
+ *                                                                                                                                                                   *
+ * @exception None. This function does not throw exceptions but relies on standard library functions that may set `errno` on failure.                                *
+ * @exceptsafe This function does not provide any exception safety guarantees and relies on the behavior of the underlying system calls.                             *
+ *********************************************************************************************************************************************************************/
 int kbhit()
 {
     struct termios oldt, newt;
