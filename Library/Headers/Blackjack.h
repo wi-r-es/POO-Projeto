@@ -13,14 +13,22 @@
 #ifndef CODE_BLACKJACK_H
 #define CODE_BLACKJACK_H
 #include "Machine.h"
-/*******************************************************************************************************************************
- * Blackjack Machine ADT class and variables description                                                                       *
- * Inherits UID, TYPE, state, failureProbability, temperate, posX,posY, winProbability, failures and usage from Machine Class  *
- * @see Machine Class                                                                                                          *
- *                                                                                                                             *
- // GUI IDK THIS GAME SO YOU GO SINCE YOU DO
- // OK!
- *******************************************************************************************************************************/
+/***********************************************************************************************
+ * Blackjack ADT class description derived from Machine                                        *
+ *                                                                                             *
+ * Inherits from Machine class. Represents a specific type of machine, namely a Blackjack      *
+ * game machine. In addition to the attributes inherited from Machine, it includes specific    *
+ * attributes and mechanisms for playing the game of Blackjack.                                *
+ *                                                                                             *
+ * Values_Cards            -> Map associating card characters with their corresponding         *
+ *                            integer values in the game of Blackjack.                         *
+ *                            For example, 'A' might map to 1 or 11, '2' to 2, ..., 'K' to 10. *
+ * Dealers_Hand            -> Vector storing the integer values of the cards currently in the  *
+ *                            dealer's hand. Each integer represents a card.                   *
+ * Players_Hand            -> Vector storing the integer values of the cards currently in the  *
+ *                            player's hand. Similar to Dealers_Hand, each integer             *
+ *                            represents a card.                                               *
+ ***********************************************************************************************/
 class Blackjack : public Machine {
 private:
     std::map<char,int> Values_Cards;

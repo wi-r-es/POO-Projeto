@@ -43,7 +43,7 @@ std::string machineSTATEToString(MACHINE_STATE state);
 
 
 /**********************************************************************************************
- * Machine ADT class and vars description                                                     *
+ * Machine ADT class description                                                              *
  *                                                                                            *
  * ID                       -> TYPE_TBD of the Unique identifier (ID) for each machine.       *
  * state                    -> Current state of the machine.                                  *
