@@ -21,14 +21,25 @@
 using namespace std;
 
 
-/*******************************************************************************************************************************
- * Classic Slot Machine ADT class and variables description                                                                    *
- * Inherits UID, TYPE, state, failureProbability, temperate, posX,posY, winProbability, failures and usage from Machine Class  *
- * @see Machine Class                                                                                                          *
- *                                                                                                                             *
- * symbols      ->  Symbols in this classic slot machine                                                                       *
- * numSpins     ->  Number of spins played on this machine                                                                     *
- *******************************************************************************************************************************/
+/**********************************************************************************************
+ * ClassicSlot ADT class description derived from Machine                                     *
+ *                                                                                            *
+ * Inherits from Machine class. Represents a classic slot machine typically found in casinos. *
+ * Classic slot machines are simpler in design and function compared to more modern video     *
+ * slot machines, often featuring a limited number of reels and traditional symbols. In       *
+ * addition to the attributes inherited from the Machine class, the ClassicSlot class         *
+ * includes specific attributes unique to the functioning of a classic slot machine.          *
+ *                                                                                            *
+ * numSpins                -> An integer representing the number of spins that have been      *
+ *                            played on this machine. This is a key statistic for tracking    *
+ *                            the usage and popularity of the machine, as well as for         *
+ *                            maintenance and analysis purposes.                              *
+ *                                                                                            *
+ * This class would likely also include methods specific to the operation of a classic slot   *
+ * machine, such as handling bets, spinning the reels, determining winning combinations,      *
+ * and calculating payouts. These methods would make use of both the inherited attributes     *
+ * from the Machine class and the specific attributes of the ClassicSlot class.               *
+ **********************************************************************************************/
 class ClassicSlot : public Machine {
 private:
     int numSpins;
