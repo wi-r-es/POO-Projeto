@@ -405,7 +405,7 @@ std::list<std::string> *Casino::Ranking_of_the_weaks(){
 
     try{
         usefulFT::stableSortContainer(tempL, [](const Machine& a, const Machine& b) {
-            return a.getFailures() < b.getFailures();
+            return a.getFailures() > b.getFailures();
         });
         for(auto &m : tempL){
             l_ranking->push_back(m->toStringOut());
@@ -424,7 +424,7 @@ std::list<Machine *> *Casino::Ranking_of_the_most_used(){
     auto l_ranking = new std::list<Machine *>;
     try{
         usefulFT::stableSortContainer(tempL, [](const Machine& a, const Machine& b) {
-            return a.getUsage() < b.getUsage();
+            return a.getUsage() > b.getUsage();
         });
         for(auto &m : tempL){
             l_ranking->push_back(m);
@@ -445,7 +445,7 @@ std::list<User *> *Casino::Most_Frequent_Users(){
     auto l_ranking = new std::list<User *>;
     try{
         usefulFT::stableSortUsers(tempL, [](User &a, const User& b) {
-            return a.getTimeSpent() < b.getTimeSpent();
+            return a.getTimeSpent() > b.getTimeSpent();
         });
         for(auto &usr : tempL){
             l_ranking->push_back(usr);
@@ -467,7 +467,7 @@ std::list<User *> *Casino::Most_Wins_Users(){
     auto l_ranking = new std::list<User *>;
     try{
         usefulFT::stableSortUsers(tempL, [](User &a, const User& b) {
-            return a.getPrizesWon() < b.getPrizesWon();
+            return a.getPrizesWon() > b.getPrizesWon();
         });
         for(auto &usr : tempL){
             l_ranking->push_back(usr);
