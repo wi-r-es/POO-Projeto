@@ -1,7 +1,3 @@
-//
-//  Edit comments in this sections
-
-//
 /**********************************************************************************
  *  @file Machine.h                                                               *
  *  @brief Class prototypes for Casino Machines ADT Structure/Class               *
@@ -22,8 +18,11 @@
 
 #include "utils.h"
 #include "User.h"
-// Enumerations for machine type and state
-// using class for scope restriction and unsigned char for memory optimization
+
+/*********************************************************************************
+ * Enumerations for machine type for extra support to the Machine Class          *
+ * Using class for scope restriction and unsigned char for memory optimization   *
+ *********************************************************************************/
 enum class MACHINE_TYPE : unsigned char {CLASSIC_SLOT =1 ,          // 1
                                         THEMATIC_SLOT,              // 2
                                         FEATURE_SLOT,               // 3
@@ -32,12 +31,16 @@ enum class MACHINE_TYPE : unsigned char {CLASSIC_SLOT =1 ,          // 1
                                         CRAPS,                      // 6
                                         BACCARAT,                   // 7
                                         POKER};                     // 8
+
 std::string machineTypeToString(MACHINE_TYPE type);
 
-
-enum class MACHINE_STATE : unsigned char {OFF, ON, BROKEN, MAINTENANCE, NONEXISTENT}; // maybe add another value, TBD
+/*********************************************************************************
+ * Enumerations for machine state for extra support to the Machine Class         *
+ * Using class for scope restriction and unsigned char for memory optimization   *
+ *********************************************************************************/
+enum class MACHINE_STATE : unsigned char {OFF, ON, BROKEN, MAINTENANCE, NONEXISTENT};
 std::string machineSTATEToString(MACHINE_STATE state);
-// to use simply use MACHINE_TYPE::BLACKJACK for example
+
 
 /**********************************************************************************************
  * Machine ADT class and vars description                                                     *
@@ -49,7 +52,9 @@ std::string machineSTATEToString(MACHINE_STATE state);
  * posX,posY                -> Position of the machine in the casino (X, Y).                  *
  * winProbability           -> Probability that a user will win at this machine.              *
  * failures                 -> Number of times the machine has failed.                        *
+ * betAmount                -> the bet amount of the round.                                   *
  * usage                    -> Number of times the machine was used.                          *
+ * coolingtime              -> Time point object to simulate the machine getting fixed.       *
  **********************************************************************************************/
 class Machine {
 private:
@@ -71,6 +76,7 @@ public:
      *                                                                     *
      *        The UID of the machine is generated.                         *
      *                                                                     *
+     * @exceptsafe none - Shall not throw exceptions                       *
      * @param type  -> Enum type indicating the type of the Machine.       *
      * @param posX  -> X Position of the machine in the casino (X, Y).     *
      * @param posY  -> Y Position of the machine in the casino (X, Y).     *
@@ -78,112 +84,193 @@ public:
     Machine(MACHINE_TYPE type, int posX, int posY);
 
     // id =  idtype seguido de um numero [WIP]
-    /***********************************
-     * @brief Destructor for Machine   *
-     ***********************************/
+    /**************************************************
+     * @brief Destructor for Machine                  *
+     * @exceptsafe none - Shall not throw exceptions  *
+     **************************************************/
     virtual ~Machine();
 
-    /***********************************************
-     * @brief Getter for the UID of the Machine    *
-     * @return The UID of the machine.             *
-     ***********************************************/
+    /**************************************************
+     * @brief Getter for the UID of the Machine       *
+     * @exceptsafe none - Shall not throw exceptions  *
+     * @return The UID of the machine.                *
+     **************************************************/
     [[nodiscard]] int getUID() const;
 
     /*********************************************************************
      * @brief Getter for the number of the times the Machine was used    *
+     * @exceptsafe none - Shall not throw exceptions                     *
      * @return The Number of usages.                                     *
      *********************************************************************/
     [[nodiscard]] int getUsage() const;
 
     /************************************************************
      * @brief Increments the number of times a machine was used *
+     * @exceptsafe none - Shall not throw exceptions            *
+     * @return None                                             *
      ************************************************************/
     void incUsage();
 
     /*****************************************************************************************
      * @brief Getter for the current state of the Machine                                    *
-     * @return The current Machine State. One of the following options: OFF, ON or BROKEN.   *
+     * @exceptsafe none - Shall not throw exceptions                                         *
+     * @return The current MACHINE_STATE. One of the following options: OFF, ON or BROKEN.   *
      *****************************************************************************************/
     MACHINE_STATE getState();
 
- /*****************************************************************************************
- * @brief Getter for the current type of the Machine                                      *
- * @return The current Machine type. One of the games                                     *
- *****************************************************************************************/
+   /******************************************************************************************
+    * @brief Getter for the current type of the Machine                                      *
+    * @exceptsafe none - Shall not throw exceptions                                          *
+    * @return The current Machine type. One of the games                                     *
+    *****************************************************************************************/
     MACHINE_TYPE getType();
 
     /****************************************************************************************
      * @brief Setter for the current state of the Machine                                   *
-     *                                                                                      *
+     * @exceptsafe none - Shall not throw exceptions                                        *
      * @param newState -> MACHINE_STATE enum indicating the current state of the machine.   *
+     * @return None                                                                         *
      ****************************************************************************************/
     void setState(MACHINE_STATE newState);
 
     /****************************************************
      * @brief Getter for Machine Position               *
+     * @exceptsafe none - Shall not throw exceptions    *
      * @return a pair of the position of the machine.   *
      ****************************************************/
     std::pair<int, int> getPosition();
 
-    /***********************************************************************
-     * @brief Setter for Machine Error Probability                         *
-     *      *
-     ***********************************************************************/
+    /***************************************************
+     * @brief Setter for Machine Error Probability     *
+     * @param prob of the machine to fail              *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return None                                    *
+     ***************************************************/
     void setFailureProbability(float prob);
+
+    /***************************************************
+     * @brief Getter for Machine Error Probability     *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return None                                    *
+     ***************************************************/
     [[nodiscard]] float getFailureProbability() const;
 
-    /************************************************
-     * @brief Getter for Machine win probability    *
-     * @return Float representing Win probability.  *
-     ************************************************/
+    /***************************************************
+     * @brief Getter for Machine win probability       *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return Float representing Win probability.     *
+     ***************************************************/
     [[nodiscard]] float getWinProbability() const;
 
     /**********************************************************
      * @brief Setter for Machine win probability              *
+     * @exceptsafe none - Shall not throw exceptions          *
      * @param newProb -> Float representing Win probability.  *
+     * @return None                                           *
      **********************************************************/
     void setWinProbability(float newProb);
 
     /*******************************************************
      * @brief Getter for Machine Number of failures        *
+     * @exceptsafe none - Shall not throw exceptions       *
      * @return Integer representing number of failures.    *
      *******************************************************/
     [[nodiscard]] int getFailures() const;
 
     /***************************************************************************
      * @brief Function to increment the number of times a machine has failed.  *
+     * @exceptsafe none - Shall not throw exceptions                           *
+     * @return none                                                            *
      ***************************************************************************/
     void incrementFailures();
 
-    /******************************************
-     * @brief Getter for Machine Temperature  *
-     * @return Machine Temperature            *
-     ******************************************/
+    /***************************************************
+     * @brief Getter for Machine Temperature           *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return Machine Temperature - Flaot             *
+     ***************************************************/
     [[nodiscard]] float getTemperature() const;
 
     /*******************************************************
      * @brief Setter for the Machine current temperature   *
-     * @param newTemp                                      *
-     ******************************************************/
+     * @exceptsafe none - Shall not throw exceptions       *
+     * @param newTemp new temperature for the machine      *
+     * @return None                                        *
+     *******************************************************/
     void setTemperature(float newTemp);
+
+    /*******************************************************
+     * @brief Increases the temperature of the machine     *
+     * @exceptsafe none - Shall not throw exceptions       *
+     * @return None                                        *
+     *******************************************************/
     void increaseTemperature();
 
+    /*******************************************************
+     * @brief Setter for the bet amount of the machine     *
+     * @exceptsafe none - Shall not throw exceptions       *
+     * @param bet amount of the bet put into the round     *
+     * @return None                                        *
+     *******************************************************/
     virtual void setBetAmount(float bet);
+
+    /********************************************************************
+     * @brief Getter for the bet amount of the round in the machine     *
+     * @exceptsafe none - Shall not throw exceptions                    *
+     * @return None                                                     *
+     ********************************************************************/
     [[nodiscard]] float getBetAmount() const;
 
+    /***********************************************************
+     * @brief Random number generator between a min and a max  *
+     * @exceptsafe none - Shall not throw exceptions           *
+     * @param x minimum number                                 *
+     * @param y maximum number                                 *
+     * @return Randomly generated integer between the interval *
+     ***********************************************************/
     int randomNumberGeneratorInterval(int x, int y);
 
-    /**********************************************************************************
-     * @brief Function that simulates the operation of the Machine .                  *
-     *                                                                                *
-     **********************************************************************************/
+    /************************************************************************
+     * @brief Function that simulates the usage of the Machine by the user. *
+     ************************************************************************/
     virtual bool Play(User* user);
-    std::string toString() const;
-    std::string toStringOut() const;
+
+    /*****************************************************************
+     * @brief Function that converts a machine object into a string  *
+     * @exceptsafe none - Shall not throw exceptions                 *
+     * @return a String representation of the object                 *
+     *****************************************************************/
+    [[nodiscard]] std::string toString() const;
+
+    /*********************************************************************************
+     * @brief Function that converts a machine object into a string meant for output *
+     * @exceptsafe none - Shall not throw exceptions                                 *
+     * @return a String representation of the object                                 *
+     *********************************************************************************/
+    [[nodiscard]] std::string toStringOut() const;
+
+    /*****************************************************************************
+     * @brief Setter of the maintenance time point of machine object             *
+     * @exceptsafe none - Shall not throw exceptions                             *
+     * @param time time_point representing when the machine started maintenance  *
+     * @return a String representation of the object                             *
+     *****************************************************************************/
     void setMaintenanceTime(std::chrono::steady_clock::time_point time);
+
+    /*********************************************************************************
+     * @brief Getter of the maintenance time point of machine object                 *
+     * @exceptsafe none - Shall not throw exceptions                                 *
+     * @return a time_point value representing when the machine entered maintenance  *
+     *********************************************************************************/
     std::chrono::steady_clock::time_point getTimeInMaintenance();
+
+    /*****************************************************************************
+     * @brief Function that resets the machine probabilities and temperature     *
+     * @exceptsafe none - Shall not throw exceptions                             *
+     * @return None                                                              *
+     *****************************************************************************/
     void reset();
-    [[nodiscard]] int getID() const{ return UID;}
+
 };
 
 

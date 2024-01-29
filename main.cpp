@@ -558,8 +558,8 @@ void listingToFile(Casino* casino){
             throw std::ios_base::failure("Unable to open file: " + casinoFile);
         casino->Listing(file);
     } catch (const std::ios_base::failure &e) {
-        std::cerr << "An error occurred while opening the file: " << e.what() << '\n';
+        std::cerr << "An error occurred while opening the file -> " << e.what() << '\n';
     }catch (const std::runtime_error &e) {
-        std::cerr << "An error occurred: " << e.what() << '\n';
+        std::cerr << "An error occurred -> " << e.what() << '\n';
     }
 }
