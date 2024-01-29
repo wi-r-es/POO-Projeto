@@ -263,6 +263,6 @@ public:
  *                                                                                                                                                                 *
  * @return int The total value of the hand.                                                                                                                        *
  *******************************************************************************************************************************************************************/
-int get_total(std::vector<int>hand);
+int get_total(const std::vector<int> &hand);
 
 #endif //CODE_BLACKJACK_H

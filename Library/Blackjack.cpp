@@ -69,7 +69,7 @@ void Blackjack::show_dealer_hand() {
 }
 
 /** Function to get the sum total of card values **/
-int get_total(std::vector<int>hand) {
+int get_total(const std::vector<int>& hand) {
     int total = 0;
     bool has_ace = false;
     for(const auto& card : hand) {
@@ -84,13 +84,6 @@ int get_total(std::vector<int>hand) {
     return total;
 }
 
-
-// A 2 3
-// 1+2+3 = 6 < 21       6 + 11 < 21
-// 11+2+3 = 16
-// A 4 7
-// 1+4+7 = 12
-// 11+4+7 = 23
 void Blackjack::show_game(){
     show_player_hand();
     std::cout<<"Total = "<<get_total(Players_Hand)<<std::endl;
@@ -149,7 +142,7 @@ bool Blackjack::simulate_game(){
     std::cout << "FINAL" << std::endl;
     show_game();
 
-    //Checks who has the bigger value in their hands
+    /** Checks who has the bigger value in their hands **/
     auto p_hand = get_total(Players_Hand);
     auto d_hand = get_total(Dealers_Hand);
 
@@ -157,7 +150,6 @@ bool Blackjack::simulate_game(){
         std::cout << "WINNER = [Player]" << std::endl;
         return true;
     }
-
     else {
         std::cout << "WINNER = [Dealer]" << std::endl;
         return false;
