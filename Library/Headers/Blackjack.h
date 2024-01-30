@@ -90,7 +90,7 @@ public:
     /***************************************************************
      * @brief Function to print the Blackjack for testing purposes *
      ***************************************************************/
-    [[maybe_unused]]void printMap() const; // no longer being used, but might be handy
+    [[maybe_unused]] [[maybe_unused]]void printMap() const; // no longer being used, but might be handy
 
     /*********************************************************************************************************************************************************************
      * @brief Adds a random card to a given hand in Blackjack.                                                                                                           *

@@ -30,7 +30,7 @@ Blackjack::~Blackjack() {
     Players_Hand.clear();
 }
 
-void Blackjack::printMap() const {
+[[maybe_unused]] void Blackjack::printMap() const {
     for (const auto& pair : Values_Cards)
         std::cout << "Card: " << pair.first << " Value: " << pair.second << std::endl;
 }
@@ -99,21 +99,21 @@ int Blackjack::hit_or_stay(){
 }
 
 bool Blackjack::simulate_game(){
-    int player_total = 0, dealer_total = 0, player_decision;
-    bool game = true, result;
-    /** Give the cards to the player and dealer**/
+    int player_decision;
+    bool game = true;
+    /** Give the cards to the player and dealer **/
     start_game();
 
     while(game){
         if(get_total(Players_Hand) > 21){
             std::cout << "PLAYER LOSES" << std::endl;
             return false;
-            game = false;
         }else {
-            /** Simulates the decision hit or stay in a random manner
-             * 1 -> hit
-             * 0 -> stay
-             * **/
+            /** Simulates the decision hit or stay in a random manner **/
+            /*
+            1 -> hit
+            0 -> stay*
+            */
             player_decision = hit_or_stay();
 
             if (!player_decision) {
@@ -155,6 +155,8 @@ bool Blackjack::simulate_game(){
         return false;
     }
 }
+
+
 
 
 bool Blackjack::Play(User* user) {

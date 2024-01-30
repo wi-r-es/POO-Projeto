@@ -30,7 +30,7 @@ using namespace std;
  * addition to the attributes inherited from the Machine class, the ClassicSlot class         *
  * includes specific attributes unique to the functioning of a classic slot machine.          *
  *                                                                                            *
- * numSpins                ->                                                                 *
+ * numSpins                ->    not implemented as expected                                  *
  *                                                                                            *
  * This class would likely also include methods specific to the operation of a classic slot   *
  * machine, such as handling bets, spinning the reels, determining winning combinations,      *

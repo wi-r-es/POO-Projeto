@@ -59,11 +59,11 @@ bool ClassicSlot::Play(User *user) {
         user->incTimeSpent(elapsed);
         return true;
     }
-
-    int rol1 = randomNumberGeneratorInterval(1,4); //randomly a number that represents the 4 simbols
-    int rol2 = randomNumberGeneratorInterval(1,4);
-    int rol3 = randomNumberGeneratorInterval(1,4);
-    int rol4 = randomNumberGeneratorInterval(1,4);
+    /** generate a random number that represents the a symbol **/
+    int rol1 = randomNumberGeneratorInterval(1,10);
+    int rol2 = randomNumberGeneratorInterval(1,10);
+    int rol3 = randomNumberGeneratorInterval(1,10);
+    int rol4 = randomNumberGeneratorInterval(1,10);
     setBetAmount(userMoney <= 5 ? 1 : static_cast<float>(randomNumberGeneratorInterval(5, static_cast<int>(userMoney))));
     user->setMoney(userMoney - getBetAmount());
     user->incBets(1);

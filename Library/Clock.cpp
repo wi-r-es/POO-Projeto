@@ -4,12 +4,10 @@
 #include "Headers/Clock.h"
 
 Clock::Clock() : START(time(0)), SPEED(0), START_TIME{} {}
-Clock::Clock(time_t start, int velocidade, time_t horaInicio) : START(start), SPEED(velocidade),
-                                                                START_TIME(horaInicio) {}
+Clock::Clock(time_t start, int velocity, time_t start_time) : START(start), SPEED(velocity),
+                                                                START_TIME(start_time) {}
 
-Clock::~Clock() {
-
-}
+Clock::~Clock() = default;
 
 void Clock::StartClock(int speed, const std::string& start_time) {
     START = time(nullptr);
