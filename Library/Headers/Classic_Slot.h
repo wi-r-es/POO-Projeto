@@ -30,10 +30,7 @@ using namespace std;
  * addition to the attributes inherited from the Machine class, the ClassicSlot class         *
  * includes specific attributes unique to the functioning of a classic slot machine.          *
  *                                                                                            *
- * numSpins                -> An integer representing the number of spins that have been      *
- *                            played on this machine. This is a key statistic for tracking    *
- *                            the usage and popularity of the machine, as well as for         *
- *                            maintenance and analysis purposes.                              *
+ * numSpins                ->                                                                 *
  *                                                                                            *
  * This class would likely also include methods specific to the operation of a classic slot   *
  * machine, such as handling bets, spinning the reels, determining winning combinations,      *
@@ -45,16 +42,42 @@ private:
     int numSpins;
 
 public:
-    /***********************************************************************
-     * @brief Constructor for Classic Slot Machine                         *
-     * @param posX  -> X Position of the machine in the casino (X, Y).     *
-     * @param posY  -> Y Position of the machine in the casino (X, Y).     *
-     ***********************************************************************/
+    /*******************************************************************************************************************************************************************
+     * @brief Constructor for ClassicSlot with position parameters.
+     *
+     * This constructor initializes an instance of the `ClassicSlot` class, which is derived from the `Machine` class. It sets the machine's type to `CLASSIC_SLOT`
+     * and initializes its position to the provided coordinates (`posX`, `posY`). It also initializes the number of spins (`numSpins`) to zero.
+     *
+     * @note This constructor is used when the position of the slot machine is known and needs to be specified.
+     *
+     * @see Machine class for the base class constructor.
+     *
+     * @param posX The x-coordinate of the slot machine's position.
+     * @param posY The y-coordinate of the slot machine's position.
+     *
+     * @exception None. This constructor does not throw exceptions.
+     * @exceptsafe This constructor is exception-neutral and offers no guarantees if an exception is thrown during initialization.
+     *
+     * @return None. Constructors do not return values.
+     *******************************************************************************************************************************************************************/
     ClassicSlot(int posX, int posY);
 
- /****************************************************
-     * @brief Empty Constructor for Roulette Machine *
- ****************************************************/
+    /*******************************************************************************************************************************************************************
+     * @brief Default Constructor for ClassicSlot.
+     *
+     * This default constructor initializes an instance of the `ClassicSlot` class with default values. It sets the machine type to `CLASSIC_SLOT` and initializes
+     * its position to (0, 0). It also sets the number of spins (`numSpins`) to zero. This constructor is used when no specific position is provided for the slot
+     * machine.
+     *
+     * @note This constructor provides a way to create a ClassicSlot machine with default settings.
+     *
+     * @see Machine class for the base class constructor.
+     *
+     * @exception None. This constructor does not throw exceptions.
+     * @exceptsafe This constructor is exception-neutral and offers no guarantees if an exception is thrown during initialization.
+     *
+     * @return None. Constructors do not return values.
+     *******************************************************************************************************************************************************************/
     ClassicSlot();
 
     /************************************************

@@ -64,9 +64,22 @@ public:
      ***********************************************************************************************************************************************************************/
     Blackjack(int posX, int posY);
 
-    /*************************************************
-     * @brief Empty Constructor for Roulette Machine *
-     *************************************************/
+    /***********************************************************************************************************************************************************************
+     * @brief Default Constructor for Blackjack.                                                                                                                           *
+     *                                                                                                                                                                     *
+     * This default constructor initializes an instance of the `Blackjack` class, a specific type of gaming machine. It sets the machine's type to `BLACKJACK` and         *
+     * initializes its position to default values (0, 0). Moreover, it initializes the `Values_Cards` map with the values of the cards used in a game of blackjack.        *
+     *                                                                                                                                                                     *
+     * @note This constructor provides a way to create a ClassicSlot machine with default settings.                                                                        *
+     *                                                                                                                                                                     *
+     * @see Machine class for the base class constructor and initializations.                                                                                              *
+     * @see Values_Cards for the map holding card values.                                                                                                                  *
+     *                                                                                                                                                                     *
+     * @exception None. This constructor does not throw exceptions.                                                                                                        *
+     * @exceptsafe This constructor is exception-neutral. It offers no guarantees if an exception is thrown during initialization.                                         *
+     *                                                                                                                                                                     *
+     * @return None. Constructors do not return values.                                                                                                                    *
+     ***********************************************************************************************************************************************************************/
     Blackjack();
 
     /*********************************************

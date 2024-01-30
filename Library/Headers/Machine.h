@@ -82,7 +82,7 @@ public:
      * @param type  -> Enum type indicating the type of the Machine.       *
      * @param posX  -> X Position of the machine in the casino (X, Y).     *
      * @param posY  -> Y Position of the machine in the casino (X, Y).     *
-     * @return Newly created Machine object                                *
+     * @return None. Constructors do not return values.                    *
      ***********************************************************************/
     Machine(MACHINE_TYPE type, int posX, int posY);
 
