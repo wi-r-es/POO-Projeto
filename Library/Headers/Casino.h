@@ -446,7 +446,7 @@ public:
      *
      * @return float - The Euclidean distance between the two points.
      *******************************************************************************************************************************************************************/
-    float DistanceBetweenPoints(int first, int second, int first1, int second1);
+    static float DistanceBetweenPoints(int first, int second, int first1, int second1);
 
     /*******************************************************************************************************************************************************************
      * @brief Increases the win probability of machines in the vicinity of a winning machine.
@@ -463,7 +463,7 @@ public:
      *
      * @return void. This function does not return a value but modifies the win probability of certain machines.
      *******************************************************************************************************************************************************************/
-    void Up_Neighbour_Probability(Machine *M_win, float R, std::list<Machine *> &list_machine_neighbour);
+    static void Up_Neighbour_Probability(Machine *M_win, float R, std::list<Machine *> &list_machine_neighbour);
 
 
 
@@ -539,6 +539,24 @@ public:
     Machine* getRandomMachineByType(MACHINE_TYPE type);
 
     /*******************************************************************************************************************************************************************
+     * @brief Randomly selects a machine from a given vector of machines.
+     *
+     * This function selects and returns a random `Machine` object from a provided vector of machines. It calculates the size of the vector, generates a random index
+     * within the bounds of the vector, and then returns the machine at that index. This method is used when a random machine needs to be chosen from a specific
+     * subset of machines, typically categorized by type.
+     *
+     * @param vec A constant reference to a vector of `Machine` pointers, representing a specific subset of machines.
+     *
+     * @see randomNumberGeneratorInterval() for generating the random index within the range of the vector size.
+     *
+     * @exception None. This function does not throw exceptions, but it returns `nullptr` if the vector is empty.
+     * @exceptsafe This function is exception-neutral and does not modify any program state.
+     *
+     * @return Machine* - A pointer to the randomly selected machine from the vector. Returns `nullptr` if the vector is empty.
+     *******************************************************************************************************************************************************************/
+    static Machine* getRandomMachineFromVector(const std::vector<Machine *>& vec);
+
+    /*******************************************************************************************************************************************************************
      * @brief Randomly selects a type of machine currently in use in the Casino.
      *
      * This function returns a random `MACHINE_TYPE` from a predefined array of machine types currently in use. It randomly selects an index within the range of
@@ -552,7 +570,7 @@ public:
      *
      * @return MACHINE_TYPE - A randomly selected machine type from the types currently in use.
      *******************************************************************************************************************************************************************/
-    MACHINE_TYPE getRandomType();
+    static MACHINE_TYPE getRandomType();
 
     /*******************************************************************************************************************************************************************
      * @brief Modifies the failure probability of a randomly selected machine.

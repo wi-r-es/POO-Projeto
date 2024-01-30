@@ -680,7 +680,7 @@ User* Casino::getRandomUser(){
 }
 
 
-Machine* getRandomMachineFromVector(MACHINE_TYPE type, const std::vector<Machine *>& vec) {
+Machine* Casino::getRandomMachineFromVector(const std::vector<Machine *>& vec) {
     auto machineCount = vec.size();
     int randomIndex = randomNumberGeneratorInterval(0, static_cast<int>(machineCount) - 1);
     auto t = vec.at(randomIndex);
@@ -694,19 +694,19 @@ Machine* Casino::getRandomMachineByType(MACHINE_TYPE type){
         switch (type) {
             case MACHINE_TYPE::BLACKJACK:
                 if (v_Blackjack_Machines.empty()) { throw runtime_error{"Empty Blackjack List"}; }
-                machine = getRandomMachineFromVector(type, v_Blackjack_Machines);
+                machine = getRandomMachineFromVector(v_Blackjack_Machines);
                 break;
             case MACHINE_TYPE::ROULETTE:
                 if (v_Roulette_Machines.empty()) { throw runtime_error{"Empty Roulette List"}; }
-                machine = getRandomMachineFromVector(type, v_Roulette_Machines);
+                machine = getRandomMachineFromVector(v_Roulette_Machines);
                 break;
             case MACHINE_TYPE::CLASSIC_SLOT:
                 if (v_classicSlots_Machines.empty()) { throw runtime_error{"Empty ClassicSlot List"}; }
-                machine = getRandomMachineFromVector(type, v_classicSlots_Machines);
+                machine = getRandomMachineFromVector(v_classicSlots_Machines);
                 break;
             case MACHINE_TYPE::CRAPS:
                 if (v_Craps_Machines.empty()) { throw runtime_error{"Empty Craps List"}; }
-                machine = getRandomMachineFromVector(type, v_Craps_Machines);
+                machine = getRandomMachineFromVector(v_Craps_Machines);
                 break;
             default:
                 cerr << "Type not used, some error has occurred....";
