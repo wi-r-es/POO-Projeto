@@ -4,18 +4,6 @@
 
 #include "Headers/IO.h"
 #include "Headers/utils.h"
-/*
-ifstream open(const char* path, ios_base::openmode mode){
-    ifstream file{ path, mode };
-    if(!file.is_open()) {
-        string err{ "Unable to open file "};
-        err.append(path);
-        throw runtime_error{ err };
-    }
-    file.exceptions(ifstream::badbit);
-    return file;
-}
- */
 
 void logging(const std::string& filename, const std::string& funcname, const std::string& info) {
     if (funcname.empty() || info.empty())

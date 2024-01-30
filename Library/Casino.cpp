@@ -21,7 +21,6 @@ string logfile { "../Files/O/applog.csv" } ;
 string error_logfile { "../Files/O/error_log.csv" } ;
 string casinoFile { "../Files/O/casinoState.txt" } ;
 string reportfile { "../Files/O/casino_report.xml" } ;
-
 #endif
 
 
