@@ -26,16 +26,36 @@ string reportfile { "../Files/O/casino_report.xml" } ;
 
 namespace usefulFT{
     /** specific content for C++ 17, for C++ 20 concepts can be used **/
-    /**  Helper template to check for toString method **/
-    /** SORTING TEMPLATE FOR MACHINES **/
+
+    /*******************************************************************************************************************************************************************
+     * @brief Template structure to check for the existence of a `toString` method in a class.
+     *
+     * This template structure `has_toString_method` is a type trait used to determine if a given class `T` has a `toString` member function. It makes use of SFINAE
+     * (Substitution Failure Is Not An Error) to check for the existence of `toString`. It inherits from `std::true_type` or `std::false_type` based on the check.
+     *
+     * @tparam T The type to check for the `toString` method.
+     * @tparam The second template parameter is used for SFINAE and is defaulted to `std::void_t<>`.
+     *
+     * @note This structure is useful in compile-time checks and static assertions to ensure that a class provides a specific interface.
+     *******************************************************************************************************************************************************************/
     template<typename T, typename = std::void_t<>>
     struct has_toString_method : std::false_type {
     };
-
     template<typename T>
     struct has_toString_method<T, std::void_t<decltype(std::declval<T>().toString())>> : std::true_type {
     };
 
+    /*******************************************************************************************************************************************************************
+     * @brief Prints elements of a container assuming each element has a `toString` method.
+     *
+     * This function template iterates over a container and prints each element using its `toString` method. It statically asserts that the container's value type is
+     * `Machine` and that `Machine` has a `toString` method.
+     *
+     * @tparam Container The type of the container (should contain `Machine` objects).
+     * @param container A constant reference to the container whose elements are to be printed.
+     *
+     * @note This function is useful for printing details of objects stored in a collection in a standardized format.
+     *******************************************************************************************************************************************************************/
     template<typename Container>
     void printElements(const Container &container) {
         /** Check if the container's value_type is Machine **/
@@ -50,7 +70,19 @@ namespace usefulFT{
         }
     }
 
-
+    /*******************************************************************************************************************************************************************
+     * @brief Sorts elements of a container in a stable manner based on a comparison function.
+     *
+     * This function template sorts the elements of a container using `std::stable_sort` for random-access containers or `sort` for `std::list`. It requires a
+     * comparison function `comp` that compares the dereferenced elements (pointers) of the container.
+     *
+     * @tparam Container The type of the container to be sorted (e.g., vector, list of pointers).
+     * @tparam Compare The type of the comparison function.
+     * @param container A reference to the container to be sorted.
+     * @param comp The comparison function used for sorting.
+     *
+     * @note Specialized for handling `std::list` differently as it does not support random-access iterators required by `std::stable_sort`.
+     *******************************************************************************************************************************************************************/
     template <typename Container, typename Compare>
     void stableSortContainer(Container& container, Compare comp) {
         std::stable_sort(container.begin(), container.end(),
@@ -62,7 +94,19 @@ namespace usefulFT{
         container.sort([&](const auto& a, const auto& b) { return comp(*a, *b); });
     }
 
-    /** SORTING TEMPLATE FOR USERS **/
+    /*******************************************************************************************************************************************************************
+     * @brief Sorts elements representing users in a container in a stable manner based on a comparison function.
+     *
+     * Similar to `stableSortContainer`, this function template sorts user-related elements in a container. It is specifically named to reflect its typical use case
+     * with user data. It uses `std::stable_sort` or `sort` depending on the container type and requires a comparison function.
+     *
+     * @tparam Container The type of the container holding user data.
+     * @tparam Compare The type of the comparison function.
+     * @param container A reference to the container to be sorted.
+     * @param comp The comparison function used for sorting.
+     *
+     * @note Specialized for sorting user data, useful in contexts like user management systems or leaderboards.
+     *******************************************************************************************************************************************************************/
     template <typename Container, typename Compare>
     void stableSortUsers(Container& container, Compare comp) {
         std::stable_sort(container.begin(), container.end(),
@@ -164,6 +208,8 @@ bool Casino::Add(User *usr){
         return false;
     }
 }
+
+
 bool Casino::Add(Machine *m){
 
     if ( m== nullptr ) return false;
@@ -571,9 +617,6 @@ void Casino::Up_Neighbour_Probability(Machine *M_win, float R, std::list<Machine
 }
 
 
-
-
-
 void Casino::Run() {
     auto usr = getRandomUser();
     Machine* mac{};
@@ -675,6 +718,7 @@ Machine* Casino::getRandomMachineByType(MACHINE_TYPE type){
     }
     return machine;
 }
+
 MACHINE_TYPE Casino::getRandomType(){
     /** Only randomizes the machines types at use **/
     static const MACHINE_TYPE typesInUse[] = {
@@ -741,6 +785,7 @@ void Casino::check_routine() {
         }
     }
 }
+
 void Casino::removeFromTypeVector(Machine* machine, MACHINE_TYPE type) {
     vector<Machine*> *machine_vector;
 
@@ -773,6 +818,7 @@ void Casino::removeFromTypeVector(Machine* machine, MACHINE_TYPE type) {
         cerr << ex.what();
     }
 }
+
 void Casino::addToTypeVector(Machine* machine, MACHINE_TYPE type) {
     vector<Machine*> *machine_vector;
 
@@ -808,6 +854,7 @@ void Casino::printVectorsSize(){
             << "\n\tCraps: " << s2 << "\n\tClassicSlots: " << s3
             << "\n\tRoulette: " << s4 << "\n\tBrokenMachines: " << b << endl;
 }
+
 string Casino::VectorsSize(){
     auto s1 = v_Blackjack_Machines.size();
     auto s2 = v_Craps_Machines.size();
