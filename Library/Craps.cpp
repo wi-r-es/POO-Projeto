@@ -5,24 +5,20 @@
 #include "Headers/Craps.h"
 
 Craps::Craps(int posX, int posY) : Machine(MACHINE_TYPE::CRAPS, posX, posY){
-    point=0;
     Dice1=0;
     Dice2=0;
 }
 
 Craps::Craps(): Machine(MACHINE_TYPE::CRAPS, 0, 0) {
-    point=0;
     Dice1=0;
     Dice2=0;
 }
 
-Craps::~Craps() {
-
-}
+Craps::~Craps() = default;
 
 void Craps::RollDices() {
-    Dice1 = rand() % 6 + 1;
-    Dice2 = rand() % 6 + 1;
+    Dice1 = randomNumberGeneratorInterval(1,6);
+    Dice2 = randomNumberGeneratorInterval(1,6);
 }
 
 bool Craps::Play(User* user) {
@@ -69,13 +65,12 @@ bool Craps::Play(User* user) {
         user->incTimeSpent(elapsed);
         return true;
     }
-    /* else if (sumDices == 2 || sumDices == 3 || sumDices == 12) {
+    else if (sumDices == 2 || sumDices == 3 || sumDices == 12) {
 
         std::cout << "\nYou lost!" << std::endl;
         user->setMoney(userMoney - getBetAmount());
         return false;
     }
-     */
     else {
         auto end_time = std::chrono::steady_clock::now();
         auto elapsed = getElapsedTime(start_time, end_time);

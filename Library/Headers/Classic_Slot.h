@@ -48,8 +48,6 @@ public:
      * This constructor initializes an instance of the `ClassicSlot` class, which is derived from the `Machine` class. It sets the machine's type to `CLASSIC_SLOT`
      * and initializes its position to the provided coordinates (`posX`, `posY`). It also initializes the number of spins (`numSpins`) to zero.
      *
-     * @note This constructor is used when the position of the slot machine is known and needs to be specified.
-     *
      * @see Machine class for the base class constructor.
      *
      * @param posX The x-coordinate of the slot machine's position.
@@ -69,7 +67,7 @@ public:
      * its position to (0, 0). It also sets the number of spins (`numSpins`) to zero. This constructor is used when no specific position is provided for the slot
      * machine.
      *
-     * @note This constructor provides a way to create a ClassicSlot machine with default settings.
+     * @note This constructor provides a way to create a ClassicSlot machine with default settings. Mostly for testing purposes.
      *
      * @see Machine class for the base class constructor.
      *
@@ -102,11 +100,31 @@ public:
      ***************************************************/
     void resetNumSpins();
 
-    /**********************************************************************************
-     * @brief Function that simulates the operation of the Machine .                  *
-     *                                                                                *
-     * @param Debug : boolean that represents if the has to debug or not.             *
-     **********************************************************************************/
+    /*******************************************************************************************************************************************************************
+     * @brief Simulates a round of play on the ClassicSlot machine for a user.
+     *
+     * This member function of the `ClassicSlot` class manages the gameplay for a user on the classic slot machine. The function performs several key operations:
+     * 1. Checks the user's current monetary balance. If the user has no money, it increases their debt after a certain number of attempts and exits the round.
+     * 2. Determines a win based on a predefined probability. If the win condition is met, the user's balance is increased accordingly.
+     * 3. Simulates the slot machine spin by generating random numbers to represent slot symbols.
+     * 4. Determines the game's outcome based on the alignment of these symbols and updates the user's balance and game statistics.
+     * 5. Tracks the time spent by the user in playing the round.
+     *
+     * The function uses a random number generator for simulating the spinning of slot reels and decides the game outcome based on the matching of symbols.
+     * The bet amount is dynamically set based on the user's current money.
+     *
+     * @note This function is central to the slot machine gameplay, handling the betting process, spin simulation, and outcome determination.
+     *
+     * @see User class for user-related operations.
+     * @see randomNumberGeneratorInterval(), getWinProbability(), getBetAmount(), incUsage(), increaseTemperature() for various utility functions.
+     *
+     * @param user Pointer to a `User` object representing the player.
+     *
+     * @exception None. This function does not throw exceptions but relies on methods that might (e.g., random number generation).
+     * @exceptsafe This function provides basic exception safety. If an exception is thrown, the user's state remains unchanged.
+     *
+     * @return bool - The outcome of the round: `true` if the player wins, `false` otherwise.
+     *******************************************************************************************************************************************************************/
     bool Play(User* user) override;
 };
 

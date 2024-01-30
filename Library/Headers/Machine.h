@@ -224,15 +224,6 @@ public:
      ********************************************************************/
     [[nodiscard]] float getBetAmount() const;
 
-    /*****************************************************************
-     * @brief Random number generator between a min and a max        *
-     * @exceptsafe none - Shall not throw exceptions                 *
-     * @param x minimum number                                       *
-     * @param y maximum number                                       *
-     * @return Randomly generated integer between the given interval *
-     *****************************************************************/
-    int randomNumberGeneratorInterval(int x, int y);
-
     /************************************************************************
      * @brief Function that simulates the usage of the Machine by the user. *
      ************************************************************************/

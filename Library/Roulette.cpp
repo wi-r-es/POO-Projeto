@@ -34,9 +34,8 @@ Roulette::Roulette() : Machine(MACHINE_TYPE::ROULETTE, 0, 0) {
     colorbet[1] = "red";
 }
 
-Roulette:: ~Roulette(){
+Roulette:: ~Roulette()= default;
 
-}
 // was used for debug purposes
 void Roulette::printMap() const {
     for (const auto& pair : BOARD) {

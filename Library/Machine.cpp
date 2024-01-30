@@ -94,16 +94,6 @@ float Machine::getBetAmount() const {
     return betAmount;
 }
 
-int Machine::randomNumberGeneratorInterval(int x, int y) {
-    std::random_device rd; // Obtain a random number from hardware
-    std::mt19937 eng(rd()); // Seed the generator
-    std::uniform_int_distribution<> distr(x, y); // Define the range
-
-    int randomValue = distr(eng); // Generate a random number within the range
-    return randomValue;
-}
-
-
 bool Machine::Play(User* user){
     std::cout << __FUNCTION__  << std::endl;
     return true;
