@@ -118,10 +118,10 @@ namespace usefulFT{
     }
 }
 
-Casino::Casino(std::string name): NAME{std::move(name)}, MAX_Players{},JackpotRadius{}{
+Casino::Casino(std::string name): NAME{std::move(name)},JackpotRadius{}{
     rolex = new Clock();
 }
-Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)}, MAX_Players{max},JackpotRadius{jradius}{
+Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)},JackpotRadius{jradius}{
     rolex = new Clock();
 }
 
@@ -161,10 +161,7 @@ bool Casino::Load(const std::string &file) {
 
     auto settings = data.child("SETTINGS");
     NAME = settings.child_value("NAME");
-    MAX_Players = std::stoi(settings.child_value("MAX_PLAYERS"));
-    JackpotRadius = std::stof(settings.child_value("JackpotRadius"));
     std::cout << "Casino Name: " << NAME << std::endl;
-    std::cout << "Max Players: " << MAX_Players << std::endl;
     std::cout << "Jackpot Radius: " << JackpotRadius << std::endl;
 
     auto machineList = data.child("MACHINELIST");
@@ -536,7 +533,6 @@ void Casino::Report(const std::string& xml_file){
         /** Create a root node for the casino **/
         pugi::xml_node casinoNode = doc.append_child("CASINO");
         casinoNode.append_attribute("NAME") = NAME.c_str();
-        casinoNode.append_attribute("MAX_PLAYERS") = MAX_Players;
         casinoNode.append_attribute("JACKPOTRADIUS") = JackpotRadius;
 
         try{

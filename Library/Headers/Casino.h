@@ -93,7 +93,6 @@ extern std::string error_logfile;
 class Casino {
 private:
     std::string NAME;
-    int MAX_Players{};
     int JackpotRadius{};
     std::map<std::pair<int, int>, uint16_t > m_positions; // A map with the machines position and the machine ID
     std::list<Machine *> l_machines; // A list with machine TYPE as key and machine list as value

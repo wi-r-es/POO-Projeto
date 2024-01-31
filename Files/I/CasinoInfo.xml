@@ -1,7 +1,6 @@
 <DATA>
     <SETTINGS>
         <NAME> El chumanco Casino Vedas </NAME>
-        <MAX_PLAYERS> 50 </MAX_PLAYERS>
         <JackpotRadius> 10.5 </JackpotRadius>
     </SETTINGS>
     <MACHINELIST>
