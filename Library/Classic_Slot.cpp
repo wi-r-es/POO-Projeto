@@ -63,11 +63,10 @@ bool ClassicSlot::Play(User *user) {
     int rol1 = randomNumberGeneratorInterval(1,10);
     int rol2 = randomNumberGeneratorInterval(1,10);
     int rol3 = randomNumberGeneratorInterval(1,10);
-    int rol4 = randomNumberGeneratorInterval(1,10);
     setBetAmount(userMoney <= 5 ? 1 : static_cast<float>(randomNumberGeneratorInterval(5, static_cast<int>(userMoney))));
     user->setMoney(userMoney - getBetAmount());
     user->incBets(1);
-    if (rol1==rol2==rol3==rol4) {
+    if (rol1==rol2==rol3) {
         auto profit = getBetAmount()*12;
         user->setMoney(userMoney + profit);
         user->incPrizesWon(profit);
@@ -75,7 +74,7 @@ bool ClassicSlot::Play(User *user) {
         auto elapsed = chrono::duration_cast<chrono::seconds>(start_time - end_time);
         user->incTimeSpent(elapsed);
         return true;
-    } else if (rol1==rol2 || rol1==rol3 || rol1==rol4 || rol2==rol3 || rol2==rol4 || rol3==rol4 ) {
+    } else if (rol1==rol2 || rol1==rol3 || rol2==rol3) {
         auto profit = getBetAmount()*4;
         user->setMoney(userMoney + profit);
         user->incPrizesWon(profit);
