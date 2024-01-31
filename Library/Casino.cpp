@@ -120,6 +120,7 @@ namespace usefulFT{
 
 Casino::Casino(std::string name): NAME{std::move(name)},JackpotRadius{}{
     rolex = new Clock();
+    total_profits=0;
 }
 Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)},JackpotRadius{jradius}{
     rolex = new Clock();
@@ -321,6 +322,8 @@ void Casino::Listing(std::ostream &f){
     }
     f << "[[Containers size]]\n";
     f << VectorsSize() << '\n';
+    f << "[[Casino Profits]]--->\n";
+    f <<  getTotalProfits() << '\n';
 }
 
 void Casino::Listing(float X, std::ostream &f){
@@ -534,6 +537,7 @@ void Casino::Report(const std::string& xml_file){
         pugi::xml_node casinoNode = doc.append_child("CASINO");
         casinoNode.append_attribute("NAME") = NAME.c_str();
         casinoNode.append_attribute("JACKPOTRADIUS") = JackpotRadius;
+        casinoNode.append_attribute("PROFITS") = total_profits;
 
         try{
             usefulFT::stableSortContainer(l_machines, [](const Machine& a, const Machine& b) {
@@ -643,6 +647,7 @@ void Casino::Run() {
         }
         auto result = mac->Play(usr);
         if(result) Up_Neighbour_Probability(mac, this->getRadius(), l_machines );
+        else this->AddProfits(mac->getBetAmount());
         if(mac->getFailureProbability() == 0.8f) {
             throw runtime_error{"Machine malfunction due to failure in the system hardware."};
         }
@@ -875,4 +880,15 @@ string Casino::VectorsSize(){
 
 int Casino::getRadius() const{
     return JackpotRadius;
+}
+
+void Casino::setTotalProfits(double totalProfits) {
+    total_profits = totalProfits;
+}
+double Casino::getTotalProfits() const{
+    return total_profits;
+}
+
+void Casino::AddProfits(double profits) {
+    total_profits += profits;
 }

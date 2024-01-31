@@ -103,6 +103,7 @@ private:
     std::vector<Machine *> v_Craps_Machines;
     std::list<User*> l_users;
     std::vector<Machine *> v_Broken_Machines;
+    double total_profits;
     // More data members related to opening and closing time, etc.
     Clock *rolex;
 
@@ -668,6 +669,26 @@ public:
      * @return None                                    *
      ***************************************************/
     [[nodiscard]] int getRadius() const;
+
+    /***************************************************
+     * @brief Setter for casino total profit           *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return None                                    *
+     ***************************************************/
+    void setTotalProfits(double totalProfits);
+    /***************************************************
+     * @brief Add casino profit to casino              *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return None                                    *
+     ***************************************************/
+    void AddProfits(double profits);
+
+    /***************************************************
+     * @brief Getter for casino total profit           *
+     * @exceptsafe none - Shall not throw exceptions   *
+     * @return None                                    *
+     ***************************************************/
+    double getTotalProfits() const;
 };
 
 #endif //CODE_CASINO_H
