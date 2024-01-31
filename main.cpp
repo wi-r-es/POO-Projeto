@@ -80,7 +80,7 @@ int main() {
 
     const size_t mem = casino->Total_Memory();
     cout << "\nMemoria total ocupado pelo casino: " << mem << "bytes" << endl;
-
+    cout << "\nTotal Profit Casino: " << casino->getTotalProfits() << endl;
     /** Callback at program ending **/
     auto endTime = std::chrono::steady_clock::now();
     static auto time_executing = (getElapsedTime(startTime, endTime).count())/60;

@@ -103,7 +103,7 @@ private:
     std::vector<Machine *> v_Craps_Machines;
     std::list<User*> l_users;
     std::vector<Machine *> v_Broken_Machines;
-    double total_profits;
+    unsigned long long total_profits;
     // More data members related to opening and closing time, etc.
     Clock *rolex;
 
@@ -675,7 +675,8 @@ public:
      * @exceptsafe none - Shall not throw exceptions   *
      * @return None                                    *
      ***************************************************/
-    void setTotalProfits(double totalProfits);
+    [[maybe_unused]] void setTotalProfits(unsigned long long totalProfits);
+
     /***************************************************
      * @brief Add casino profit to casino              *
      * @exceptsafe none - Shall not throw exceptions   *
@@ -688,7 +689,7 @@ public:
      * @exceptsafe none - Shall not throw exceptions   *
      * @return None                                    *
      ***************************************************/
-    double getTotalProfits() const;
+    [[nodiscard]] unsigned long long getTotalProfits() const;
 };
 
 #endif //CODE_CASINO_H

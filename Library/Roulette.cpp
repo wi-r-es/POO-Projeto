@@ -109,12 +109,12 @@ bool Roulette::Play(User* user) {
     auto [winNumber, winColor] = oddGenerate();
     /** Print bets **/
     if (multibet)
-        cout << "You bet $" << getBetAmount() << " on " << betNumber << betColor << endl;
+        cout << "You bet $" << getBetAmount() << " on " << betNumber << " " << betColor << endl;
     else
         cout << "You bet $" << getBetAmount() << " on " << betColor << endl;
 
     /** Print winning pair **/
-    cout << "The winning pair is: " << winNumber
+    cout << "The winning pair is: " << winNumber << " "
          << winColor << "." << endl;
 
     float profit=0;

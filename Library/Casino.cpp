@@ -882,10 +882,10 @@ int Casino::getRadius() const{
     return JackpotRadius;
 }
 
-void Casino::setTotalProfits(double totalProfits) {
+[[maybe_unused]] void Casino::setTotalProfits(unsigned long long totalProfits) {
     total_profits = totalProfits;
 }
-double Casino::getTotalProfits() const{
+unsigned long long Casino::getTotalProfits() const{
     return total_profits;
 }
 

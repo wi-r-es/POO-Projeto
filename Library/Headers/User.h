@@ -29,9 +29,8 @@
  * d_money              -> User's money                                                  *
  * d_time_spent         -> User's time spent inside the casino.                          *
  * d_prizes_won         -> User's total amount of prizes won.                            *
- * d_bets                 -> User's bet within a game round.                               *
- * d_profit               -> User's profit inside the casino.                              *
- * d_debt                 -> User's debt to the casino.                                    *
+ * d_bets               -> User's bet within a game round.                               *
+ * d_debt               -> User's debt to the casino.                                    *
  * count_plays_no_money -> Counter for number of times user tried to play without money. *
  * playing              -> Flag to control whether user is playing. \NOT USED            *
  *****************************************************************************************/
@@ -46,7 +45,6 @@ private:
     std::chrono::seconds d_time_spent;
     float d_prizes_won;
     int d_bets;
-    int d_profit;
     float d_debt;
     int count_plays_no_money;
     [[maybe_unused]]unsigned int playing : 1; //bitfield to tell if the user is playing or not

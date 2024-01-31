@@ -14,7 +14,7 @@ User::User(char *id, std::string name, std::string city, int age) : d_name(std::
     d_prizes_won=0;
     playing = 0;
     d_bets=0;
-    d_profit=0;
+    //d_profit=0;
 }
 
 User::~User(){
@@ -112,7 +112,6 @@ std::string User::toString() {
     s.append(" [Playing]->").append(playing ? "Yes" : "No").append(";");
     s.append(" [Money]->").append(std::to_string(d_money)).append(";");
     s.append(" [Bets]->").append(std::to_string(d_bets)).append(";");
-    s.append(" [Profit]->").append(std::to_string(d_profit)).append(";");
     s.append(" [Debt]->").append(std::to_string(d_debt)).append(";");
     s.append(" [Attempts No Money]->").append(std::to_string(count_plays_no_money));
 
