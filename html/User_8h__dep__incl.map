@@ -1,0 +1,29 @@
+<map id="src/Library/Headers/User.h" name="src/Library/Headers/User.h">
+<area shape="rect" id="Node000001" title="Class prototypes for User ADT Structure/Class *This contains the prototypes for the managing of User ..." alt="" coords="332,5,479,50"/>
+<area shape="rect" id="Node000002" href="$Casino_8h.html" title="Class prototypes for Casino ADT Structure/Class *This contains the prototypes for the managing of Cas..." alt="" coords="344,283,491,328"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="317,45,200,71,141,89,86,111,43,136,27,150,16,165,9,180,9,197,15,215,27,234,47,249,78,263,161,282,256,294,343,300,343,305,256,299,160,287,76,268,45,254,23,237,10,217,4,198,4,179,11,162,23,146,40,132,84,106,139,84,199,66,316,40"/>
+<area shape="rect" id="Node000003" href="$Classic__Slot_8h.html" title="Class prototypes for Classic Slot Machine ADT Structure/Class *This contains the prototypes for the m..." alt="" coords="37,191,184,235"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="359,60,147,192,144,188,357,56"/>
+<area shape="rect" id="Node000004" href="$Machine_8h.html" title="Class prototypes for Casino Machines ADT Structure/Class *This contains the prototypes for the managi..." alt="" coords="430,98,578,143"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="442,59,482,96,479,99,438,63"/>
+<area shape="rect" id="Node000008" href="$Roulette_8h.html" title="Class prototypes for Roulette Machine ADT Structure/Class *This contains the prototypes for the manag..." alt="" coords="976,191,1123,235"/>
+<area shape="poly" id="edge18_Node000001_Node000008" title=" " alt="" coords="494,52,976,188,974,193,493,57"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="199,238,345,280,343,285,198,243"/>
+<area shape="poly" id="edge7_Node000004_Node000002" title=" " alt="" coords="416,136,315,159,274,174,248,192,242,203,240,212,249,234,267,255,291,271,317,283,344,291,342,296,315,288,288,275,264,259,244,237,235,213,237,201,245,189,271,170,313,154,414,131"/>
+<area shape="poly" id="edge8_Node000004_Node000003" title=" " alt="" coords="416,145,185,197,184,192,414,139"/>
+<area shape="rect" id="Node000005" href="$Blackjack_8h.html" title="Class prototypes for Blackjack Machine ADT Structure/Class *This contains the prototypes for the mana..." alt="" coords="258,191,406,235"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="451,153,374,193,371,188,448,148"/>
+<area shape="rect" id="Node000006" href="$Craps_8h.html" title="Class prototypes for Craps Machine ADT Structure/Class *This contains the prototypes for the managing..." alt="" coords="430,191,578,235"/>
+<area shape="poly" id="edge9_Node000004_Node000006" title=" " alt="" coords="507,158,507,190,501,190,501,158"/>
+<area shape="rect" id="Node000007" href="$IO_8h_source.html" title=" " alt="" coords="602,199,779,227"/>
+<area shape="poly" id="edge11_Node000004_Node000007" title=" " alt="" coords="563,147,665,196,662,201,561,152"/>
+<area shape="poly" id="edge13_Node000004_Node000008" title=" " alt="" coords="593,130,765,154,963,188,976,191,975,196,962,193,764,159,593,135"/>
+<area shape="rect" id="Node000009" href="$utils_8h_source.html" title=" " alt="" coords="804,191,951,235"/>
+<area shape="poly" id="edge15_Node000004_Node000009" title=" " alt="" coords="594,143,780,188,804,194,803,199,779,193,592,148"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="365,245,399,281,395,285,361,249"/>
+<area shape="poly" id="edge10_Node000006_Node000002" title=" " alt="" coords="475,248,440,285,436,281,471,245"/>
+<area shape="poly" id="edge12_Node000007_Node000002" title=" " alt="" coords="637,235,484,285,482,280,636,230"/>
+<area shape="poly" id="edge14_Node000008_Node000002" title=" " alt="" coords="961,238,699,277,492,300,491,295,698,272,960,233"/>
+<area shape="poly" id="edge16_Node000009_Node000002" title=" " alt="" coords="789,239,492,295,491,289,788,233"/>
+<area shape="poly" id="edge17_Node000009_Node000004" title=" " alt="" coords="788,190,577,140,579,134,789,184"/>
+</map>

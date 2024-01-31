@@ -1,0 +1,11 @@
+<map id="Machine" name="Machine">
+<area shape="rect" id="Node000001" title=" " alt="" coords="239,5,409,288"/>
+<area shape="rect" id="Node000002" href="$classBlackjack.html" title=" " alt="" coords="5,336,163,640"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,263,177,338,165,355,160,352,172,334,228,260"/>
+<area shape="rect" id="Node000003" href="$classClassicSlot.html" title=" " alt="" coords="187,389,322,587"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="295,303,277,390,272,389,290,302"/>
+<area shape="rect" id="Node000004" href="$classCraps.html" title=" " alt="" coords="346,411,443,565"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="359,302,381,410,376,411,354,303"/>
+<area shape="rect" id="Node000005" href="$classRoulette.html" title=" " alt="" coords="468,389,628,587"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="420,278,458,335,492,388,488,391,454,337,416,281"/>
+</map>

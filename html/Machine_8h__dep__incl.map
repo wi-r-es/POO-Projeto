@@ -1,0 +1,24 @@
+<map id="src/Library/Headers/Machine.h" name="src/Library/Headers/Machine.h">
+<area shape="rect" id="Node000001" title="Class prototypes for Casino Machines ADT Structure/Class *This contains the prototypes for the managi..." alt="" coords="492,5,639,50"/>
+<area shape="rect" id="Node000002" href="$Blackjack_8h.html" title="Class prototypes for Blackjack Machine ADT Structure/Class *This contains the prototypes for the mana..." alt="" coords="5,98,153,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="477,46,172,101,154,104,153,99,170,95,476,41"/>
+<area shape="rect" id="Node000003" href="$Casino_8h.html" title="Class prototypes for Casino ADT Structure/Class *This contains the prototypes for the managing of Cas..." alt="" coords="399,191,546,235"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="477,37,401,44,324,57,257,75,233,86,217,100,206,122,210,140,226,156,252,170,323,190,399,202,398,208,322,195,250,175,222,160,205,143,201,121,213,96,230,82,256,70,322,51,401,39,476,31"/>
+<area shape="rect" id="Node000004" href="$Classic__Slot_8h.html" title="Class prototypes for Classic Slot Machine ADT Structure/Class *This contains the prototypes for the m..." alt="" coords="227,98,374,143"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="489,58,365,100,363,95,487,53"/>
+<area shape="rect" id="Node000005" href="$Craps_8h.html" title="Class prototypes for Craps Machine ADT Structure/Class *This contains the prototypes for the managing..." alt="" coords="399,98,546,143"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="535,63,496,100,492,96,531,59"/>
+<area shape="rect" id="Node000006" href="$IO_8h_source.html" title=" " alt="" coords="570,107,748,134"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="600,59,647,104,644,108,597,63"/>
+<area shape="rect" id="Node000007" href="$Roulette_8h.html" title="Class prototypes for Roulette Machine ADT Structure/Class *This contains the prototypes for the manag..." alt="" coords="772,98,919,143"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="648,53,779,95,778,100,646,58"/>
+<area shape="rect" id="Node000008" href="$utils_8h_source.html" title=" " alt="" coords="944,98,1091,143"/>
+<area shape="poly" id="edge12_Node000001_Node000008" title=" " alt="" coords="655,44,920,95,944,101,943,106,918,101,654,49"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="168,139,399,192,397,197,167,145"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="356,148,433,188,430,193,354,153"/>
+<area shape="poly" id="edge7_Node000005_Node000003" title=" " alt="" coords="475,158,475,190,470,190,470,158"/>
+<area shape="poly" id="edge9_Node000006_Node000003" title=" " alt="" coords="619,144,518,192,516,188,617,139"/>
+<area shape="poly" id="edge11_Node000007_Node000003" title=" " alt="" coords="758,146,547,197,546,191,756,141"/>
+<area shape="poly" id="edge14_Node000008_Node000001" title=" " alt="" coords="928,98,639,43,640,38,929,92"/>
+<area shape="poly" id="edge13_Node000008_Node000003" title=" " alt="" coords="929,146,717,182,547,205,546,200,717,176,928,140"/>
+</map>

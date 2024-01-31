@@ -1,0 +1,28 @@
+var classUser =
+[
+    [ "User", "classUser.html#a81c2253ede2acde4b594189767810045", null ],
+    [ "~User", "classUser.html#a7d1cf7c22ba031caec015ec427419513", null ],
+    [ "addDebt", "classUser.html#afd7ec667ef66babaced0d08b80b7afc3", null ],
+    [ "getAge", "classUser.html#a71385d4c5a3a509af5024b3c8e1e1aa9", null ],
+    [ "getAttempts", "classUser.html#ae2a2ae3631cd82786fc4033c99f0b36f", null ],
+    [ "getBets", "classUser.html#a9beb3f70cc61c47254e35c48abe5ed7e", null ],
+    [ "getCity", "classUser.html#ad7bb50974b33c4808e0c9641e96a5c9d", null ],
+    [ "getDebt", "classUser.html#aeda840e8160db398b472e8c360da8424", null ],
+    [ "getId", "classUser.html#a6741d13ce784edea7a9dc417843ff4d7", null ],
+    [ "getMoney", "classUser.html#a10b8edd7c0427087546aaf2437d8a1c3", null ],
+    [ "getName", "classUser.html#ae332af7a6fbb36879fa401b1b98e5027", null ],
+    [ "getPlaying", "classUser.html#a8fdd49602d7d6927e8ff654c12bb0ed0", null ],
+    [ "getPrizesWon", "classUser.html#a6e238434ce65670c7fc34f32f41bd9ef", null ],
+    [ "getTimeSpent", "classUser.html#aa6c9b09bae91b2ad7724c2b3fc5edaaf", null ],
+    [ "incAttempts", "classUser.html#a14ea25f040bb7d67fa1cfc53ae991fb0", null ],
+    [ "incBets", "classUser.html#a533140ff23785cb3e2bd5327b39e011b", null ],
+    [ "incPrizesWon", "classUser.html#a0392fca61391dfe4637fa593a0ce0577", null ],
+    [ "incTimeSpent", "classUser.html#ae9ac6465241ae97d162539c065b0b807", null ],
+    [ "resetAttempts", "classUser.html#a69d7b25e0775fe908d2bbabf5dd770ae", null ],
+    [ "setAge", "classUser.html#a1129ee98efc56a38329bfb0286d79061", null ],
+    [ "setCity", "classUser.html#a4ddedbfc8b5d9a63e30ef7be55da978a", null ],
+    [ "setMoney", "classUser.html#a2be5e36223ddd65281ccd16aa0bd232f", null ],
+    [ "setName", "classUser.html#a157d830ab001ddfbd7bafaad0927edbb", null ],
+    [ "setPlaying", "classUser.html#a88fde2fabba3e525cb0b083be7f56693", null ],
+    [ "toString", "classUser.html#a64968da937c80f85d772477492d9c79e", null ]
+];
