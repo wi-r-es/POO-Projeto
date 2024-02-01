@@ -37,7 +37,7 @@ Blackjack::~Blackjack() {
 
 void Blackjack::give_card(std::vector<int>& hand){
     auto itr = Values_Cards.begin();
-    int randCardIndex = randomNumberGeneratorInterval(0, Values_Cards.size() - 1);
+    int randCardIndex = randomNumberGeneratorInterval(0, Values_Cards.size()-1);
     std::advance(itr, randCardIndex);
     hand.push_back(itr->second);
 
@@ -51,7 +51,9 @@ void Blackjack::start_game(){
     }
     show_player_hand();
     std::cout<<"DEALER'S FIRST HAND"<<std::endl;
-    std::cout<<Dealers_Hand.at(0)<<"| ?? \n\n"<<std::endl;
+   // std::cout<<Dealers_Hand.at(0)<<"| ?? \n\n"<<std::endl;
+    for(const auto& card : Dealers_Hand)
+        std::cout << card << "| ";
 }
 
 void Blackjack::show_player_hand() {
@@ -103,9 +105,11 @@ bool Blackjack::simulate_game(){
     bool game = true;
     /** Give the cards to the player and dealer **/
     start_game();
-
+    //Wait(5);
     while(game){
         if(get_total(Players_Hand) > 21){
+            show_player_hand();
+            //Wait(10);
             std::cout << "PLAYER LOSES" << std::endl;
             return false;
         }else {
@@ -121,6 +125,7 @@ bool Blackjack::simulate_game(){
                 /** Dealer hits until the total on the table is at least 17 **/
                 while(true){
                     if(get_total(Dealers_Hand) > 17){
+                        //Wait(5);
                         break;
                     }
                     std::cout << "\n-> Dealer is hitting..." << std::endl;
@@ -141,7 +146,7 @@ bool Blackjack::simulate_game(){
     }
     std::cout << "FINAL" << std::endl;
     show_game();
-
+    //Wait(10);
     /** Checks who has the bigger value in their hands **/
     auto p_hand = get_total(Players_Hand);
     auto d_hand = get_total(Dealers_Hand);
@@ -157,9 +162,8 @@ bool Blackjack::simulate_game(){
 }
 
 
-
-
 bool Blackjack::Play(User* user) {
+    std::cout << "\n\t[BLACKJACK]\n" << std::endl;
     auto start_time = std::chrono::steady_clock::now();
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {
@@ -185,11 +189,13 @@ bool Blackjack::Play(User* user) {
         user->incTimeSpent(elapsed);
         return true;
     }
-    simulate_game();
+    auto result = simulate_game();
+    Players_Hand.erase(Players_Hand.begin(), Players_Hand.end());
+    Dealers_Hand.erase(Dealers_Hand.begin(), Dealers_Hand.end());
     incUsage();
     increaseTemperature();
     auto end_time = std::chrono::steady_clock::now();
     auto elapsed = getElapsedTime(start_time, end_time);
     user->incTimeSpent(elapsed);
-    return true;
+    return result;
 }

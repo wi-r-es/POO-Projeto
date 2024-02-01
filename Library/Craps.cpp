@@ -22,6 +22,7 @@ void Craps::RollDices() {
 }
 
 bool Craps::Play(User* user) {
+    std::cout << "\n\t[CRAPS]\n" << std::endl;
     auto start_time = std::chrono::steady_clock::now();
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {

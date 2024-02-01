@@ -69,6 +69,7 @@ string Roulette::simulate_singlebet(){
  */
 
 bool Roulette::Play(User* user) {
+    cout << "\n\t[ROULETTE]\n" << endl;
     auto start_time = std::chrono::steady_clock::now();
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {

@@ -33,7 +33,7 @@ void ClassicSlot::resetNumSpins() {
 }
 
 bool ClassicSlot::Play(User *user) {
-    cout << __FUNCTION__ << endl;
+    cout << "\n\t[CLASSIC_SLOT]\n" << endl;
     auto start_time = chrono::steady_clock::now();
     int userMoney = user->getMoney();
     if (userMoney == 0 ) {

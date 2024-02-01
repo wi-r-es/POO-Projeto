@@ -783,7 +783,7 @@ void Casino::check_routine() {
             mac->reset();
             addToTypeVector(mac,type);
             it = v_Broken_Machines.erase(it);  /** Remove fixed machine and update iterator **/
-            cout << "Machine removed from broken vector";
+            cout << "Machine removed from broken vector; ";
         } else {
             ++it;
         }
