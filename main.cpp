@@ -516,10 +516,13 @@ void subsubmenu(Casino* casino) {
              << "###   $<0> Exit the submenu.\n"
              << "\n\n\t [<Enter your choice>]: ";
 
-        cin >> choice;
-
-        /** Clearing input buffer **/
-        cin.clear();
+        if (!(cin >> choice)) {
+            cin.clear(); /** Clear error state **/
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); /** Discard bad input **/
+            cout << "Invalid input. Please enter a number.\n";
+            continue; /** Skip the rest of this iteration **/
+        }
+        /** Now safely ignore any extra input until the next newline **/
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         cout << "CHOICE -> " << choice << endl;
