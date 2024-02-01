@@ -17,8 +17,7 @@ User::User(char *id, std::string name, std::string city, int age) : d_name(std::
     //d_profit=0;
 }
 
-User::~User(){
-}
+User::~User()= default;
 
 // Setters and Getters
 const char *User::getId() const {

@@ -38,12 +38,13 @@ namespace usefulFT{
      *
      * @note This structure is useful in compile-time checks and static assertions to ensure that a class provides a specific interface.
      *******************************************************************************************************************************************************************/
-    template<typename T, typename = std::void_t<>>
-    struct has_toString_method : std::false_type {
+
+    template<typename T, typename = std::void_t<>> // std::void_t é um tipo especial em C++ que resulta sempre em void, independentemente dos tipos de parâmetros que recebe
+    struct has_toString_method : std::false_type { // por padrao será avaliado como false
     };
     template<typename T>
-    struct has_toString_method<T, std::void_t<decltype(std::declval<T>().toString())>> : std::true_type {
-    };
+    struct has_toString_method<T, std::void_t<decltype(std::declval<T>().toString())>> : std::true_type { //std::declval<T>(): Cria um valor fictício do tipo T
+    };      // Se a expressão decltype for válida (ou seja, se T tiver um método toString()), a especialização do std::void_t será válida e resultará em void.
 
     /*******************************************************************************************************************************************************************
      * @brief Prints elements of a container assuming each element has a `toString` method.
@@ -124,6 +125,7 @@ Casino::Casino(std::string name): NAME{std::move(name)},JackpotRadius{}{
 }
 Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)},JackpotRadius{jradius}{
     rolex = new Clock();
+    total_profits=0;
 }
 
 Casino::~Casino(){
@@ -632,8 +634,9 @@ void Casino::Run() {
         }
         ++attempts;
     } while(attempts <= num_macs);
-
-    if (mac->getState() == MACHINE_STATE::BROKEN || mac->getState() == MACHINE_STATE::OFF || mac == nullptr) {
+    if(mac == nullptr) return;
+    auto state = mac->getState();
+    if (state == MACHINE_STATE::BROKEN || state == MACHINE_STATE::OFF || state == MACHINE_STATE::MAINTENANCE) {
         cout << "No working machines available.\n";
         return; /** Early exit if no working machine is found **/
     }
@@ -773,7 +776,7 @@ void Casino::check_routine() {
             /** Reactivate machine **/
             //Wait(5);
             auto s = mac->toStringOut();
-            s.append(" -- was in maitenance for ") + to_string(timeInMaintenance);
+            s.append(" -- was in maintenance for ") + to_string(timeInMaintenance);
             logging(logfile, s, to_string(timeInMaintenance));
 
             mac->setState(MACHINE_STATE::ON);

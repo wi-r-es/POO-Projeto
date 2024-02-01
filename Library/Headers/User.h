@@ -37,16 +37,16 @@
 class User {
 private:
 
-    char d_id[10];
+    char d_id[10]{};
     std::string d_name;
     std::string d_city;
     int d_age;
     float d_money;
-    std::chrono::seconds d_time_spent;
+    std::chrono::seconds d_time_spent{};
     float d_prizes_won;
     int d_bets;
-    float d_debt;
-    int count_plays_no_money;
+    float d_debt{};
+    int count_plays_no_money{};
     [[maybe_unused]]unsigned int playing : 1; //bitfield to tell if the user is playing or not
 
 public:
