@@ -220,12 +220,14 @@ void menu(Casino* casino) {
              << "###   $<0> Exit the menu and return the flow control to the simulation.\n"
              << "\n\n\t [<Enter your choice>]: ";
 
-        cin >> choice;
-
-        /** Clearing input buffer **/
-        cin.clear();
+        if (!(cin >> choice)) {
+            cin.clear(); /** Clear error state **/
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); /** Discard bad input **/
+            cout << "Invalid input. Please enter a number.\n";
+            continue; /** Skip the rest of this iteration **/
+        }
+        /** Now safely ignore any extra input until the next newline **/
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
         cout << "CHOICE -> " << choice << endl;
         time_t currentTime{};
         if(choice == 3)  currentTime = casino->getClock()->getTime();
@@ -321,7 +323,7 @@ void ROTMU(Casino* casino){
     beautify(" Ranking of the ~Most USED~");
     auto ml = casino->Ranking_of_the_most_used();
     if(ml->empty()){
-        cerr << "An error as occured...\n" << endl;
+        cerr << "An error as occurred...\n" << endl;
     }
     else{
         for(auto &entry : *ml){
@@ -345,7 +347,7 @@ void MFU(Casino* casino){
     beautify(" Ranking of the ~Most Frequent Users~");
     auto mfu = casino->Most_Frequent_Users();
     if(mfu->empty()){
-        cerr << "An error as occured...\n" << endl;
+        cerr << "An error as occurred...\n" << endl;
     }
     else{
         for(auto &entry : *mfu){
@@ -369,7 +371,7 @@ void MWU(Casino* casino){
     beautify(" Ranking of the ~Most Winners Users~");
     auto mwu = casino->Most_Wins_Users();
     if(mwu->empty()){
-        cerr << "An error as occured...\n" << endl;
+        cerr << "An error as occurred...\n" << endl;
     }
     else{
         for(auto &entry : *mwu){
@@ -416,12 +418,14 @@ void submenu(Casino* casino) {
              << "###   $<0> Exit the submenu.\n"
              << "\n\n\t [<Enter your choice>]: ";
 
-        cin >> choice;
-
-        /** Clearing input buffer **/
-        cin.clear();
+        if (!(cin >> choice)) {
+            cin.clear(); /** Clear error state **/
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); /** Discard bad input **/
+            cout << "Invalid input. Please enter a number.\n";
+            continue; /** Skip the rest of this iteration **/
+        }
+        /** Now safely ignore any extra input until the next newline **/
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
         cout << "CHOICE -> " << choice << endl;
         int id;
         switch (choice) {
@@ -433,27 +437,33 @@ void submenu(Casino* casino) {
             case 2:
                 cout << "You selected Option 2 - Turn Off Machine by UID.\n";
                 cout << "Machine UID to turn off: ";
-                this_thread::sleep_for(std::chrono::seconds(5));
-                cin >> id;
-                /** Clearing input buffer **/
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cout << "CHOICE -> " << choice << endl;
-                casino->TurnOff(id);
+                this_thread::sleep_for(std::chrono::seconds(1));
+                int machineUID;
+                if (!(cin >> machineUID)) {
+                    cin.clear(); // Clear error state
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard bad input
+                    cout << "Invalid input. Please enter a valid UID.\n";
+                    break;
+                }
+                cout << "CHOICE -> " << machineUID << endl;
+                cout << "FROM:  " << machineSTATEToString(casino->getState(machineUID)) << endl;
+
+                casino->TurnOff(machineUID);
+                cout << "TO:  " << machineSTATEToString(casino->getState(machineUID)) << endl;
                 logging(logfile, __FUNCTION__, "Turn Off Machine by UID");
                 break;
             case 3:
                 cout << "You selected Option 3 - Get Machine State by UID.\n";
                 cout << "Machine UID to get state: ";
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                //this_thread::sleep_for(std::chrono::seconds(5));
-                cin >> id;
-                /** Clearing input buffer **/
-                //cin.clear();
-                //cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cout << "CHOICE -> " << choice << endl;
-                casino->getState(id);
+                int UID;
+                if (!(cin >> UID)) {
+                    cin.clear(); // Clear error state
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard bad input
+                    cout << "Invalid input. Please enter a valid UID.\n";
+                    break;
+                }
+                cout << "CHOICE -> " << UID << endl;
+                cout << machineSTATEToString(casino->getState(UID)) << endl;
                 logging(logfile, __FUNCTION__, "Get Machine State by UID");
                 break;
             case 5:
