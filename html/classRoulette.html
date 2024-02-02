@@ -19,9 +19,6 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -127,26 +124,44 @@ Collaboration diagram for Roulette:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aaf06fbf3c3268868e637ddd37df10cc1" id="r_aaf06fbf3c3268868e637ddd37df10cc1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf06fbf3c3268868e637ddd37df10cc1">Roulette</a> (int posX, int posY)</td></tr>
-<tr class="memdesc:aaf06fbf3c3268868e637ddd37df10cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRoulette.html">Roulette</a> with specified position parameters.  <br /></td></tr>
+<tr class="memdesc:aaf06fbf3c3268868e637ddd37df10cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRoulette.html">Roulette</a> with specified position parameters. *</p><ul>
+<li>This constructor initializes an instance of the <code><a class="el" href="classRoulette.html">Roulette</a></code> class, which is derived from the <code><a class="el" href="classMachine.html">Machine</a></code> class. It sets the machine's type to <code>ROULETTE</code> and * initializes its position to the provided coordinates (<code>posX</code>, <code>posY</code>). Additionally, it initializes the <a class="el" href="classRoulette.html">Roulette</a> board with predefined black, red, and green * numbers, following standard <a class="el" href="classRoulette.html">Roulette</a> rules. * *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:aaf06fbf3c3268868e637ddd37df10cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3fee153e8e8dd3be868c02af02fa36b" id="r_ad3fee153e8e8dd3be868c02af02fa36b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3fee153e8e8dd3be868c02af02fa36b">Roulette</a> ()</td></tr>
-<tr class="memdesc:ad3fee153e8e8dd3be868c02af02fa36b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor for <a class="el" href="classRoulette.html">Roulette</a>.  <br /></td></tr>
+<tr class="memdesc:ad3fee153e8e8dd3be868c02af02fa36b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor for <a class="el" href="classRoulette.html">Roulette</a>. *</p><ul>
+<li>This default constructor initializes an instance of the <code><a class="el" href="classRoulette.html">Roulette</a></code> class with default position values (0, 0) and sets the machine type to <code>ROULETTE</code>. It also * initializes the <a class="el" href="classRoulette.html">Roulette</a> board similarly to the overloaded constructor. This constructor is used when no specific position is provided for the <a class="el" href="classRoulette.html">Roulette</a> table. * *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:ad3fee153e8e8dd3be868c02af02fa36b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20b495b0b9da98c2ab17af1529964ac9" id="r_a20b495b0b9da98c2ab17af1529964ac9"><td class="memItemLeft" align="right" valign="top"><a id="a20b495b0b9da98c2ab17af1529964ac9" name="a20b495b0b9da98c2ab17af1529964ac9"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Roulette</b> ()</td></tr>
 <tr class="memdesc:a20b495b0b9da98c2ab17af1529964ac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for <a class="el" href="classRoulette.html">Roulette</a> <a class="el" href="classMachine.html">Machine</a> *. <br /></td></tr>
 <tr class="separator:a20b495b0b9da98c2ab17af1529964ac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefdaf36a2c339105eb3000f194509cca" id="r_aefdaf36a2c339105eb3000f194509cca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aefdaf36a2c339105eb3000f194509cca">printMap</a> () const</td></tr>
-<tr class="memdesc:aefdaf36a2c339105eb3000f194509cca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the <a class="el" href="classRoulette.html">Roulette</a> board mapping.  <br /></td></tr>
+<tr class="memdesc:aefdaf36a2c339105eb3000f194509cca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the <a class="el" href="classRoulette.html">Roulette</a> board mapping. *</p><ul>
+<li>This member function of the <code><a class="el" href="classRoulette.html">Roulette</a></code> class outputs the current state of the <a class="el" href="classRoulette.html">Roulette</a> board to the console. It displays each number and its corresponding * color (black, red, or green) as per the <a class="el" href="classRoulette.html">Roulette</a> rules. This function was primarily used for debugging purposes. * *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:aefdaf36a2c339105eb3000f194509cca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae22f0b8c45d525260c90a7c5c64ae717" id="r_ae22f0b8c45d525260c90a7c5c64ae717"><td class="memItemLeft" align="right" valign="top">pair&lt; int, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae22f0b8c45d525260c90a7c5c64ae717">oddGenerate</a> ()</td></tr>
-<tr class="memdesc:ae22f0b8c45d525260c90a7c5c64ae717"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a winning number and color for a <a class="el" href="classRoulette.html">Roulette</a> spin.  <br /></td></tr>
+<tr class="memdesc:ae22f0b8c45d525260c90a7c5c64ae717"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a winning number and color for a <a class="el" href="classRoulette.html">Roulette</a> spin. *</p><ul>
+<li>This member function simulates the spinning of the <a class="el" href="classRoulette.html">Roulette</a> wheel by generating a random winning number and determining its corresponding color. It returns * both the winning number and its color, which are essential for determining the outcome of a bet. * *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:ae22f0b8c45d525260c90a7c5c64ae717"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca8e283d41939f860b385215cc3ce44f" id="r_aca8e283d41939f860b385215cc3ce44f"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca8e283d41939f860b385215cc3ce44f">simulate_singlebet</a> ()</td></tr>
-<tr class="memdesc:aca8e283d41939f860b385215cc3ce44f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulates a single color bet in <a class="el" href="classRoulette.html">Roulette</a>.  <br /></td></tr>
+<tr class="memdesc:aca8e283d41939f860b385215cc3ce44f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulates a single color bet in <a class="el" href="classRoulette.html">Roulette</a>. *</p><ul>
+<li>This member function simulates placing a bet on a color in the <a class="el" href="classRoulette.html">Roulette</a> game. It randomly selects between the two colors (black or red) and returns the * selected color. This function is used in the <code>Play</code> function to simulate the user's bet. * *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:aca8e283d41939f860b385215cc3ce44f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c7b8dc928d2ee6ddf8bbd9f64661f7e" id="r_a8c7b8dc928d2ee6ddf8bbd9f64661f7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c7b8dc928d2ee6ddf8bbd9f64661f7e">Play</a> (<a class="el" href="classUser.html">User</a> *user) override</td></tr>
-<tr class="memdesc:a8c7b8dc928d2ee6ddf8bbd9f64661f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a round of <a class="el" href="classRoulette.html">Roulette</a> for a user.  <br /></td></tr>
+<tr class="memdesc:a8c7b8dc928d2ee6ddf8bbd9f64661f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a round of <a class="el" href="classRoulette.html">Roulette</a> for a user. *</p><ul>
+<li>This member function of the <code><a class="el" href="classRoulette.html">Roulette</a></code> class simulates a round of <a class="el" href="classRoulette.html">Roulette</a> for a user. It checks the user's monetary balance and manages their betting * process. The function simulates the user placing a bet, spinning the <a class="el" href="classRoulette.html">Roulette</a> wheel, and determines the outcome based on the generated winning number and * color. It updates the user's balance based on the outcome, and machine statistics such as usage and temperature are adjusted accordingly. * *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:a8c7b8dc928d2ee6ddf8bbd9f64661f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classMachine"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classMachine')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classMachine.html">Machine</a></td></tr>
 <tr class="memitem:a5c75026a6141468bb6eb9a7d6f44e5b5 inherit pub_methods_classMachine" id="r_a5c75026a6141468bb6eb9a7d6f44e5b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMachine.html#a5c75026a6141468bb6eb9a7d6f44e5b5">Machine</a> (<a class="el" href="Machine_8h.html#a3486ab93ce1c796a2bd663159b6a4f5a">MACHINE_TYPE</a> type, int posX, int posY)</td></tr>
@@ -257,22 +272,30 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Machine</b> ()</t
       </table>
 </div><div class="memdoc">
 
-<p>Constructor for <a class="el" href="classRoulette.html">Roulette</a> with specified position parameters. </p>
-<p>This constructor initializes an instance of the <code><a class="el" href="classRoulette.html">Roulette</a></code> class, which is derived from the <code><a class="el" href="classMachine.html">Machine</a></code> class. It sets the machine's type to <code>ROULETTE</code> and initializes its position to the provided coordinates (<code>posX</code>, <code>posY</code>). Additionally, it initializes the <a class="el" href="classRoulette.html">Roulette</a> board with predefined black, red, and green numbers, following standard <a class="el" href="classRoulette.html">Roulette</a> rules.</p>
+<p>Constructor for <a class="el" href="classRoulette.html">Roulette</a> with specified position parameters. *</p><ul>
+<li>This constructor initializes an instance of the <code><a class="el" href="classRoulette.html">Roulette</a></code> class, which is derived from the <code><a class="el" href="classMachine.html">Machine</a></code> class. It sets the machine's type to <code>ROULETTE</code> and * initializes its position to the provided coordinates (<code>posX</code>, <code>posY</code>). Additionally, it initializes the <a class="el" href="classRoulette.html">Roulette</a> board with predefined black, red, and green * numbers, following standard <a class="el" href="classRoulette.html">Roulette</a> rules. * *. </li>
+</ul>
+</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">posX</td><td>The x-coordinate of the <a class="el" href="classRoulette.html">Roulette</a> table's position. </td></tr>
-    <tr><td class="paramname">posY</td><td>The y-coordinate of the <a class="el" href="classRoulette.html">Roulette</a> table's position.</td></tr>
+    <tr><td class="paramname">posX</td><td>The x-coordinate of the <a class="el" href="classRoulette.html">Roulette</a> table's position. * </td></tr>
+    <tr><td class="paramname">posY</td><td>The y-coordinate of the <a class="el" href="classRoulette.html">Roulette</a> table's position. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This constructor does not throw exceptions. @exceptsafe This constructor is exception-neutral and offers no guarantees if an exception is thrown during initialization.</td></tr>
+    <tr><td class="paramname">None.</td><td>This constructor does not throw exceptions. * @exceptsafe This constructor is exception-neutral and offers no guarantees if an exception is thrown during initialization. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>None. Constructors do not return values. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>None. Constructors do not return values. * </dd></dl>
 
 </div>
 </div>
@@ -291,16 +314,24 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Machine</b> ()</t
       </table>
 </div><div class="memdoc">
 
-<p>Default Constructor for <a class="el" href="classRoulette.html">Roulette</a>. </p>
-<p>This default constructor initializes an instance of the <code><a class="el" href="classRoulette.html">Roulette</a></code> class with default position values (0, 0) and sets the machine type to <code>ROULETTE</code>. It also initializes the <a class="el" href="classRoulette.html">Roulette</a> board similarly to the overloaded constructor. This constructor is used when no specific position is provided for the <a class="el" href="classRoulette.html">Roulette</a> table.</p>
-<dl class="section note"><dt>Note</dt><dd>This constructor provides a way to create a <a class="el" href="classRoulette.html">Roulette</a> table with default settings. Mostly for testing purposes.</dd></dl>
+<p>Default Constructor for <a class="el" href="classRoulette.html">Roulette</a>. *</p><ul>
+<li>This default constructor initializes an instance of the <code><a class="el" href="classRoulette.html">Roulette</a></code> class with default position values (0, 0) and sets the machine type to <code>ROULETTE</code>. It also * initializes the <a class="el" href="classRoulette.html">Roulette</a> board similarly to the overloaded constructor. This constructor is used when no specific position is provided for the <a class="el" href="classRoulette.html">Roulette</a> table. * *. </li>
+</ul>
+</p>
+<dl class="section note"><dt>Note</dt><dd>This constructor provides a way to create a <a class="el" href="classRoulette.html">Roulette</a> table with default settings. Mostly for testing purposes. *<ul>
+<li></li>
+</ul>
+</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This constructor does not throw exceptions. @exceptsafe This constructor is exception-neutral and offers no guarantees if an exception is thrown during initialization.</td></tr>
+    <tr><td class="paramname">None.</td><td>This constructor does not throw exceptions. * @exceptsafe This constructor is exception-neutral and offers no guarantees if an exception is thrown during initialization. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>None. Constructors do not return values. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>None. Constructors do not return values. * </dd></dl>
 
 </div>
 </div>
@@ -320,16 +351,24 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Machine</b> ()</t
       </table>
 </div><div class="memdoc">
 
-<p>Generates a winning number and color for a <a class="el" href="classRoulette.html">Roulette</a> spin. </p>
-<p>This member function simulates the spinning of the <a class="el" href="classRoulette.html">Roulette</a> wheel by generating a random winning number and determining its corresponding color. It returns both the winning number and its color, which are essential for determining the outcome of a bet.</p>
-<dl class="section note"><dt>Note</dt><dd>This function is crucial for simulating the outcome of a <a class="el" href="classRoulette.html">Roulette</a> spin.</dd></dl>
+<p>Generates a winning number and color for a <a class="el" href="classRoulette.html">Roulette</a> spin. *</p><ul>
+<li>This member function simulates the spinning of the <a class="el" href="classRoulette.html">Roulette</a> wheel by generating a random winning number and determining its corresponding color. It returns * both the winning number and its color, which are essential for determining the outcome of a bet. * *. </li>
+</ul>
+</p>
+<dl class="section note"><dt>Note</dt><dd>This function is crucial for simulating the outcome of a <a class="el" href="classRoulette.html">Roulette</a> spin. *<ul>
+<li></li>
+</ul>
+</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This function does not throw exceptions but relies on the randomNumberGeneratorInterval function. @exceptsafe This function is exception-neutral and does not modify any game state.</td></tr>
+    <tr><td class="paramname">None.</td><td>This function does not throw exceptions but relies on the randomNumberGeneratorInterval function. * @exceptsafe This function is exception-neutral and does not modify any game state. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>pair&lt;int, string&gt; - A pair containing the winning number and its corresponding color. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>pair&lt;int, string&gt; - A pair containing the winning number and its corresponding color. * </dd></dl>
 
 </div>
 </div>
@@ -356,29 +395,43 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Machine</b> ()</t
 </table>
 </div><div class="memdoc">
 
-<p>Executes a round of <a class="el" href="classRoulette.html">Roulette</a> for a user. </p>
-<p>This member function of the <code><a class="el" href="classRoulette.html">Roulette</a></code> class simulates a round of <a class="el" href="classRoulette.html">Roulette</a> for a user. It checks the user's monetary balance and manages their betting process. The function simulates the user placing a bet, spinning the <a class="el" href="classRoulette.html">Roulette</a> wheel, and determines the outcome based on the generated winning number and color. It updates the user's balance based on the outcome, and machine statistics such as usage and temperature are adjusted accordingly.</p>
-<dl class="section note"><dt>Note</dt><dd>This function integrates user interaction with the <a class="el" href="classRoulette.html">Roulette</a> game, handling the betting process, spin simulation, and outcome determination.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classUser.html">User</a> class for user-related operations. </dd>
+<p>Executes a round of <a class="el" href="classRoulette.html">Roulette</a> for a user. *</p><ul>
+<li>This member function of the <code><a class="el" href="classRoulette.html">Roulette</a></code> class simulates a round of <a class="el" href="classRoulette.html">Roulette</a> for a user. It checks the user's monetary balance and manages their betting * process. The function simulates the user placing a bet, spinning the <a class="el" href="classRoulette.html">Roulette</a> wheel, and determines the outcome based on the generated winning number and * color. It updates the user's balance based on the outcome, and machine statistics such as usage and temperature are adjusted accordingly. * *. </li>
+</ul>
+</p>
+<dl class="section note"><dt>Note</dt><dd>This function integrates user interaction with the <a class="el" href="classRoulette.html">Roulette</a> game, handling the betting process, spin simulation, and outcome determination. *<ul>
+<li></li>
+</ul>
+</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classUser.html">User</a> class for user-related operations. * </dd>
 <dd>
-<a class="el" href="#ae22f0b8c45d525260c90a7c5c64ae717" title="Generates a winning number and color for a Roulette spin.">oddGenerate()</a> for simulating the <a class="el" href="classRoulette.html">Roulette</a> spin. </dd>
+<a class="el" href="#ae22f0b8c45d525260c90a7c5c64ae717" title="Generates a winning number and color for a Roulette spin. *This member function simulates the spinnin...">oddGenerate()</a> for simulating the <a class="el" href="classRoulette.html">Roulette</a> spin. * </dd>
 <dd>
-<a class="el" href="classMachine.html#ae6a4b166fe771b42e821b873e4c39041" title="Getter for Machine win probability * @exceptsafe none - Shall not throw exceptions *.">getWinProbability()</a> for determining the chance of an automatic win. </dd>
+<a class="el" href="classMachine.html#ae6a4b166fe771b42e821b873e4c39041" title="Getter for Machine win probability * @exceptsafe none - Shall not throw exceptions *.">getWinProbability()</a> for determining the chance of an automatic win. * </dd>
 <dd>
-getElapsedTime() for calculating the duration of the game round.</dd></dl>
+getElapsedTime() for calculating the duration of the game round. *<ul>
+<li></li>
+</ul>
+</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">user</td><td>Pointer to a <code><a class="el" href="classUser.html">User</a></code> object representing the player.</td></tr>
+    <tr><td class="paramname">user</td><td>Pointer to a <code><a class="el" href="classUser.html">User</a></code> object representing the player. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This function does not throw exceptions but relies on methods that might (e.g., user balance checks, bet simulation). @exceptsafe This function provides basic exception safety. If an exception is thrown, the user's state remains unchanged.</td></tr>
+    <tr><td class="paramname">None.</td><td>This function does not throw exceptions but relies on methods that might (e.g., user balance checks, bet simulation). * @exceptsafe This function provides basic exception safety. If an exception is thrown, the user's state remains unchanged. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>bool - The outcome of the game: <code>true</code> if the user wins or the game round completes, <code>false</code> otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>bool - The outcome of the game: <code>true</code> if the user wins or the game round completes, <code>false</code> otherwise. * </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classMachine.html#a9f8d706d049e04447ddd65b53c2cf6c4">Machine</a>.</p>
 
@@ -399,16 +452,24 @@ getElapsedTime() for calculating the duration of the game round.</dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Prints the <a class="el" href="classRoulette.html">Roulette</a> board mapping. </p>
-<p>This member function of the <code><a class="el" href="classRoulette.html">Roulette</a></code> class outputs the current state of the <a class="el" href="classRoulette.html">Roulette</a> board to the console. It displays each number and its corresponding color (black, red, or green) as per the <a class="el" href="classRoulette.html">Roulette</a> rules. This function was primarily used for debugging purposes.</p>
-<dl class="section note"><dt>Note</dt><dd>This function can be used to verify the correct initialization and state of the <a class="el" href="classRoulette.html">Roulette</a> board. For testing purposes.</dd></dl>
+<p>Prints the <a class="el" href="classRoulette.html">Roulette</a> board mapping. *</p><ul>
+<li>This member function of the <code><a class="el" href="classRoulette.html">Roulette</a></code> class outputs the current state of the <a class="el" href="classRoulette.html">Roulette</a> board to the console. It displays each number and its corresponding * color (black, red, or green) as per the <a class="el" href="classRoulette.html">Roulette</a> rules. This function was primarily used for debugging purposes. * *. </li>
+</ul>
+</p>
+<dl class="section note"><dt>Note</dt><dd>This function can be used to verify the correct initialization and state of the <a class="el" href="classRoulette.html">Roulette</a> board. For testing purposes. *<ul>
+<li></li>
+</ul>
+</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This function does not throw exceptions. @exceptsafe This function is exception-neutral and does not modify any game state.</td></tr>
+    <tr><td class="paramname">None.</td><td>This function does not throw exceptions. * @exceptsafe This function is exception-neutral and does not modify any game state. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>void. This function does not return a value but outputs the board state to the standard output. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>void. This function does not return a value but outputs the board state to the standard output. * </dd></dl>
 
 </div>
 </div>
@@ -427,16 +488,24 @@ getElapsedTime() for calculating the duration of the game round.</dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Simulates a single color bet in <a class="el" href="classRoulette.html">Roulette</a>. </p>
-<p>This member function simulates placing a bet on a color in the <a class="el" href="classRoulette.html">Roulette</a> game. It randomly selects between the two colors (black or red) and returns the selected color. This function is used in the <code>Play</code> function to simulate the user's bet.</p>
-<dl class="section note"><dt>Note</dt><dd>This function is used for simulating a color bet in the game of <a class="el" href="classRoulette.html">Roulette</a>.</dd></dl>
+<p>Simulates a single color bet in <a class="el" href="classRoulette.html">Roulette</a>. *</p><ul>
+<li>This member function simulates placing a bet on a color in the <a class="el" href="classRoulette.html">Roulette</a> game. It randomly selects between the two colors (black or red) and returns the * selected color. This function is used in the <code>Play</code> function to simulate the user's bet. * *. </li>
+</ul>
+</p>
+<dl class="section note"><dt>Note</dt><dd>This function is used for simulating a color bet in the game of <a class="el" href="classRoulette.html">Roulette</a>. *<ul>
+<li></li>
+</ul>
+</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This function does not throw exceptions but relies on the randomNumberGeneratorInterval function. @exceptsafe This function is exception-neutral and does not modify any game state.</td></tr>
+    <tr><td class="paramname">None.</td><td>This function does not throw exceptions but relies on the randomNumberGeneratorInterval function. * @exceptsafe This function is exception-neutral and does not modify any game state. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>string - The color on which the bet is placed. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>string - The color on which the bet is placed. * </dd></dl>
 
 </div>
 </div>

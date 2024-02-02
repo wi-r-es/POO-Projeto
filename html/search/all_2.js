@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['casino_0',['Casino',['../classCasino.html',1,'Casino'],['../classCasino.html#ad994375a1f94df2e06d4bf0a8aceff35',1,'Casino::Casino(std::string name)'],['../classCasino.html#ae1848268fc4a769bc3bdfa30419b12e4',1,'Casino::Casino(std::string name, int MAX_Players, int JackpotRadius)']]],
+  ['casino_0',['Casino',['../classCasino.html',1,'Casino'],['../classCasino.html#ad994375a1f94df2e06d4bf0a8aceff35',1,'Casino::Casino(std::string name)'],['../classCasino.html#aafe639d53f580e624eff183f44147287',1,'Casino::Casino(std::string name, int MAX_Players, float JackpotRadius)']]],
   ['casino_2eh_1',['Casino.h',['../Casino_8h.html',1,'']]],
   ['casinos_2',['POO- Projeto Final - Gestão de Casinos',['../md_src_2README.html',1,'']]],
   ['changemachinefailprobability_3',['changeMachineFailProbability',['../classCasino.html#a8b2aff6d3b83f0c4bb5e26d8479f4537',1,'Casino']]],

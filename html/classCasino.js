@@ -1,8 +1,8 @@
 var classCasino =
 [
     [ "Casino", "classCasino.html#ad994375a1f94df2e06d4bf0a8aceff35", null ],
-    [ "Casino", "classCasino.html#ae1848268fc4a769bc3bdfa30419b12e4", null ],
-    [ "~Casino", "classCasino.html#a7ee78fc58e4f2ff56c4ac3be7dd2e0c9", null ],
+    [ "Casino", "classCasino.html#aafe639d53f580e624eff183f44147287", null ],
+    [ "~Casino", "classCasino.html#abd4ab773c944d04b96c789d01fc79b66", null ],
     [ "Add", "classCasino.html#a86bebb34fdffbe3497e39a66eb0cd362", null ],
     [ "Add", "classCasino.html#aa6a096df0c9fd9a666fc014e7b536d8a", null ],
     [ "AddProfits", "classCasino.html#ad5f15abd010e117e6429518d92830faa", null ],
@@ -18,7 +18,7 @@ var classCasino =
     [ "getRandomUser", "classCasino.html#aba9c9b7382144229a44c2516b5da03be", null ],
     [ "getState", "classCasino.html#ab0de4f4b33b116a426edfaccf4dd5521", null ],
     [ "getTotalProfits", "classCasino.html#a4877c6c81995e0ef91f1bd87120f2dfe", null ],
-    [ "List_Types", "classCasino.html#a59b96eece7058d404eae09f0f7df6ad5", null ],
+    [ "List_Types", "classCasino.html#a7fe1fad9ad01cb0d064c7302af640906", null ],
     [ "Listing", "classCasino.html#a0e3f6841a1944b8b8cf9d0834efc9d8b", null ],
     [ "ListMachinesUID", "classCasino.html#adf2213ee0e9984bc2d6bb13958c370f5", null ],
     [ "Load", "classCasino.html#a59ca4749b9996f1205a04c12c56eb9b0", null ],

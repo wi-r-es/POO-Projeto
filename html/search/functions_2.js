@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['casino_0',['Casino',['../classCasino.html#ad994375a1f94df2e06d4bf0a8aceff35',1,'Casino::Casino(std::string name)'],['../classCasino.html#ae1848268fc4a769bc3bdfa30419b12e4',1,'Casino::Casino(std::string name, int MAX_Players, int JackpotRadius)']]],
+  ['casino_0',['Casino',['../classCasino.html#ad994375a1f94df2e06d4bf0a8aceff35',1,'Casino::Casino(std::string name)'],['../classCasino.html#aafe639d53f580e624eff183f44147287',1,'Casino::Casino(std::string name, int MAX_Players, float JackpotRadius)']]],
   ['changemachinefailprobability_1',['changeMachineFailProbability',['../classCasino.html#a8b2aff6d3b83f0c4bb5e26d8479f4537',1,'Casino']]],
   ['check_5froutine_2',['check_routine',['../classCasino.html#a1086a41f2165f5007da30381154f3dda',1,'Casino']]],
   ['checkmachinepositionavailability_3',['checkMachinePositionAvailability',['../classCasino.html#acbf48b26ea4b66abcf646b5b4c9b665b',1,'Casino']]],

@@ -19,9 +19,6 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -115,20 +112,32 @@ Collaboration diagram for Clock:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:adbc370eb6b5f8d01645cf440188160a8" id="r_adbc370eb6b5f8d01645cf440188160a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adbc370eb6b5f8d01645cf440188160a8">Clock</a> ()</td></tr>
-<tr class="memdesc:adbc370eb6b5f8d01645cf440188160a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor for <a class="el" href="classClock.html">Clock</a>.  <br /></td></tr>
+<tr class="memdesc:adbc370eb6b5f8d01645cf440188160a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor for <a class="el" href="classClock.html">Clock</a>. *</p><ul>
+<li>This constructor initializes a <code><a class="el" href="classClock.html">Clock</a></code> instance with default settings. It sets the initial starting time (<code>START</code>) to the current time, speed (<code>SPEED</code>) to 0, * and the software start time (<code>START_TIME</code>) to an empty struct. This setup is suitable for scenarios where specific clock settings are not required initially. * *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:adbc370eb6b5f8d01645cf440188160a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80e89cbf0633098df040e1d37232dfef" id="r_a80e89cbf0633098df040e1d37232dfef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80e89cbf0633098df040e1d37232dfef">Clock</a> (time_t start, int speed, time_t horaInicio)</td></tr>
-<tr class="memdesc:a80e89cbf0633098df040e1d37232dfef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameterized Constructor for <a class="el" href="classClock.html">Clock</a>.  <br /></td></tr>
+<tr class="memdesc:a80e89cbf0633098df040e1d37232dfef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameterized Constructor for <a class="el" href="classClock.html">Clock</a>. *</p><ul>
+<li>This constructor initializes a <code><a class="el" href="classClock.html">Clock</a></code> instance with specified settings. It allows setting the initial start time (<code>START</code>), speed of time flow (<code>SPEED</code>), * and the software-based start time (<code>START_TIME</code>). This setup is useful for simulations that require a specific start time and time flow rate. * *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:a80e89cbf0633098df040e1d37232dfef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc976ce68fa85e15cc06f9ed47bddb7c" id="r_afc976ce68fa85e15cc06f9ed47bddb7c"><td class="memItemLeft" align="right" valign="top"><a id="afc976ce68fa85e15cc06f9ed47bddb7c" name="afc976ce68fa85e15cc06f9ed47bddb7c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~Clock</b> ()</td></tr>
 <tr class="memdesc:afc976ce68fa85e15cc06f9ed47bddb7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for <a class="el" href="classClock.html">Clock</a> *. <br /></td></tr>
 <tr class="separator:afc976ce68fa85e15cc06f9ed47bddb7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2538fb8fd53d8b9199895cafcf00faa4" id="r_a2538fb8fd53d8b9199895cafcf00faa4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2538fb8fd53d8b9199895cafcf00faa4">StartClock</a> (int speed, const std::string &amp;H_Inicio)</td></tr>
-<tr class="memdesc:a2538fb8fd53d8b9199895cafcf00faa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the clock with a specified speed and start time.  <br /></td></tr>
+<tr class="memdesc:a2538fb8fd53d8b9199895cafcf00faa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the clock with a specified speed and start time. *</p><ul>
+<li>This member function sets the <code><a class="el" href="classClock.html">Clock</a></code> instance's starting time to the current time, adjusts the speed, and initializes the software-based start time based on * the given string. It is used to configure the clock's operational parameters and to begin time progression in the simulation. * *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:a2538fb8fd53d8b9199895cafcf00faa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a106174dbe0c5846f2cc81a2953963c5e" id="r_a106174dbe0c5846f2cc81a2953963c5e"><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a106174dbe0c5846f2cc81a2953963c5e">getTime</a> () const</td></tr>
-<tr class="memdesc:a106174dbe0c5846f2cc81a2953963c5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current simulated time.  <br /></td></tr>
+<tr class="memdesc:a106174dbe0c5846f2cc81a2953963c5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current simulated time. *</p><ul>
+<li>This member function calculates and returns the current simulated time based on the initial start time, the elapsed real time, and the speed of the clock. * It is essential for retrieving the current time in the context of the simulation. * *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:a106174dbe0c5846f2cc81a2953963c5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c5542d41f6d09b40619b152891f9312" id="r_a8c5542d41f6d09b40619b152891f9312"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c5542d41f6d09b40619b152891f9312">toString</a> () const</td></tr>
 <tr class="memdesc:a8c5542d41f6d09b40619b152891f9312"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a clock object into a string * @exceptsafe none - Shall not throw exceptions *.  <br /></td></tr>
@@ -161,16 +170,24 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Default Constructor for <a class="el" href="classClock.html">Clock</a>. </p>
-<p>This constructor initializes a <code><a class="el" href="classClock.html">Clock</a></code> instance with default settings. It sets the initial starting time (<code>START</code>) to the current time, speed (<code>SPEED</code>) to 0, and the software start time (<code>START_TIME</code>) to an empty struct. This setup is suitable for scenarios where specific clock settings are not required initially.</p>
-<dl class="section note"><dt>Note</dt><dd>This constructor is used for initializing the clock with default settings.</dd></dl>
+<p>Default Constructor for <a class="el" href="classClock.html">Clock</a>. *</p><ul>
+<li>This constructor initializes a <code><a class="el" href="classClock.html">Clock</a></code> instance with default settings. It sets the initial starting time (<code>START</code>) to the current time, speed (<code>SPEED</code>) to 0, * and the software start time (<code>START_TIME</code>) to an empty struct. This setup is suitable for scenarios where specific clock settings are not required initially. * *. </li>
+</ul>
+</p>
+<dl class="section note"><dt>Note</dt><dd>This constructor is used for initializing the clock with default settings. *<ul>
+<li></li>
+</ul>
+</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This constructor does not throw exceptions. @exceptsafe This constructor is exception-neutral.</td></tr>
+    <tr><td class="paramname">None.</td><td>This constructor does not throw exceptions. * @exceptsafe This constructor is exception-neutral. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>None. Constructors do not return values. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>None. Constructors do not return values. * </dd></dl>
 
 </div>
 </div>
@@ -198,24 +215,35 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Parameterized Constructor for <a class="el" href="classClock.html">Clock</a>. </p>
-<p>This constructor initializes a <code><a class="el" href="classClock.html">Clock</a></code> instance with specified settings. It allows setting the initial start time (<code>START</code>), speed of time flow (<code>SPEED</code>), and the software-based start time (<code>START_TIME</code>). This setup is useful for simulations that require a specific start time and time flow rate.</p>
+<p>Parameterized Constructor for <a class="el" href="classClock.html">Clock</a>. *</p><ul>
+<li>This constructor initializes a <code><a class="el" href="classClock.html">Clock</a></code> instance with specified settings. It allows setting the initial start time (<code>START</code>), speed of time flow (<code>SPEED</code>), * and the software-based start time (<code>START_TIME</code>). This setup is useful for simulations that require a specific start time and time flow rate. * *. </li>
+</ul>
+</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">start</td><td>The initial hardware-based start time. </td></tr>
-    <tr><td class="paramname">velocity</td><td>The speed at which time progresses in the simulation. </td></tr>
-    <tr><td class="paramname">start_time</td><td>The software-based start time.</td></tr>
+    <tr><td class="paramname">start</td><td>The initial hardware-based start time. * </td></tr>
+    <tr><td class="paramname">velocity</td><td>The speed at which time progresses in the simulation. * </td></tr>
+    <tr><td class="paramname">start_time</td><td>The software-based start time. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This constructor provides flexibility for initializing the clock with custom settings.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This constructor provides flexibility for initializing the clock with custom settings. *<ul>
+<li></li>
+</ul>
+</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This constructor does not throw exceptions. @exceptsafe This constructor is exception-neutral.</td></tr>
+    <tr><td class="paramname">None.</td><td>This constructor does not throw exceptions. * @exceptsafe This constructor is exception-neutral. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>None. Constructors do not return values. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>None. Constructors do not return values. * </dd></dl>
 
 </div>
 </div>
@@ -235,15 +263,20 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Gets the current simulated time. </p>
-<p>This member function calculates and returns the current simulated time based on the initial start time, the elapsed real time, and the speed of the clock. It is essential for retrieving the current time in the context of the simulation.</p>
+<p>Gets the current simulated time. *</p><ul>
+<li>This member function calculates and returns the current simulated time based on the initial start time, the elapsed real time, and the speed of the clock. * It is essential for retrieving the current time in the context of the simulation. * *. </li>
+</ul>
+</p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This function does not throw exceptions. @exceptsafe This function is exception-neutral and does not modify any game state.</td></tr>
+    <tr><td class="paramname">None.</td><td>This function does not throw exceptions. * @exceptsafe This function is exception-neutral and does not modify any game state. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>time_t - The current simulated time. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>time_t - The current simulated time. * </dd></dl>
 
 </div>
 </div>
@@ -266,22 +299,30 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Starts the clock with a specified speed and start time. </p>
-<p>This member function sets the <code><a class="el" href="classClock.html">Clock</a></code> instance's starting time to the current time, adjusts the speed, and initializes the software-based start time based on the given string. It is used to configure the clock's operational parameters and to begin time progression in the simulation.</p>
+<p>Starts the clock with a specified speed and start time. *</p><ul>
+<li>This member function sets the <code><a class="el" href="classClock.html">Clock</a></code> instance's starting time to the current time, adjusts the speed, and initializes the software-based start time based on * the given string. It is used to configure the clock's operational parameters and to begin time progression in the simulation. * *. </li>
+</ul>
+</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">speed</td><td>The speed at which time should progress. </td></tr>
-    <tr><td class="paramname">start_time</td><td>A string representing the start time (formatted as "HH:MM:SS").</td></tr>
+    <tr><td class="paramname">speed</td><td>The speed at which time should progress. * </td></tr>
+    <tr><td class="paramname">start_time</td><td>A string representing the start time (formatted as "HH:MM:SS"). *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This function does not throw exceptions but relies on standard library functions that may set `errno`. @exceptsafe This function is exception-neutral and does not modify any game state other than the clock settings.</td></tr>
+    <tr><td class="paramname">None.</td><td>This function does not throw exceptions but relies on standard library functions that may set `errno`. * @exceptsafe This function is exception-neutral and does not modify any game state other than the clock settings. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>void. This function does not return a value. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>void. This function does not return a value. * </dd></dl>
 
 </div>
 </div>

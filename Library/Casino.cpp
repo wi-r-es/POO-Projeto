@@ -123,7 +123,7 @@ Casino::Casino(std::string name): NAME{std::move(name)},JackpotRadius{}{
     rolex = new Clock();
     total_profits=0;
 }
-Casino::Casino(std::string name,int max, int jradius): NAME{std::move(name)},JackpotRadius{jradius}{
+Casino::Casino(std::string name,int max, float jradius): NAME{std::move(name)},JackpotRadius{jradius}{
     rolex = new Clock();
     total_profits=0;
 }
@@ -164,6 +164,7 @@ bool Casino::Load(const std::string &file) {
 
     auto settings = data.child("SETTINGS");
     NAME = settings.child_value("NAME");
+    JackpotRadius = stof(settings.child_value("JackpotRadius"));
     std::cout << "Casino Name: " << NAME << std::endl;
     std::cout << "Jackpot Radius: " << JackpotRadius << std::endl;
 
@@ -748,11 +749,11 @@ void Casino::RandomOddImprovement(){
 }
 
 void Casino::check_routine() {
-    auto TimeGoneBy = [](std::chrono::steady_clock::time_point tp1,
+   /* auto TimeGoneBy = [](std::chrono::steady_clock::time_point tp1,
                             std::chrono::steady_clock::time_point tp2){
         auto temp = chrono::duration_cast<chrono::seconds>(tp2 - tp1);
         return (temp.count());
-    };
+    }; */
 
     auto it = v_Broken_Machines.begin();
     while (it != v_Broken_Machines.end()) {
@@ -764,7 +765,8 @@ void Casino::check_routine() {
         //Wait(5);
         //cout << mac->toStringOut();
         //Wait(15);
-        auto timeInMaintenance = TimeGoneBy(mac->getTimeInMaintenance(),time);
+        //auto timeInMaintenance = TimeGoneBy(mac->getTimeInMaintenance(),time);
+        auto timeInMaintenance = getElapsedTime(mac->getTimeInMaintenance(),time).count();
         if (state == MACHINE_STATE::BROKEN) {
             // Move machine to maintenance
             mac->setState(MACHINE_STATE::MAINTENANCE);

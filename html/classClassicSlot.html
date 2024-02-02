@@ -19,9 +19,6 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -127,10 +124,16 @@ Collaboration diagram for ClassicSlot:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abf9d02b34a4ec169435d37763af8ec1a" id="r_abf9d02b34a4ec169435d37763af8ec1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf9d02b34a4ec169435d37763af8ec1a">ClassicSlot</a> (int posX, int posY)</td></tr>
-<tr class="memdesc:abf9d02b34a4ec169435d37763af8ec1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classClassicSlot.html">ClassicSlot</a> with position parameters.  <br /></td></tr>
+<tr class="memdesc:abf9d02b34a4ec169435d37763af8ec1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classClassicSlot.html">ClassicSlot</a> with position parameters. *</p><ul>
+<li>This constructor initializes an instance of the <code><a class="el" href="classClassicSlot.html">ClassicSlot</a></code> class, which is derived from the <code><a class="el" href="classMachine.html">Machine</a></code> class. It sets the machine's type to <code>CLASSIC_SLOT</code> * and initializes its position to the provided coordinates (<code>posX</code>, <code>posY</code>). It also initializes the number of spins (<code>numSpins</code>) to zero. * *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:abf9d02b34a4ec169435d37763af8ec1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adeca90b964335ddfbd89da95a73a1ed6" id="r_adeca90b964335ddfbd89da95a73a1ed6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adeca90b964335ddfbd89da95a73a1ed6">ClassicSlot</a> ()</td></tr>
-<tr class="memdesc:adeca90b964335ddfbd89da95a73a1ed6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor for <a class="el" href="classClassicSlot.html">ClassicSlot</a>.  <br /></td></tr>
+<tr class="memdesc:adeca90b964335ddfbd89da95a73a1ed6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor for <a class="el" href="classClassicSlot.html">ClassicSlot</a>. *</p><ul>
+<li>This default constructor initializes an instance of the <code><a class="el" href="classClassicSlot.html">ClassicSlot</a></code> class with default values. It sets the machine type to <code>CLASSIC_SLOT</code> and initializes * its position to (0, 0). It also sets the number of spins (<code>numSpins</code>) to zero. This constructor is used when no specific position is provided for the slot * machine. * *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:adeca90b964335ddfbd89da95a73a1ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6f156dd50b5b451440a503901a3dc38" id="r_aa6f156dd50b5b451440a503901a3dc38"><td class="memItemLeft" align="right" valign="top"><a id="aa6f156dd50b5b451440a503901a3dc38" name="aa6f156dd50b5b451440a503901a3dc38"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ClassicSlot</b> ()</td></tr>
@@ -148,7 +151,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>resetNumSpins</b> ()<
 <tr class="memdesc:af6c8ff0b706d89648f6a289d9dff9889"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the number of spins of the machine *. <br /></td></tr>
 <tr class="separator:af6c8ff0b706d89648f6a289d9dff9889"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab91206de13d975f43cdba0f31b11ed4f" id="r_ab91206de13d975f43cdba0f31b11ed4f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab91206de13d975f43cdba0f31b11ed4f">Play</a> (<a class="el" href="classUser.html">User</a> *user) override</td></tr>
-<tr class="memdesc:ab91206de13d975f43cdba0f31b11ed4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulates a round of play on the <a class="el" href="classClassicSlot.html">ClassicSlot</a> machine for a user.  <br /></td></tr>
+<tr class="memdesc:ab91206de13d975f43cdba0f31b11ed4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulates a round of play on the <a class="el" href="classClassicSlot.html">ClassicSlot</a> machine for a user. *</p><ul>
+<li>This member function of the <code><a class="el" href="classClassicSlot.html">ClassicSlot</a></code> class manages the gameplay for a user on the classic slot machine. The function performs several key operations: *. </li>
+</ul>
+ <br /></td></tr>
 <tr class="separator:ab91206de13d975f43cdba0f31b11ed4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classMachine"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classMachine')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classMachine.html">Machine</a></td></tr>
 <tr class="memitem:a5c75026a6141468bb6eb9a7d6f44e5b5 inherit pub_methods_classMachine" id="r_a5c75026a6141468bb6eb9a7d6f44e5b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMachine.html#a5c75026a6141468bb6eb9a7d6f44e5b5">Machine</a> (<a class="el" href="Machine_8h.html#a3486ab93ce1c796a2bd663159b6a4f5a">MACHINE_TYPE</a> type, int posX, int posY)</td></tr>
@@ -234,9 +240,9 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Machine</b> ()</t
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classClassicSlot.html">ClassicSlot</a> ADT class description derived from <a class="el" href="classMachine.html">Machine</a> *</p><ul>
-<li>Inherits from <a class="el" href="classMachine.html">Machine</a> class. Represents a classic slot machine typically found in casinos. * Classic slot machines are simpler in design and function compared to more modern video * slot machines, often featuring a limited number of reels and traditional symbols. In * addition to the attributes inherited from the <a class="el" href="classMachine.html">Machine</a> class, the <a class="el" href="classClassicSlot.html">ClassicSlot</a> class * includes specific attributes unique to the functioning of a classic slot machine. *</li>
+<li>Inherits from <a class="el" href="classMachine.html">Machine</a> class. Represents a classic slot machine typically found in casinos. * In addition to the attributes inherited from the <a class="el" href="classMachine.html">Machine</a> class, the <a class="el" href="classClassicSlot.html">ClassicSlot</a> class * includes specific attributes unique to the functioning of a classic slot machine. *</li>
 <li>numSpins -&gt; not implemented as expected *</li>
-<li>This class would likely also include methods specific to the operation of a classic slot * machine, such as handling bets, spinning the reels, determining winning combinations, * and calculating payouts. These methods would make use of both the inherited attributes * from the <a class="el" href="classMachine.html">Machine</a> class and the specific attributes of the <a class="el" href="classClassicSlot.html">ClassicSlot</a> class. * </li>
+<li></li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abf9d02b34a4ec169435d37763af8ec1a" name="abf9d02b34a4ec169435d37763af8ec1a"></a>
@@ -258,23 +264,34 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Machine</b> ()</t
       </table>
 </div><div class="memdoc">
 
-<p>Constructor for <a class="el" href="classClassicSlot.html">ClassicSlot</a> with position parameters. </p>
-<p>This constructor initializes an instance of the <code><a class="el" href="classClassicSlot.html">ClassicSlot</a></code> class, which is derived from the <code><a class="el" href="classMachine.html">Machine</a></code> class. It sets the machine's type to <code>CLASSIC_SLOT</code> and initializes its position to the provided coordinates (<code>posX</code>, <code>posY</code>). It also initializes the number of spins (<code>numSpins</code>) to zero.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classMachine.html">Machine</a> class for the base class constructor.</dd></dl>
+<p>Constructor for <a class="el" href="classClassicSlot.html">ClassicSlot</a> with position parameters. *</p><ul>
+<li>This constructor initializes an instance of the <code><a class="el" href="classClassicSlot.html">ClassicSlot</a></code> class, which is derived from the <code><a class="el" href="classMachine.html">Machine</a></code> class. It sets the machine's type to <code>CLASSIC_SLOT</code> * and initializes its position to the provided coordinates (<code>posX</code>, <code>posY</code>). It also initializes the number of spins (<code>numSpins</code>) to zero. * *. </li>
+</ul>
+</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classMachine.html">Machine</a> class for the base class constructor. *<ul>
+<li></li>
+</ul>
+</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">posX</td><td>The x-coordinate of the slot machine's position. </td></tr>
-    <tr><td class="paramname">posY</td><td>The y-coordinate of the slot machine's position.</td></tr>
+    <tr><td class="paramname">posX</td><td>The x-coordinate of the slot machine's position. * </td></tr>
+    <tr><td class="paramname">posY</td><td>The y-coordinate of the slot machine's position. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This constructor does not throw exceptions. @exceptsafe This constructor is exception-neutral and offers no guarantees if an exception is thrown during initialization.</td></tr>
+    <tr><td class="paramname">None.</td><td>This constructor does not throw exceptions. * @exceptsafe This constructor is exception-neutral and offers no guarantees if an exception is thrown during initialization. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>None. Constructors do not return values. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>None. Constructors do not return values. * </dd></dl>
 
 </div>
 </div>
@@ -293,17 +310,28 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Machine</b> ()</t
       </table>
 </div><div class="memdoc">
 
-<p>Default Constructor for <a class="el" href="classClassicSlot.html">ClassicSlot</a>. </p>
-<p>This default constructor initializes an instance of the <code><a class="el" href="classClassicSlot.html">ClassicSlot</a></code> class with default values. It sets the machine type to <code>CLASSIC_SLOT</code> and initializes its position to (0, 0). It also sets the number of spins (<code>numSpins</code>) to zero. This constructor is used when no specific position is provided for the slot machine.</p>
-<dl class="section note"><dt>Note</dt><dd>This constructor provides a way to create a <a class="el" href="classClassicSlot.html">ClassicSlot</a> machine with default settings. Mostly for testing purposes.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classMachine.html">Machine</a> class for the base class constructor.</dd></dl>
+<p>Default Constructor for <a class="el" href="classClassicSlot.html">ClassicSlot</a>. *</p><ul>
+<li>This default constructor initializes an instance of the <code><a class="el" href="classClassicSlot.html">ClassicSlot</a></code> class with default values. It sets the machine type to <code>CLASSIC_SLOT</code> and initializes * its position to (0, 0). It also sets the number of spins (<code>numSpins</code>) to zero. This constructor is used when no specific position is provided for the slot * machine. * *. </li>
+</ul>
+</p>
+<dl class="section note"><dt>Note</dt><dd>This constructor provides a way to create a <a class="el" href="classClassicSlot.html">ClassicSlot</a> machine with default settings. Mostly for testing purposes. *<ul>
+<li></li>
+</ul>
+</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classMachine.html">Machine</a> class for the base class constructor. *<ul>
+<li></li>
+</ul>
+</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This constructor does not throw exceptions. @exceptsafe This constructor is exception-neutral and offers no guarantees if an exception is thrown during initialization.</td></tr>
+    <tr><td class="paramname">None.</td><td>This constructor does not throw exceptions. * @exceptsafe This constructor is exception-neutral and offers no guarantees if an exception is thrown during initialization. *<ul>
+<li></li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>None. Constructors do not return values. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>None. Constructors do not return values. * </dd></dl>
 
 </div>
 </div>
@@ -351,32 +379,42 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Machine</b> ()</t
 </table>
 </div><div class="memdoc">
 
-<p>Simulates a round of play on the <a class="el" href="classClassicSlot.html">ClassicSlot</a> machine for a user. </p>
-<p>This member function of the <code><a class="el" href="classClassicSlot.html">ClassicSlot</a></code> class manages the gameplay for a user on the classic slot machine. The function performs several key operations:</p><ol type="1">
-<li>Checks the user's current monetary balance. If the user has no money, it increases their debt after a certain number of attempts and exits the round.</li>
-<li>Determines a win based on a predefined probability. If the win condition is met, the user's balance is increased accordingly.</li>
-<li>Simulates the slot machine spin by generating random numbers to represent slot symbols.</li>
-<li>Determines the game's outcome based on the alignment of these symbols and updates the user's balance and game statistics.</li>
-<li>Tracks the time spent by the user in playing the round.</li>
-</ol>
-<p>The function uses a random number generator for simulating the spinning of slot reels and decides the game outcome based on the matching of symbols. The bet amount is dynamically set based on the user's current money.</p>
-<dl class="section note"><dt>Note</dt><dd>This function is central to the slot machine gameplay, handling the betting process, spin simulation, and outcome determination.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classUser.html">User</a> class for user-related operations. </dd>
+<p>Simulates a round of play on the <a class="el" href="classClassicSlot.html">ClassicSlot</a> machine for a user. *</p><ul>
+<li>This member function of the <code><a class="el" href="classClassicSlot.html">ClassicSlot</a></code> class manages the gameplay for a user on the classic slot machine. The function performs several key operations: *. </li>
+</ul>
+</p>
+<ol type="1">
+<li>Checks the user's current monetary balance. If the user has no money, it increases their debt after a certain number of attempts and exits the round. *</li>
+<li>Determines a win based on a predefined probability. If the win condition is met, the user's balance is increased accordingly. *</li>
+<li>Simulates the slot machine spin by generating random numbers to represent slot symbols. *</li>
+<li>Determines the game's outcome based on the alignment of these symbols and updates the user's balance and game statistics. *</li>
+<li>Tracks the time spent by the user in playing the round. *<ul>
+<li>The function uses a random number generator for simulating the spinning of slot reels and decides the game outcome based on the matching of symbols. * The bet amount is dynamically set based on the user's current money. *</li>
+<li><dl class="section note"><dt>Note</dt><dd>This function is central to the slot machine gameplay, handling the betting process, spin simulation, and outcome determination. *</dd></dl>
+</li>
+<li><dl class="section see"><dt>See also</dt><dd><a class="el" href="classUser.html">User</a> class for user-related operations. * </dd>
 <dd>
-randomNumberGeneratorInterval(), <a class="el" href="classMachine.html#ae6a4b166fe771b42e821b873e4c39041" title="Getter for Machine win probability * @exceptsafe none - Shall not throw exceptions *.">getWinProbability()</a>, <a class="el" href="classMachine.html#a007c817ebf3cc6a2720cd81edad84416" title="Getter for the bet amount of the round in the machine * @exceptsafe none - Shall not throw exceptions...">getBetAmount()</a>, <a class="el" href="classMachine.html#aca61614eb4613540463aaf466777c644" title="Increments the number of times a machine was used * @exceptsafe none - Shall not throw exceptions *.">incUsage()</a>, <a class="el" href="classMachine.html#a7abfeffe2a7350c0d4c05e9a02b596a6" title="Increases the temperature of the machine * @exceptsafe none - Shall not throw exceptions *.">increaseTemperature()</a> for various utility functions.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
+randomNumberGeneratorInterval(), <a class="el" href="classMachine.html#ae6a4b166fe771b42e821b873e4c39041" title="Getter for Machine win probability * @exceptsafe none - Shall not throw exceptions *.">getWinProbability()</a>, <a class="el" href="classMachine.html#a007c817ebf3cc6a2720cd81edad84416" title="Getter for the bet amount of the round in the machine * @exceptsafe none - Shall not throw exceptions...">getBetAmount()</a>, <a class="el" href="classMachine.html#aca61614eb4613540463aaf466777c644" title="Increments the number of times a machine was used * @exceptsafe none - Shall not throw exceptions *.">incUsage()</a>, <a class="el" href="classMachine.html#a7abfeffe2a7350c0d4c05e9a02b596a6" title="Increases the temperature of the machine * @exceptsafe none - Shall not throw exceptions *.">increaseTemperature()</a> for various utility functions. *</dd></dl>
+</li>
+<li><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">user</td><td>Pointer to a <code><a class="el" href="classUser.html">User</a></code> object representing the player.</td></tr>
+    <tr><td class="paramname">user</td><td>Pointer to a <code><a class="el" href="classUser.html">User</a></code> object representing the player. *</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
+</li>
+<li><dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">None.</td><td>This function does not throw exceptions but relies on methods that might (e.g., random number generation). @exceptsafe This function provides basic exception safety. If an exception is thrown, the user's state remains unchanged.</td></tr>
+    <tr><td class="paramname">None.</td><td>This function does not throw exceptions but relies on methods that might (e.g., random number generation). * @exceptsafe This function provides basic exception safety. If an exception is thrown, the user's state remains unchanged. *</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>bool - The outcome of the round: <code>true</code> if the player wins, <code>false</code> otherwise. </dd></dl>
+</li>
+<li><dl class="section return"><dt>Returns</dt><dd>bool - The outcome of the round: <code>true</code> if the player wins, <code>false</code> otherwise. * </dd></dl>
+</li>
+</ul>
+</li>
+</ol>
 
 <p>Reimplemented from <a class="el" href="classMachine.html#a9f8d706d049e04447ddd65b53c2cf6c4">Machine</a>.</p>
 
