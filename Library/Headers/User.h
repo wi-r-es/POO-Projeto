@@ -167,7 +167,7 @@ public:
      *        Adds more prizes (money) to the users prizes          *
      *                                                              *
      * @exceptsafe none - Shall not throw exceptions                *
-     * @param dPrizesWon -> money to add to user's bets               *
+     * @param dPrizesWon -> money to add to user's bets             *
      * @return None.                                                *
      ****************************************************************/
     void incPrizesWon(float dPrizesWon);

@@ -56,25 +56,25 @@ int kbhit()
     int oldf, newf;
     int ch;
 
-    // Save the current terminal settings
+    /** Save the current terminal settings **/
     tcgetattr(STDIN_FILENO, &oldt);
-    // Set the file status flags for stdin to non-blocking
+    /** Set the file status flags for stdin to non-blocking **/
     oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
     fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
 
-    // Set the terminal to raw mode
+    /** Set the terminal to raw mode**/
     newt = oldt;
     newt.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 
-    // Read one character from stdin
+    /** Read one character from stdin **/
     ch = getchar();
 
-    // Restore the terminal settings
+    /** Restore the terminal settings **/
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     fcntl(STDIN_FILENO, F_SETFL, oldf);
 
-    // If a character was read, put it back on the input stream
+    /** If a character was read, put it back on the input stream **/
     if (ch != EOF)
     {
         ungetc(ch, stdin);
