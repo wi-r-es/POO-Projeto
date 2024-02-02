@@ -107,23 +107,26 @@ void logAtExit() {
     logging(logfile, __FUNCTION__, exit_message);
 }
 
-/*******************************************************************************************************************************************************************
- * @brief Function to simulate the casino.                                                                                                                         *
- *                                                                                                                                                                 *
- *          Function that simulates the casino "behaviour" by grouping together the a few important functions to simulate the casino behaviour.                    *
- *          It has a static integer variable that gets incremented every time the function gets called (For statistics purposes).                                  *
- *          It checks whether the time the casino closes has come, and if the answer is yes, it changes the received flag to 1 to signal the main program to stop. *
- *                                                                                                                                                                 *
- * @see Casino::Run                                                                                                                                                *
- * @see Casino::getClock()                                                                                                                                         *
- * @see Clock::getTime()                                                                                                                                           *
- * @see logging()                                                                                                                                                  *
- * @throw std::invalid_argument If casino is a null pointer                                                                                                        *
- * @exceptsafe basic -> It throws an invalid_argument exception in case of null-pointer, other than that it catches runtime_errors.                                *
- * @param casino pointer to a casino object                                                                                                                        *
- * @param flag received as a reference, to keep track of whether the casino needs to close or not.                                                                 *
- * @return None.                                                                                                                                                   *
- *******************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************************
+ * @brief Simulates the operation of a casino over multiple iterations until a specified closing time.                                                                          *
+ *                                                                                                                                                                              *
+ *      This standalone function orchestrates the simulation of a casino's operation. It increments a static iteration counter on each call, simulating one iteration           *
+ *      of casino operation by invoking the `Run` method on the provided `Casino` object. The simulation checks the current time against a predetermined closing time           *
+ *      (4 AM). If the closing time is reached, it sets a flag to signal the end of the simulation and logs the total number of iterations completed.                           *
+ *                                                                                                                                                                              *
+ * @param casino Pointer to a `Casino` object representing the casino to simulate.                                                                                              *
+ * @param flag Reference to an `u_int8_t` variable used to signal the end of the simulation (1 indicates the casino should close).                                              *
+ *                                                                                                                                                                              *
+ * @see Casino::Run() for the logic executed in each iteration of the simulation.                                                                                               *
+ * @see Casino::getClock() and Clock::getTime() for obtaining the current simulation time.                                                                                      *
+ * @see logging() for logging the total number of iterations upon simulation completion.                                                                                        *
+ *                                                                                                                                                                              *
+ * @exception invalid_argument Thrown if a null `Casino` pointer is passed.                                                                                                     *
+ * @exception runtime_error Thrown if an error occurs during the simulation (e.g., within the `Run` method of the `Casino`).                                                    *
+ * @exceptsafe This function attempts to provide basic exception safety. It logs errors and exits the program in case of failure.                                               *
+ *                                                                                                                                                                              *
+ * @return void. This function does not return a value but may exit the program upon encountering a critical error.                                                             *
+ ********************************************************************************************************************************************************************************/
 void SimulateCasino( Casino *casino, u_int8_t &flag){
     static int iterations =0;
     try{
@@ -148,22 +151,26 @@ void SimulateCasino( Casino *casino, u_int8_t &flag){
         logging(error_logfile, __FUNCTION__ , ex.what());
         exit(EXIT_FAILURE);
     }
-
 }
 
-/*****************************************************************************************************************************************************************************
- * @brief Function to shutdown/close the casino.                                                                                                                             *
- *                                                                                                                                                                           *
- *          Function that simulates the casino closing "behaviour" by writing the casino current state (at function call time) to a XML file amd calls casino deconstructor. *
- *                                                                                                                                                                           *
- * @see Casino::~Casino()                                                                                                                                                    *
- * @see Casino::Report()                                                                                                                                                     *
- * @see Wait()                                                                                                                                                               *
- * @throw std::runtime_error If something goes wrong during execution                                                                                                        *
- * @exceptsafe basic - It throws a runtime_error in case of null-pointer, other than that is unpredictable behaviour                                                         *
- * @param casino pointer to a casino object                                                                                                                                  *
- * @return None.                                                                                                                                                             *
- *****************************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************************
+ * @brief Gracefully shuts down a casino, generating a final report and releasing resources.                                                                                    *
+ *                                                                                                                                                                              *
+ *      This function is responsible for the orderly shutdown of a casino's operations. It first calls the `Report` method on the given `Casino` object to generate             *
+ *      a final report of the casino's state. After an optional wait period, it then safely deletes the `Casino` object, freeing up any resources it was using.                 *
+ *      This function ensures that all necessary cleanup and final reporting are performed before the program terminates or the casino simulation ends.                         *
+ *                                                                                                                                                                              *
+ * @param casino Pointer to the `Casino` object that is to be shut down.                                                                                                        *
+ *                                                                                                                                                                              *
+ * @see Casino::Report() for how the final state report of the casino is generated.                                                                                             *
+ * @see Wait() for introducing a delay before the actual shutdown, which might be useful for concluding any pending operations or simply for effect.                            *
+ *                                                                                                                                                                              *
+ * @exception std::runtime_error Captures and logs any runtime errors that occur during the shutdown process, particularly during report generation.                            *
+ * @exceptsafe This function provides basic exception safety by ensuring that an exception does not prevent the `Casino` object from being deleted and resources\               *
+ * from being freed. However, it may terminate the program if an exception is caught.                                                                                           *
+ *                                                                                                                                                                              *
+ * @return void. This function does not return a value but cleans up resources associated with the `Casino` object.                                                             *
+ ********************************************************************************************************************************************************************************/
 void Shutdown(Casino *casino){
     try {
         casino->Report(reportfile);
@@ -175,32 +182,29 @@ void Shutdown(Casino *casino){
     }
 }
 
-/*******************************************************************************************************************************
- * @brief Menu for when the simulation is running and the user pressed a keyboard key.                                         *
- *                                                                                                                             *
- *          Can Show the casino current state;                                                                                 *
- *          Save the casino current state to a file;                                                                           *
- *          Check what time it is to the simulated casino object;                                                              *
- *          Performs various Listings (ranking of the weak, most used machines, most frequent users, users who win the most);  *
- *          Shutdown current simulation and exit the program;                                                                  *
- *          Exit the menu and return the flow control to the function that called this one.                                    *
- *                                                                                                                             *
- * @see logging()                                                                                                              *
- * @see beautify()                                                                                                             *
- * @see Casino::Listing()                                                                                                      *
- * @see Clock::ListingToFile()                                                                                                 *
- * @see printTime()                                                                                                            *
- * @see ROTW()                                                                                                                 *
- * @see ROTMU()                                                                                                                *
- * @see MFU()                                                                                                                  *
- * @see MWU()                                                                                                                  *
- * @see submenu()                                                                                                              *
- * @see Shutdown()                                                                                                             *
- * @exceptsafe none - Shall not throw exceptions                                                                               *
- * @param casino pointer to a casino object                                                                                    *
- * @param choice[in] user choice of the options                                                                                *
- * @return None.                                                                                                               *
- *******************************************************************************************************************************/
+/********************************************************************************************************************************************************************************
+ * @brief Displays an interactive menu for the casino simulation and handles user input.                                                                                        *
+ *                                                                                                                                                                              *
+ *      This function presents a user interface for interacting with various aspects of the casino simulation. Users can view casino information, save data to a file,          *
+ *      check simulated time, view rankings of machines and users, access more options through a submenu, or shut down the simulation. The function ensures input               *
+ *      validation and provides feedback for invalid choices. It employs a loop to keep the menu active until the user chooses to exit or shut down the simulation.             *
+ *                                                                                                                                                                              *
+ * @param casino Pointer to the `Casino` object for which the menu is being displayed.                                                                                          *
+ *                                                                                                                                                                              *
+ * @see beautify() for enhancing menu presentation.                                                                                                                             *
+ * @see Casino::Listing() for displaying casino information.                                                                                                                    *
+ * @see listingToFile() for saving casino information to a file.                                                                                                                *
+ * @see printTime() for displaying the current simulated time.                                                                                                                  *
+ * @see ROTW(), ROTMU(), MFU(), MWU() for displaying various rankings.                                                                                                          *
+ * @see submenu() for accessing additional options.                                                                                                                             *
+ * @see Shutdown() for gracefully ending the simulation and cleaning up resources.                                                                                              *
+ * @see logging() for logging menu interactions and choices.                                                                                                                    *
+ *                                                                                                                                                                              *
+ * @exception None directly thrown by this function, but exceptions may be thrown by called functions and are handled appropriately.                                            *
+ * @exceptsafe The function is designed to be exception-neutral, with attempts to handle exceptions thrown by operations within the menu.                                       *
+ *                                                                                                                                                                              *
+ * @return void. No return value, but the function controls the flow of interaction within the simulation until exit or shutdown is selected.                                   *
+ ********************************************************************************************************************************************************************************/
 void menu(Casino* casino) {
     if(!casino) exit(-1);
     int choice;
@@ -286,15 +290,23 @@ void menu(Casino* casino) {
     } while (choice != 0);
 }
 
-/************************************************************************
- * @brief Listing to the output the Ranking of the Weak machines.       *
- *                                                                      *
- * @see beautify()                                                      *
- * @see Casino::Ranking_of_the_weaks()                                  *
- * @exceptsafe none - Shall not throw exceptions                        *
- * @param casino pointer to a casino object                             *
- * @return None.                                                        *
- ************************************************************************/
+/********************************************************************************************************************************************************************************
+ * @brief Displays the ranking of the weakest machines in the Casino.                                                                                                           *
+ *                                                                                                                                                                              *
+ *      This function showcases the machines with the highest failure rates. It calls the Casino's  `Ranking_of_the_weaks` method to obtain a list of machine                   *
+ *      descriptions sorted by their weakness. The function then iterates through this list, printing each entry. It beautifies the output for better readability and           *
+ *      handles cases where the list might be empty, indicating no weak machines or an error.                                                                                   *
+ *                                                                                                                                                                              *
+ * @param casino Pointer to the `Casino` object from which the weak machines' ranking is to be retrieved.                                                                       *
+ *                                                                                                                                                                              *
+ * @see Casino::Ranking_of_the_weaks() for how the ranking is determined and the list of weak machines is obtained.                                                             *
+ * @see beautify() for enhancing the presentation of the ranking header.                                                                                                        *
+ *                                                                                                                                                                              *
+ * @exception None. This function does not throw exceptions directly but checks for and handles errors in obtaining the ranking.                                                *
+ * @exceptsafe This function is exception-neutral, ensuring no state changes in the `Casino` object. Memory allocated for the list is safely deleted after use.                 *
+ *                                                                                                                                                                              *
+ * @return void. No return value, but prints the ranking of weak machines to the standard output.                                                                               *
+ ********************************************************************************************************************************************************************************/
 void ROTW(Casino* casino){
     beautify(" Ranking of the ~W E A K~");
     auto sl = casino->Ranking_of_the_weaks();
@@ -309,16 +321,24 @@ void ROTW(Casino* casino){
     delete sl;
 }
 
-/*****************************************************************************
- * @brief Listing to the output the Ranking of the most used machines.       *
- *                                                                           *
- * @see beautify()                                                           *
- * @see Casino::Ranking_of_the_most_used()                                   *
- * @see Machine::toStringOut()                                               *
- * @exceptsafe none - Shall not throw exceptions                             *
- * @param casino pointer to a casino object                                  *
- * @return None.                                                             *
- *****************************************************************************/
+/********************************************************************************************************************************************************************************
+ * @brief Displays the ranking of the most used machines in the Casino.                                                                                                         *
+ *                                                                                                                                                                              *
+ *      This function showcases the machines that have been used the most based on usage metrics such as play counts. It calls the Casino's `Ranking_of_the_most_used`          *
+ *      method to obtain a list of machine pointers sorted by their usage. The function then iterates through this list, printing the detailed description of each              *
+ *      machine. It beautifies the output for better readability and handles cases where the list might be empty, indicating an error or no usage data.                         *
+ *                                                                                                                                                                              *
+ * @param casino Pointer to the `Casino` object from which the most used machines' ranking is to be retrieved.                                                                  *
+ *                                                                                                                                                                              *
+ * @see Casino::Ranking_of_the_most_used() for how the ranking is determined and the list of most used machines is obtained.                                                    *
+ * @see beautify() for enhancing the presentation of the ranking header.                                                                                                        *
+ * @see Machine::toStringOut() for obtaining the string representation of each machine in the list.                                                                             *
+ *                                                                                                                                                                              *
+ * @exception None. This function does not throw exceptions directly but checks for and handles errors in obtaining the ranking.                                                *
+ * @exceptsafe This function is exception-neutral, ensuring no state changes in the `Casino` object. Memory allocated for the list is safely deleted after use.                 *
+ *                                                                                                                                                                              *
+ * @return void. No return value, but prints the ranking of the most used machines to the standard output.                                                                      *
+ ********************************************************************************************************************************************************************************/
 void ROTMU(Casino* casino){
     beautify(" Ranking of the ~Most USED~");
     auto ml = casino->Ranking_of_the_most_used();
@@ -333,16 +353,25 @@ void ROTMU(Casino* casino){
     delete ml;
 }
 
-/*****************************************************************************
- * @brief Listing to the output the Ranking of the most frequent users       *
- *                                                                           *
- * @see beautify()                                                           *
- * @see Casino::Most_Frequent_Users()                                        *
- * @see User::toString()                                                     *
- * @exceptsafe none - Shall not throw exceptions                             *
- * @param casino pointer to a casino object                                  *
- * @return None.                                                             *
- *****************************************************************************/
+/********************************************************************************************************************************************************************************
+ * @brief Displays the ranking of the most frequent users in the Casino.                                                                                                        *
+ *                                                                                                                                                                              *
+ *      This function highlights the users who visit and use the casino facilities the most, based on frequency metrics such as time spent in the casino.                       *
+ *      It retrieves a list of user pointers sorted by their frequency of visits from the `Casino` object's `Most_Frequent_Users` method.                                       *
+ *      Each user's information is then printed to the standard output. The output is formatted for readability, and the function handles cases where the list might be empty,  *
+ *      indicating either an error or the absence of user data.                                                                                                                 *
+ *                                                                                                                                                                              *
+ * @param casino Pointer to the `Casino` object from which the most frequent users' ranking is to be retrieved.                                                                 *
+ *                                                                                                                                                                              *
+ * @see Casino::Most_Frequent_Users() for the method that determines the ranking and obtains the list of frequent users.                                                        *
+ * @see beautify() for enhancing the presentation of the ranking header.                                                                                                        *
+ * @see User::toString() for obtaining the string representation of each user in the list.                                                                                      *
+ *                                                                                                                                                                              *
+ * @exception None. This function does not throw exceptions directly but checks for and handles errors in obtaining the ranking.                                                *
+ * @exceptsafe This function is exception-neutral, ensuring no state changes in the `Casino` object. Memory allocated for the list is safely deleted after use.                 *
+ *                                                                                                                                                                              *
+ * @return void. No return value, but prints the ranking of the most frequent users to the standard output.                                                                     *
+ ********************************************************************************************************************************************************************************/
 void MFU(Casino* casino){
     beautify(" Ranking of the ~Most Frequent Users~");
     auto mfu = casino->Most_Frequent_Users();
@@ -357,16 +386,24 @@ void MFU(Casino* casino){
     delete mfu;
 }
 
-/*****************************************************************************
- * @brief Listing to the output the Ranking of the most users with most wins *
- *                                                                           *
- * @see beautify()                                                           *
- * @see Casino::Most_Wins_Users()                                            *
- * @see User::toString()                                                     *
- * @exceptsafe none - Shall not throw exceptions                             *
- * @param casino pointer to a casino object                                  *
- * @return None.                                                             *
- *****************************************************************************/
+/********************************************************************************************************************************************************************************
+ * @brief Displays the ranking of users with the most wins in the Casino.                                                                                                       *
+ *                                                                                                                                                                              *
+ *      This function presents the users who have won the most in terms of earnings within the casino. It leverages the `Casino` object's `Most_Wins_Users` method to obtain    *
+ *      a sorted list of user pointers based on their winnings. The function iterates through this list, printing detailed information about each user.                         *
+ *      It employs a beautification process to enhance the readability of the ranking's header and handles scenarios where the list might be empty.                             *
+ *                                                                                                                                                                              *
+ * @param casino Pointer to the `Casino` object from which the ranking of users with the most wins is retrieved.                                                                *
+ *                                                                                                                                                                              *
+ * @see Casino::Most_Wins_Users() for the method that calculates the ranking and retrieves the list of winning users.                                                           *
+ * @see beautify() for formatting the presentation of the ranking header.                                                                                                       *
+ * @see User::toString() for generating the string representation of each user in the ranking.                                                                                  *
+ *                                                                                                                                                                              *
+ * @exception None. While this function does not directly throw exceptions, it includes error handling for cases where the ranking list is empty.                               *
+ * @exceptsafe This function is exception-neutral, ensuring no state changes in the `Casino` object. Memory allocated for the list is properly freed after use.                 *
+ *                                                                                                                                                                              *
+ * @return void. This function does not return a value but outputs the ranking of users with the most wins to the standard console.                                             *
+ ********************************************************************************************************************************************************************************/
 void MWU(Casino* casino){
     beautify(" Ranking of the ~Most Winners Users~");
     auto mwu = casino->Most_Wins_Users();
@@ -381,28 +418,28 @@ void MWU(Casino* casino){
     delete mwu;
 }
 
-/*********************************************************************
- * @brief Submenu of the Menu                                        *
- *                                                                   *
- *          Can List Machines Unique Identifier (UID);               *
- *          Turn Off Machine by UID;                                 *
- *          Get Machine State by UID;                                *
- *          List Machines by type; (calls subsubmenu)                *
- *          List Machines with winning percentage higher than 50%;   *
- *          Exit the submenu.                                        *
- *                                                                   *
- * @see logging()                                                    *
- * @see beautify()                                                   *
- * @see Casino::ListMachinesUID()                                    *
- * @see Casino::TurnOff()                                            *
- * @see Casino::getState()                                           *
- * @see Casino::Listing()                                            *
- * @see subsubmenu()                                                 *
- * @exceptsafe none - Shall not throw exceptions                     *
- * @param casino pointer to the casino object                        *
- * @param choice[in] user choice of the options                      *
- * @return None.                                                     *
- *********************************************************************/
+/********************************************************************************************************************************************************************************
+ * @brief Displays an interactive submenu for additional operations within the Casino simulation.                                                                               *
+ *                                                                                                                                                                              *
+ *      This function presents a secondary user interface for interacting with more specific aspects of the casino simulation, such as listing machine UIDs, turning            *
+ *      off machines by UID, getting the state of a machine by UID, listing machines by type, and listing machines with a winning percentage higher than a certain              *
+ *      threshold. It validates user input and provides feedback for invalid choices, utilizing a loop to keep the submenu active until the user chooses to exit.               *
+ *                                                                                                                                                                              *
+ * @param casino Pointer to the `Casino` object for which the submenu is being displayed.                                                                                       *
+ *                                                                                                                                                                              *
+ * @see beautify() for enhancing submenu presentation.                                                                                                                          *
+ * @see Casino::ListMachinesUID() for listing all machine UIDs.                                                                                                                 *
+ * @see Casino::TurnOff() for turning off a specific machine by UID.                                                                                                            *
+ * @see Casino::getState() for getting the state of a specific machine by UID.                                                                                                  *
+ * @see Casino::Listing() for listing machines with a winning percentage higher than a specified threshold.                                                                     *
+ * @see subsubmenu() for navigating to further nested menus.                                                                                                                    *
+ * @see logging() for logging submenu interactions and choices.                                                                                                                 *
+ *                                                                                                                                                                              *
+ * @exception None directly thrown by this function, but exceptions may be thrown by called functions and are handled appropriately.                                            *
+ * @exceptsafe The function is designed to be exception-neutral, with attempts to handle exceptions thrown by operations within the submenu.                                    *
+ *                                                                                                                                                                              *
+ * @return void. No return value, but the function controls the flow of interaction within the submenu until exit is selected.                                                  *
+ ********************************************************************************************************************************************************************************/
 void submenu(Casino* casino) {
     if (!casino) exit(-1);
     int choice;
@@ -488,19 +525,24 @@ void submenu(Casino* casino) {
     } while (choice != 0);
 }
 
-/*************************************************************************************
- * @brief Subsubmenu of the Menu - submenu of submenu option                         *
- *                                                                                   *
- *          Can list any of the programmed machine types that belong to the casino   *
- *                                                                                   *
- * @see logging()                                                                    *
- * @see beautify()                                                                   *
- * @see Casino::List_Types()                                                         *
- * @exceptsafe none - Shall not throw exceptions                                     *
- * @param casino pointer to the casino object                                        *
- * @param choice[in] user choice of the options                                      *
- * @return None.                                                                     *
- *************************************************************************************/
+/********************************************************************************************************************************************************************************
+ * @brief Displays an interactive subsubmenu for operations related to machine types within the Casino simulation.                                                              *
+ *                                                                                                                                                                              *
+ *      This function extends the user interface to allow for interactions specifically focused on the different types of machines available in the casino. Users can           *
+ *      choose to list machines based on their type, such as CLASSIC_SLOT, BLACKJACK, ROULETTE, or CRAPS (the ones that are implemented).                                       *
+ *      The function validates user input and loops to keep the subsubmenu active until the user decides to exit back to the previous menu level.                               *
+ *                                                                                                                                                                              *
+ * @param casino Pointer to the `Casino` object for which the subsubmenu is being displayed.                                                                                    *
+ *                                                                                                                                                                              *
+ * @see beautify() for enhancing subsubmenu presentation.                                                                                                                       *
+ * @see Casino::List_Types() for listing machines of a specific type.                                                                                                           *
+ * @see logging() for logging subsubmenu interactions and choices.                                                                                                              *
+ *                                                                                                                                                                              *
+ * @exception None directly thrown by this function, but exceptions may be thrown by called functions and are handled appropriately.                                            *
+ * @exceptsafe The function is designed to be exception-neutral, with attempts to handle exceptions thrown by operations within the subsubmenu.                                 *
+ *                                                                                                                                                                              *
+ * @return void. No return value, but the function controls the flow of interaction within the subsubmenu until exit is selected.                                               *
+ ********************************************************************************************************************************************************************************/
 void subsubmenu(Casino* casino) {
     if (!casino) exit(-1);
     int choice;
@@ -552,18 +594,23 @@ void subsubmenu(Casino* casino) {
     }while (choice != 0);
 }
 
-/*********************************************************************************************************************
- * @brief Writes the current state of the casino to a file                                                           *
- *                                                                                                                   *
- * @see logging()                                                                                                    *
- * @see beautify()                                                                                                   *
- * @see Casino::Listing()                                                                                            *
- * @throw std::ios_base::failure if an error occurs while opening the file                                           *
- * @exceptsafe basic - captures errors related to the opening of the file, and some runtime error that might occur   *
- * @param casino pointer to the casino object                                                                        *
- * @param choice[in] user choice input                                                                               *
- * @return None.                                                                                                     *
- *********************************************************************************************************************/
+/********************************************************************************************************************************************************************************
+ * @brief Exports the listing of the Casino's current state to a file.                                                                                                          *
+ *                                                                                                                                                                              *
+ *      This function is responsible for writing the current state and information of the casino, including details about machines, users, and other relevant data,             *
+ *      to a specified file. It opens the file in append mode, ensuring that existing content is not overwritten. If the file cannot be opened, or if any other error           *
+ *      occurs during the operation, an exception is caught and handled by reporting the error to the standard error stream.                                                    *
+ *                                                                                                                                                                              *
+ * @param casino Pointer to the `Casino` object whose information is to be exported.                                                                                            *
+ *                                                                                                                                                                              *
+ * @see Casino::Listing(std::ostream&) for the method that generates the listing of the casino's current state.                                                                 *
+ *                                                                                                                                                                              *
+ * @exception std::ios_base::failure Thrown if the file specified by `casinoFile` cannot be opened for writing.                                                                 *
+ * @exception std::runtime_error Potentially thrown by the `Listing` method of the `Casino` class, indicating an error in generating the listing.                               *
+ * @exceptsafe This function is exception-safe in that it catches and handles all exceptions locally, ensuring that the program remains stable even in the face of errors.      *
+ *                                                                                                                                                                              *
+ * @return void. No return value, but the function may generate output in a file or produce error messages on failure.                                                          *
+ ********************************************************************************************************************************************************************************/
 void listingToFile(Casino* casino){
     try {
         std::ofstream file{casinoFile, std::ios::app};
